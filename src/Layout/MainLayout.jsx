@@ -7,9 +7,11 @@ const MainLayout = () => {
     return (
         <div className="font-roboto">
             <Navbar></Navbar>
-            <Outlet></Outlet>
+            <div className="min-h-screen">
+                <Outlet></Outlet>
+            </div>
             {/* footer */}
-            <Footer/>
+            <Footer />
         </div>
     );
 };
