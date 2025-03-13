@@ -9,6 +9,8 @@ const AuthProvider = ({ children }) => {
   const authInfo = {
     user,
     setUser,
+    darkMode,
+    setDarkMode
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
