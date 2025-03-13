@@ -14,6 +14,9 @@ const Navbar = () => {
             <Link to="/" className="flex items-center gap-2 hover:text-primary">
                 Home
             </Link>
+            <Link to="/travel" className="flex items-center gap-2 hover:text-primary">
+                Travel
+            </Link>
             <Link to="/gallery" className="flex items-center gap-2 hover:text-primary">
                 Gallery
             </Link>
