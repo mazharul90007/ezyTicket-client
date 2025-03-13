@@ -25,6 +25,10 @@ const Route = createBrowserRouter([
                 path: '/travel',
                 element: <Travel/>
             },
+            {
+                path: '/events',
+                element: <Events></Events>
+            }
         ]
     }
 ])
