@@ -14,8 +14,11 @@ const Navbar = () => {
             <Link to="/travel" className="flex items-center gap-2 hover:text-primary">
                 Travel
             </Link>
-            <Link to="/events" className="flex items-center gap-2 hover:text-primary">
-                Events
+            <Link to="/travel" className="flex items-center gap-2 hover:text-primary">
+                Travel
+            </Link>
+            <Link to="/travel" className="flex items-center gap-2 hover:text-primary">
+                Travel
             </Link>
             <Link to="/entertainment" className="flex items-center gap-2 hover:text-primary">
                 Entertainment
