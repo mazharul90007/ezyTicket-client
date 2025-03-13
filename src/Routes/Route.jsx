@@ -7,6 +7,7 @@ import Home from "../Pages/Home/Home";
 import About from "../Pages/About/About";
 import Events from "../Pages/Events/Events";
 import Travel from "../Pages/Travel/Travel";
+import Entertainment from "../Pages/Entertainment/Entertainment";
 
 const Route = createBrowserRouter([
     {
@@ -28,6 +29,10 @@ const Route = createBrowserRouter([
             {
                 path: '/events',
                 element: <Events></Events>
+            },
+            {
+                path: '/entertainment',
+                element: <Entertainment></Entertainment>
             }
         ]
     }
