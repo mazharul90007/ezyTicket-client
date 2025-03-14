@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Loading from "../../../Shared/Loading/Loading";
 
 const EventCards = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -30,9 +30,7 @@ const EventCards = () => {
 
     fetchData();
   }, []);
-  const handleViewDetails = (eventId) => {
-    navigate(`/eventdetailspublic/${eventId}`);
-  };
+
   if (loading)
     return (
       <p className="text-center text-lg">
@@ -70,7 +68,7 @@ const EventCards = () => {
               Price: {event.price} Tk
             </p>
             <Link
-              onClick={() => handleViewDetails(event._id)}
+              to={`/eventdetailspublic/${event._id}`}
               className="btn bg-[#F5F7F9] hover:bg-gray-400 hover:text-white"
             >
               View Details
