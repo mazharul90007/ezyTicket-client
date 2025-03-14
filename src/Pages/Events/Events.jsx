@@ -5,8 +5,6 @@ const Events = () => {
     return (
         <div>
             <EventBanner></EventBanner>
-            <h2>This is Event Page</h2>
-
             <EventCards></EventCards>
         </div>
     );
