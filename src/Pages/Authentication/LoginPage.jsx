@@ -1,5 +1,5 @@
 import React from "react";
-
+import { FaGoogle, FaLock, FaEnvelope } from "react-icons/fa";
 function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-blue-900 to-purple-900">
