@@ -33,7 +33,7 @@ const Navbar = () => {
 
 
     return (
-        <nav className="navbar shadow px-6 py-4">
+        <nav className="navbar shadow px-6 py-4 fixed top-0 z-40 backdrop-blur-2xl">
             {/* Left Side: Logo */}
             <div className="flex-1">
                 <Link to="/" className="text-2xl font-bold text-amber-700 flex items-center gap-2">

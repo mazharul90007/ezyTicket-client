@@ -1,5 +1,9 @@
 import travelBannerImage from "../../../assets/Travel_image/Bus.jpg"
+import { MdHealthAndSafety } from "react-icons/md";
 import BannerCard from "./BannerCard";
+import { AiFillSafetyCertificate } from "react-icons/ai";
+import { AiFillDollarCircle } from "react-icons/ai";
+import { MdOutlineTravelExplore } from "react-icons/md";
 
 const TravelBanner = () => {
 
@@ -9,30 +13,34 @@ const TravelBanner = () => {
             description: "Get the best prices by booking your tickets directly with us.",
             linkText: "Cheap Coach Tickets",
             linkUrl: "#",
+            icon: <AiFillSafetyCertificate />
         },
         {
             title: "Keeping You Safe",
             description: "We prioritize your safety with enhanced cleaning and security measures.",
             linkText: "Explore Now",
             linkUrl: "#",
+            icon:<MdHealthAndSafety />
         },
         {
             title: "No Booking Fees",
             description: "Enjoy a hassle-free experience with no hidden charges or booking fees.",
             linkText: "Sign up or Login",
             linkUrl: "#",
+            icon:<AiFillDollarCircle />
         },
         {
             title: "Travel Now. Pay Later.",
             description: "Book your tickets today and pay later with interest-free options.",
             linkText: "Learn More",
             buttonUrl: "#",
+            icon: <MdOutlineTravelExplore/>
         }
     ];
 
 
     return (
-        <div className="relative mb-40 h-[1200px] md:h-[800px] lg:h-[680px] xl:h-[600px]">
+        <div className="relative mb-40 h-[1350px] md:h-[880px] lg:h-[680px] xl:h-[650px]">
             <div
                 className="hero md:min-h-[600px] min-h-screen my-10"
                 style={{
@@ -41,9 +49,9 @@ const TravelBanner = () => {
                 <div className="hero-overlay"></div>
                 <div className="hero-content text-neutral-content text-center">
                     <div className="">
-                        <h1 className='text-2xl font-bold md:text-3xl lg:text-5xl'>Smart Bus Ticket Booking <br /><span className="text-green-500">Fast, Easy & Secure!</span> </h1>
+                        <h1 className='text-2xl font-bold md:text-3xl lg:text-5xl'>Smart Bus Ticket Booking <br /><span className="text-main">Fast, Easy & Secure!</span> </h1>
                         <p className='my-4'>Book Your Bus Tickets Anytime, Anywhere – Hassle-Free & Instant Confirmation!</p>
-                        <button className="btn btn-primary">Get Started</button>
+                        <button className="btn bg-button border-none text-white">Book Now</button>
                     </div>
                 </div>
             </div>
