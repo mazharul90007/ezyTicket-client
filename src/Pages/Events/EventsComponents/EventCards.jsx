@@ -3,94 +3,34 @@ import { Link } from "react-router-dom";
 
 const EventCards = () => {
   const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Fake API call (simulated fetch)
     const fetchData = async () => {
-      const eventData = [
-        {
-          title: "AI & Future Tech Summit",
-          description:
-            "A deep dive into the latest advancements in artificial intelligence and emerging technologies.",
-          organizedBy: "TechVision Bangladesh",
-          dateTime: "2025-04-10T10:00:00",
-          location: "Radisson Blu, Dhaka",
-          photo:
-            "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-          price: 1500,
-        },
-        {
-          title: "StartUp Pitch Night",
-          description:
-            "A platform for startups to pitch their ideas to investors and industry experts.",
-          organizedBy: "Bangladesh Startup Hub",
-          dateTime: "2025-04-15T18:30:00",
-          location: "Online",
-          photo:
-            "https://images.pexels.com/photos/933964/pexels-photo-933964.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-          price: 100,
-        },
-        {
-          title: "Gaming Fiesta 2025",
-          description:
-            "A gaming festival featuring tournaments, workshops, and a showcase of upcoming games.",
-          organizedBy: "Gamers Unite Bangladesh",
-          dateTime: "2025-05-05T12:00:00",
-          location: "BICC, Dhaka",
-          photo:
-            "https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-          price: 500,
-        },
-        {
-          title: "Photography Masterclass",
-          description:
-            "A hands-on photography workshop conducted by renowned photographers.",
-          organizedBy: "Shutterbugs Bangladesh",
-          dateTime: "2025-03-30T15:00:00",
-          location: "Online",
-          photo:
-            "https://images.pexels.com/photos/1264210/pexels-photo-1264210.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-          price: 800,
-        },
-        {
-          title: "Green Future Expo",
-          description:
-            "An exhibition on sustainable living, renewable energy, and eco-friendly innovations.",
-          organizedBy: "EcoVision BD",
-          dateTime: "2025-06-12T10:00:00",
-          location: "Bashundhara Convention Center, Dhaka",
-          photo:
-            "https://images.pexels.com/photos/1072824/pexels-photo-1072824.jpeg?auto=compress&cs=tinysrgb&w=600",
-          price: 200,
-        },
-        {
-          title: "Blockchain & Crypto Conference",
-          description:
-            "Exploring the impact of blockchain and cryptocurrency in the modern financial world.",
-          organizedBy: "Crypto Enthusiasts Bangladesh",
-          dateTime: "2025-07-20T14:00:00",
-          location: "Online",
-          photo:
-            "https://images.pexels.com/photos/730564/pexels-photo-730564.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-          price: 1000,
-        },
-        {
-          title: "Music Fest Dhaka",
-          description:
-            "A night of live performances featuring top local and international artists.",
-          organizedBy: "Dhaka Music Crew",
-          dateTime: "2025-08-05T19:00:00",
-          location: "Army Stadium, Dhaka",
-          photo:
-            "https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-          price: 3000,
-        },
-      ];
-      setEvents(eventData);
+      try {
+        const response = await fetch("http://localhost:3000/events");
+        if (!response.ok) {
+          throw new Error("Failed to fetch events");
+        }
+        const data = await response.json();
+
+        setTimeout(() => {
+          setEvents(data);
+          setLoading(false);
+        }, 2000);
+      } catch (error) {
+        setTimeout(() => {
+          setError(error.message);
+          setLoading(false);
+        }, 2000);
+      }
     };
 
     fetchData();
   }, []);
+  if (loading) return <p className="text-center text-lg">Loading events...</p>;
+  if (error) return <p className="text-center text-red-500">Error: {error}</p>;
 
   return (
     <div className="p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
