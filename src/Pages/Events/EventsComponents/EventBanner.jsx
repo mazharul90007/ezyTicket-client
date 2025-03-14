@@ -6,7 +6,7 @@ const EventBanner = () => {
         <div className="bg-gradient-to-r from-green-200 to-green-600 py-16 px-8 text-white text-center relative overflow-hidden">
             {/* Background Overlay */}
             <div className="absolute inset-0 bg-black opacity-30"></div>
-
+ 
             {/* Content */}
             <div className="relative z-10">
                 <h1 className="text-4xl md:text-5xl font-bold mb-4">
