@@ -45,7 +45,7 @@ const EventDetails = () => {
       <div className="card bg-white shadow-md rounded-lg p-6 dark:text-black flex md:flex-row">
         <figure>
           <img
-            src={eventData.image}
+            src={eventData.photo}
             alt={eventData.title}
             className="w-fit h-66 px-5 object-cover rounded-lg"
           />

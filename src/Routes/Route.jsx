@@ -8,6 +8,7 @@ import Entertainment from "../Pages/Entertainment/Entertainment";
 import Error from "../Pages/Error/Error";
 import LoginPage from "../Pages/Authentication/LoginPage";
 import RegisterPage from "../Pages/Authentication/RegisterPage";
+import EventDetails from "./../Pages/Events/EventDetails/EventDetails";
 
 const Route = createBrowserRouter([
   {
