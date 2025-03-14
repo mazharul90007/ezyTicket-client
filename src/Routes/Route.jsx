@@ -6,6 +6,8 @@ import Events from "../Pages/Events/Events";
 import Travel from "../Pages/Travel/Travel";
 import Entertainment from "../Pages/Entertainment/Entertainment";
 import Error from "../Pages/Error/Error";
+import LoginPage from "../Pages/Authentication/LoginPage";
+import RegisterPage from "../Pages/Authentication/RegisterPage";
 
 const Route = createBrowserRouter([
   {
@@ -23,11 +25,11 @@ const Route = createBrowserRouter([
       },
       {
         path: "/login",
-        element: <About />,
+        element: <LoginPage></LoginPage>,
       },
       {
         path: "/register",
-        element: <About />,
+        element: <RegisterPage></RegisterPage>,
       },
       {
         path: "/travel",
