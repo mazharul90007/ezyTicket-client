@@ -1,11 +1,15 @@
+import EventCategoriesSection from "./EventCategoriesSection";
+import FeaturedEventsSection from "./FeaturedEventsSection";
+import HeroSection from "./HeroSection";
+import UpcomingEventsSection from "./UpcomingEventsSection";
+
 const Entertainment = () => {
   return (
     <div>
-      <h2>This is Entertainment Page</h2>
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea eum eveniet
-        saepe culpa earum laudantium, facilis sapiente praesentium nulla qui.
-      </p>
+      <HeroSection></HeroSection>
+      <FeaturedEventsSection></FeaturedEventsSection>
+      <EventCategoriesSection></EventCategoriesSection>
+      <UpcomingEventsSection></UpcomingEventsSection>
     </div>
   );
 };
