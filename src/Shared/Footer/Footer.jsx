@@ -49,7 +49,7 @@ const Footer = () => {
             {/* about us */}
             <div className="flex flex-col ">
                 <h1 className="text-2xl font-semibold mb-3">About Us</h1>
-                <p className="text-left">Welcome to [Your Website Name], your trusted online ticket booking platform. We make ticket purchasing fast, secure, and hassle-free for events, travel, and entertainment. Our user-friendly system ensures seamless booking, real-time availability, and secure payments. Whether you're planning a trip, attending a concert, or booking a sports event, we've got you covered. Enjoy a smooth and convenient ticketing experience with us!</p>
+                <p className="text-left">Welcome to EZY Ticket, your trusted online ticket booking platform. We make ticket purchasing fast, secure, and hassle-free for events, travel, and entertainment. Our user-friendly system ensures seamless booking, real-time availability, and secure payments. Whether you're planning a trip, attending a concert, or booking a sports event, we've got you covered. Enjoy a smooth and convenient ticketing experience with us!</p>
             </div>
             {/* nav links */}
             <div className="flex flex-col  lg:pl-10">
@@ -57,7 +57,7 @@ const Footer = () => {
                 <div>
                     <ul className="flex flex-col justify-center  gap-4">
                         {
-                            navLinks.map((i, idx) => <li><Link to={i.path}>{i.name}</Link></li>)
+                            navLinks.map((i, idx) => <li key={idx}><Link to={i.path}>{i.name}</Link></li>)
                         }
                     </ul>
                 </div>
@@ -67,7 +67,7 @@ const Footer = () => {
                 <h1 className="text-2xl font-semibold mb-3">Be Part Of Us</h1>
                 <ul className="flex flex-col justify-center  gap-4">
                     {
-                        partUsLinks.map((i, idx) => <li><Link to={i.path}>{i.name}</Link></li>)
+                        partUsLinks.map((i, idx) => <li key={idx}><Link to={i.path}>{i.name}</Link></li>)
                     }
                 </ul>
             </div>
