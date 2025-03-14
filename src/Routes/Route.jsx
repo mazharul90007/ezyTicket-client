@@ -8,11 +8,13 @@ import About from "../Pages/About/About";
 import Events from "../Pages/Events/Events";
 import Travel from "../Pages/Travel/Travel";
 import Entertainment from "../Pages/Entertainment/Entertainment";
+import Error from "../Pages/Error/Error";
 
 const Route = createBrowserRouter([
     {
         path: '/',
         element: <MainLayout></MainLayout>,
+        errorElement: <Error></Error>,
         children: [
             {
                 path: '/',
