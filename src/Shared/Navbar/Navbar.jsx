@@ -58,7 +58,7 @@ const Navbar = () => {
 
             {/* Mobile Menu (Drawer) */}
             <div
-                className={`fixed top-20 -right-1 bg-base-100 shadow-xl p-4 rounded-l-lg flex flex-col space-y-4 lg:hidden transition-all duration-500 ease-in-out transform ${menuOpen ? "translate-x-0" : "translate-x-full"}`}
+                className={`fixed top-20 -right-1 bg-base-100 shadow-xl p-4 rounded-l-lg flex flex-col space-y-4 lg:hidden transition-all duration-500 ease-in-out transform z-20 ${menuOpen ? "translate-x-0" : "translate-x-full"}`}
                 style={{ pointerEvents: menuOpen ? "auto" : "none" }}
             >
                 {links}
