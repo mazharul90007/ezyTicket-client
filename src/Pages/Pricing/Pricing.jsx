@@ -1,5 +1,6 @@
 import PricingBanner from "./PricingComponents/PricingBanner";
 import bangladesh from "../../assets/Pricing_image/bangladesh-icon.png"
+import PricingCalculator from "./PricingComponents/PricingCalculator";
 const Pricing = () => {
     return (
         <div className="pt-16">
@@ -29,6 +30,7 @@ const Pricing = () => {
 
                 </div>
             </div>
+            <PricingCalculator></PricingCalculator>
         </div>
     );
 };
