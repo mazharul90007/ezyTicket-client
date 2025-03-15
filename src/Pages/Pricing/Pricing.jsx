@@ -1,7 +1,7 @@
 import PricingBanner from "./PricingComponents/PricingBanner";
 const Pricing = () => {
     return (
-        <div>
+        <div className="pt-16">
             <PricingBanner></PricingBanner>
         </div>
     );
