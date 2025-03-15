@@ -50,30 +50,24 @@ const SelectPlaceTime = () => {
 
 
     return (
-        <section className="flex flex-col lg:flex-row justify-between items-center gap-5">
-            <select defaultValue="Pick a Runtime" className="select select-success">
-                <option disabled={true}>Pick a Place</option>
+        <section className="border p-5 rounded border-black/20 flex flex-col lg:flex-row justify-between items-center gap-5 shadow-2xl shadow-main">
+            <select defaultValue="From" className="select select-success">
+                <option disabled={true} >From</option>
                 {
                     busStands.map((stand,idx)=><option key={idx}>{stand}</option>)
                 }
-                <option>npm</option>
-                
             </select>
-            <select defaultValue="Pick a Runtime" className="select select-success">
-                <option disabled={true}>Pick a Place</option>
+            <select defaultValue="To" className="select select-success">
+                <option disabled={true}>To</option>
                 {
                     busStands.map((stand,idx)=><option key={idx}>{stand}</option>)
                 }
-                <option>npm</option>
-                
             </select>
-            <select defaultValue="Pick a Runtime" className="select select-success">
-                <option disabled={true}>Pick a Place</option>
+            <select defaultValue="Pick a Time" className="select select-success">
+                <option disabled={true}>Pick a Time</option>
                 {
                     busTime.map((time,idx)=><option key={idx}>{time}</option>)
                 }
-                <option>npm</option>
-                
             </select>
 
         </section>
