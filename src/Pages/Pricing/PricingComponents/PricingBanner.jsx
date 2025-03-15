@@ -3,7 +3,7 @@ import ticket from "../../../assets/Events_image/ticket.png";
 
 const PricingBanner = () => {
     return (
-        <div className="min-h-[500px] md:min-h-[600px] lg:min-h-[680px] xl:min-h-[600px] bg-green-100 grid grid-cols-1 md:grid-cols-2 gap-10 px-6 md:px-10 py-16 md:py-20 items-center">
+        <div className="min-h-[500px] md:min-h-[600px] lg:min-h-[680px] xl:min-h-[600px] bg-gradient-to-br from-green-200 via-green-50 to-green-100 grid grid-cols-1 md:grid-cols-2 gap-10 px-6 md:px-10 py-16 md:py-20 items-center">
             {/* Text Content */}
             <div className="space-y-6 md:space-y-8 text-center md:text-left">
                 <h2 className="text-4xl md:text-5xl font-bold text-gray-800">
