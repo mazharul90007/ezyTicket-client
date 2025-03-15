@@ -8,9 +8,16 @@ const EventDetails = () => {
   const [eventData, setEventData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
   useEffect(() => {
-    const fetchClassDetails = async () => {
+    if (!eventId) {
+      console.error("❌ eventId is missing from useParams");
+      return;
+    }
+
+    const fetchEventDetails = async () => {
       try {
+        console.log(`🔍 Fetching event details for ID: ${eventId}`);
         const response = await fetch(`http://localhost:3000/events/${eventId}`);
 
         if (!response.ok) {
@@ -18,9 +25,10 @@ const EventDetails = () => {
         }
 
         const data = await response.json();
+        console.log("✅ Event data fetched:", data);
         setEventData(data);
       } catch (error) {
-        console.error("Error fetching event details:", error);
+        console.error("❌ Error fetching event details:", error);
         setError("Failed to fetch event details. Please try again later.");
         Swal.fire("Error", "Failed to fetch event details.", "error");
       } finally {
@@ -28,15 +36,12 @@ const EventDetails = () => {
       }
     };
 
-    fetchClassDetails();
+    fetchEventDetails();
   }, [eventId]);
-  if (loading)
-    return (
-      <p>
-        <Loading></Loading>
-      </p>
-    );
+
+  if (loading) return <Loading />;
   if (error) return <p className="text-red-500">{error}</p>;
+
   return (
     <div className="mt-40 w-11/12 mx-auto mb-10">
       <h1 className="text-3xl font-bold text-center mb-6 dark:text-white">
@@ -45,24 +50,24 @@ const EventDetails = () => {
       <div className="card bg-white shadow-md rounded-lg p-6 dark:text-black flex md:flex-row">
         <figure>
           <img
-            src={eventData.photo}
-            alt={eventData.title}
+            src={eventData?.photo}
+            alt={eventData?.title}
             className="w-fit h-66 px-5 object-cover rounded-lg"
           />
         </figure>
         <div className="card-body p-4">
-          <h2 className="card-title text-lg">{eventData.title}</h2>
+          <h2 className="card-title text-lg">{eventData?.title}</h2>
           <p className="text-sm">
-            <strong>Name:</strong> {eventData.name}
+            <strong>Name:</strong> {eventData?.name}
           </p>
           <p className="text-sm">
-            <strong>Price:</strong> ${eventData.price}
+            <strong>Price:</strong> ${eventData?.price}
           </p>
           <p className="text-sm">
-            <strong>Description:</strong> {eventData.description}
+            <strong>Description:</strong> {eventData?.description}
           </p>
           <p className="text-sm">
-            <strong>Total Enrolment:</strong> {eventData.enrollmentCount || 0}
+            <strong>Total Enrolment:</strong> {eventData?.enrollmentCount || 0}
           </p>
           <div className="card-actions justify-end mt-2">
             <button className="btn btn-lg bg-blue-500 text-white">
