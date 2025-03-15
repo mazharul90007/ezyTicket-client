@@ -1,15 +1,13 @@
-import EventCategoriesSection from "./EventCategoriesSection";
-import FeaturedEventsSection from "./FeaturedEventsSection";
-import HeroSection from "./HeroSection";
-import UpcomingEventsSection from "./UpcomingEventsSection";
+import FeaturedTrailers from "./FeaturedTrailers";
+import MovieHero from "./MovieHero";
+import TrendingMovies from "./TrendingMovies";
 
 const Entertainment = () => {
   return (
-    <div>
-      <HeroSection></HeroSection>
-      <FeaturedEventsSection></FeaturedEventsSection>
-      <EventCategoriesSection></EventCategoriesSection>
-      <UpcomingEventsSection></UpcomingEventsSection>
+    <div className="pt-16">
+      <MovieHero></MovieHero>
+      <TrendingMovies></TrendingMovies>
+      <FeaturedTrailers></FeaturedTrailers>
     </div>
   );
 };
