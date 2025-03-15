@@ -9,6 +9,7 @@ import Error from "../Pages/Error/Error";
 import LoginPage from "../Pages/Authentication/LoginPage";
 import RegisterPage from "../Pages/Authentication/RegisterPage";
 import EventDetails from "./../Pages/Events/EventDetails/EventDetails";
+import Pricing from "../Pages/Pricing/Pricing";
 
 const Route = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const Route = createBrowserRouter([
         path: "/entertainment",
         element: <Entertainment></Entertainment>,
       },
+      {
+        path: '/pricing',
+        element: <Pricing></Pricing>
+      }
     ],
   },
 ]);
