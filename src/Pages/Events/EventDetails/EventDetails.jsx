@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Loading from "../../../Shared/Loading/Loading";
 import Swal from "sweetalert2";
 
@@ -43,38 +43,46 @@ const EventDetails = () => {
   if (error) return <p className="text-red-500">{error}</p>;
 
   return (
-    <div className="mt-40 w-11/12 mx-auto mb-10">
-      <h1 className="text-3xl font-bold text-center mb-6 dark:text-white">
-        Event Details
-      </h1>
-      <div className="card bg-white shadow-md rounded-lg p-6 dark:text-black flex md:flex-row">
-        <figure>
-          <img
-            src={eventData?.photo}
-            alt={eventData?.title}
-            className="w-fit h-66 px-5 object-cover rounded-lg"
-          />
-        </figure>
-        <div className="card-body p-4">
-          <h2 className="card-title text-lg">{eventData?.title}</h2>
-          <p className="text-sm">
-            <strong>Name:</strong> {eventData?.name}
-          </p>
-          <p className="text-sm">
-            <strong>Price:</strong> ${eventData?.price}
-          </p>
-          <p className="text-sm">
-            <strong>Description:</strong> {eventData?.description}
-          </p>
-          <p className="text-sm">
-            <strong>Total Enrolment:</strong> {eventData?.enrollmentCount || 0}
-          </p>
-          <div className="card-actions justify-end mt-2">
-            <button className="btn btn-lg bg-blue-500 text-white">
-              Buy ticket
-            </button>
-          </div>
+    <div className="container mx-auto w-11/12 p-6 grid grid-cols-1 lg:grid-cols-3 gap-6 mt-20">
+      {/* Left Section */}
+      <div className="lg:col-span-2">
+        <img
+          src={eventData?.photo}
+          alt={eventData?.name}
+          className="w-full h-80 object-cover rounded-lg shadow-md"
+        />
+        <div className="mt-4 bg-gray-100 p-4 rounded-lg shadow">
+          <h2 className="text-2xl font-bold">{eventData?.name}</h2>
+          <p className="text-gray-700 mt-2">{eventData?.description}</p>
         </div>
+      </div>
+
+      {/* Right Sidebar */}
+      <div className="bg-white p-6 shadow-lg rounded-lg h-fit">
+        <h3 className="text-2xl font-semibold mb-4">Event Information</h3>
+        <p className="text-gray-700 mt-10 text-xl">
+          <strong>Name:</strong> {eventData?.title}
+        </p>
+        <p className="text-gray-700 mt-10 text-xl">
+          <strong>Price:</strong> ${eventData?.price}
+        </p>
+        <p className="text-gray-700 mt-10 text-xl">
+          <strong>Location:</strong> {eventData?.location || "N/A"}
+        </p>
+        <p className="text-gray-700">
+          <div className="flex justify-between mt-20">
+            <button className="py-2 md:py-3 px-4 md:px-6 bg-supporting flex items-center justify-center md:justify-start rounded-lg shadow-md hover:scale-95 transform transition-transform cursor-pointer text-white font-semibold mx-auto md:mx-0 hover:bg-main">
+              Buy Tickets
+            </button>
+
+            <Link
+              to="/events"
+              className="py-2 md:py-3 px-4 md:px-6 bg-supporting flex items-center justify-center md:justify-start rounded-lg shadow-md hover:scale-95 transform transition-transform cursor-pointer text-white font-semibold mx-auto md:mx-0 hover:bg-main"
+            >
+              Back
+            </Link>
+          </div>
+        </p>
       </div>
     </div>
   );
