@@ -33,18 +33,18 @@ const EventCards = () => {
 
   if (loading)
     return (
-      <p className="text-center text-lg">
+      <p className="text-center text-lg mt-50 mb-50">
         <Loading></Loading>
       </p>
     );
   if (error) return <p className="text-center text-red-500">Error: {error}</p>;
 
   return (
-    <div className="p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto w-11/12 mb-10 mt-10">
       {events.map((event, index) => (
         <div
           key={index}
-          className="border shadow-lg rounded-lg overflow-hidden"
+          className="hover:shadow-2xl hover:scale-105 transition-transform duration-300  rounded-lg bg-[#F6FCDF] overflow-hidden shadow-sm shadow-[#A2CA71]"
         >
           <img
             src={event.photo}
@@ -69,7 +69,7 @@ const EventCards = () => {
             </p>
             <Link
               to={`/eventdetailspublic/${event._id}`}
-              className="btn bg-[#F5F7F9] hover:bg-gray-400 hover:text-white"
+              className="py-2 md:py-3 px-4 md:px-6 bg-supporting flex items-center justify-center md:justify-start rounded-lg shadow-md hover:scale-95 transform transition-transform cursor-pointer text-white font-semibold mx-auto md:mx-0"
             >
               View Details
             </Link>
