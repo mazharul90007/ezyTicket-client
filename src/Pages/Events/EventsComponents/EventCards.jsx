@@ -69,7 +69,7 @@ const EventCards = () => {
             </p>
             <Link
               to={`/eventdetailspublic/${event._id}`}
-              className="py-2 md:py-3 px-4 md:px-6 bg-supporting flex items-center justify-center md:justify-start rounded-lg shadow-md hover:scale-95 transform transition-transform cursor-pointer text-white font-semibold mx-auto md:mx-0"
+              className="py-2 md:py-3 px-4 md:px-6 bg-supporting flex items-center justify-center md:justify-start rounded-lg shadow-md hover:scale-95 transform transition-transform cursor-pointer text-white font-semibold mx-auto md:mx-0 hover:bg-main"
             >
               View Details
             </Link>
