@@ -39,7 +39,7 @@ const Navbar = () => {
         <nav className="navbar shadow px-6 py-4 fixed top-0 z-40 bg-background">
             {/* Left Side: Logo */}
             <div className="flex-1">
-                <Link to="/" className="text-2xl font-bold text-amber-700 flex items-center gap-2">
+                <Link to="/" className="text-2xl font-bold text-main flex items-center gap-2">
                     <span>EzyTicket</span>
                 </Link>
             </div>
