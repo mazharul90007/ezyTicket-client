@@ -2,15 +2,17 @@ import { Outlet } from "react-router-dom";
 import Navbar from "../Shared/Navbar/Navbar";
 import Footer from "../Shared/Footer/Footer";
 
-
 const MainLayout = () => {
     return (
-        <div className="font-roboto">
-            <Navbar></Navbar>
-            <div className="min-h-screen">
-                <Outlet></Outlet>
+        <div className="font-roboto flex flex-col min-h-screen">
+            <div className="fixed top-0 left-0 right-0 z-50">
+                <Navbar />
             </div>
-            {/* footer */}
+
+            {/* Main content area */}
+            <main className="flex-grow">
+                <Outlet />
+            </main>
             <Footer />
         </div>
     );

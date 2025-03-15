@@ -3,7 +3,7 @@ import EventCards from "./EventsComponents/EventCards";
 
 const Events = () => {
     return (
-        <div>
+        <div className="pt-16">
             <EventBanner></EventBanner>
             <EventCards></EventCards>
         </div>
