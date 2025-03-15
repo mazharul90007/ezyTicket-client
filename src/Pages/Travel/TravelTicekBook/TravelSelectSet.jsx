@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import SelectPlaceTime from "./SelectPlaceTime";
+import Heading from "../../../components/Heading";
 
 const TravelSelectSet = () => {
 
@@ -17,10 +19,19 @@ const TravelSelectSet = () => {
 
 
     return (
-        <section className="container mx-auto my-8 px-5">
+        <section className="container mx-auto my-20 px-5 ">
+            <div className="my-10">
+                <Heading 
+                title="Your Ultimate Travel Companion"
+                subtitle="Discover and book your next adventure effortlessly with ExploreEase! From flights to hotels and exciting experiences, we make travel planning simple, fast, and convenient. Start exploring today!"
+                ></Heading>
+            </div>
+            <div className="mb-10">
+                <SelectPlaceTime/>
+            </div>
             <div className="mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 ">
                 {/* Seat Selection Grid */}
-                <div className="bg-white p-6 rounded-lg shadow col-span-2">
+                <div className="bg-white p-6 rounded-lg shadow-2xl col-span-2 shadow-main">
                     <h2 className="text-lg font-semibold mb-4">Select Your Seat</h2>
                     {/* Legend */}
                     <div className="flex items-center justify-between space-x-4 mb-6">
@@ -61,7 +72,7 @@ const TravelSelectSet = () => {
                 </div>
 
                 {/* Seat Details and Form */}
-                <div className="bg-white p-6 rounded-lg shadow col-span-1">
+                <div className="bg-white p-6 rounded-lg  col-span-1 shadow-2xl  shadow-main">
                     <h2 className="text-lg font-semibold mb-4">Selected Your Seat</h2>
                     <div className="mb-6 bg-gray-100 p-8">
                         <div className="flex justify-between py-2 font-semibold">
