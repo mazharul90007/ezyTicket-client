@@ -20,6 +20,9 @@ const Navbar = () => {
             <Link to="/entertainment" className="flex items-center gap-2 hover:text-primary">
                 Entertainment
             </Link>
+            <Link to="/pricing" className="flex items-center gap-2 hover:text-primary">
+                Pricing
+            </Link>
             <Link to="/about" className="flex items-center gap-2 hover:text-primary">
                 About
             </Link>
