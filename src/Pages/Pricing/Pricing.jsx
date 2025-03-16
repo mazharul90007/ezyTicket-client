@@ -14,6 +14,7 @@ import logo9 from "../../assets/Pricing_image/logo9.png"
 import logo10 from "../../assets/Pricing_image/logo10.jpeg"
 import logo11 from "../../assets/Pricing_image/logo11.jpeg"
 import logo12 from "../../assets/Pricing_image/logo12.png"
+import PricingFaq from "./PricingComponents/PricingFaq";
 const Pricing = () => {
     return (
         <div className="pt-16">
@@ -48,7 +49,7 @@ const Pricing = () => {
                 <div className="w-11/12 mx-auto py-20">
                     <p className="text-3xl md:text-4xl text-gray-800 font-bold text-center">321+ events created by hundreds of organizations around Bangladesh
                     </p>
-                    <div className="mt-8">
+                    <div className="mt-12">
                         <Marquee>
                             <div>
                                 <img src={logo1} alt="Event Logo"  className="w-40 h-32 mr-4 rounded-md"/>
@@ -90,6 +91,7 @@ const Pricing = () => {
                     </div>
                 </div>
             </div>
+            <PricingFaq></PricingFaq>
         </div>
     );
 };

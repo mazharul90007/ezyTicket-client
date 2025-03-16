@@ -90,17 +90,17 @@ const PricingCalculator = () => {
                             {/* Display Result */}
                                 <div className="grid grid-cols-2 gap-4">
                                     <div className="border border-gray-300 rounded shadow p-4 md:p-8 text-center space-y-2">
-                                        <p>Total Amount</p>
+                                        <p className="text-gray-500">Total Amount</p>
                                         <h2 className="text-4xl font-bold">৳{totalAmount || "0"}</h2>
                                     </div>
 
                                     <div className="border border-gray-300 rounded shadow p-4 md:p-8 text-center space-y-2">
-                                        <p>Our Charge (5%)</p>
+                                        <p className="text-gray-500">Our Charge (5%)</p>
                                         <h2 className="text-4xl font-bold">৳{fee || "0"}</h2>
                                     </div>
 
                                     <div className="border border-gray-300 rounded shadow p-4 col-span-2 md:p-8 text-center space-y-2">
-                                        <p>After deducting a 5% fee, you will receive</p>
+                                        <p className="text-gray-500">After deducting a 5% fee, you will receive</p>
                                         <h2 className="text-4xl font-bold text-main">৳{receiveAmount || "0"}</h2>
                                     </div>
                                 </div>
