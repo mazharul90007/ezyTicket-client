@@ -63,7 +63,7 @@ const Pricing = () => {
             <PricingCalculator></PricingCalculator>
             <div className="bg-gradient-to-br from-green-300 via-green-50 to-green-300">
                 <div className="w-11/12 mx-auto py-20">
-                    <p className="text-4xl text-gray-800 font-bold text-center">321+ events created by hundreds of organizations around Bangladesh
+                    <p className="text-3xl md:text-4xl text-gray-800 font-bold text-center">321+ events created by hundreds of organizations around Bangladesh
                     </p>
                     <div className="mt-8">
                         <Marquee>
