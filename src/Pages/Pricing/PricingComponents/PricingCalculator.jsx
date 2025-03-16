@@ -32,7 +32,7 @@ const PricingCalculator = () => {
     };
 
     return (
-        <div className="mb-16 bg-background">
+        <div className="bg-background">
             <div className="py-8 w-11/12 mx-auto">
                 <div className="md:w-9/12 mx-auto">
                     <h2 className="text-4xl font-bold text-center mb-6 text-main">
