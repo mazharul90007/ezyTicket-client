@@ -3,7 +3,7 @@ import ticket from "../../../assets/Pricing_image/ticket.png";
 
 const PricingBanner = () => {
     return (
-        <div className="min-h-[500px] md:min-h-[600px] lg:min-h-[680px] xl:min-h-[600px] bg-gradient-to-br from-green-200 via-green-50 to-green-100 pt-16">
+        <div className="min-h-[500px] md:min-h-[600px] lg:min-h-[680px] xl:min-h-[600px] bg-gradient-to-br from-green-300 via-green-50 to-green-200 pt-16">
             <div className=" grid grid-cols-1 md:grid-cols-2 w-11/12 mx-auto gap-10 py-16 md:py-20 items-center">
                 {/* Text Content */}
                 <div className="space-y-6 md:space-y-8 text-center md:text-left">
@@ -20,7 +20,7 @@ const PricingBanner = () => {
                 </div>
 
                 {/* Image */}
-                <div className="flex items-center justify-center bg-green-200 py-8 rounded-2xl overflow-hidden">
+                <div className="flex items-center justify-center bg-green-200 py-8 rounded-2xl overflow-hidden shadow">
                     <img
                         src={ticket}
                         alt="ticket"
