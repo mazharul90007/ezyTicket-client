@@ -6,13 +6,13 @@ import AddTravelService from './AddTravelService/AddTravelService'
 
 const Travel = () => {
   return (
-    <section>
+    <section className='overflow-x-hidden'>
       <TravelBanner />
       <div className='px-4 mb-20'>
         <TravelService />
-        <AddTravelService/>
       </div>
-      <TravelSelectSet/>
+      <AddTravelService />
+      <TravelSelectSet />
     </section>
   )
 }
