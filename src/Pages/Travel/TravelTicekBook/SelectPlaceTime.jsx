@@ -57,9 +57,7 @@ const SelectPlaceTime = () => {
         "Saintmartin Paribahan",
         "BRTC",
         "Anabil Super",
-      ];
-      
-
+      ];     
 
     return (
         <section className="border p-5 rounded border-black/20 flex flex-col lg:flex-row justify-between items-center gap-5 shadow-2xl shadow-main">
