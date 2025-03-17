@@ -1,8 +1,13 @@
+import useBusState from "../TravelHooks/useBusState";
 
 
 
 const SelectPlaceTime = () => {
-
+    const [busInfo, refetch] = useBusState()
+    // buss name 
+    const busNames = busInfo?.map(bus => bus.busName);
+    console.log(busNames)
+    
     //  TODO: Data come from Database
     const busStands = [
         "Gabtoli Bus Terminal, Dhaka",
@@ -46,18 +51,6 @@ const SelectPlaceTime = () => {
         "11:30pm",
         "12:30pm",
       ]
-      
-      const busNames = [
-        "Green Line Paribahan",
-        "Shohagh Paribahan",
-        "Hanif Enterprise",
-        "Ena Transport",
-        "Desh Travels",
-        "Shyamoli Paribahan",
-        "Saintmartin Paribahan",
-        "BRTC",
-        "Anabil Super",
-      ];     
 
     return (
         <section className="border p-5 rounded border-black/20 flex flex-col lg:flex-row justify-between items-center gap-5 shadow-2xl shadow-main">
