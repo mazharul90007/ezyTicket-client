@@ -3,7 +3,7 @@
 
 const SelectPlaceTime = () => {
 
-
+    //  TODO: Data come from Database
     const busStands = [
         "Gabtoli Bus Terminal, Dhaka",
         "Sayedabad Bus Terminal, Dhaka",
@@ -47,10 +47,28 @@ const SelectPlaceTime = () => {
         "12:30pm",
       ]
       
+      const busNames = [
+        "Green Line Paribahan",
+        "Shohagh Paribahan",
+        "Hanif Enterprise",
+        "Ena Transport",
+        "Desh Travels",
+        "Shyamoli Paribahan",
+        "Saintmartin Paribahan",
+        "BRTC",
+        "Anabil Super",
+      ];
+      
 
 
     return (
         <section className="border p-5 rounded border-black/20 flex flex-col lg:flex-row justify-between items-center gap-5 shadow-2xl shadow-main">
+            <select defaultValue="Select a Bus" className="select select-success">
+                <option disabled={true} >Select a Bus</option>
+                {
+                    busNames.map((bus,idx)=><option key={idx}>{bus}</option>)
+                }
+            </select>
             <select defaultValue="From" className="select select-success">
                 <option disabled={true} >From</option>
                 {
