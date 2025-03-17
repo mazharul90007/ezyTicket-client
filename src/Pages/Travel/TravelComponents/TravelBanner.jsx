@@ -61,6 +61,7 @@ const TravelBanner = () => {
                     {
                         travelCards.map((card, idx) => <BannerCard
                             key={idx}
+                            idx={idx}
                             card={card}
                         ></BannerCard>)
                     }
