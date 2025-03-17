@@ -48,7 +48,7 @@ const PricingCalculator = () => {
                     <div className=" grid grid-cols-1 md:grid-cols-2 gap-8">
                         {/* Ticket Price Input */}
                         <div className="md:col-span-1 bg-white p-4 md:p-8 rounded-lg  space-y-4">
-                            <div className="flex items-center gap-4">
+                            <div className="flex flex-col lg:flex-row items-center gap-4 w-full">
                                 <div>
                                     <label className="block text-gray-700 text-sm font-bold mb-2">
                                         Ticket Price (BDT)
@@ -58,7 +58,7 @@ const PricingCalculator = () => {
                                         value={ticketPrice}
                                         onChange={(e) => setTicketPrice(e.target.value)}
                                         className="w-full md:w-fit p-2 md:p-4 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-supporting"
-                                        placeholder="Enter ticket price"
+                                        placeholder="Per ticket price"
                                     />
                                 </div>
 
@@ -72,7 +72,7 @@ const PricingCalculator = () => {
                                         value={numberOfTickets}
                                         onChange={(e) => setNumberOfTickets(e.target.value)}
                                         className="w-full md:w-fit p-2 md:p-4 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-supporting"
-                                        placeholder="Enter number of tickets"
+                                        placeholder="Number of tickets"
                                     />
                                 </div>
                             </div>
@@ -80,7 +80,7 @@ const PricingCalculator = () => {
                             {/* Calculate Button */}
                             <button
                                 onClick={handleCalculate}
-                                className="py-2 md:py-3 px-4 md:px-6 bg-supporting flex items-center justify-center md:justify-start rounded-lg shadow-md hover:scale-95 transform transition-transform cursor-pointer text-white font-semibold mx-auto md:mx-0"
+                                className="py-2 md:py-3 px-4 md:px-6 bg-supporting flex items-center justify-center lg:justify-start rounded-lg shadow-md hover:scale-95 transform transition-transform cursor-pointer text-white font-semibold mx-auto lg:mx-0"
                             >
                                 Calculate
                             </button>
