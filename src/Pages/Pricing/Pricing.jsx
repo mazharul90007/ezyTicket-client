@@ -28,6 +28,7 @@ const Pricing = () => {
 
                         <p className="text-xl text-gray-500">With EzyTicket, you can create, manage, and promote your events without any upfront costs. Our platform is designed to support your success, and we only take a small fee when you sell tickets. All ticket prices are displayed in Bangladeshi Taka (BDT), making it easy for you and your attendees to plan and budget effectively.</p>
 
+
                         <div className="flex items-center text-xl text-gray-500">Displaying ticket price for
                             <span className="mx-2">
                                 <img src={bangladesh} alt="Bangladesh flag" className="w-8 h-auto" />
