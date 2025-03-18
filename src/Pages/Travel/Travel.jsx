@@ -11,8 +11,13 @@ const Travel = () => {
       <div className='px-4 mb-20'>
         <TravelService />
       </div>
+      
       <AddTravelService />
-      <TravelSelectSet />
+
+      {/* set form */}
+      <div id="scroll-section">
+        <TravelSelectSet />
+      </div>
     </section>
   )
 }
