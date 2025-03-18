@@ -21,15 +21,15 @@ const Pricing = () => {
             <PricingBanner></PricingBanner>
             <div className="my-8 md:py-12 w-11/12 mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="md:col-span-2 text-gray-800 space-y-6">
-                        <h2 className="text-3xl md:text-4xl font-bold text-main">EzyTicket is Completely Free to Use</h2>
+                    <div className="md:col-span-2 text-gray-800">
+                        <h2 className="text-3xl md:text-4xl font-bold text-main mb-2">EzyTicket is Completely Free to Use</h2>
 
-                        <h2 className="text-2xl md:text-3xl font-bold"> We only charge when you sell tickets for your Event</h2>
+                        <h2 className="text-xl md:text-2xl font-bold mb-4"> We only charge when you sell tickets for your Event</h2>
 
-                        <p className="text-xl text-gray-500">With EzyTicket, you can create, manage, and promote your events without any upfront costs. Our platform is designed to support your success, and we only take a small fee when you sell tickets. All ticket prices are displayed in Bangladeshi Taka (BDT), making it easy for you and your attendees to plan and budget effectively.</p>
+                        <p className="text-lg text-gray-500">With EzyTicket, you can create, manage, and promote your events without any upfront costs. Our platform is designed to support your success, and we only take a small fee when you sell tickets. All ticket prices are displayed in Bangladeshi Taka (BDT), making it easy for you and your attendees to plan and budget effectively.</p>
 
 
-                        <div className="flex items-center text-xl text-gray-500">Displaying ticket price for
+                        <div className="flex items-center text-lg text-gray-500">Displaying ticket price for
                             <span className="mx-2">
                                 <img src={bangladesh} alt="Bangladesh flag" className="w-8 h-auto" />
                             </span>
