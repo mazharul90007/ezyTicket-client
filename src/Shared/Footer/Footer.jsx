@@ -45,11 +45,11 @@ const Footer = () => {
 
 
     return (
-        <footer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-20 lg:gap-5 bg-[#1b1b1b] text-white py-16 px-5">
+        <footer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-20 lg:gap-5 bg-[#1b1b1b] text-white py-12 px-5">
             {/* about us */}
             <div className="flex flex-col ">
                 <h1 className="text-2xl font-semibold mb-3">About Us</h1>
-                <p className="text-left">Welcome to EZY Ticket, your trusted online ticket booking platform. We make ticket purchasing fast, secure, and hassle-free for events, travel, and entertainment. Our user-friendly system ensures seamless booking, real-time availability, and secure payments. Whether you're planning a trip, attending a concert, or booking a sports event, we've got you covered. Enjoy a smooth and convenient ticketing experience with us!</p>
+                <p className="text-left">Welcome to EZY Ticket, your trusted online ticket booking platform. We make ticket purchasing fast, secure, and hassle-free for events, travel, and entertainment.</p>
             </div>
             {/* nav links */}
             <div className="flex flex-col  lg:pl-10">

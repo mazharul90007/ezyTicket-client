@@ -20,6 +20,9 @@ const Navbar = () => {
             <Link to="/entertainment" className="flex items-center gap-2 hover:text-primary">
                 Entertainment
             </Link>
+            <Link to="/pricing" className="flex items-center gap-2 hover:text-primary">
+                Pricing
+            </Link>
             <Link to="/about" className="flex items-center gap-2 hover:text-primary">
                 About
             </Link>
@@ -33,7 +36,7 @@ const Navbar = () => {
 
 
     return (
-        <nav className="navbar shadow px-6 py-4">
+        <nav className="navbar shadow px-6 py-4 fixed top-0 z-40 bg-background">
             {/* Left Side: Logo */}
             <div className="flex-1">
                 <Link to="/" className="text-2xl font-bold text-amber-700 flex items-center gap-2">
@@ -58,7 +61,7 @@ const Navbar = () => {
 
             {/* Mobile Menu (Drawer) */}
             <div
-                className={`fixed top-20 -right-1 bg-base-100 shadow-xl p-4 rounded-l-lg flex flex-col space-y-4 lg:hidden transition-all duration-500 ease-in-out transform ${menuOpen ? "translate-x-0" : "translate-x-full"}`}
+                className={`fixed top-20 -right-1 bg-base-100 shadow-xl p-4 rounded-l-lg flex flex-col space-y-4 lg:hidden transition-all duration-500 ease-in-out transform z-20 ${menuOpen ? "translate-x-0" : "translate-x-full"}`}
                 style={{ pointerEvents: menuOpen ? "auto" : "none" }}
             >
                 {links}

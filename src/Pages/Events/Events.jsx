@@ -1,10 +1,11 @@
 import EventBanner from "./EventsComponents/EventBanner";
+import EventCards from "./EventsComponents/EventCards";
 
 const Events = () => {
     return (
-        <div>
+        <div className="pt-16">
             <EventBanner></EventBanner>
-            <h2>This is Event Page</h2>
+            <EventCards></EventCards>
         </div>
     );
 };
