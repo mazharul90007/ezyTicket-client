@@ -35,10 +35,10 @@ const PricingCalculator = () => {
         <div className="bg-background">
             <div className="py-8 w-11/12 mx-auto">
                 <div className="md:w-9/12 mx-auto">
-                    <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 text-main">
+                    <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-main">
                         Calculate your EzyTicket fees
                     </h2>
-                    <p className="text-xl text-gray-500 text-center">
+                    <p className="text-lg text-gray-500 text-center">
                         Plan and host in-person or virtual events effortlessly. With our powerful platform, you can create unforgettable experiences for your attendees while keeping everything simple and streamlined.
                     </p>
                 </div>
@@ -47,7 +47,7 @@ const PricingCalculator = () => {
                 <div className="mt-10 p-6 rounded-lg">
                     <div className=" grid grid-cols-1 md:grid-cols-2 gap-8">
                         {/* Ticket Price Input */}
-                        <div className="md:col-span-1 bg-white p-4 md:p-8 rounded-lg  space-y-4">
+                        <div className="md:col-span-1 bg-white p-2 md:p-4 rounded-lg  space-y-4 overflow-scroll">
                             <div className="flex flex-col lg:flex-row items-center gap-4 w-full">
                                 <div>
                                     <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -86,7 +86,7 @@ const PricingCalculator = () => {
                             </button>
                         </div>
 
-                        <div className="md:col-span-1 bg-white p-4 md:p-8 rounded-lg">
+                        <div className="md:col-span-1 bg-white p-2 md:p-4 rounded-lg ">
                             {/* Display Result */}
                                 <div className="grid grid-cols-2 gap-4">
                                     <div className="border border-gray-300 rounded shadow p-4 md:p-8 text-center space-y-2">

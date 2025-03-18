@@ -20,6 +20,7 @@ export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
   const [darkMode, setDarkMode] = useState(false);
   const [user, setUser] = useState();
+  console.log(user);
 
   const [loading, setLoading] = useState(true);
 
