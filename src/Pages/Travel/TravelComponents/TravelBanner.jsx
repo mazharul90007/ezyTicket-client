@@ -7,6 +7,13 @@ import { MdOutlineTravelExplore } from "react-icons/md";
 
 const TravelBanner = () => {
 
+    const handleScroll = () => {
+        const section = document.getElementById("scroll-section");
+        if (section) {
+          section.scrollIntoView({ behavior: "smooth" });
+        }
+      };
+
     const travelCards = [
         {
             title: "Book Direct",
@@ -51,7 +58,7 @@ const TravelBanner = () => {
                     <div className="">
                         <h1 className='text-2xl font-bold md:text-3xl lg:text-5xl'>Smart Bus Ticket Booking <br /><span className="text-main">Fast, Easy & Secure!</span> </h1>
                         <p className='my-4'>Book Your Bus Tickets Anytime, Anywhere – Hassle-Free & Instant Confirmation!</p>
-                        <button className="btn bg-button border-none text-white">Book Now</button>
+                        <button onClick={handleScroll} className="btn bg-main border-none text-white ">Book Now</button>
                     </div>
                 </div>
             </div>
@@ -61,6 +68,7 @@ const TravelBanner = () => {
                     {
                         travelCards.map((card, idx) => <BannerCard
                             key={idx}
+                            idx={idx}
                             card={card}
                         ></BannerCard>)
                     }
