@@ -37,8 +37,8 @@ const Pricing = () => {
                         </div>
                     </div>
                     <div className="md:col-span-1">
-                        <div className="bg-main text-white text-center p-20 space-y-4 rounded-2xl">
-                            <h3 className="text-7xl font-bold">5%</h3>
+                        <div className="bg-green-200 text-supporting border border-gray-300 text-center p-16 space-y-4 rounded-2xl">
+                            <h3 className="text-8xl font-bold">5%</h3>
                             <p className="text-2xl font-semibold">Per ticket sold</p>
                         </div>
                     </div>

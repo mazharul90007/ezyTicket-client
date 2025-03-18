@@ -5,7 +5,7 @@ import useAuth from "../../Hooks/useAuth";
 import nightSky from "../../assets/Navbar_image/sky.jpg";
 
 const Navbar = () => {
-    const { darkMode, setDarkMode } = useAuth();
+    const { darkMode, setDarkMode, user, logOut } = useAuth();
     const [menuOpen, setMenuOpen] = useState(false);
 
     // Initialize darkMode from localStorage on component mount
@@ -29,6 +29,10 @@ const Navbar = () => {
     const toggleMenu = () => setMenuOpen(!menuOpen);
     const closeMenu = () => setMenuOpen(false);
 
+    const handleLogout = ()=>{
+        logOut();
+    }
+
     // Navigation links
     const links = (
         <>
@@ -50,9 +54,11 @@ const Navbar = () => {
             <Link to="/contact" className="flex items-center gap-2 hover:text-primary" onClick={closeMenu}>
                 Contact
             </Link>
-            <Link to="/login" className="flex items-center gap-2 hover:text-primary" onClick={closeMenu}>
-                Login/SignUp
-            </Link>
+            {user ? <div onClick={handleLogout()}>LogOut</div>:
+                <Link to="/login" className="flex items-center gap-2 hover:text-primary" onClick={closeMenu}>
+                    Login/SignUp
+                </Link>
+            }
         </>
     );
 
