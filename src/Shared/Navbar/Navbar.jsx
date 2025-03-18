@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { FaHome, FaInfoCircle, FaBlog, FaEnvelope, FaBars, FaTimes, FaMoon, FaSun } from "react-icons/fa";
+import { FaBars, FaTimes, FaMoon, FaSun } from "react-icons/fa";
 import useAuth from "../../Hooks/useAuth";
 import nightSky from "../../assets/Navbar_image/sky.jpg";
+import noImage from "../../assets/Common_image/noImage.png";
 
 const Navbar = () => {
-    const { darkMode, setDarkMode, user, logOut } = useAuth();
+    const { darkMode, setDarkMode, user, logOut, setUser } = useAuth();
     const [menuOpen, setMenuOpen] = useState(false);
 
     // Initialize darkMode from localStorage on component mount
@@ -29,9 +30,17 @@ const Navbar = () => {
     const toggleMenu = () => setMenuOpen(!menuOpen);
     const closeMenu = () => setMenuOpen(false);
 
-    const handleLogout = ()=>{
-        logOut();
-    }
+    // Logout functionality
+    const handleLogout = () => {
+        logOut()
+            .then(() => {
+                setUser(null);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        closeMenu(); // Close the mobile menu after logout
+    };
 
     // Navigation links
     const links = (
@@ -54,11 +63,38 @@ const Navbar = () => {
             <Link to="/contact" className="flex items-center gap-2 hover:text-primary" onClick={closeMenu}>
                 Contact
             </Link>
-            {user ? <div onClick={handleLogout()}>LogOut</div>:
+            {user ? (
+                <div className="dropdown dropdown-end">
+                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                        <div className="w-10 rounded-full">
+                            <img
+                                src={user?.photoURL ? user.photoURL : noImage}
+                                alt="User Profile"
+                                className="rounded-full"
+                            />
+                        </div>
+                    </div>
+                    <ul
+                        tabIndex={0}
+                        className="dropdown-content menu bg-base-100 rounded-box z-50 w-52 p-2 shadow"
+                    >
+                        <li>
+                            <Link to="/profile" className="hover:text-primary">
+                                Profile
+                            </Link>
+                        </li>
+                        <li>
+                            <button onClick={handleLogout} className="hover:text-primary">
+                                Logout
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            ) : (
                 <Link to="/login" className="flex items-center gap-2 hover:text-primary" onClick={closeMenu}>
                     Login/SignUp
                 </Link>
-            }
+            )}
         </>
     );
 
@@ -100,7 +136,7 @@ const Navbar = () => {
             {/* Backdrop Overlay */}
             {menuOpen && (
                 <div
-                    className="fixed"
+                    className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
                     onClick={closeMenu} // Close menu when clicking outside
                 ></div>
             )}
