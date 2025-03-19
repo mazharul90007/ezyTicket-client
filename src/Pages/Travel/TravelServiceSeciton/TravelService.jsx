@@ -42,7 +42,7 @@ const TravelService = () => {
 
 
   return (
-    <section className="">
+    <section className="container mx-auto px-5">
       <Heading
         title="Reliable Bus Rental & Shuttle Services"
         subtitle="Ezy Ticket offers efficient and comfortable bus and shuttle services for all your travel needs. Whether you're planning a group trip, airport transfer, or daily commute, we ensure a smooth and reliable experience."

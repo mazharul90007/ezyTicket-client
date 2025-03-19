@@ -10,9 +10,9 @@ const TravelBanner = () => {
     const handleScroll = () => {
         const section = document.getElementById("scroll-section");
         if (section) {
-          section.scrollIntoView({ behavior: "smooth" });
+            section.scrollIntoView({ behavior: "smooth" });
         }
-      };
+    };
 
     const travelCards = [
         {
@@ -27,21 +27,21 @@ const TravelBanner = () => {
             description: "We prioritize your safety with enhanced cleaning and security measures.",
             linkText: "Explore Now",
             linkUrl: "#",
-            icon:<MdHealthAndSafety />
+            icon: <MdHealthAndSafety />
         },
         {
             title: "No Booking Fees",
             description: "Enjoy a hassle-free experience with no hidden charges or booking fees.",
             linkText: "Sign up or Login",
             linkUrl: "#",
-            icon:<AiFillDollarCircle />
+            icon: <AiFillDollarCircle />
         },
         {
             title: "Travel Now. Pay Later.",
             description: "Book your tickets today and pay later with interest-free options.",
             linkText: "Learn More",
             buttonUrl: "#",
-            icon: <MdOutlineTravelExplore/>
+            icon: <MdOutlineTravelExplore />
         }
     ];
 
@@ -63,16 +63,19 @@ const TravelBanner = () => {
                 </div>
             </div>
             {/* cards */}
-            <div className="container mx-auto flex justify-center ">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-10 absolute z-20 top-[520px] px-5">
-                    {
-                        travelCards.map((card, idx) => <BannerCard
-                            key={idx}
-                            idx={idx}
-                            card={card}
-                        ></BannerCard>)
-                    }
+            <div className="flex justify-center items-center">
+                <div className=" absolute z-20 top-[520px]">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-10 container mx-auto px-5">
+                        {
+                            travelCards.map((card, idx) => <BannerCard
+                                key={idx}
+                                idx={idx}
+                                card={card}
+                            ></BannerCard>)
+                        }
+                    </div>
                 </div>
+
             </div>
 
         </div>
