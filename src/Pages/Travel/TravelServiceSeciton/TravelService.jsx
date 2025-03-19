@@ -32,13 +32,13 @@ const TravelService = () => {
     {
       title: "School & College Bus Service",
       image: BusImage5,
+      path: "//travelbus-reservation"
     },
     {
       title: "Tour & Travel Bus Rentals",
       image: BusImage6,
     },
   ];
-
 
 
   return (
