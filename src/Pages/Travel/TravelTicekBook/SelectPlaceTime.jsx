@@ -1,9 +1,14 @@
+import useBusState from "../TravelHooks/useBusState";
 
 
 
 const SelectPlaceTime = () => {
-
-
+    const [busInfo, refetch] = useBusState()
+    // buss name 
+    const busNames = busInfo?.map(bus => bus.busName);
+    console.log(busNames)
+    
+    //  TODO: Data come from Database
     const busStands = [
         "Gabtoli Bus Terminal, Dhaka",
         "Sayedabad Bus Terminal, Dhaka",
@@ -46,11 +51,15 @@ const SelectPlaceTime = () => {
         "11:30pm",
         "12:30pm",
       ]
-      
-
 
     return (
         <section className="border p-5 rounded border-black/20 flex flex-col lg:flex-row justify-between items-center gap-5 shadow-2xl shadow-main">
+            <select defaultValue="Select a Bus" className="select select-success">
+                <option disabled={true} >Select a Bus</option>
+                {
+                    busNames.map((bus,idx)=><option key={idx}>{bus}</option>)
+                }
+            </select>
             <select defaultValue="From" className="select select-success">
                 <option disabled={true} >From</option>
                 {

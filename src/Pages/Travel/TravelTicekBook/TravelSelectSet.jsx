@@ -15,7 +15,7 @@ const TravelSelectSet = () => {
         return [...prevSeats, seat];
       });
     };
-
+     console.log(selectedSeats)
 
 
     return (

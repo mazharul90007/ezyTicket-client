@@ -1,14 +1,16 @@
 import React from "react";
-import { FaGoogle, FaLock, FaEnvelope } from "react-icons/fa";
+import { FaLock, FaEnvelope, FaFacebookF } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 import { useForm } from "react-hook-form";
 // import { useLocation, useNavigate, Navigate } from "react-router-dom";
 
 import toast from "react-hot-toast";
 // import Spinner from "../components/Spinner"; // Optional spinner component
 import useAuth from "../../Hooks/useAuth";
+import { Link } from "react-router-dom";
 
 function LoginPage() {
-  const { signIn, signInWithGoogle, setLoading } = useAuth();
+  const { signIn, signInWithGoogle, setLoading, darkMode } = useAuth();
   // const navigate = useNavigate();user, loading,
   // const location = useLocation();
 
@@ -51,20 +53,20 @@ function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-blue-900 to-purple-900">
-      <div className="bg-white/10 backdrop-blur-md p-10 rounded-2xl shadow-xl w-full max-w-md text-white">
+    <div className={`min-h-screen flex items-center justify-center bg-gradient-to-br ${darkMode ? 'from-black via-blue-900 to-purple-900' : 'from-green-200 via-green-50 to-green-200'} `}>
+      <div className={`${darkMode ? 'bg-white/10 text-white' : 'bg-white text-black'} backdrop-blur-md p-10 rounded-2xl shadow-xl w-full max-w-md `}>
         <h2 className="text-3xl font-bold text-center mb-6">Welcome Back</h2>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           <div>
             <label className="block mb-1">Email</label>
-            <div className="flex items-center bg-white/20 rounded-lg px-3">
-              <FaEnvelope className="text-gray-200 mr-2" />
+            <div className={`flex items-center ${darkMode ? 'bg-white/20' : 'bg-green-100'} rounded-lg px-3 py-2`}>
+              <FaEnvelope className={`${darkMode ? 'text-gray-200' : 'text-black'} mr-2`} />
               <input
                 type="email"
                 placeholder="Enter email"
                 {...register("email", { required: true })}
-                className="bg-transparent outline-none py-2 w-full text-white"
+                className={`${darkMode ? 'outline-none bg-transparent text-white placeholder-gray-300' : 'outline-none text-gray-500 placeholder-gray-600'} py-2 w-full`}
               />
             </div>
             {errors.email && (
@@ -74,13 +76,13 @@ function LoginPage() {
 
           <div>
             <label className="block mb-1">Password</label>
-            <div className="flex items-center bg-white/20 rounded-lg px-3">
-              <FaLock className="text-gray-200 mr-2" />
+            <div className={`flex items-center ${darkMode ? 'bg-white/20' : 'bg-green-100'} rounded-lg px-3 py-2`}>
+              <FaLock className={`${darkMode ? 'text-gray-200' : 'text-black'} mr-2`} />
               <input
                 type="password"
                 placeholder="Enter password"
                 {...register("password", { required: true })}
-                className="bg-transparent outline-none py-2 w-full text-white"
+                className={`${darkMode ? 'outline-none bg-transparent text-white placeholder-gray-300' : 'outline-none text-gray-500 placeholder-gray-600'} py-2 w-full`}
               />
             </div>
             {errors.password && (
@@ -90,27 +92,41 @@ function LoginPage() {
 
           <button
             type="submit"
-            className="w-full bg-purple-700 hover:bg-purple-800 transition text-white font-bold py-3 rounded-lg"
+            className="w-full text-center py-2 md:py-3 bg-supporting rounded-lg shadow-md hover:scale-95 transform transition-transform cursor-pointer text-white font-semibold mx-auto md:mx-0"
           >
             Login
           </button>
         </form>
 
         <div className="text-center mt-4">
-          <p className="mb-2">Or</p>
-          <button
-            onClick={handleGoogleSignIn}
-            className="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 py-3 rounded-lg transition font-semibold"
-          >
-            <FaGoogle /> Login with Google
-          </button>
+          <div className="divider">OR</div>
+          <div className="flex gap-2 justify-center">
+            <button
+              onClick={handleGoogleSignIn}
+              className="p-2 border border-gray-300 text-3xl font-bold rounded-full hover:scale-95 transform transition-transform cursor-pointer mx-auto md:mx-0 shadow-md"
+            >
+              {/* <FaGoogle /> Login with Google */}
+              <FcGoogle />
+            </button>
+
+            <button
+              onClick={''}
+              className="p-2 border border-gray-300 text-3xl font-bold text-blue-500 rounded-full hover:scale-95 transform transition-transform cursor-pointer mx-auto md:mx-0 shadow-md"
+            >
+              {/* <FaGoogle /> Login with Google */}
+              <FaFacebookF />
+            </button>
+          </div>
         </div>
 
-        <p className="text-center mt-6 text-sm text-gray-300">
+        <p className={`text-center text-sm ${darkMode ? 'text-gray-300' : 'text-gray-500'} mt-6`}>
           Don’t have an account?{" "}
-          <a href="/register" className="text-blue-300 hover:underline">
+          <Link
+            to={"/register"}
+            className="text-amber-600 font-semibold underline"
+          >
             Register
-          </a>
+          </Link>
         </p>
       </div>
     </div>
