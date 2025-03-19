@@ -8,7 +8,7 @@ const ProfileDashboard = () => {
                     <li>Home</li>
                     <li>About</li>
                     <li>Setting</li>
-                    <li>My Orders</li>
+                    <li>My Order</li>
                 </ul>
             </div>
         </div>
