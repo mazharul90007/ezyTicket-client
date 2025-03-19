@@ -74,21 +74,37 @@ const Navbar = () => {
                             />
                         </div>
                     </div>
-                    <ul
+                    <div
                         tabIndex={0}
-                        className="dropdown-content menu bg-base-100 rounded-box z-50 w-52 p-2 shadow"
+                        className="dropdown-content menu bg-base-100 rounded-box z-50 w-52 p-4 shadow mt-4"
                     >
-                        <li>
-                            <Link to="/profile" className="hover:text-primary">
-                                Profile
-                            </Link>
-                        </li>
-                        <li>
-                            <button onClick={handleLogout} className="hover:text-primary">
-                                Logout
-                            </button>
-                        </li>
-                    </ul>
+                        <div className="text-center">
+                            <img src={user?.photoURL ? user.photoURL : noImage}
+                                alt="User Profile"
+                                className="w-16 h-16 rounded-full border-2 p-1 border-main mx-auto mb-3"
+                            />
+                            <h4 className="text-lg text-gray-600 font-semibold">{user?.displayName}</h4>
+                            <p className="text-sm font-semibold text-gray-400">{user?.email}</p>
+                        </div>
+                        <div className="divider"></div>
+                        <ul>
+                            <li>
+                                <Link to="/mydashboard" className="hover:text-primary">
+                                    My Dashboard
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/profile" className="hover:text-primary">
+                                    Profile
+                                </Link>
+                            </li>
+                            <li>
+                                <button onClick={handleLogout} className="hover:text-primary">
+                                    Logout
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             ) : (
                 <Link to="/login" className="flex items-center gap-2 hover:text-primary" onClick={closeMenu}>
