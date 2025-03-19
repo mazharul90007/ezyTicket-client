@@ -4,7 +4,6 @@ import useTravelData from '../../../Hooks/TrevalHook/useTravelData';
 import Heading from '../../../components/Heading';
 const BusReservationPage = () => {
   const [busServices] =  useTravelData()
-  
 
   const [serviceType, setServiceType] = useState('');
   const [name, setName] = useState('');
