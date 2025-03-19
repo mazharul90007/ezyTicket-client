@@ -10,6 +10,7 @@ import LoginPage from "../Pages/Authentication/LoginPage";
 import RegisterPage from "../Pages/Authentication/RegisterPage";
 import EventDetails from "./../Pages/Events/EventDetails/EventDetails";
 import Pricing from "../Pages/Pricing/Pricing";
+import Profile from "../Pages/Profile/Profile";
 import BusReservationPage from "../Pages/Travel/TravelServiceSeciton/BusReservationPage";
 
 const Route = createBrowserRouter([
@@ -33,6 +34,10 @@ const Route = createBrowserRouter([
       {
         path: "/register",
         element: <RegisterPage></RegisterPage>,
+      },
+      {
+        path: '/profile',
+        element: <Profile></Profile>
       },
       {
         path: "/travel",

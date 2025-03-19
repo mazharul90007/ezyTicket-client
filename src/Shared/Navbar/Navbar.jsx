@@ -64,7 +64,7 @@ const Navbar = () => {
                 Contact
             </Link>
             {user ? (
-                <div className="dropdown dropdown-end">
+                <div className="dropdown dropdown-end ">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                         <div className="w-10 rounded-full">
                             <img
@@ -76,7 +76,7 @@ const Navbar = () => {
                     </div>
                     <div
                         tabIndex={0}
-                        className="dropdown-content menu bg-base-100 rounded-box z-50 w-52 p-4 shadow mt-4"
+                        className="dropdown-content menu bg-base-100 rounded-box z-50 w-52 p-4 shadow-md mt-4 border border-gray-300"
                     >
                         <div className="text-center">
                             <img src={user?.photoURL ? user.photoURL : noImage}
