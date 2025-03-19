@@ -136,7 +136,7 @@ const Navbar = () => {
             {/* Backdrop Overlay */}
             {menuOpen && (
                 <div
-                    className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
+                    className="fixed inset-0 z-30"
                     onClick={closeMenu} // Close menu when clicking outside
                 ></div>
             )}
