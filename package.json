@@ -11,6 +11,10 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.13",
+<<<<<<< HEAD
+=======
+    "@tanstack/react-query": "^5.69.0",
+>>>>>>> 40176cc65a1e6e7869f73d3333e7b9e9e348eeee
     "axios": "^1.8.3",
     "firebase": "^11.4.0",
     "framer-motion": "^12.5.0",
@@ -18,10 +22,12 @@
     "match-sorter": "^8.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-fast-marquee": "^1.6.5",
     "react-hook-form": "^7.54.2",
     "react-hot-toast": "^2.5.2",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.3.0",
+    "react-toastify": "^11.0.5",
     "sort-by": "^1.2.0",
     "sweetalert2": "^11.17.2",
     "swiper": "^11.2.5",

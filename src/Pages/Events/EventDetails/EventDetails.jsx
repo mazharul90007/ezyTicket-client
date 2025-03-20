@@ -1,16 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Loading from "../../../Shared/Loading/Loading";
 import Swal from "sweetalert2";
-
+import { IoPersonCircle } from "react-icons/io5";
+import { MdDateRange } from "react-icons/md";
+import { IoMdPricetags } from "react-icons/io";
+import { IoLocation } from "react-icons/io5";
 const EventDetails = () => {
   const { eventId } = useParams();
   const [eventData, setEventData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
   useEffect(() => {
-    const fetchClassDetails = async () => {
+    if (!eventId) {
+      console.error("❌ eventId is missing from useParams");
+      return;
+    }
+
+    const fetchEventDetails = async () => {
       try {
+        console.log(`🔍 Fetching event details for ID: ${eventId}`);
         const response = await fetch(`http://localhost:3000/events/${eventId}`);
 
         if (!response.ok) {
@@ -18,9 +28,10 @@ const EventDetails = () => {
         }
 
         const data = await response.json();
+        console.log("✅ Event data fetched:", data);
         setEventData(data);
       } catch (error) {
-        console.error("Error fetching event details:", error);
+        console.error("❌ Error fetching event details:", error);
         setError("Failed to fetch event details. Please try again later.");
         Swal.fire("Error", "Failed to fetch event details.", "error");
       } finally {
@@ -28,47 +39,90 @@ const EventDetails = () => {
       }
     };
 
-    fetchClassDetails();
+    fetchEventDetails();
   }, [eventId]);
-  if (loading)
-    return (
-      <p>
-        <Loading></Loading>
-      </p>
-    );
+
+  if (loading) return <Loading />;
   if (error) return <p className="text-red-500">{error}</p>;
+
   return (
-    <div className="mt-40 w-11/12 mx-auto mb-10">
-      <h1 className="text-3xl font-bold text-center mb-6 dark:text-white">
-        Event Details
-      </h1>
-      <div className="card bg-white shadow-md rounded-lg p-6 dark:text-black flex md:flex-row">
-        <figure>
-          <img
-            src={eventData.photo}
-            alt={eventData.title}
-            className="w-fit h-66 px-5 object-cover rounded-lg"
-          />
-        </figure>
-        <div className="card-body p-4">
-          <h2 className="card-title text-lg">{eventData.title}</h2>
-          <p className="text-sm">
-            <strong>Name:</strong> {eventData.name}
-          </p>
-          <p className="text-sm">
-            <strong>Price:</strong> ${eventData.price}
-          </p>
-          <p className="text-sm">
-            <strong>Description:</strong> {eventData.description}
-          </p>
-          <p className="text-sm">
-            <strong>Total Enrolment:</strong> {eventData.enrollmentCount || 0}
-          </p>
-          <div className="card-actions justify-end mt-2">
-            <button className="btn btn-lg bg-blue-500 text-white">
-              Buy ticket
-            </button>
+    <div className="bg-gray-100">
+      <div className="container  mx-auto w-11/12 p-6 grid grid-cols-1 lg:grid-cols-3 gap-6 mt-18  px-10">
+        {/* Left Section */}
+
+        <div className="lg:col-span-2">
+          <div>
+            <p className="text-black mt-10 mb-1 font-bold text-4xl">
+              {eventData?.title}
+            </p>
+            <div className="flex gap-4 mb-10">
+              <p className="text-gray-500 mt-10 text-xm">
+                <strong></strong> {eventData?.dateTime}
+              </p>
+              <p className="text-gray-500 mt-10 text-xm">
+                <strong></strong> {eventData?.duration}
+              </p>
+              <p className="text-gray-500 mt-10 text-xm">
+                <strong></strong> {eventData?.location}
+              </p>
+            </div>
           </div>
+
+          <img
+            src={eventData?.photo}
+            alt={eventData?.name}
+            className="w-full h-80 object-cover rounded-lg shadow-md"
+          />
+          <div className="mt-4 bg-white p-20 rounded-lg shadow">
+            <h2 className="text-2xl font-bold text-black">{eventData?.name}</h2>
+            <p className="text-BLACK mt-2 text-xl">{eventData?.description}</p>
+          </div>
+        </div>
+
+        {/* Right Sidebar */}
+        <div className="bg-white p-20 md:mt-45 shadow-lg rounded-lg h-fit">
+          <h3 className="text-2xl text-black font-semibold mb-4">
+            Event Information
+          </h3>
+          <p className="text-black mt-10 text-xl ">
+            <strong className="flex">
+              <IoPersonCircle className="text-second text-4xl mr-2 "></IoPersonCircle>
+              Organized by: {eventData?.organizedBy}
+            </strong>{" "}
+          </p>
+          <p className="text-black mt-10 text-xl ">
+            <strong className="flex">
+              <MdDateRange className="text-second text-4xl mr-2 "></MdDateRange>
+              Date and Time: {eventData?.dateTime}
+            </strong>{" "}
+          </p>
+          <p className="text-black mt-10 text-xl ">
+            <strong className="flex">
+              <IoMdPricetags className="text-second text-4xl mr-2 "></IoMdPricetags>
+              Price: {eventData?.price}
+            </strong>{" "}
+          </p>
+          <p className="text-black mt-10 text-xl ">
+            <strong className="flex">
+              <IoLocation className="text-second text-4xl mr-2 "></IoLocation>
+              Location: {eventData?.location}
+            </strong>{" "}
+          </p>
+
+          <p className="text-black">
+            <div className="flex justify-between mt-20">
+              <button className="py-2 md:py-3 px-4 md:px-6 bg-supporting flex items-center justify-center md:justify-start rounded-lg shadow-md hover:scale-95 transform transition-transform cursor-pointer text-white font-semibold mx-auto md:mx-0 hover:bg-main">
+                Buy Tickets
+              </button>
+
+              <Link
+                to="/events"
+                className="py-2 md:py-3 px-4 md:px-6 bg-supporting flex items-center justify-center md:justify-start rounded-lg shadow-md hover:scale-95 transform transition-transform cursor-pointer text-white font-semibold mx-auto md:mx-0 hover:bg-main"
+              >
+                Back
+              </Link>
+            </div>
+          </p>
         </div>
       </div>
     </div>
