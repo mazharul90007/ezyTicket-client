@@ -15,11 +15,6 @@ const MainLayout = () => {
                 <Outlet />
             </main>
             <Footer />
-<<<<<<< HEAD
-            <ToastContainer />
-=======
-            
->>>>>>> 40176cc65a1e6e7869f73d3333e7b9e9e348eeee
         </div>
     );
 };
