@@ -40,42 +40,43 @@ const EventCards = () => {
   if (error) return <p className="text-center text-red-500">Error: {error}</p>;
 
   return (
-    <div className="p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto w-11/12 mb-10 mt-10">
-      {events.map((event, index) => (
-        <div
-          key={index}
-          className="hover:shadow-2xl hover:scale-105 transition-transform duration-300  rounded-lg bg-[#F6FCDF] overflow-hidden shadow-sm shadow-[#A2CA71]"
-        >
-          <img
-            src={event.photo}
-            alt={event.title}
-            className="w-full h-56 object-cover"
-          />
-          <div className="p-4">
-            <h2 className="text-xl font-bold">{event.title}</h2>
-            <p className="text-gray-600 mt-2">{event.description}</p>
-            <p className="text-sm mt-1">
-              <strong>Organized By:</strong> {event.organizedBy}
-            </p>
-            <p className="text-sm mt-1">
-              <strong>Date & Time:</strong>{" "}
-              {new Date(event.dateTime).toLocaleString()}
-            </p>
-            <p className="text-sm mt-1">
-              <strong>Location:</strong> {event.location}
-            </p>
-            <p className="text-lg font-semibold mt-2">
-              Price: {event.price} Tk
-            </p>
-            <Link
-              to={`/eventdetailspublic/${event._id}`}
-              className="py-2 md:py-3 px-4 md:px-6 bg-supporting flex items-center justify-center md:justify-start rounded-lg shadow-md hover:scale-95 transform transition-transform cursor-pointer text-white font-semibold mx-auto md:mx-0 hover:bg-main"
-            >
-              View Details
-            </Link>
+    <div className="bg-gray-200">
+      <div className=" p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto w-11/12 py-10 mb-10 mt-10">
+        {events.map((event, index) => (
+          <div
+            key={index}
+            className="hover:shadow-2xl hover:scale-105 transition-transform duration-300  rounded-lg bg-green-100 overflow-hidden shadow-sm shadow-[#A2CA71]"
+          >
+            <img
+              src={event.photo}
+              alt={event.title}
+              className="w-full h-56 object-cover"
+            />
+            <div className="p-4">
+              <h2 className="text-xl font-bold mb-10">{event.title}</h2>
+
+              <p className="text-lg font-semibold mt-4 mb-4">
+                Price: {event.price} Tk
+              </p>
+              <Link
+                to={`/eventdetailspublic/${event._id}`}
+                className="py-2 md:py-3 px-4 md:px-6 bg-supporting flex items-center justify-center md:justify-start rounded-lg shadow-md hover:scale-95 transform transition-transform cursor-pointer text-white font-semibold mx-auto md:mx-0 hover:bg-main"
+              >
+                View Details
+              </Link>
+              <div className="flex justify-around mt-4">
+                <p className="text-sm mt-1">
+                  <strong>Date & Time:</strong>{" "}
+                  {new Date(event.dateTime).toLocaleString()}
+                </p>
+                <p className="text-sm mt-1">
+                  <strong>Location:</strong> {event.location}
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };

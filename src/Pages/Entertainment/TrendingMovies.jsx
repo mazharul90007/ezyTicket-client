@@ -30,8 +30,8 @@ const trendingMovies = [
 
 const TrendingMovies = () => {
   return (
-    <section className="bg-black text-white py-12 px-4 md:px-10">
-      <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-purple-400">
+    <section className="  py-12 px-4 md:px-10">
+      <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 ">
         🔥 Trending Movies
       </h2>
       <div className="flex flex-col gap-8 md:grid md:grid-cols-3 md:gap-10 overflow-x-auto no-scrollbar md:overflow-visible">

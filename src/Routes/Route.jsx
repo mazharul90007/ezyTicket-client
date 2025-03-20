@@ -10,6 +10,8 @@ import LoginPage from "../Pages/Authentication/LoginPage";
 import RegisterPage from "../Pages/Authentication/RegisterPage";
 import EventDetails from "./../Pages/Events/EventDetails/EventDetails";
 import Pricing from "../Pages/Pricing/Pricing";
+import Profile from "../Pages/Profile/Profile";
+import BusReservationPage from "../Pages/Travel/TravelServiceSeciton/BusReservationPage";
 
 const Route = createBrowserRouter([
   {
@@ -34,8 +36,16 @@ const Route = createBrowserRouter([
         element: <RegisterPage></RegisterPage>,
       },
       {
+        path: '/profile',
+        element: <Profile></Profile>
+      },
+      {
         path: "/travel",
         element: <Travel />,
+      },
+      {
+        path:"/travel/bus-reservation",
+        element: <BusReservationPage/>
       },
       {
         path: "/events",
