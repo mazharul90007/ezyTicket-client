@@ -40,8 +40,8 @@ const marqueeMovies = [
 
 const MovieMarquee = () => {
   return (
-    <section className="py-16 px-4 bg-black text-white">
-      <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-12 text-green-700">
+    <section className="py-16 px-4 text-white">
+      <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-12 text-white">
         <span>🎬</span> Movie Marquee Showcase
       </h2>
 

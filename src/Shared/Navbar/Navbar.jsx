@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { FaBars, FaTimes, FaMoon, FaSun } from "react-icons/fa";
 import useAuth from "../../Hooks/useAuth";
 import nightSky from "../../assets/Navbar_image/sky.jpg";
@@ -8,16 +8,33 @@ import noImage from "../../assets/Common_image/noImage.png";
 const Navbar = () => {
     const { darkMode, setDarkMode, user, logOut, setUser } = useAuth();
     const [menuOpen, setMenuOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
+    const isHomePage= location.pathname ==='/entertainment' || location.pathname==='/login' || location.pathname==='/register'
 
     // Initialize darkMode from localStorage on component mount
     useEffect(() => {
+
+        
         const savedTheme = localStorage.getItem("Theme");
         if (savedTheme === "dark_mode") {
             setDarkMode(true);
         } else {
             setDarkMode(false);
         }
-    }, [setDarkMode]);
+        const handleScroll = () => {
+            if (window.scrollY > 0 || !isHomePage) {
+              setIsScrolled(true);
+            } else {
+              setIsScrolled(false);
+            }
+          };
+      
+          window.addEventListener("scroll", handleScroll);
+          handleScroll();
+          return () => {
+            window.removeEventListener("scroll", handleScroll);
+          };
+    }, [setDarkMode, isHomePage]);
 
     // Dark/Light theme toggle
     const activeMode = async () => {
@@ -45,24 +62,60 @@ const Navbar = () => {
     // Navigation links
     const links = (
         <>
-            <Link to="/travel" className="flex items-center gap-2 hover:text-primary" onClick={closeMenu}>
+            <NavLink
+                to="/travel"
+                className={({ isActive }) =>
+                    `flex items-center gap-2 hover:text-supporting ${isActive ? "text-supporting" : ""}`
+                }
+                onClick={closeMenu}
+            >
                 Travel
-            </Link>
-            <Link to="/events" className="flex items-center gap-2 hover:text-primary" onClick={closeMenu}>
+            </NavLink>
+            <NavLink
+                to="/events"
+                className={({ isActive }) =>
+                    `flex items-center gap-2 hover:text-supporting ${isActive ? "text-supporting" : ""}`
+                }
+                onClick={closeMenu}
+            >
                 Events
-            </Link>
-            <Link to="/entertainment" className="flex items-center gap-2 hover:text-primary" onClick={closeMenu}>
+            </NavLink>
+            <NavLink
+                to="/entertainment"
+                className={({ isActive }) =>
+                    `flex items-center gap-2 hover:text-supporting ${isActive ? "text-supporting" : ""}`
+                }
+                onClick={closeMenu}
+            >
                 Entertainment
-            </Link>
-            <Link to="/pricing" className="flex items-center gap-2 hover:text-primary" onClick={closeMenu}>
+            </NavLink>
+            <NavLink
+                to="/pricing"
+                className={({ isActive }) =>
+                    `flex items-center gap-2 hover:text-supporting ${isActive ? "text-supporting" : ""}`
+                }
+                onClick={closeMenu}
+            >
                 Pricing
-            </Link>
-            <Link to="/about" className="flex items-center gap-2 hover:text-primary" onClick={closeMenu}>
+            </NavLink>
+            <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                    `flex items-center gap-2 hover:text-supporting ${isActive ? "text-supporting" : ""}`
+                }
+                onClick={closeMenu}
+            >
                 About
-            </Link>
-            <Link to="/contact" className="flex items-center gap-2 hover:text-primary" onClick={closeMenu}>
+            </NavLink>
+            <NavLink
+                to="/contact"
+                className={({ isActive }) =>
+                    `flex items-center gap-2 hover:text-supporting ${isActive ? "text-supporting" : ""}`
+                }
+                onClick={closeMenu}
+            >
                 Contact
-            </Link>
+            </NavLink>
             {user ? (
                 <div className="dropdown dropdown-end">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
@@ -74,44 +127,71 @@ const Navbar = () => {
                             />
                         </div>
                     </div>
-                    <ul
+                    <div
                         tabIndex={0}
-                        className="dropdown-content menu bg-base-100 rounded-box z-50 w-52 p-2 shadow"
+                        className="dropdown-content menu bg-base-100 rounded-box z-50 w-52 p-4 shadow mt-4"
                     >
-                        <li>
-                            <Link to="/profile" className="hover:text-primary">
-                                Profile
-                            </Link>
-                        </li>
-                        <li>
-                            <button onClick={handleLogout} className="hover:text-primary">
-                                Logout
-                            </button>
-                        </li>
-                    </ul>
+                        <div className="text-center">
+                            <img
+                                src={user?.photoURL ? user.photoURL : noImage}
+                                alt="User Profile"
+                                className="w-16 h-16 rounded-full border-2 p-1 border-main mx-auto mb-3"
+                            />
+                            <h4 className="text-lg text-gray-600 font-semibold">{user?.displayName}</h4>
+                            <p className="text-sm font-semibold text-gray-400">{user?.email}</p>
+                        </div>
+                        <div className="divider"></div>
+                        <ul>
+                            <li>
+                                <Link to="/mydashboard" className="hover:text-primary">
+                                    My Dashboard
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/profile" className="hover:text-primary">
+                                    Profile
+                                </Link>
+                            </li>
+                            <li>
+                                <button onClick={handleLogout} className="hover:text-primary">
+                                    Logout
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             ) : (
-                <Link to="/login" className="flex items-center gap-2 hover:text-primary" onClick={closeMenu}>
+                <NavLink
+                    to="/login"
+                    className={({ isActive }) =>
+                        `flex items-center gap-2 hover:text-primary ${isActive ? "text-supporting" : ""}`
+                    }
+                    onClick={closeMenu}
+                >
                     Login/SignUp
-                </Link>
+                </NavLink>
             )}
         </>
     );
 
     return (
         <nav
-            className={`navbar shadow px-6 py-4 fixed top-0 z-40 w-full bg-cover bg-center bg-background`}
-            style={darkMode ? { backgroundImage: `url(${nightSky})` } : {}}
+            className={`navbar shadow px-6 py-4 fixed top-0 z-40 w-full bg-cover bg-center ${
+                isScrolled ? "" : "bg-transparent"
+              }
+              ${darkMode && !isScrolled? "":"bg-background"} `}
+
+            style={darkMode && isScrolled ? { backgroundImage: `url(${nightSky})` } :{} }
         >
             {/* Left Side: Logo */}
             <div className="flex-1">
-                <Link to="/" className="text-2xl font-bold text-main flex items-center gap-2">
+                <Link to="/" className="text-3xl font-bold text-main flex items-center gap-2">
                     <span>EzyTicket</span>
                 </Link>
             </div>
 
             {/* Right Side: Navigation Links (Desktop) */}
-            <div className={`hidden lg:flex space-x-6 ${darkMode ? 'text-white' : 'text-black'}`}>
+            <div className={`hidden text-lg font-medium lg:flex space-x-6 ${darkMode  ? 'text-white' : 'text-black'}`}>
                 {links}
             </div>
 
@@ -136,7 +216,7 @@ const Navbar = () => {
             {/* Backdrop Overlay */}
             {menuOpen && (
                 <div
-                    className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
+                    className="fixed inset-0 z-30"
                     onClick={closeMenu} // Close menu when clicking outside
                 ></div>
             )}

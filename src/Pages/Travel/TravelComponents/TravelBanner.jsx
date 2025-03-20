@@ -4,52 +4,24 @@ import BannerCard from "./BannerCard";
 import { AiFillSafetyCertificate } from "react-icons/ai";
 import { AiFillDollarCircle } from "react-icons/ai";
 import { MdOutlineTravelExplore } from "react-icons/md";
+import useCardData from "./useCardData";
 
 const TravelBanner = () => {
+    const [travelCards] = useCardData()
 
     const handleScroll = () => {
         const section = document.getElementById("scroll-section");
         if (section) {
-          section.scrollIntoView({ behavior: "smooth" });
+            section.scrollIntoView({ behavior: "smooth" });
         }
-      };
+    };
 
-    const travelCards = [
-        {
-            title: "Book Direct",
-            description: "Get the best prices by booking your tickets directly with us.",
-            linkText: "Cheap Coach Tickets",
-            linkUrl: "#",
-            icon: <AiFillSafetyCertificate />
-        },
-        {
-            title: "Keeping You Safe",
-            description: "We prioritize your safety with enhanced cleaning and security measures.",
-            linkText: "Explore Now",
-            linkUrl: "#",
-            icon:<MdHealthAndSafety />
-        },
-        {
-            title: "No Booking Fees",
-            description: "Enjoy a hassle-free experience with no hidden charges or booking fees.",
-            linkText: "Sign up or Login",
-            linkUrl: "#",
-            icon:<AiFillDollarCircle />
-        },
-        {
-            title: "Travel Now. Pay Later.",
-            description: "Book your tickets today and pay later with interest-free options.",
-            linkText: "Learn More",
-            buttonUrl: "#",
-            icon: <MdOutlineTravelExplore/>
-        }
-    ];
 
 
     return (
         <div className="relative mb-40 h-[1350px] md:h-[880px] lg:h-[680px] xl:h-[650px]">
             <div
-                className="hero md:min-h-[600px] min-h-screen my-10"
+                className="hero md:min-h-[600px] min-h-screen "
                 style={{
                     backgroundImage: `url(${travelBannerImage})`,
                 }}>
@@ -63,16 +35,19 @@ const TravelBanner = () => {
                 </div>
             </div>
             {/* cards */}
-            <div className="container mx-auto flex justify-center ">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-10 absolute z-20 top-[520px] px-5">
-                    {
-                        travelCards.map((card, idx) => <BannerCard
-                            key={idx}
-                            idx={idx}
-                            card={card}
-                        ></BannerCard>)
-                    }
+            <div className="flex justify-center items-center">
+                <div className=" absolute z-20 top-[520px]">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-10 container mx-auto px-5">
+                        {
+                            travelCards.map((card, idx) => <BannerCard
+                                key={idx}
+                                idx={idx}
+                                card={card}
+                            ></BannerCard>)
+                        }
+                    </div>
                 </div>
+
             </div>
 
         </div>
