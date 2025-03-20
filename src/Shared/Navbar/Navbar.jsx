@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { FaBars, FaTimes, FaMoon, FaSun } from "react-icons/fa";
 import useAuth from "../../Hooks/useAuth";
 import nightSky from "../../assets/Navbar_image/sky.jpg";
@@ -9,7 +9,8 @@ const Navbar = () => {
     const { darkMode, setDarkMode, user, logOut, setUser } = useAuth();
     const [menuOpen, setMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
-    const isHomePage= location.pathname ==='/entertainment' || location.pathname==='/login' || location.pathname==='/register'
+    const location=useLocation();
+    const isHomePage= location.pathname ==='/entertainment' || location.pathname==='/login' || location.pathname==='/register'|| location.pathname==='/travel'|| location.pathname==='/events'
 
     // Initialize darkMode from localStorage on component mount
     useEffect(() => {
