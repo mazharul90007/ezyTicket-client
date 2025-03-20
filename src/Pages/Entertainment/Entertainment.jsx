@@ -12,8 +12,8 @@ const Entertainment = () => {
   return ( 
     <div className={` bg-gradient-to-br ${
       darkMode
-        ? "from-black via-blue-900 to-purple-900"
-        : "from-green-200 via-green-50 to-green-200"
+        ? "from-black via-blue-900 to-purple-900 text-white"
+        : "from-green-200 via-green-50 to-green-200 text-purple-700"
     } `}>
       <MovieHero></MovieHero>
       <TrendingMovies></TrendingMovies>
