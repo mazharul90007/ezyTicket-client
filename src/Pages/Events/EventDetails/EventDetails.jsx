@@ -125,6 +125,36 @@ const EventDetails = () => {
           </p>
         </div>
       </div>
+
+      {/* Right Sidebar */}
+      <div className="bg-gradient-to-br from-black via-blue-900 to-purple-900 p-20 shadow-lg rounded-lg h-fit">
+        <h3 className="text-2xl text-white font-semibold mb-4">
+          Event Information
+        </h3>
+        <p className="text-white mt-10 text-xl">
+          <strong>Name:</strong> {eventData?.title}
+        </p>
+        <p className="text-white mt-10 text-xl">
+          <strong>Price:</strong> ${eventData?.price}
+        </p>
+        <p className="text-white mt-10 text-xl">
+          <strong>Location:</strong> {eventData?.location || "N/A"}
+        </p>
+        <p className="text-white">
+          <div className="flex justify-between mt-20">
+            <button className="py-2 md:py-3 px-4 md:px-6 bg-supporting flex items-center justify-center md:justify-start rounded-lg shadow-md hover:scale-95 transform transition-transform cursor-pointer text-white font-semibold mx-auto md:mx-0 hover:bg-main">
+              Buy Tickets
+            </button>
+
+            <Link
+              to="/events"
+              className="py-2 md:py-3 px-4 md:px-6 bg-supporting flex items-center justify-center md:justify-start rounded-lg shadow-md hover:scale-95 transform transition-transform cursor-pointer text-white font-semibold mx-auto md:mx-0 hover:bg-main"
+            >
+              Back
+            </Link>
+          </div>
+        </p>
+      </div>
     </div>
   );
 };
