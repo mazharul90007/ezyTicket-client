@@ -10,6 +10,7 @@ const Travel = () => {
       <div className='px-4 mb-20'>
         <TravelService />
       </div>
+      
       <TravelSelectSet/>
     </section>
   )
