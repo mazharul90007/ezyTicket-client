@@ -3,7 +3,7 @@ import { FaUser, FaEnvelope, FaLock, FaGoogle } from "react-icons/fa";
 
 function RegisterPage() {
   return (
-    <div>
+    <div className="pt-10">
       <div className="min-h-screen flex items-center justify-center p-8 bg-gradient-to-br from-black via-blue-900 to-purple-900">
         <div className="bg-white/10 backdrop-blur-md p-10 rounded-2xl shadow-xl w-full max-w-md text-white">
           <h2 className="text-3xl font-bold text-center mb-6">

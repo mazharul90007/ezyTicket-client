@@ -1,3 +1,4 @@
+import MovieMarquee from "./Components/MovieMarquee";
 import FeaturedTrailers from "./FeaturedTrailers";
 import MovieHero from "./MovieHero";
 import TrendingMovies from "./TrendingMovies";
@@ -8,6 +9,7 @@ const Entertainment = () => {
       <MovieHero></MovieHero>
       <TrendingMovies></TrendingMovies>
       <FeaturedTrailers></FeaturedTrailers>
+      <MovieMarquee></MovieMarquee>
     </div>
   );
 };
