@@ -14,7 +14,7 @@ const Profile = () => {
                     </div>
                 </div>
                 {/*  */}
-                <div className="lg:col-span-8">
+                <div className="lg:col-span-8 p-4">
                     <ProfileDashboard></ProfileDashboard>
                 </div>
             </div>
