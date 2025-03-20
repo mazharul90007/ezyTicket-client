@@ -1,9 +1,5 @@
-import travelBannerImage from "../../../assets/Travel_image/Bus.jpg"
-import { MdHealthAndSafety } from "react-icons/md";
+import travelBannerImage from "../../../assets/Travel_image/Bus3.jpg"
 import BannerCard from "./BannerCard";
-import { AiFillSafetyCertificate } from "react-icons/ai";
-import { AiFillDollarCircle } from "react-icons/ai";
-import { MdOutlineTravelExplore } from "react-icons/md";
 import useCardData from "./useCardData";
 
 const TravelBanner = () => {
