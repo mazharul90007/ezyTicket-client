@@ -191,7 +191,7 @@ const Navbar = () => {
             </div>
 
             {/* Right Side: Navigation Links (Desktop) */}
-            <div className={`hidden text-lg font-medium lg:flex space-x-6 ${darkMode  ? 'text-white' : 'text-black'}`}>
+            <div className={`hidden text-lg font-medium lg:flex space-x-6 ${isScrolled? " ":"text-white"} ${darkMode  ? 'text-white' : 'text-black'}`}>
                 {links}
             </div>
 

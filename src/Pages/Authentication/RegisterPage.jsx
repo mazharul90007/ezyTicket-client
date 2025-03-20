@@ -58,7 +58,7 @@ function RegisterPage() {
 
   return (
     <div
-      className={`min-h-screen flex items-center justify-center py-8 pt-20 bg-gradient-to-br ${
+      className={`min-h-screen flex items-center justify-center pt-20 bg-gradient-to-br ${
         darkMode
           ? "from-black via-blue-900 to-purple-900"
           : "from-green-200 via-green-50 to-green-200"

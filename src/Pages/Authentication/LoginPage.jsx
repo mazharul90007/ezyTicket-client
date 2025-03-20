@@ -56,7 +56,7 @@ function LoginPage() {
 
   return (
     <div
-      className={`min-h-screen mt-16 flex items-center justify-center bg-gradient-to-br ${
+      className={`min-h-screen  flex items-center justify-center bg-gradient-to-br ${
         darkMode
           ? "from-black via-blue-900 to-purple-900"
           : "from-green-200 via-green-50 to-green-200"
