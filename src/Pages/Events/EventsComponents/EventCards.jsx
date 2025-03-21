@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Loading from "../../../Shared/Loading/Loading";
+import useAuth from "../../../Hooks/useAuth";
 
 const EventCards = () => {
+  const { darkMode } = useAuth();
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -33,19 +35,23 @@ const EventCards = () => {
 
   if (loading)
     return (
-      <p className="text-center text-lg mt-50 mb-50">
+      <p className="text-center text-lg mt-30">
         <Loading></Loading>
       </p>
     );
   if (error) return <p className="text-center text-red-500">Error: {error}</p>;
 
   return (
-    <div className="bg-gray-200">
-      <div className=" p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto w-11/12 py-10 mb-10 mt-10">
+    <div
+      className={`${darkMode ? "bg-black text-white" : "bg-white text-black"} `}
+    >
+      <div className=" p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto w-11/12 py-10  mt-10">
         {events.map((event, index) => (
           <div
             key={index}
-            className="hover:shadow-2xl hover:scale-105 transition-transform duration-300  rounded-lg bg-green-100 overflow-hidden shadow-sm shadow-[#A2CA71]"
+            className={` ${
+              darkMode ? "bg-white/30 text-white" : "bg-gray-200 text-black"
+            }  hover:shadow-2xl  hover:scale-105 transition-transform duration-300  rounded-lg bg-base-100 overflow-hidden  shadow-green-600`}
           >
             <img
               src={event.photo}
