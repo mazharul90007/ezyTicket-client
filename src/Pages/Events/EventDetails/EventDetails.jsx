@@ -13,6 +13,7 @@ const EventDetails = () => {
   const [eventData, setEventData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [timeLeft, setTimeLeft] = useState(null);
 
   useEffect(() => {
     if (!eventId) {
@@ -43,6 +44,37 @@ const EventDetails = () => {
 
     fetchEventDetails();
   }, [eventId]);
+
+  // Countdown Timer Logic
+  useEffect(() => {
+    if (!eventData?.dateTime) return;
+
+    const targetTime = new Date(eventData.dateTime).getTime();
+
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const difference = targetTime - now;
+
+      if (difference <= 0) {
+        setTimeLeft("Event has started!");
+        return;
+      }
+
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+      setTimeLeft(`${days}d ${hours}h ${minutes}m ${seconds}s`);
+    };
+
+    updateCountdown();
+    const timer = setInterval(updateCountdown, 1000);
+
+    return () => clearInterval(timer);
+  }, [eventData]);
 
   if (loading) return <Loading />;
   if (error) return <p className="text-red-500 text-center">{error}</p>;
@@ -109,7 +141,13 @@ const EventDetails = () => {
             Event Information
           </h3>
 
-          <p className="text-black text-lg flex items-center gap-2 mt-2">
+          {/* Countdown Timer */}
+          <div className="bg-gray-200 text-black p-4 rounded-lg text-center">
+            <h4 className="text-lg font-semibold">Event Starts In:</h4>
+            <p className="text-xl font-bold">{timeLeft}</p>
+          </div>
+
+          <p className="text-black text-lg flex items-center gap-2 mt-4">
             <IoPersonCircle className="text-green-500 text-3xl md:text-4xl" />
             Organized by: {eventData?.organizedBy}
           </p>
