@@ -8,7 +8,7 @@ import noImage from "../../assets/Common_image/noImage.png";
 const Navbar = () => {
     const { darkMode, setDarkMode, user, logOut, setUser } = useAuth();
     const [menuOpen, setMenuOpen] = useState(false);
-    const [isScrolled, setIsScrolled] = useState(false);
+    // const [isScrolled, setIsScrolled] = useState(false);
     const location=useLocation();
     const isHomePage= location.pathname ==='/entertainment' || location.pathname==='/login' || location.pathname==='/register'|| location.pathname==='/travel'|| location.pathname==='/events'
 
@@ -22,19 +22,19 @@ const Navbar = () => {
         } else {
             setDarkMode(false);
         }
-        const handleScroll = () => {
-            if (window.scrollY > 0 || !isHomePage) {
-              setIsScrolled(true);
-            } else {
-              setIsScrolled(false);
-            }
-          };
+        // const handleScroll = () => {
+        //     if (window.scrollY > 0 || !isHomePage) {
+        //       setIsScrolled(true);
+        //     } else {
+        //       setIsScrolled(false);
+        //     }
+        //   };
       
-          window.addEventListener("scroll", handleScroll);
-          handleScroll();
-          return () => {
-            window.removeEventListener("scroll", handleScroll);
-          };
+        //   window.addEventListener("scroll", handleScroll);
+        //   handleScroll();
+        //   return () => {
+        //     window.removeEventListener("scroll", handleScroll);
+        //   };
     }, [setDarkMode, isHomePage]);
 
     // Dark/Light theme toggle
@@ -144,17 +144,17 @@ const Navbar = () => {
                         <div className="divider"></div>
                         <ul>
                             <li>
-                                <Link to="/mydashboard" className="hover:text-primary">
+                                <Link to="/mydashboard" className="hover:text-supporting">
                                     My Dashboard
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/profile" className="hover:text-primary">
+                                <Link to="/profile" className="hover:text-supporting">
                                     Profile
                                 </Link>
                             </li>
                             <li>
-                                <button onClick={handleLogout} className="hover:text-primary">
+                                <button onClick={handleLogout} className="hover:text-supporting">
                                     Logout
                                 </button>
                             </li>
@@ -165,7 +165,7 @@ const Navbar = () => {
                 <NavLink
                     to="/login"
                     className={({ isActive }) =>
-                        `flex items-center gap-2 hover:text-primary ${isActive ? "text-supporting" : ""}`
+                        `flex items-center gap-2 hover:text-supporting ${isActive ? "text-supporting" : ""}`
                     }
                     onClick={closeMenu}
                 >
@@ -177,12 +177,10 @@ const Navbar = () => {
 
     return (
         <nav
-            className={`navbar shadow px-6 py-4 fixed top-0 z-40 w-full bg-cover bg-center ${
-                isScrolled ? "" : "bg-transparent"
-              }
-              ${darkMode && !isScrolled? "":"bg-background"} `}
+            className={`navbar shadow px-6 py-4 fixed top-0 z-40 w-full bg-cover bg-center
+              ${darkMode ? "":"bg-background"} `}
 
-            style={darkMode && isScrolled ? { backgroundImage: `url(${nightSky})` } :{} }
+            style={darkMode ? { backgroundImage: `url(${nightSky})` } :{} }
         >
             {/* Left Side: Logo */}
             <div className="flex-1">
@@ -192,7 +190,7 @@ const Navbar = () => {
             </div>
 
             {/* Right Side: Navigation Links (Desktop) */}
-            <div className={`hidden text-lg font-medium lg:flex space-x-6 ${isScrolled? " ":"text-white"} ${darkMode  ? 'text-white' : 'text-black'}`}>
+            <div className={`hidden text-lg font-medium lg:flex space-x-6 ${darkMode  ? 'text-white' : 'text-black'}`}>
                 {links}
             </div>
 
