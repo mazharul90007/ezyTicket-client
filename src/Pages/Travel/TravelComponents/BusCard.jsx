@@ -1,6 +1,8 @@
 import { FaBus } from "react-icons/fa";
-const BusCard = ({ bus }) => {
-    const { } = bus
+import { Link } from "react-router-dom";
+const BusCard = ({ bus, time}) => {
+    console.log(bus)
+    const {busName, } = bus
     return (
         <div className="flex flex-col justify-between border rounded-2xl">
             <div className="flex flex-col lg:flex-row justify-between gap-10 p-4 md:p-10 pb-0">
@@ -8,15 +10,15 @@ const BusCard = ({ bus }) => {
                 <div className="flex flex-col md:flex-row gap-5">
                     <img className="w-full md:w-20 h-[150px] md:h-20 object-cover" src="https://t4.ftcdn.net/jpg/02/69/47/51/360_F_269475198_k41qahrZ1j4RK1sarncMiFHpcmE2qllQ.jpg" alt="Bus Image" />
                     {/*  */}
-                    <div>
-                        <h1 className="text-xl md:text-2xl font-black">Bus name</h1>
+                    <div className="md:max-w-[200px]">
+                        <h1 className="text-xl font-black">{busName}</h1>
                         <h1 className="text-xs">Route:Dhaka-Sirajganj</h1>
                     </div>
                 </div>
                 <div className="flex flex-col md:flex-row flex-grow justify-between ">
                     {/* date */}
                     <div>
-                        <h1 className="text-xl md:text-2xl font-black">time:8:30 am</h1>
+                        <h1 className="text-xl  font-black">{time}</h1>
                         <p>Date: 25 mar 2025 <br />Dhaka</p>
                     </div>
                     {/* hour */}
@@ -42,9 +44,9 @@ const BusCard = ({ bus }) => {
                 </div>
             </div>
             {/* information */}
-            <div className="flex flex-col md:flex-row md:items-center text-center gap-4 px-4 md:px-10 mt-5 py-5 bg-main/40 rounded-b-2xl">
+            <div className="flex flex-col md:flex-row md:items-center text-center gap-4 px-4 md:px-10 py-5 bg-main/40 rounded-b-2xl">
                 <p className="btn">Non-Refundable</p>
-                <p className="btn">Cancellation Policy</p>
+                <Link to="/travel/Bus-Ticket-Cancellation-policy" className="btn">Cancellation Policy</Link>
             </div>
         </div>
     )
