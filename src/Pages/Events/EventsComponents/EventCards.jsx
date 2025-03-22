@@ -9,8 +9,6 @@ const EventCards = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const eventsPerPage = 6;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,8 +19,13 @@ const EventCards = () => {
         }
         const data = await response.json();
 
+        // Sort events by date (ascending order)
+        const sortedEvents = data.sort(
+          (a, b) => new Date(a.dateTime) - new Date(b.dateTime)
+        );
+
         setTimeout(() => {
-          setEvents(data);
+          setEvents(sortedEvents);
           setLoading(false);
         }, 2000);
       } catch (error) {
@@ -44,11 +47,8 @@ const EventCards = () => {
     );
   if (error) return <p className="text-center text-red-500">Error: {error}</p>;
 
-  // Pagination logic
-  const indexOfLastEvent = currentPage * eventsPerPage;
-  const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
-  const currentEvents = events.slice(indexOfFirstEvent, indexOfLastEvent);
-  const totalPages = Math.ceil(events.length / eventsPerPage);
+  // Show only the first 4 events
+  const displayedEvents = events.slice(0, 3);
 
   return (
     <div
@@ -57,8 +57,7 @@ const EventCards = () => {
       } py-10`}
     >
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto w-11/12">
-        {currentEvents.map((event, index) => {
-          // Convert dateTime into formatted Date and Time
+        {displayedEvents.map((event, index) => {
           const eventDate = new Date(event.dateTime).toLocaleDateString(
             "en-US",
             {
@@ -83,7 +82,8 @@ const EventCards = () => {
               key={index}
               className={`${
                 darkMode ? "bg-gray-800 text-white" : "bg-white text-black"
-              } rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300`}
+              } 
+              rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300`}
             >
               <img
                 src={event.photo}
@@ -116,45 +116,14 @@ const EventCards = () => {
         })}
       </div>
 
-      {/* Pagination Controls */}
-      <div className="flex justify-center mt-6 space-x-2">
-        <button
-          onClick={() => setCurrentPage(currentPage - 1)}
-          disabled={currentPage === 1}
-          className={`px-4 py-2 rounded-lg ${
-            currentPage === 1
-              ? "bg-gray-400 cursor-not-allowed"
-              : "bg-green-600 text-white hover:bg-green-700"
-          }`}
+      {/* View All Button */}
+      <div className="flex justify-center mt-8">
+        <Link
+          to="/allevents"
+          className="bg-green-600 text-white px-6 py-3 rounded-lg text-lg hover:bg-green-700"
         >
-          Previous
-        </button>
-
-        {[...Array(totalPages)].map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentPage(index + 1)}
-            className={`px-4 py-2 rounded-lg ${
-              currentPage === index + 1
-                ? "bg-green-700 text-white"
-                : "bg-gray-300 hover:bg-gray-400"
-            }`}
-          >
-            {index + 1}
-          </button>
-        ))}
-
-        <button
-          onClick={() => setCurrentPage(currentPage + 1)}
-          disabled={currentPage === totalPages}
-          className={`px-4 py-2 rounded-lg ${
-            currentPage === totalPages
-              ? "bg-gray-400 cursor-not-allowed"
-              : "bg-green-600 text-white hover:bg-green-700"
-          }`}
-        >
-          Next
-        </button>
+          View All
+        </Link>
       </div>
     </div>
   );
