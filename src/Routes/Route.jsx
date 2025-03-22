@@ -13,6 +13,7 @@ import Pricing from "../Pages/Pricing/Pricing";
 import Profile from "../Pages/Profile/Profile";
 import BusReservationPage from "../Pages/Travel/TravelServiceSeciton/BusReservationPage";
 import TravelBusTicketPage from "../Pages/Travel/TravelTicekBook/TravelBusTicketPage";
+import BusTicketCancellation from "../components/BusTicketCancellation";
 
 const Route = createBrowserRouter([
   {
@@ -52,6 +53,10 @@ const Route = createBrowserRouter([
       {
         path:"/travel/bus-reservation",
         element: <BusReservationPage/>
+      },
+      {
+        path:"/travel/Bus-Ticket-Cancellation-policy",
+        element: <BusTicketCancellation/>
       },
       // travel route end
       {
