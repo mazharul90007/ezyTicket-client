@@ -12,6 +12,7 @@ import EventDetails from "./../Pages/Events/EventDetails/EventDetails";
 import Pricing from "../Pages/Pricing/Pricing";
 import Profile from "../Pages/Profile/Profile";
 import BusReservationPage from "../Pages/Travel/TravelServiceSeciton/BusReservationPage";
+import TravelBusTicketPage from "../Pages/Travel/TravelTicekBook/TravelBusTicketPage";
 
 const Route = createBrowserRouter([
   {
@@ -39,14 +40,20 @@ const Route = createBrowserRouter([
         path: '/profile',
         element: <Profile></Profile>
       },
+      // travel route
       {
         path: "/travel",
         element: <Travel />,
       },
       {
+        path: "/travel/bus-ticket-book",
+        element: <TravelBusTicketPage />,
+      },
+      {
         path:"/travel/bus-reservation",
         element: <BusReservationPage/>
       },
+      // travel route end
       {
         path: "/events",
         element: <Events></Events>,

@@ -23,22 +23,27 @@ const SelectPlaceTime = () => {
         const fromDistrict = form.fromDistrict.value;
         const toDistrict = form.toDistrict.value;
         const date = form.date.value;
-        setSearchData({stand1:fromDistrict, stand2:toDistrict, date:date})
-        // if(location.pathname ==="/travel"){
-        //     // navigate("/")
-        // } 
+        const placeTimeData = {stand1:fromDistrict, stand2:toDistrict, date:date}
+        setSearchData(placeTimeData)
+        axiosSecure.get("/api/stand", {
+            params: placeTimeData,
+        })
+        .then(data=>{
+            setFilterBus(data.data)
+            // if(location.pathname ==="/travel"){
+            //     navigate("/travel/bus-ticket-book")
+            // } 
+        })
+        .catch(err=>console.log(err))
+       
         
     }
-    useEffect( ()=>{
-        axiosSecure.get("/api/stand", {
-            params: searchData,
-        })
-        .then(data=>setFilterBus(data.data))
-        .catch(err=>console.log(err))
-    },[searchData])
-    console.log(filterBus)
+    // useEffect( ()=>{
+       
+    // },[searchData])
+    console.log(filterBus, "search", searchData)
     return (
-        <section>
+        <section className="bg-white">
             <form onSubmit={handleSearchData} className="border p-8 rounded border-black/20 flex flex-col lg:flex-row justify-between items-center gap-5 shadow-2xl shadow-main">
                 <select name="fromDistrict" defaultValue="From" className="select select-success w-full">
                     <option disabled={true} >From</option>
