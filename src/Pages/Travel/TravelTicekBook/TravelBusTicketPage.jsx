@@ -16,7 +16,7 @@ const TravelBusTicketPage = () => {
         </div>
       </div>
 
-      <div>
+      <div className="px-4 md:px-20 flex flex-col gap-10 my-14">
         {
           busInfo.map((bus,idx)=><BusCard key={idx} bus={bus}/> )
         }
