@@ -1,14 +1,21 @@
-import { useState } from "react";
-import useBusStandName from "./useBusStandName";
+import { useEffect, useState } from "react";
+import useBusStandName from "../TravelHooks/useBusStandName";
 import { useLocation, useNavigate } from "react-router-dom";
+import useBusState from "../TravelHooks/useBusState";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 
 
 const SelectPlaceTime = () => {
+    const [busInfo] = useBusState()
     const [districts] = useBusStandName()
     const [searchData, setSearchData] = useState()
     const location = useLocation()
     const navigate = useNavigate()
+    const axiosSecure = useAxiosSecure()
+    const [filterBus, setFilterBus] = useState()
+
+    // console.log(busInfo)
 
     const handleSearchData = (e) => {
         e.preventDefault();
@@ -16,13 +23,20 @@ const SelectPlaceTime = () => {
         const fromDistrict = form.fromDistrict.value;
         const toDistrict = form.toDistrict.value;
         const date = form.date.value;
-        setSearchData({fromDistrict:fromDistrict, toDistrict:toDistrict, date:date})
-        if(location.pathname ==="/travel"){
-            navigate("/")
-        } 
+        setSearchData({stand1:fromDistrict, stand2:toDistrict, date:date})
+        // if(location.pathname ==="/travel"){
+        //     // navigate("/")
+        // } 
         
     }
-
+    useEffect( ()=>{
+        axiosSecure.get("/api/stand", {
+            params: searchData,
+        })
+        .then(data=>setFilterBus(data.data))
+        .catch(err=>console.log(err))
+    },[searchData])
+    console.log(filterBus)
     return (
         <section>
             <form onSubmit={handleSearchData} className="border p-8 rounded border-black/20 flex flex-col lg:flex-row justify-between items-center gap-5 shadow-2xl shadow-main">
