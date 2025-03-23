@@ -44,12 +44,6 @@ const AllEvents = () => {
     fetchData();
   }, []);
 
-  if (loading)
-    return (
-      <p className="text-center text-lg mt-30">
-        <Loading />
-      </p>
-    );
   if (error) return <p className="text-center text-red-500">Error: {error}</p>;
 
   // Pagination Logic
@@ -57,14 +51,18 @@ const AllEvents = () => {
   const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
   const currentEvents = events.slice(indexOfFirstEvent, indexOfLastEvent);
   const totalPages = Math.ceil(events.length / eventsPerPage);
-
+  if (loading)
+    return (
+      <p className="text-center text-lg mt-30">
+        <Loading />
+      </p>
+    );
   return (
     <div
       className={`${
         darkMode ? "bg-black text-white" : "bg-gray-50 text-black"
       }`}
     >
-      {/* ✅ Banner Section with Correct Image */}
       <div
         className="relative py-16 px-8 text-white text-center overflow-hidden h-[500px] md:h-[600px] lg:h-[680px] xl:h-[600px] flex justify-center items-center"
         style={{
@@ -73,7 +71,7 @@ const AllEvents = () => {
           backgroundPosition: "center",
         }} // ✅ Correct usage
       >
-        <div className=" absolute inset-0 bg-black opacity-65 w-full h-full flex flex-col items-center justify-center">
+        <div className=" absolute inset-0 bg-black opacity-70 w-full h-full flex flex-col items-center justify-center">
           <h1 className="text-4xl md:text-5xl font-bold text-white">
             All Events
           </h1>
