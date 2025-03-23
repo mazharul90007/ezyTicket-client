@@ -16,6 +16,7 @@ import TravelBusTicketPage from "../Pages/Travel/TravelTicekBook/TravelBusTicket
 import BusTicketCancellation from "../components/BusTicketCancellation";
 import AllEvents from "../Pages/Events/AllEvents/AllEvents";
 import MyWishList from "../Pages/MyWishList/MyWishList";
+import Contact from "../Pages/Contact/Contact";
 
 const Route = createBrowserRouter([
   {
@@ -90,6 +91,10 @@ const Route = createBrowserRouter([
         path: "/pricing",
         element: <Pricing></Pricing>,
       },
+      {
+        path:"/contact",
+        element:<Contact></Contact>
+      }
     ],
   },
 ]);
