@@ -12,6 +12,10 @@ import EventDetails from "./../Pages/Events/EventDetails/EventDetails";
 import Pricing from "../Pages/Pricing/Pricing";
 import Profile from "../Pages/Profile/Profile";
 import BusReservationPage from "../Pages/Travel/TravelServiceSeciton/BusReservationPage";
+import TravelBusTicketPage from "../Pages/Travel/TravelTicekBook/TravelBusTicketPage";
+import BusTicketCancellation from "../components/BusTicketCancellation";
+import AllEvents from "../Pages/Events/AllEvents/AllEvents";
+import MyWishList from "../Pages/MyWishList/MyWishList";
 
 const Route = createBrowserRouter([
   {
@@ -36,17 +40,29 @@ const Route = createBrowserRouter([
         element: <RegisterPage></RegisterPage>,
       },
       {
-        path: '/profile',
-        element: <Profile></Profile>
+        path: "/profile",
+        element: <Profile></Profile>,
       },
+      // travel route
       {
         path: "/travel",
         element: <Travel />,
       },
       {
-        path:"/travel/bus-reservation",
-        element: <BusReservationPage/>
+        path: "/travel/bus-ticket-book",
+        element: <TravelBusTicketPage />,
       },
+      {
+        path: "/travel/bus-reservation",
+        element: <BusReservationPage />,
+      },
+      {
+        path: "/travel/Bus-Ticket-Cancellation-policy",
+        element: <BusTicketCancellation />,
+      },
+      // travel route end
+
+      //Events Section start
       {
         path: "/events",
         element: <Events></Events>,
@@ -56,13 +72,24 @@ const Route = createBrowserRouter([
         element: <EventDetails></EventDetails>,
       },
       {
+        path: "/allevents",
+        element: <AllEvents></AllEvents>,
+      },
+
+      //event section end
+      {
         path: "/entertainment",
         element: <Entertainment></Entertainment>,
       },
+      //my wishlists
       {
-        path: '/pricing',
-        element: <Pricing></Pricing>
-      }
+        path: "/mywishlist",
+        element: <MyWishList></MyWishList>,
+      },
+      {
+        path: "/pricing",
+        element: <Pricing></Pricing>,
+      },
     ],
   },
 ]);

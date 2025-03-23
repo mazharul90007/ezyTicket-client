@@ -6,11 +6,16 @@ import { IoPersonCircle } from "react-icons/io5";
 import { MdDateRange } from "react-icons/md";
 import { IoMdPricetags } from "react-icons/io";
 import { IoLocation } from "react-icons/io5";
+import { IoIosTime } from "react-icons/io";
+import useAuth from "../../../Hooks/useAuth";
+
 const EventDetails = () => {
+  const { darkMode } = useAuth();
   const { eventId } = useParams();
   const [eventData, setEventData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [timeLeft, setTimeLeft] = useState(null);
 
   useEffect(() => {
     if (!eventId) {
@@ -42,118 +47,161 @@ const EventDetails = () => {
     fetchEventDetails();
   }, [eventId]);
 
+  // Countdown Timer Logic
+  useEffect(() => {
+    if (!eventData?.dateTime) return;
+
+    const targetTime = new Date(eventData.dateTime).getTime();
+
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const difference = targetTime - now;
+
+      if (difference <= 0) {
+        setTimeLeft("Event has started!");
+        return;
+      }
+
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+      setTimeLeft(`${days}d ${hours}h ${minutes}m ${seconds}s`);
+    };
+
+    updateCountdown();
+    const timer = setInterval(updateCountdown, 1000);
+
+    return () => clearInterval(timer);
+  }, [eventData]);
+
   if (loading) return <Loading />;
-  if (error) return <p className="text-red-500">{error}</p>;
+  if (error) return <p className="text-red-500 text-center">{error}</p>;
+
+  const eventDate = new Date(eventData?.dateTime);
+  const month = eventDate
+    .toLocaleString("en-US", { month: "short" })
+    .toUpperCase();
+  const day = eventDate.getDate().toString().padStart(2, "0");
 
   return (
-    <div className="bg-gray-100">
-      <div className="container  mx-auto w-11/12 p-6 grid grid-cols-1 lg:grid-cols-3 gap-6 mt-18  px-10">
+    <div
+      className={`${
+        darkMode ? "bg-black text-white" : "bg-white text-black"
+      }  mt-15`}
+    >
+      <div className="container mx-auto w-11/12 p-6 grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8 px-4 md:px-10">
         {/* Left Section */}
-
         <div className="lg:col-span-2">
-          <div>
-            <p className="text-black mt-10 mb-1 font-bold text-4xl">
+          <div className="flex flex-wrap items-center gap-4">
+            {/* Calendar Box */}
+            <div className="flex flex-col items-center bg-green-500 text-white px-4 py-2 rounded-md shadow-md">
+              <span className="text-sm font-bold">{month}</span>
+              <span className="text-3xl font-bold">{day}</span>
+            </div>
+
+            {/* Title */}
+            <p
+              className={`${
+                darkMode ? "bg-black text-white" : "bg-white text-black"
+              } text-black  font-bold text-2xl md:text-4xl`}
+            >
               {eventData?.title}
             </p>
-            <div className="flex gap-4 mb-10">
-              <p className="text-gray-500 mt-10 text-xm">
-                <strong></strong> {eventData?.dateTime}
-              </p>
-              <p className="text-gray-500 mt-10 text-xm">
-                <strong></strong> {eventData?.duration}
-              </p>
-              <p className="text-gray-500 mt-10 text-xm">
-                <strong></strong> {eventData?.location}
-              </p>
-            </div>
           </div>
 
+          {/* Event Info */}
+          <div className="flex flex-wrap gap-4 mt-4 text-sm md:text-lg">
+            <p className={` text-gray-500 flex items-center gap-1`}>
+              <MdDateRange className="text-xl" />{" "}
+              {eventData?.dateTime?.split("T")[0]}
+            </p>
+            <p className="text-gray-500 flex items-center gap-1">
+              <IoIosTime className="text-xl" /> {eventData?.duration}
+            </p>
+            <p className="text-gray-500 flex items-center gap-1">
+              <IoLocation className="text-xl" /> {eventData?.location}
+            </p>
+          </div>
+
+          {/* Event Image */}
           <img
             src={eventData?.photo}
             alt={eventData?.name}
-            className="w-full h-80 object-cover rounded-lg shadow-md"
+            className="w-full h-64 md:h-80 object-cover rounded-lg shadow-md mt-4"
           />
-          <div className="mt-4 bg-white p-20 rounded-lg shadow">
-            <h2 className="text-2xl font-bold text-black">{eventData?.name}</h2>
-            <p className="text-BLACK mt-2 text-xl">{eventData?.description}</p>
+
+          {/* Description */}
+          <div
+            className={`${
+              darkMode ? "bg-gray-600 text-white" : "bg-white text-black"
+            } mt-4  p-6 md:p-10 rounded-lg shadow`}
+          >
+            <h2 className="text-xl md:text-2xl font-bold text-black">
+              {eventData?.name}
+            </h2>
+            <p className=" mt-2 text-md md:text-xl">{eventData?.description}</p>
           </div>
         </div>
 
         {/* Right Sidebar */}
-        <div className="bg-white p-20 md:mt-45 shadow-lg rounded-lg h-fit">
-          <h3 className="text-2xl text-black font-semibold mb-4">
+        <div
+          className={` ${
+            darkMode ? "bg-gray-500 text-white" : "bg-white text-black"
+          }p-6 md:p-10 shadow-lg rounded-lg h-fit md:mt-35`}
+        >
+          <h3 className="text-xl md:text-2xl  font-semibold mb-4">
             Event Information
           </h3>
-          <p className="text-black mt-10 text-xl ">
-            <strong className="flex">
-              <IoPersonCircle className="text-second text-4xl mr-2 "></IoPersonCircle>
-              Organized by: {eventData?.organizedBy}
-            </strong>{" "}
-          </p>
-          <p className="text-black mt-10 text-xl ">
-            <strong className="flex">
-              <MdDateRange className="text-second text-4xl mr-2 "></MdDateRange>
-              Date and Time: {eventData?.dateTime}
-            </strong>{" "}
-          </p>
-          <p className="text-black mt-10 text-xl ">
-            <strong className="flex">
-              <IoMdPricetags className="text-second text-4xl mr-2 "></IoMdPricetags>
-              Price: {eventData?.price}
-            </strong>{" "}
-          </p>
-          <p className="text-black mt-10 text-xl ">
-            <strong className="flex">
-              <IoLocation className="text-second text-4xl mr-2 "></IoLocation>
-              Location: {eventData?.location}
-            </strong>{" "}
+
+          {/* Countdown Timer */}
+          <div className="bg-gray-200  p-4 rounded-lg text-center">
+            <h4
+              className="text-lg 
+             text-black font-semibold"
+            >
+              Event Starts In:
+            </h4>
+            <p className="text-xl text-black font-bold">{timeLeft}</p>
+          </div>
+
+          <p className="text-lg flex items-center gap-2 mt-4">
+            <IoPersonCircle className="text-green-500 text-3xl md:text-4xl" />
+            Organized by: {eventData?.organizedBy}
           </p>
 
-          <p className="text-black">
-            <div className="flex justify-between mt-20">
-              <button className="py-2 md:py-3 px-4 md:px-6 bg-supporting flex items-center justify-center md:justify-start rounded-lg shadow-md hover:scale-95 transform transition-transform cursor-pointer text-white font-semibold mx-auto md:mx-0 hover:bg-main">
-                Buy Tickets
-              </button>
-
-              <Link
-                to="/events"
-                className="py-2 md:py-3 px-4 md:px-6 bg-supporting flex items-center justify-center md:justify-start rounded-lg shadow-md hover:scale-95 transform transition-transform cursor-pointer text-white font-semibold mx-auto md:mx-0 hover:bg-main"
-              >
-                Back
-              </Link>
-            </div>
+          <p className=" text-lg flex items-center gap-2 mt-2">
+            <MdDateRange className="text-green-500 text-3xl md:text-4xl" />
+            Date: {eventData?.dateTime?.split("T")[0]}
           </p>
-        </div>
-      </div>
 
-      {/* Right Sidebar */}
-      <div className="bg-gradient-to-br from-black via-blue-900 to-purple-900 p-20 shadow-lg rounded-lg h-fit">
-        <h3 className="text-2xl text-white font-semibold mb-4">
-          Event Information
-        </h3>
-        <p className="text-white mt-10 text-xl">
-          <strong>Name:</strong> {eventData?.title}
-        </p>
-        <p className="text-white mt-10 text-xl">
-          <strong>Price:</strong> ${eventData?.price}
-        </p>
-        <p className="text-white mt-10 text-xl">
-          <strong>Location:</strong> {eventData?.location || "N/A"}
-        </p>
-        <p className="text-white">
-          <div className="flex justify-between mt-20">
-            <button className="py-2 md:py-3 px-4 md:px-6 bg-supporting flex items-center justify-center md:justify-start rounded-lg shadow-md hover:scale-95 transform transition-transform cursor-pointer text-white font-semibold mx-auto md:mx-0 hover:bg-main">
+          <p className=" text-lg flex items-center gap-2 mt-2">
+            <IoMdPricetags className="text-green-500 text-3xl md:text-4xl" />
+            Price: ${eventData?.price}
+          </p>
+
+          <p className=" text-lg flex items-center gap-2 mt-2">
+            <IoLocation className="text-green-500 text-3xl md:text-4xl" />
+            Location: {eventData?.location}
+          </p>
+
+          {/* Buttons */}
+          <div className="flex flex-col md:flex-row justify-between gap-4 mt-6">
+            <button className="py-2 md:py-3 px-4 md:px-6 bg-supporting flex items-center justify-center md:justify-start rounded-lg shadow-md hover:scale-95 transform transition-transform cursor-pointer text-white font-semibold mx-auto md:mx-0">
               Buy Tickets
             </button>
 
             <Link
               to="/events"
-              className="py-2 md:py-3 px-4 md:px-6 bg-supporting flex items-center justify-center md:justify-start rounded-lg shadow-md hover:scale-95 transform transition-transform cursor-pointer text-white font-semibold mx-auto md:mx-0 hover:bg-main"
+              className="w-full md:w-auto py-2 md:py-3 px-4 md:px-6 bg-gray-700 flex items-center justify-center rounded-lg shadow-md text-white font-semibold hover:bg-gray-600 transition"
             >
               Back
             </Link>
           </div>
-        </p>
+        </div>
       </div>
     </div>
   );

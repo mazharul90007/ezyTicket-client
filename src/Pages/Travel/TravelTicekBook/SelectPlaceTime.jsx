@@ -1,84 +1,67 @@
+import { useEffect, useState } from "react";
+import useBusStandName from "../TravelHooks/useBusStandName";
+import { useLocation, useNavigate } from "react-router-dom";
 import useBusState from "../TravelHooks/useBusState";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 
 
 const SelectPlaceTime = () => {
-    const [busInfo, refetch] = useBusState()
-    // buss name 
-    const busNames = busInfo?.map(bus => bus.busName);
-    console.log(busNames)
-    
-    //  TODO: Data come from Database
-    const busStands = [
-        "Gabtoli Bus Terminal, Dhaka",
-        "Sayedabad Bus Terminal, Dhaka",
-        "Mohakhali Bus Terminal, Dhaka",
-        "Kamalapur Bus Stand, Dhaka",
-        "Chattogram BRTC Bus Terminal",
-        "Kadamtali Bus Terminal, Chattogram",
-        "Rajshahi Bus Terminal",
-        "Sylhet Kadamtali Bus Stand",
-        "Khulna Sonadanga Bus Terminal",
-        "Barisal Nathullabad Bus Terminal",
-        "Mymensingh Kewatkhali Bus Terminal",
-        "Bogura Satmatha Bus Stand",
-        "Rangpur Modern Bus Terminal",
-        "Cumilla Shasongacha Bus Terminal",
-        "Cox’s Bazar Bus Terminal",
-        "Sirajganj Bus Terminal"
-      ];
-      const busTime = [
-        "5:30am",
-        "6:30am",
-        "7:30am",
-        "8:30am",
-        "9:30am",
-        "10:30am",
-        "11:30am",
-        "11:30am",
-        "12:30am",
-        "01:30pm",
-        "01:30pm",
-        "02:30pm",
-        "03:30pm",
-        "04:30pm",
-        "05:30pm",
-        "06:30pm",
-        "07:30pm",
-        "08:30pm",
-        "09:30pm",
-        "10:30pm",
-        "11:30pm",
-        "12:30pm",
-      ]
+    const [busInfo] = useBusState()
+    const [districts] = useBusStandName()
+    const [searchData, setSearchData] = useState()
+    const location = useLocation()
+    const navigate = useNavigate()
+    const axiosSecure = useAxiosSecure()
+    const [filterBus, setFilterBus] = useState()
 
+    // console.log(busInfo)
+
+    const handleSearchData = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const fromDistrict = form.fromDistrict.value;
+        const toDistrict = form.toDistrict.value;
+        const date = form.date.value;
+        const placeTimeData = {stand1:fromDistrict, stand2:toDistrict, date:date}
+        setSearchData(placeTimeData)
+        axiosSecure.get("/api/stand", {
+            params: placeTimeData,
+        })
+        .then(data=>{
+            setFilterBus(data.data)
+            // if(location.pathname ==="/travel"){
+            //     navigate("/travel/bus-ticket-book")
+            // } 
+        })
+        .catch(err=>console.log(err))
+       
+        
+    }
+    // useEffect( ()=>{
+       
+    // },[searchData])
+    console.log(filterBus, "search", searchData)
     return (
-        <section className="border p-5 rounded border-black/20 flex flex-col lg:flex-row justify-between items-center gap-5 shadow-2xl shadow-main">
-            <select defaultValue="Select a Bus" className="select select-success">
-                <option disabled={true} >Select a Bus</option>
-                {
-                    busNames.map((bus,idx)=><option key={idx}>{bus}</option>)
-                }
-            </select>
-            <select defaultValue="From" className="select select-success">
-                <option disabled={true} >From</option>
-                {
-                    busStands.map((stand,idx)=><option key={idx}>{stand}</option>)
-                }
-            </select>
-            <select defaultValue="To" className="select select-success">
-                <option disabled={true}>To</option>
-                {
-                    busStands.map((stand,idx)=><option key={idx}>{stand}</option>)
-                }
-            </select>
-            <select defaultValue="Pick a Time" className="select select-success">
-                <option disabled={true}>Pick a Time</option>
-                {
-                    busTime.map((time,idx)=><option key={idx}>{time}</option>)
-                }
-            </select>
-
+        <section className="bg-white">
+            <form onSubmit={handleSearchData} className="border p-8 rounded border-black/20 flex flex-col lg:flex-row justify-between items-center gap-5 shadow-2xl shadow-main">
+                <select name="fromDistrict" defaultValue="From" className="select select-success w-full">
+                    <option disabled={true} >From</option>
+                    {
+                        districts.map((stand, idx) => <option key={idx}>{stand}</option>)
+                    }
+                </select>
+                <select name="toDistrict" defaultValue="To" className="select select-success w-full">
+                    <option disabled={true}>To</option>
+                    {
+                        districts.map((stand, idx) => <option key={idx}>{stand}</option>)
+                    }
+                </select>
+                <div className="w-full">
+                    <input name="date" type="date" className="input input-success w-full border p-2 rounded" />
+                </div>
+                <button type="submit" className="btn bg-main text-xl p-6">Search</button>
+            </form>
         </section>
     )
 }
