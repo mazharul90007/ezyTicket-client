@@ -10,6 +10,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import app from "../Pages/Authentication/Firebase";
+import axios from "axios";
 
 const googleProvider = new GoogleAuthProvider();
 const auth = getAuth(app);
@@ -67,10 +68,32 @@ const AuthProvider = ({ children }) => {
   // onAuthStateChange
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      if (currentUser) {
-        setLoading(false);
+      if (currentUser?.email) {
         setUser(currentUser);
+        await axios.post(
+          `${import.meta.env.VITE_API_URL}/jwt`,
+          { email: currentUser.email },
+          { withCredentials: true }
+        )
+        .then(res => {
+          console.log('login token', res.data);
+          setLoading(false)
+        })
+      } else {
+        setUser(currentUser);
+        await axios.post(
+          `${import.meta.env.VITE_API_URL}/logout`,
+          {},
+          {
+            withCredentials: true,
+          }
+        )
+        .then(res =>{
+          console.log('logout', res.data)
+          setLoading(false)
+        })
       }
+      setLoading(false);
     });
     return () => {
       return unsubscribe();

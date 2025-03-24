@@ -78,7 +78,7 @@ const TravelSelectSet = () => {
                         <div className="flex justify-between py-2 font-semibold">
                             <div>
                                 <span>Seat</span>
-                                <span className="p-1 bg-green-600 text-white rounded-md ml-2">
+                                <span className="p-1 bg-main text-white rounded-md ml-2">
                                     {selectedSeats.length}
                                 </span>
                             </div>
