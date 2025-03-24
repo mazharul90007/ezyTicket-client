@@ -67,10 +67,19 @@ const Navbar = () => {
   const links = (
     <>
       <NavLink
+        to="/"
+        className={({ isActive }) =>
+          `flex items-center gap-2 hover:text-supporting ${isActive ? "text-supporting" : ""
+          }`
+        }
+        onClick={closeMenu}
+      >
+        Home
+      </NavLink>
+      <NavLink
         to="/travel"
         className={({ isActive }) =>
-          `flex items-center gap-2 hover:text-supporting ${
-            isActive ? "text-supporting" : ""
+          `flex items-center gap-2 hover:text-supporting ${isActive ? "text-supporting" : ""
           }`
         }
         onClick={closeMenu}
@@ -80,8 +89,7 @@ const Navbar = () => {
       <NavLink
         to="/events"
         className={({ isActive }) =>
-          `flex items-center gap-2 hover:text-supporting ${
-            isActive ? "text-supporting" : ""
+          `flex items-center gap-2 hover:text-supporting ${isActive ? "text-supporting" : ""
           }`
         }
         onClick={closeMenu}
@@ -91,8 +99,7 @@ const Navbar = () => {
       <NavLink
         to="/entertainment"
         className={({ isActive }) =>
-          `flex items-center gap-2 hover:text-supporting ${
-            isActive ? "text-supporting" : ""
+          `flex items-center gap-2 hover:text-supporting ${isActive ? "text-supporting" : ""
           }`
         }
         onClick={closeMenu}
@@ -102,8 +109,7 @@ const Navbar = () => {
       <NavLink
         to="/pricing"
         className={({ isActive }) =>
-          `flex items-center gap-2 hover:text-supporting ${
-            isActive ? "text-supporting" : ""
+          `flex items-center gap-2 hover:text-supporting ${isActive ? "text-supporting" : ""
           }`
         }
         onClick={closeMenu}
@@ -113,8 +119,7 @@ const Navbar = () => {
       <NavLink
         to="/about"
         className={({ isActive }) =>
-          `flex items-center gap-2 hover:text-supporting ${
-            isActive ? "text-supporting" : ""
+          `flex items-center gap-2 hover:text-supporting ${isActive ? "text-supporting" : ""
           }`
         }
         onClick={closeMenu}
@@ -124,8 +129,7 @@ const Navbar = () => {
       <NavLink
         to="/contact"
         className={({ isActive }) =>
-          `flex items-center gap-2 hover:text-supporting ${
-            isActive ? "text-supporting" : ""
+          `flex items-center gap-2 hover:text-supporting ${isActive ? "text-supporting" : ""
           }`
         }
         onClick={closeMenu}
@@ -196,8 +200,7 @@ const Navbar = () => {
         <NavLink
           to="/login"
           className={({ isActive }) =>
-            `flex items-center gap-2 hover:text-supporting ${
-              isActive ? "text-supporting" : ""
+            `flex items-center gap-2 hover:text-supporting ${isActive ? "text-supporting" : ""
             }`
           }
           onClick={closeMenu}
@@ -226,9 +229,8 @@ const Navbar = () => {
 
       {/* Right Side: Navigation Links (Desktop) */}
       <div
-        className={`hidden text-lg font-medium lg:flex space-x-6 ${
-          darkMode ? "text-white" : "text-black"
-        }`}
+        className={`hidden text-lg font-medium lg:flex space-x-6 ${darkMode ? "text-white" : "text-black"
+          }`}
       >
         {links}
       </div>
@@ -237,9 +239,8 @@ const Navbar = () => {
       <button
         onClick={activeMode}
         aria-label="Toggle dark mode"
-        className={`text-xl border ${
-          darkMode ? "border-white" : "border-black"
-        } p-2 ml-4 rounded-full shadow hover:scale-110 transition-transform transform`}
+        className={`text-xl border ${darkMode ? "border-white" : "border-black"
+          } p-2 ml-4 rounded-full shadow hover:scale-110 transition-transform transform`}
       >
         {!darkMode ? (
           <FaMoon className="text-black" />
@@ -267,9 +268,8 @@ const Navbar = () => {
 
       {/* Mobile Menu (Drawer) */}
       <div
-        className={`fixed top-20 -right-1 shadow-xl p-4 rounded-l-lg flex flex-col space-y-4 lg:hidden transition-all duration-500 ease-in-out transform z-40 ${
-          menuOpen ? "translate-x-0" : "translate-x-full"
-        } ${darkMode ? "text-white bg-gray-700" : "text-black bg-background"}`}
+        className={`fixed top-20 -right-1 shadow-xl p-4 rounded-l-lg flex flex-col space-y-4 lg:hidden transition-all duration-500 ease-in-out transform z-40 ${menuOpen ? "translate-x-0" : "translate-x-full"
+          } ${darkMode ? "text-white bg-gray-700" : "text-black bg-background"}`}
         style={{ pointerEvents: menuOpen ? "auto" : "none" }}
         onClick={(e) => e.stopPropagation()} // Prevent clicks inside the menu from closing it
       >

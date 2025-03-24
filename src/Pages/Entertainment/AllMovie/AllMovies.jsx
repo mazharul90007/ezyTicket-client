@@ -10,8 +10,7 @@ export const Movies = [
   {
     id: 21,
     title: "Venom",
-    poster:
-      "https://imageio.forbes.com/specials-images/imageserve/67508810cdaf3caeed2896b9/0x0.jpg?format=jpg&crop=1150,647,x0,y43,safe&height=900&width=1600&fit=bounds",
+    poster:"https://imageio.forbes.com/specials-images/imageserve/67508810cdaf3caeed2896b9/0x0.jpg?format=jpg&crop=1150,647,x0,y43,safe&height=900&width=1600&fit=bounds",
     genre: "Sci-Fi, Action",
     rating: 4.8,
   },
@@ -41,16 +40,14 @@ export const Movies = [
   {
     id: 2,
     title: "Wicked",
-    poster:
-      "https://ionabmargit.pages.dev/hwmkbvp-wicked-2024-poster-images-wepnwrd/wicked_2024_poster.jpg",
+    poster:"https://ionabmargit.pages.dev/hwmkbvp-wicked-2024-poster-images-wepnwrd/wicked_2024_poster.jpg",
     genre: "Musical, Fantasy",
     rating: 4.8,
   },
   {
     id: 3,
     title: "Den of Thieves 2: Pantera",
-    poster:
-      "https://www.impawards.com/2024/posters/den_of_thieves_two_pantera_ver3.jpg",
+    poster:"https://www.impawards.com/2024/posters/den_of_thieves_two_pantera_ver3.jpg",
     genre: "Action, Thriller",
     rating: 4.7,
   },

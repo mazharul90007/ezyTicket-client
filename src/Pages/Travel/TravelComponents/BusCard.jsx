@@ -18,7 +18,7 @@ const BusCard = ({ bus, time}) => {
                     {/* date */}
                     <div>
                         <h1 className="text-xl  font-black">{time}</h1>
-                        <p>Date: 25 mar 2025 <br />Dhaka</p>
+                        <p>25 mar 2025 <br />Dhaka</p>
                     </div>
                     {/* hour */}
                     <div className="flex flex-col items-center">
@@ -37,7 +37,7 @@ const BusCard = ({ bus, time}) => {
                     </div>
                     {/* action button and set */}
                     <div className="flex flex-col gap-2  items-center">
-                        <button className="btn bg-main px-6 text-white">Book Ticket</button>
+                        <button className="btn bg-main px-6 text-white">Buy Ticket</button>
                         <p className="text-xs"><span className="font-black">52</span> Sets (Available)</p>
                     </div>
                 </div>

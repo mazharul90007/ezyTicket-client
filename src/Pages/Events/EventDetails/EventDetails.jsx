@@ -8,90 +8,92 @@ import { IoMdPricetags } from "react-icons/io";
 import { IoLocation } from "react-icons/io5";
 import { IoIosTime } from "react-icons/io";
 import useAuth from "../../../Hooks/useAuth";
+import { FaBookmark } from "react-icons/fa";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 const EventDetails = () => {
   const { darkMode } = useAuth();
+  const { user } = useAuth();
   const { eventId } = useParams();
-  const [eventData, setEventData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [timeLeft, setTimeLeft] = useState(null);
+  const axiosPublic = useAxiosPublic();
+  const [timeLeft, setTimeLeft] = useState("");
 
+  const {
+    data: eventData,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["event", eventId],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/events/${eventId}`);
+      return res.data;
+    },
+  });
+
+  // Calculate time left until the event
   useEffect(() => {
-    if (!eventId) {
-      console.error("❌ eventId is missing from useParams");
+    if (eventData?.dateTime) {
+      const eventDate = new Date(eventData.dateTime);
+      const interval = setInterval(() => {
+        const now = new Date();
+        const difference = eventDate - now;
+        if (difference <= 0) {
+          clearInterval(interval);
+          setTimeLeft("Event Started");
+        } else {
+          const hours = Math.floor(difference / (1000 * 60 * 60));
+          const minutes = Math.floor(
+            (difference % (1000 * 60 * 60)) / (1000 * 60)
+          );
+          setTimeLeft(`${hours}h ${minutes}m`);
+        }
+      }, 60000); // Update every minute
+
+      return () => clearInterval(interval); // Cleanup the interval on component unmount
+    }
+  }, [eventData]);
+
+  const handleSaveEvent = async () => {
+    if (!user?.email) {
+      Swal.fire("Error", "You must be logged in to save events!", "error");
       return;
     }
 
-    const fetchEventDetails = async () => {
-      try {
-        console.log(`🔍 Fetching event details for ID: ${eventId}`);
-        const response = await fetch(`http://localhost:3000/events/${eventId}`);
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log("✅ Event data fetched:", data);
-        setEventData(data);
-      } catch (error) {
-        console.error("❌ Error fetching event details:", error);
-        setError("Failed to fetch event details. Please try again later.");
-        Swal.fire("Error", "Failed to fetch event details.", "error");
-      } finally {
-        setLoading(false);
-      }
+    const wishlistItem = {
+      eventId: eventData?._id,
+      title: eventData?.title,
+      dateTime: eventData?.dateTime,
+      location: eventData?.location,
+      price: eventData?.price,
+      photo: eventData?.photo,
+      userEmail: user.email,
+      userName: user.displayName,
     };
 
-    fetchEventDetails();
-  }, [eventId]);
+    try {
+      await axiosPublic.post("/wishlist", wishlistItem);
+      Swal.fire("Success!", "Event saved to wishlist!", "success");
+    } catch (error) {
+      console.error("Error saving event:", error);
+      Swal.fire("Error", "Failed to save event. Try again!", "error");
+    }
+  };
 
-  // Countdown Timer Logic
-  useEffect(() => {
-    if (!eventData?.dateTime) return;
+  if (isLoading) return <Loading />;
+  if (error) return <p className="text-red-500 text-center">{error.message}</p>;
 
-    const targetTime = new Date(eventData.dateTime).getTime();
-
-    const updateCountdown = () => {
-      const now = new Date().getTime();
-      const difference = targetTime - now;
-
-      if (difference <= 0) {
-        setTimeLeft("Event has started!");
-        return;
-      }
-
-      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-      const hours = Math.floor(
-        (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      );
-      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-      setTimeLeft(`${days}d ${hours}h ${minutes}m ${seconds}s`);
-    };
-
-    updateCountdown();
-    const timer = setInterval(updateCountdown, 1000);
-
-    return () => clearInterval(timer);
-  }, [eventData]);
-
-  if (loading) return <Loading />;
-  if (error) return <p className="text-red-500 text-center">{error}</p>;
-
-  const eventDate = new Date(eventData?.dateTime);
+  const eventDate = eventData?.dateTime?.split("T")[0]; // Extract date part
   const month = eventDate
-    .toLocaleString("en-US", { month: "short" })
-    .toUpperCase();
-  const day = eventDate.getDate().toString().padStart(2, "0");
+    ? new Date(eventData?.dateTime).toLocaleString("default", { month: "long" })
+    : "";
+  const day = eventDate ? new Date(eventData?.dateTime).getDate() : "";
 
   return (
     <div
       className={`${
         darkMode ? "bg-black text-white" : "bg-white text-black"
-      }  mt-15`}
+      } mt-15`}
     >
       <div className="container mx-auto w-11/12 p-6 grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8 px-4 md:px-10">
         {/* Left Section */}
@@ -107,7 +109,7 @@ const EventDetails = () => {
             <p
               className={`${
                 darkMode ? "bg-black text-white" : "bg-white text-black"
-              } text-black  font-bold text-2xl md:text-4xl`}
+              } text-black font-bold text-2xl md:text-4xl`}
             >
               {eventData?.title}
             </p>
@@ -115,9 +117,8 @@ const EventDetails = () => {
 
           {/* Event Info */}
           <div className="flex flex-wrap gap-4 mt-4 text-sm md:text-lg">
-            <p className={` text-gray-500 flex items-center gap-1`}>
-              <MdDateRange className="text-xl" />{" "}
-              {eventData?.dateTime?.split("T")[0]}
+            <p className="text-gray-500 flex items-center gap-1">
+              <MdDateRange className="text-xl" /> {eventDate}
             </p>
             <p className="text-gray-500 flex items-center gap-1">
               <IoIosTime className="text-xl" /> {eventData?.duration}
@@ -134,35 +135,41 @@ const EventDetails = () => {
             className="w-full h-64 md:h-80 object-cover rounded-lg shadow-md mt-4"
           />
 
+          {/* Wishlist Button */}
+          <button
+            onClick={handleSaveEvent}
+            className="flex flex-row btn ml-20 md:ml-60 lg:ml-90 mt-10 hover:bg-green-400 hover:text-white"
+          >
+            <FaBookmark />
+            Save
+          </button>
+
           {/* Description */}
           <div
             className={`${
               darkMode ? "bg-gray-600 text-white" : "bg-white text-black"
-            } mt-4  p-6 md:p-10 rounded-lg shadow`}
+            } mt-4 p-6 md:p-10 rounded-lg shadow`}
           >
             <h2 className="text-xl md:text-2xl font-bold text-black">
               {eventData?.name}
             </h2>
-            <p className=" mt-2 text-md md:text-xl">{eventData?.description}</p>
+            <p className="mt-2 text-md md:text-xl">{eventData?.description}</p>
           </div>
         </div>
 
         {/* Right Sidebar */}
         <div
-          className={` ${
+          className={`${
             darkMode ? "bg-gray-500 text-white" : "bg-white text-black"
-          }p-6 md:p-10 shadow-lg rounded-lg h-fit md:mt-35`}
+          } p-6 md:p-10 shadow-lg rounded-lg h-fit md:mt-35`}
         >
-          <h3 className="text-xl md:text-2xl  font-semibold mb-4">
+          <h3 className="text-xl md:text-2xl font-semibold mb-4">
             Event Information
           </h3>
 
           {/* Countdown Timer */}
-          <div className="bg-gray-200  p-4 rounded-lg text-center">
-            <h4
-              className="text-lg 
-             text-black font-semibold"
-            >
+          <div className="bg-gray-200 p-4 rounded-lg text-center">
+            <h4 className="text-lg text-black font-semibold">
               Event Starts In:
             </h4>
             <p className="text-xl text-black font-bold">{timeLeft}</p>
@@ -173,17 +180,17 @@ const EventDetails = () => {
             Organized by: {eventData?.organizedBy}
           </p>
 
-          <p className=" text-lg flex items-center gap-2 mt-2">
+          <p className="text-lg flex items-center gap-2 mt-2">
             <MdDateRange className="text-green-500 text-3xl md:text-4xl" />
-            Date: {eventData?.dateTime?.split("T")[0]}
+            Date: {eventDate}
           </p>
 
-          <p className=" text-lg flex items-center gap-2 mt-2">
+          <p className="text-lg flex items-center gap-2 mt-2">
             <IoMdPricetags className="text-green-500 text-3xl md:text-4xl" />
             Price: ${eventData?.price}
           </p>
 
-          <p className=" text-lg flex items-center gap-2 mt-2">
+          <p className="text-lg flex items-center gap-2 mt-2">
             <IoLocation className="text-green-500 text-3xl md:text-4xl" />
             Location: {eventData?.location}
           </p>

@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import {motion} from "framer-motion";
 const BannerCard = ({ card, idx }) => {
     const { title, description, linkText, icon } = card;
     return (

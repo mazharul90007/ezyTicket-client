@@ -21,7 +21,7 @@ const HomeBanner = () => {
     const [slideKey, setSlideKey] = useState(0);
 
     return (
-        <div className='h-[350px] md:h-[350px] lg:h-[500px] relative grid lg:grid-cols-12 overflow-hidden'>
+        <div className='h-[350px] md:h-[350px] lg:h-[500px] relative grid grid-cols-1 lg:grid-cols-12 overflow-hidden  shadow-lg'>
             {/* Left Side (Banner with Image and Overlay) */}
             <div className='lg:col-span-9'>
                 <Swiper
