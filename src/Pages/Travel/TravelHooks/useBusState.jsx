@@ -1,18 +1,17 @@
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import {useQuery} from '@tanstack/react-query'
+import { useQuery } from "@tanstack/react-query";
 
 const useBusState = () => {
+  const axiosSecure = useAxiosSecure();
+  const { data: busInfo = [], refetch } = useQuery({
+    queryKey: ["BusInfo"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/api/bus");
+      return res.data;
+    },
+  });
 
-    const axiosSecure = useAxiosSecure()
-    const { data: busInfo = [], refetch } = useQuery({
-        queryKey: ['BusInfo'],
-        queryFn: async () => {
-            const res = await axiosSecure.get('/api/bus');
-            return res.data;
-        }
-    })
+  return [busInfo, refetch];
+};
 
-    return [busInfo, refetch]
-}
-
-export default useBusState
+export default useBusState;
