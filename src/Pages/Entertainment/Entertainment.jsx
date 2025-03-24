@@ -10,7 +10,7 @@ const Entertainment = () => {
 
 
   return ( 
-    <div className={`pt-24 bg-gradient-to-br ${
+    <div className={`pt-16 bg-gradient-to-br ${
       darkMode
         ? "from-black via-blue-900 to-purple-900 text-white"
         : "from-green-200 via-green-50 to-green-200 text-black"

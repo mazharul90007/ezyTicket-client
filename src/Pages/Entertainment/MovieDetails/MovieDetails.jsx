@@ -8,7 +8,7 @@ import { FaBus, FaCheckSquare } from "react-icons/fa";
 import Heading from "../../../components/Heading";
 import useAuth from "../../../Hooks/useAuth";
 import { IoStar } from "react-icons/io5";
-import { MdLocalMovies } from "react-icons/md";
+import { MdCast, MdDirectionsBike, MdLocalMovies } from "react-icons/md";
 import TicketBooking from "./TicketBooking";
 
 const MovieDetails = () => {
@@ -23,7 +23,7 @@ const MovieDetails = () => {
       className={`pt-24 bg-gradient-to-br ${
         darkMode
           ? "from-black via-blue-900 to-purple-900 text-white"
-          : "from-green-200 via-green-50 to-green-200 text-purple-700"
+          : "from-green-200 via-green-50 to-green-200 text-black"
       }`}
     >
       <section>
@@ -55,7 +55,7 @@ const MovieDetails = () => {
               transition={{ duration: 0.8 }}
               className="w-full md:w-1/2 text-center md:text-left"
             >
-              <h2 className="flex justify-center items-center gap-5 text-3xl font-bold ">
+              <h2 className=" gap-5 text-3xl font-bold ">
                 {movie.title}
               </h2>
               <p className="mt-4  text-lg ">
@@ -70,7 +70,13 @@ const MovieDetails = () => {
                   Genre: {movie.genre}
                 </li>
                 <li className="flex items-center gap-2">
+                <MdDirectionsBike></MdDirectionsBike>Director: Jeremy Workman
+                </li>
+                <li className="flex items-center gap-2">
                   <IoStar /> Rating: {movie.rating}
+                </li>
+                <li className="flex items-center gap-2">
+                  <MdCast></MdCast> Casts: Tilda Swinton, Paul Bettany, Josh Brolin, Elizabeth Olsen, Samuel L. Jackson
                 </li>
               </ul>
             </motion.div>

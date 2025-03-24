@@ -1,6 +1,7 @@
 import React from "react";
 import { FaArrowAltCircleRight, FaStar } from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
 
 const trendingMovies = [
   {
@@ -30,6 +31,8 @@ const trendingMovies = [
 ];
 
 const TrendingMovies = () => {
+  const {darkMode}=useAuth()
+
   return (
     <section className="  py-12 px-4 md:px-10">
       <div className="flex justify-between">
@@ -46,7 +49,7 @@ const TrendingMovies = () => {
         {trendingMovies.map((movie) => (
           <div
             key={movie.id}
-            className="min-w-[280px] md:min-w-0 bg-gray-800 rounded-xl shadow-lg hover:shadow-green-600 transition hover:-translate-y-1 duration-300"
+            className={`min-w-[280px] md:min-w-0 ${darkMode? "text-white bg-gray-800":""} rounded-xl shadow-lg hover:shadow-green-600 transition hover:-translate-y-1 duration-300`}
           >
             <img
               src={movie.poster}

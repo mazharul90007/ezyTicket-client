@@ -231,7 +231,7 @@ const AllMovies = () => {
       </h2>
 
       <div className="my-5  flex flex-col md:flex-row gap-6 md:gap-32">
-        <div className="flex gap-4  md:text-3xl">
+        <div className="flex gap-4 font-semibold md:text-3xl">
           <button
             className={` ${isNowActive ? "border-b-2 pb-1" : ""}`}
             onClick={() => handleNowShowing()}
@@ -270,7 +270,7 @@ const AllMovies = () => {
         {Movies.map((movie) => (
           <div
             key={movie.id}
-            className="min-w-[280px] flex flex-col justify-between md:min-w-0 bg-zinc-900 rounded-xl shadow-lg hover:shadow-purple-600 transition hover:-translate-y-1 duration-300"
+            className={`min-w-[280px] flex flex-col justify-between md:min-w-0 ${darkMode? "text-white bg-gray-800":""} rounded-xl shadow-lg hover:shadow-green-600 transition hover:-translate-y-1 duration-300`}
           >
             <img
               src={movie.poster}

@@ -45,7 +45,7 @@ const MovieMarquee = () => {
 
   return (
     <section className="py-16 px-4 text-white">
-      <h2 className={`text-3xl md:text-4xl font-extrabold text-center mb-12 ${darkMode? "text-white":"text-purple-700 "}  `}>
+      <h2 className={`text-3xl md:text-4xl font-extrabold text-center mb-12 ${darkMode? "text-white":"text-black "}  `}>
         <span>🎬</span> Movie Marquee Showcase
       </h2>
 
