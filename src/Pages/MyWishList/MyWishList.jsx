@@ -1,40 +1,41 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import useAuth from "../../Hooks/useAuth";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const MyWishList = () => {
   const { user, darkMode } = useAuth();
-  const [wishlist, setWishlist] = useState([]);
+  const axiosPublic = useAxiosPublic();
 
-  useEffect(() => {
-    const fetchWishlist = async () => {
-      if (!user?.email) return;
+  const {
+    data: wishlist = [],
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["wishlist", user?.email],
+    queryFn: async () => {
+      if (!user?.email) throw new Error("No user email found");
 
-      try {
-        const response = await fetch("http://localhost:3000/wishlist", {
-          method: "GET",
-          credentials: "include", // Include credentials for authentication
-        });
+      const response = await axiosPublic.get("/wishlist", {
+        withCredentials: true, // Include credentials for authentication
+      });
 
-        const result = await response.json();
-
-        if (response.ok) {
-          setWishlist(result);
-        } else {
-          Swal.fire(
-            "Error",
-            result.message || "Failed to fetch wishlist",
-            "error"
-          );
-        }
-      } catch (error) {
-        console.error("Error fetching wishlist:", error);
-        Swal.fire("Error", "Something went wrong!", "error");
+      if (response.status !== 200) {
+        throw new Error(response.data.message || "Failed to fetch wishlist");
       }
-    };
 
-    fetchWishlist();
-  }, [user]);
+      return response.data;
+    },
+    enabled: !!user?.email, // Only fetch if user is logged in
+    onError: (err) => {
+      Swal.fire("Error", err.message || "Something went wrong!", "error");
+    },
+  });
+
+  if (isLoading) return <p className="text-center text-lg mt-30">Loading...</p>;
+
+  if (error)
+    return <p className="text-center text-red-500">Error: {error.message}</p>;
 
   return (
     <div

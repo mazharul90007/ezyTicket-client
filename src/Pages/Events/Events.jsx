@@ -1,6 +1,8 @@
 import useAuth from "../../Hooks/useAuth";
 import EventBanner from "./EventsComponents/EventBanner";
 import EventCards from "./EventsComponents/EventCards";
+import EventInfo from "./EventsComponents/EventInfo";
+import EventReview from "./EventsComponents/EventReview";
 
 const Events = () => {
   const { darkMode } = useAuth();
@@ -10,6 +12,8 @@ const Events = () => {
     >
       <EventBanner></EventBanner>
       <EventCards></EventCards>
+      <EventInfo></EventInfo>
+      <EventReview></EventReview>
     </div>
   );
 };
