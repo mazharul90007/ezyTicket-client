@@ -1,13 +1,13 @@
-import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import {useQuery} from '@tanstack/react-query'
+import useAxiosPublic from '../../../Hooks/useAxiosPublic';
 
 const useBusState = () => {
 
-    const axiosSecure = useAxiosSecure()
+    const axiosPublic = useAxiosPublic()
     const { data: allBusData = [], refetch } = useQuery({
         queryKey: ['allBusData'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/api/bus');
+            const res = await axiosPublic.get('/api/bus');
             return res.data;
         }
     })
