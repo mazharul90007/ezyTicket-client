@@ -1,7 +1,6 @@
 import { FaBus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 const BusCard = ({ bus, time}) => {
-    console.log(bus)
     const {busName, } = bus
     return (
         <div className="flex flex-col justify-between border rounded-2xl">
