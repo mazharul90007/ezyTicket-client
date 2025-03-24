@@ -1,62 +1,51 @@
-import { useState, useEffect } from "react";
 import { MdDateRange, MdLocationOn, MdAttachMoney } from "react-icons/md";
 import Loading from "../../../Shared/Loading/Loading";
 import useAuth from "../../../Hooks/useAuth";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import { useState } from "react";
 
 const AllEvents = () => {
   const { darkMode } = useAuth();
-  const [events, setEvents] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const axiosPublic = useAxiosPublic();
   const [currentPage, setCurrentPage] = useState(1);
   const eventsPerPage = 6;
 
   // ✅ Correct way to reference an image in `public/`
   const bannerImageUrl = "/AllEventBanner.jpg";
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("http://localhost:3000/events");
-        if (!response.ok) {
-          throw new Error("Failed to fetch events");
-        }
-        const data = await response.json();
+  // Fetch events using useQuery
+  const {
+    data: events = [],
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["events"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/events");
+      return res.data.sort(
+        (a, b) => new Date(b.dateTime) - new Date(a.dateTime)
+      ); // Sort events by date (newest first)
+    },
+  });
 
-        // Sort events by date (newest first)
-        const sortedEvents = data.sort(
-          (a, b) => new Date(b.dateTime) - new Date(a.dateTime)
-        );
-
-        setTimeout(() => {
-          setEvents(sortedEvents);
-          setLoading(false);
-        }, 2000);
-      } catch (error) {
-        setTimeout(() => {
-          setError(error.message);
-          setLoading(false);
-        }, 2000);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (error) return <p className="text-center text-red-500">Error: {error}</p>;
+  if (error)
+    return <p className="text-center text-red-500">Error: {error.message}</p>;
 
   // Pagination Logic
   const indexOfLastEvent = currentPage * eventsPerPage;
   const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
   const currentEvents = events.slice(indexOfFirstEvent, indexOfLastEvent);
   const totalPages = Math.ceil(events.length / eventsPerPage);
-  if (loading)
+
+  if (isLoading)
     return (
       <p className="text-center text-lg mt-30">
         <Loading />
       </p>
     );
+
   return (
     <div
       className={`${
@@ -84,7 +73,7 @@ const AllEvents = () => {
       {/* Events Grid */}
       <div className="py-10 w-11/12 mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {currentEvents.map((event, index) => {
+          {currentEvents.map((event) => {
             const eventDate = new Date(event.dateTime).toLocaleDateString(
               "en-US",
               {
@@ -106,7 +95,7 @@ const AllEvents = () => {
             return (
               <Link
                 to={`/eventdetailspublic/${event._id}`}
-                key={index}
+                key={event._id}
                 className={`${
                   darkMode ? "bg-gray-800 text-white" : "bg-white text-black"
                 } 

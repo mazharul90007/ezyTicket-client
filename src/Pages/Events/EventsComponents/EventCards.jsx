@@ -1,53 +1,39 @@
-import { useState, useEffect } from "react";
 import { MdDateRange, MdLocationOn, MdAttachMoney } from "react-icons/md";
 import Loading from "../../../Shared/Loading/Loading";
 import useAuth from "../../../Hooks/useAuth";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 
 const EventCards = () => {
   const { darkMode } = useAuth();
-  const [events, setEvents] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const axiosPublic = useAxiosPublic();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("http://localhost:3000/events");
-        if (!response.ok) {
-          throw new Error("Failed to fetch events");
-        }
-        const data = await response.json();
+  const {
+    data: events = [],
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["events"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/events");
+      return res.data.sort(
+        (a, b) => new Date(a.dateTime) - new Date(b.dateTime)
+      ); // Sorting after fetching
+    },
+  });
 
-        // Sort events by date (ascending order)
-        const sortedEvents = data.sort(
-          (a, b) => new Date(a.dateTime) - new Date(b.dateTime)
-        );
-
-        setTimeout(() => {
-          setEvents(sortedEvents);
-          setLoading(false);
-        }, 2000);
-      } catch (error) {
-        setTimeout(() => {
-          setError(error.message);
-          setLoading(false);
-        }, 2000);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (loading)
+  if (isLoading)
     return (
       <p className="text-center text-lg mt-30">
         <Loading />
       </p>
     );
-  if (error) return <p className="text-center text-red-500">Error: {error}</p>;
 
-  // Show only the first 4 events
+  if (error)
+    return <p className="text-center text-red-500">Error: {error.message}</p>;
+
+  // Show only the first 3 events
   const displayedEvents = events.slice(0, 3);
 
   return (
@@ -56,8 +42,15 @@ const EventCards = () => {
         darkMode ? "bg-black text-white" : "bg-gray-50 text-black"
       } py-10`}
     >
+      <h1 className="text-5xl font-bold text-center mt-5 mb-5">
+        Explore Events
+      </h1>
+      <p className="text-lg  text-center mb-10">
+        Buy Your Event Tickets Anytime, Anywhere – Hassle-Free & Instant
+        Confirmation!
+      </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto w-11/12">
-        {displayedEvents.map((event, index) => {
+        {displayedEvents.map((event) => {
           const eventDate = new Date(event.dateTime).toLocaleDateString(
             "en-US",
             {
@@ -77,41 +70,45 @@ const EventCards = () => {
           );
 
           return (
-            <Link
-              to={`/eventdetailspublic/${event._id}`}
-              key={index}
-              className={`${
-                darkMode ? "bg-gray-800 text-white" : "bg-white text-black"
-              } 
-              rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300`}
-            >
-              <img
-                src={event.photo}
-                alt={event.title}
-                className="w-full h-56 object-cover rounded-t-xl"
-              />
+            <div>
+              <div>
+                <Link
+                  to={`/eventdetailspublic/${event._id}`}
+                  key={event._id}
+                  className={`${darkMode ? "bg-gray-800 text-white" : ""} 
+              rounded-xl overflow-hidden shadow-xl transform hover:scale-105 transition-all duration-300`}
+                >
+                  <img
+                    src={event.photo}
+                    alt={event.title}
+                    className="w-full h-56 object-cover rounded-t-xl"
+                  />
 
-              <div className="p-5 space-y-3">
-                <h2 className="text-xl font-bold text-center">{event.title}</h2>
+                  <div className="p-5 space-y-3">
+                    <h2 className="text-xl font-bold text-center">
+                      {event.title}
+                    </h2>
 
-                <div className="flex items-center justify-center text-lg font-semibold text-green-600">
-                  <MdAttachMoney className="text-2xl mr-2" />
-                  {event.price} Tk
-                </div>
+                    <div className="flex items-center justify-center text-lg font-semibold text-green-600">
+                      <MdAttachMoney className="text-2xl mr-2" />
+                      {event.price} Tk
+                    </div>
 
-                <div className="flex items-center justify-center gap-2">
-                  <MdDateRange className="text-lg text-green-600" />
-                  <span>
-                    {eventDate}, {eventTime}
-                  </span>
-                </div>
+                    <div className="flex items-center justify-center gap-2">
+                      <MdDateRange className="text-lg text-green-600" />
+                      <span>
+                        {eventDate}, {eventTime}
+                      </span>
+                    </div>
 
-                <div className="flex items-center justify-center gap-2">
-                  <MdLocationOn className="text-lg text-green-600" />
-                  <span>{event.location}</span>
-                </div>
+                    <div className="flex items-center justify-center gap-2">
+                      <MdLocationOn className="text-lg text-green-600" />
+                      <span>{event.location}</span>
+                    </div>
+                  </div>
+                </Link>
               </div>
-            </Link>
+            </div>
           );
         })}
       </div>
