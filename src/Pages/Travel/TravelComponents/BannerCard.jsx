@@ -19,4 +19,4 @@ const BannerCard = ({ card, idx }) => {
     )
 }
 
-export default BannerCard
+export default BannerCard;
