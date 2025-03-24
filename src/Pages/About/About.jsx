@@ -26,7 +26,7 @@ const About = () => {
           </div>
         ))}
       </div>
-
+npm i
       {/* CTA Section */}
       <div className="flex justify-center mt-16">
         <button className="px-8 py-3 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transition">
