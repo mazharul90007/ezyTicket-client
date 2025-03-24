@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import travelBannerImage from "../../../assets/Travel_image/Bus3.jpg"
 import BannerCard from "./BannerCard";
-import useCardData from "../TravelComponents/useCardData";
+import useCardData from "./useCardData";
 
 const TravelBanner = () => {
     const [travelCards] = useCardData()
