@@ -1,19 +1,19 @@
-import { useEffect, useState } from "react";
-import useBusStandName from "../TravelHooks/useBusStandName";
+import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import useBusState from "../TravelHooks/useBusState";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import useTravelContext from "../../../Hooks/TrevalHook/useTravelContext";
 
 
 
 const SelectPlaceTime = () => {
-    const [busInfo] = useBusState()
-    const [districts] = useBusStandName()
-    const [searchData, setSearchData] = useState()
     const location = useLocation()
     const navigate = useNavigate()
     const axiosSecure = useAxiosSecure()
     const [filterBus, setFilterBus] = useState()
+
+    // Data from Travel Provider
+    const {searchData, setSearchData,districts} = useTravelContext()
+    console.log("Search Data",searchData)
 
     // console.log(busInfo)
 
@@ -30,9 +30,9 @@ const SelectPlaceTime = () => {
         })
         .then(data=>{
             setFilterBus(data.data)
-            // if(location.pathname ==="/travel"){
-            //     navigate("/travel/bus-ticket-book")
-            // } 
+            if(location.pathname ==="/travel"){
+                navigate("/travel/bus-ticket-book")
+            } 
         })
         .catch(err=>console.log(err))
        
@@ -43,22 +43,27 @@ const SelectPlaceTime = () => {
     // },[searchData])
     console.log(filterBus, "search", searchData)
     return (
-        <section className="bg-white">
-            <form onSubmit={handleSearchData} className="border p-8 rounded border-black/20 flex flex-col lg:flex-row justify-between items-center gap-5 shadow-2xl shadow-main">
-                <select name="fromDistrict" defaultValue="From" className="select select-success w-full">
+        <section className="bg-white rounded">
+            <form onSubmit={handleSearchData} className="border p-8 rounded border-black/20 flex flex-col lg:flex-row justify-between items-center gap-5 shadow-2xl ">
+                <select name="fromDistrict" defaultValue={!searchData ? "From": searchData?.stand1} className="select select-success w-full" required>
                     <option disabled={true} >From</option>
                     {
                         districts.map((stand, idx) => <option key={idx}>{stand}</option>)
                     }
                 </select>
-                <select name="toDistrict" defaultValue="To" className="select select-success w-full">
+                <select name="toDistrict" defaultValue={!searchData ? "To": searchData?.stand1} className="select select-success w-full" required>
                     <option disabled={true}>To</option>
                     {
                         districts.map((stand, idx) => <option key={idx}>{stand}</option>)
                     }
                 </select>
                 <div className="w-full">
-                    <input name="date" type="date" className="input input-success w-full border p-2 rounded" />
+                    <input name="date" 
+                    defaultValue={!searchData ? "": searchData?.date}
+                    required 
+                    type="date"
+                    min={new Date().toISOString().split("T")[0]}
+                    className="input input-success w-full border p-2 rounded" />
                 </div>
                 <button type="submit" className="btn bg-main text-xl p-6">Search</button>
             </form>
