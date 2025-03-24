@@ -74,7 +74,11 @@ const AuthProvider = ({ children }) => {
           `${import.meta.env.VITE_API_URL}/jwt`,
           { email: currentUser.email },
           { withCredentials: true }
-        );
+        )
+        .then(res => {
+          console.log('login token', res.data);
+          setLoading(false)
+        })
       } else {
         setUser(currentUser);
         await axios.post(
@@ -83,7 +87,11 @@ const AuthProvider = ({ children }) => {
           {
             withCredentials: true,
           }
-        );
+        )
+        .then(res =>{
+          console.log('logout', res.data)
+          setLoading(false)
+        })
       }
       setLoading(false);
     });
