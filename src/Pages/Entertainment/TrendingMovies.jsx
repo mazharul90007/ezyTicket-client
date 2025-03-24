@@ -1,5 +1,6 @@
 import React from "react";
-import { FaStar } from "react-icons/fa";
+import { FaArrowAltCircleRight, FaStar } from "react-icons/fa";
+import { Link, Outlet } from "react-router-dom";
 
 const trendingMovies = [
   {
@@ -31,9 +32,16 @@ const trendingMovies = [
 const TrendingMovies = () => {
   return (
     <section className="  py-12 px-4 md:px-10">
+      <div className="flex justify-between">
+        <p></p>
       <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 ">
         🔥 Trending Movies
       </h2>
+      <Link to='allmovies'>
+      <button className="btn text-end">View All <FaArrowAltCircleRight></FaArrowAltCircleRight> </button>
+      </Link>
+      </div>
+    
       <div className="flex flex-col gap-8 md:grid md:grid-cols-3 md:gap-10 overflow-x-auto no-scrollbar md:overflow-visible">
         {trendingMovies.map((movie) => (
           <div

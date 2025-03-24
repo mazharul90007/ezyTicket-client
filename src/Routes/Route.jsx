@@ -17,6 +17,7 @@ import BusTicketCancellation from "../components/BusTicketCancellation";
 import AllEvents from "../Pages/Events/AllEvents/AllEvents";
 import MyWishList from "../Pages/MyWishList/MyWishList";
 import Contact from "../Pages/Contact/Contact";
+import AllMovie from "../Pages/Entertainment/AllMovie/AllMovies";
 
 const Route = createBrowserRouter([
   {
@@ -94,7 +95,13 @@ const Route = createBrowserRouter([
       {
         path:"/contact",
         element:<Contact></Contact>
-      }
+      },
+      
+        {
+          path:"/entertainment/allmovies",
+          element:<AllMovie></AllMovie>
+        }
+      
     ],
   },
 ]);
