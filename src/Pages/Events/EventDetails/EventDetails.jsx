@@ -8,14 +8,53 @@ import { IoMdPricetags } from "react-icons/io";
 import { IoLocation } from "react-icons/io5";
 import { IoIosTime } from "react-icons/io";
 import useAuth from "../../../Hooks/useAuth";
+import { FaBookmark } from "react-icons/fa";
 
 const EventDetails = () => {
   const { darkMode } = useAuth();
+  const { user } = useAuth();
   const { eventId } = useParams();
   const [eventData, setEventData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [timeLeft, setTimeLeft] = useState(null);
+
+  const handleSaveEvent = async () => {
+    if (!user?.email) {
+      Swal.fire("Error", "You must be logged in to save events!", "error");
+      return;
+    }
+
+    const wishlistItem = {
+      eventId: eventData?._id,
+      title: eventData?.title,
+      dateTime: eventData?.dateTime,
+      location: eventData?.location,
+      price: eventData?.price,
+      photo: eventData?.photo,
+      userEmail: user.email, // Store the logged-in user's email
+      userName: user.displayName, // Store the logged-in user's name
+    };
+
+    try {
+      const response = await fetch("http://localhost:3000/wishlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(wishlistItem),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        Swal.fire("Success!", "Event saved to wishlist!", "success");
+      } else {
+        Swal.fire("Error", result.message || "Failed to save event", "error");
+      }
+    } catch (error) {
+      console.error("Error saving event:", error);
+      Swal.fire("Error", "Failed to save event. Try again!", "error");
+    }
+  };
 
   useEffect(() => {
     if (!eventId) {
@@ -133,7 +172,17 @@ const EventDetails = () => {
             alt={eventData?.name}
             className="w-full h-64 md:h-80 object-cover rounded-lg shadow-md mt-4"
           />
-
+          {/* Wishlist Button */}
+          <button
+            onClick={handleSaveEvent}
+            className={
+              "flex flex-row btn ml-20 md:ml-60 lg:ml-90 mt-10 hover:bg-green-400 hover:text-white"
+            }
+          >
+            {" "}
+            <FaBookmark />
+            Save
+          </button>
           {/* Description */}
           <div
             className={`${
