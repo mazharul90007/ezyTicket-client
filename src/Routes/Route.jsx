@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider} from "react-router-dom";
 import MainLayout from "../Layout/MainLayout";
 import Home from "../Pages/Home/Home";
 import About from "../Pages/About/About";
@@ -18,6 +18,7 @@ import AllEvents from "../Pages/Events/AllEvents/AllEvents";
 import MyWishList from "../Pages/MyWishList/MyWishList";
 import Contact from "../Pages/Contact/Contact";
 import AllMovie from "../Pages/Entertainment/AllMovie/AllMovies";
+import MovieDetails from "../Pages/Entertainment/MovieDetails/MovieDetails";
 
 const Route = createBrowserRouter([
   {
@@ -97,10 +98,15 @@ const Route = createBrowserRouter([
         element:<Contact></Contact>
       },
       
-        {
+      {
           path:"/entertainment/allmovies",
           element:<AllMovie></AllMovie>
-        }
+      },
+      {
+        path:`/entertainment/allmovies/:id`,
+        element:<MovieDetails></MovieDetails>
+
+      }
       
     ],
   },
