@@ -18,7 +18,7 @@ const BusCard = ({ bus, time}) => {
                     {/* date */}
                     <div>
                         <h1 className="text-xl  font-black">{time}</h1>
-                        <p>Date: 25 mar 2025 <br />Dhaka</p>
+                        <p>25 mar 2025 <br />Dhaka</p>
                     </div>
                     {/* hour */}
                     <div className="flex flex-col items-center">
