@@ -58,7 +58,7 @@ const MovieHeroSlider = () => {
                 <p className="mt-6 text-base sm:text-lg md:text-xl text-gray-300">
                   {slide.desc}
                 </p>
-                <button className="mt-8 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 px-8 py-3 rounded-full text-lg font-semibold shadow-lg transition duration-300">
+                <button className="mt-8 bg-supporting px-8 py-3 rounded-full text-lg font-semibold shadow-lg transition duration-300">
                   🎟️ Browse Movies
                 </button>
               </div>

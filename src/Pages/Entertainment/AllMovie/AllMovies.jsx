@@ -2,6 +2,7 @@ import React from "react";
 import { FaArrowAltCircleRight, FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
+import { MdLocalMovies } from "react-icons/md";
 
 
 
@@ -188,13 +189,13 @@ const AllMovies = () => {
         : "from-green-200 via-green-50 to-green-200 text-purple-700"
     } `}  >
       
-      <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 ">
-        🔥 All Movies
+      <h2 className="text-3xl flex items-center justify-center md:text-4xl font-bold  mb-10 ">
+      <MdLocalMovies />Movies
       </h2>
  
 
     
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-5 md:gap-10 overflow-x-auto no-scrollbar md:overflow-visible">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-4 md:gap-10 overflow-x-auto no-scrollbar md:overflow-visible">
         {Movies.map((movie) => (
           <div
             key={movie.id}
@@ -213,7 +214,7 @@ const AllMovies = () => {
                 <span>{movie.rating}</span>
               </div>
               <Link to ={`/entertainment/allmovies/${movie.id}`}>
-              <button className="mt-4 w-full bg-purple-600 hover:bg-purple-700 transition text-white py-2 cursor-pointer rounded-full font-semibold">
+              <button className="mt-4 w-full bg-green-600 hover:bg-green-700 transition text-white py-2 cursor-pointer rounded-full font-semibold">
                 Book Now
               </button>
               </Link>

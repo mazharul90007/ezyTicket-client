@@ -28,7 +28,7 @@ const marqueeMovies = [
     title: "Titanic",
     image: "https://play-lh.googleusercontent.com/7SYIHW3ymjuNe3EFC5htYqOSW1-w8DjM93ftyLi_LlzeNEVlY0HAp4YOT6crIbmYcfJwFZBT8AUBSK2go1C3",
     description:
-      "A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious, ill-fated R.M.S. Titanic.",
+      "A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious..",
   },
   {
     id: 5,
