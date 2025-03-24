@@ -1,45 +1,37 @@
 const About = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-6">
-      <div className="max-w-4xl bg-white shadow-lg rounded-lg p-8">
-        <h1 className="text-4xl font-bold text-center text-[bg-main] mb-6">
-          About Us
-        </h1>
-        <p className="text-gray-700 text-lg text-center mb-4">
-          Welcome to our digital ticketing platform, your one-stop solution for booking tickets to events, travel, and entertainment with ease. Our system ensures seamless seat selection, real-time availability, and QR-based check-in for a smooth experience.
+    <div className="pt-40 text-black bg-gradient-to-br from-[#70fd94f5] via-[#f1fff0] to-[#b0fac2d7] px-6 py-16">
+      <div className="max-w-6xl mx-auto text-center">
+        {/* Header Section */}
+        <h1 className="text-5xl font-bold mb-6">About Us</h1>
+        <p className="text-lg max-w-3xl mx-auto leading-relaxed">
+          Welcome to our <strong>all-in-one ticketing platform</strong>, designed to make booking for <strong>Travel, Events, and Entertainment</strong> seamless. Whether you’re planning a trip, attending a concert, or exploring entertainment options, we’ve got you covered with <strong>real-time availability, secure booking, and hassle-free check-ins</strong>.
         </p>
+      </div>
 
-        <div className="grid md:grid-cols-3 gap-6 mt-8">
-          <div className="flex flex-col items-center text-center">
-            <div className="w-16 h-16 flex items-center justify-center rounded-full bg-gray-200">
-              🎟️
+      {/* Features Section */}
+      <div className="grid md:grid-cols-3 gap-10 mt-16 max-w-6xl mx-auto">
+        {/** Feature Card */}
+        {[
+          { icon: "✈️", title: "Travel", desc: "Book your bus and flight tickets with ease. Enjoy real-time seat selection and instant confirmation." },
+          { icon: "🎭", title: "Events", desc: "Discover and book concerts, conferences, and sports events effortlessly with our secure platform." },
+          { icon: "🎬", title: "Entertainment", desc: "Get tickets for movies, theme parks, and more, all from one convenient place." }
+        ].map((feature, index) => (
+          <div key={index} className="bg-white text-gray-900 p-8 rounded-xl shadow-xl text-center flex flex-col items-center">
+            <div className="w-16 h-16 bg-green-100 flex items-center justify-center rounded-full text-3xl">
+              {feature.icon}
             </div>
-            <h2 className="text-xl font-semibold text-[bg-main] mt-4">Easy Booking</h2>
-            <p className="text-gray-600 text-sm">Book tickets quickly and securely with our user-friendly interface.</p>
+            <h2 className="text-2xl font-semibold mt-4">{feature.title}</h2>
+            <p className="text-gray-600 mt-2">{feature.desc}</p>
           </div>
+        ))}
+      </div>
 
-          <div className="flex flex-col items-center text-center">
-            <div className="w-16 h-16 flex items-center justify-center rounded-full bg-gray-200">
-              📍
-            </div>
-            <h2 className="text-xl font-semibold text-[bg-main] mt-4">Real-Time Updates</h2>
-            <p className="text-gray-600 text-sm">Get live seat availability and instant ticket confirmation.</p>
-          </div>
-
-          <div className="flex flex-col items-center text-center">
-            <div className="w-16 h-16 flex items-center justify-center rounded-full bg-gray-200">
-              🔐
-            </div>
-            <h2 className="text-xl font-semibold text-[bg-main] mt-4">Secure & Reliable</h2>
-            <p className="text-gray-600 text-sm">Enjoy a secure payment process with encrypted transactions.</p>
-          </div>
-        </div>
-
-        <div className="flex justify-center mt-8">
-          <button className="px-6 py-3 bg-[bg-main] text-white font-semibold rounded-lg shadow-md hover:opacity-90">
-            Learn More
-          </button>
-        </div>
+      {/* CTA Section */}
+      <div className="flex justify-center mt-16">
+        <button className="px-8 py-3 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transition">
+          Explore Now
+        </button>
       </div>
     </div>
   );
