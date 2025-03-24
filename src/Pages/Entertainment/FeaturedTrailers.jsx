@@ -47,13 +47,13 @@ const FeaturedTrailers = () => {
                 href={movie.trailerUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 px-5 py-3 rounded-full text-lg font-medium transition"
+                className="flex items-center gap-2 bg-supporting px-5 py-3 rounded-full text-lg font-medium transition"
               >
                 <FaPlay /> Watch Trailer
               </a>
             </div>
             <div className="absolute bottom-0 left-0 right-0 bg-black/70 p-3 text-center">
-              <h3 className="text-xl font-semibold">{movie.title}</h3>
+              <h3 className="text-xl text-white font-semibold">{movie.title}</h3>
             </div>
           </div>
         ))}
