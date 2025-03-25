@@ -4,7 +4,8 @@ import BusCard from "../TravelComponents/BusCard"
 import SelectPlaceTime from "./SelectPlaceTime"
 const TravelBusTicketPage = () => {
 
-  const { allBusData } = useTravelContext()
+  const { allBusData, filterBus } = useTravelContext()
+  console.log(allBusData)
   const timeArray = [
     "6:30am", "7:30am", "8:30am", "9:30am", "10:30am", "11:30am", "12:30pm", "01:30pm", "02:30pm", "03:30pm", "04:30pm", "05:30pm", "06:30pm", "07:30pm", "08:30pm", "09:30pm", "10:30pm", "11:30pm", "12:30pm",
   ];
@@ -65,8 +66,10 @@ const TravelBusTicketPage = () => {
           {/* {
             timeArray.map((time, idx) => allBusData.map((bus, idx) => <BusCard key={idx} bus={bus} time={time} />))
           } */}
+          
           {
-          allBusData.map((bus,idx)=><BusCard key={idx} bus={bus}/> )
+            !filterBus ?  allBusData.map((bus,idx)=><BusCard key={idx} bus={bus}/> ) :
+            filterBus.map((bus,idx)=><BusCard key={idx} bus={bus}/> )
         }
         </div>
       </section>
