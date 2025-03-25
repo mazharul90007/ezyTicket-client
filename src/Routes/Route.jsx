@@ -19,6 +19,7 @@ import MyWishList from "../Pages/MyWishList/MyWishList";
 import Contact from "../Pages/Contact/Contact";
 import AllMovie from "../Pages/Entertainment/AllMovie/AllMovies";
 import MovieDetails from "../Pages/Entertainment/MovieDetails/MovieDetails";
+import Dashboard from "../Layout/dashboard";
 
 const Route = createBrowserRouter([
   {
@@ -110,6 +111,18 @@ const Route = createBrowserRouter([
       
     ],
   },
+  {
+    path: '/dashboard',
+    element: <Dashboard></Dashboard>,
+    errorElement: <Error></Error>,
+      children: [
+        {
+          path: 'userProfile',
+          element: <Profile></Profile>
+
+        }
+      ]
+  }
 ]);
 
 export default Route;
