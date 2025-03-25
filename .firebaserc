@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "ezy-tricket"
-  }
+    "default": "ezyticket-7198b"
+  },
+  "targets": {},
+  "etags": {}
 }
