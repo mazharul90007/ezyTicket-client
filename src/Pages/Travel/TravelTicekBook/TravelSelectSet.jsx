@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import SelectPlaceTime from "./SelectPlaceTime";
 import Heading from "../../../components/Heading";
+import { useLocation } from "react-router-dom";
 
 const TravelSelectSet = () => {
 
     const [selectedSeats, setSelectedSeats] = useState([]);
+    const location = useLocation()
     const seatPrice = 500;
   
     const handleSeatSelect = (seat) => {
@@ -15,18 +17,18 @@ const TravelSelectSet = () => {
         return [...prevSeats, seat];
       });
     };
-     console.log(selectedSeats)
+     console.log(location.pathname)
 
 
     return (
         <section className="container mx-auto my-20 px-5 ">
-            <div className="my-10">
+            <div className={`${location.pathname === "/travel/bus-set" ? "hidden":"my-10"} `}>
                 <Heading 
                 title="Your Ultimate Travel Companion"
                 subtitle="Discover and book your next adventure effortlessly with ExploreEase! From flights to hotels and exciting experiences, we make travel planning simple, fast, and convenient. Start exploring today!"
                 ></Heading>
             </div>
-            <div className="mb-10">
+            <div className={`${location.pathname === "/travel/bus-set" ? "hidden":"my-10"} mb-10`}>
                 <SelectPlaceTime/>
             </div>
             <div className="mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 ">

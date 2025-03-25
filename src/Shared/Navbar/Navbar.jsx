@@ -4,6 +4,7 @@ import { FaBars, FaTimes, FaMoon, FaSun } from "react-icons/fa";
 import useAuth from "../../Hooks/useAuth";
 import nightSky from "../../assets/Navbar_image/sky.jpg";
 import noImage from "../../assets/Common_image/noImage.png";
+import { MdOutlineKeyboardDoubleArrowDown } from "react-icons/md";
 
 const Navbar = () => {
   const { darkMode, setDarkMode, user, logOut, setUser } = useAuth();
@@ -141,7 +142,7 @@ const Navbar = () => {
           <div
             tabIndex={0}
             role="button"
-            className="btn btn-ghost btn-circle avatar"
+            className="py-2  flex gap-1 items-center cursor-pointer"
           >
             <div className="w-10 rounded-full">
               <img
@@ -149,7 +150,11 @@ const Navbar = () => {
                 alt="User Profile"
                 className="rounded-full"
               />
+
             </div>
+            <span className="text-xl">
+              <MdOutlineKeyboardDoubleArrowDown />
+            </span>
           </div>
           <div
             tabIndex={0}
