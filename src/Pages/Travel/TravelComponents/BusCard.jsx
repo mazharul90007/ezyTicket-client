@@ -1,9 +1,11 @@
 import { FaBus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import useTravelContext from "../../../Hooks/TrevalHook/useTravelContext";
+import { FaBangladeshiTakaSign } from "react-icons/fa6";
 const BusCard = ({ bus, time}) => {
     const {busName, } = bus
-    const {searchData, allBusData} =useTravelContext()
+    const {searchData} =useTravelContext()
+    console.log(bus)
 
     return (
         <div className="flex flex-col justify-between border rounded-2xl">
@@ -21,7 +23,7 @@ const BusCard = ({ bus, time}) => {
                     {/* date */}
                     <div>
                         <h1 className="text-xl  font-black">{time}</h1>
-                        <p>{searchData?.date ? searchData.date : "25/03/2025"}<br /><span className="text-xs">{bus?.to}</span></p>
+                        <p>{searchData?.date ? searchData.date : "2025-03-25"}<br /><span className="text-xs">{bus?.to}</span></p>
                     </div>
                     {/* hour */}
                     <div className="flex flex-col items-center">
@@ -36,7 +38,7 @@ const BusCard = ({ bus, time}) => {
                     </div>
                     {/* price */}
                     <div className="text-center flex justify-center items-center">
-                        <h1 className="text-2xl">350 tk</h1>
+                        <h1 className="text-2xl flex">{bus?.ticketPrice} <FaBangladeshiTakaSign className="text-xs"/></h1>
                     </div>
                     {/* action button and set */}
                     <div className="flex flex-col gap-2  items-center">
