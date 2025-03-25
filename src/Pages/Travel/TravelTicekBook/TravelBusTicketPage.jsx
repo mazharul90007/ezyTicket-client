@@ -13,7 +13,12 @@ const TravelBusTicketPage = () => {
     <div className="my-20">
       <div
         className="relative hero min-h-[400px] flex items-center justify-center"
-        style={{ backgroundImage: `url(${travelBannerImage})`, backgroundSize: "cover", backgroundPosition: "center" }}>
+        style={{
+          backgroundImage: `url(${travelBannerImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
         <div className="absolute inset-0 "></div>
         <div className="text-center relative z-10">
           <SelectPlaceTime />
@@ -68,7 +73,7 @@ const TravelBusTicketPage = () => {
 
 
     </div>
-  )
-}
+  );
+};
 
-export default TravelBusTicketPage
+export default TravelBusTicketPage;
