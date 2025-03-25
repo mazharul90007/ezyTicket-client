@@ -9,13 +9,13 @@ const SelectPlaceTime = () => {
     const location = useLocation()
     const navigate = useNavigate()
     const axiosSecure = useAxiosSecure()
-    const [filterBus, setFilterBus] = useState()
+    
 
     // Data from Travel Provider
-    const {searchData, setSearchData,districts} = useTravelContext()
+    const {searchData, setSearchData,districts, filterBus, setFilterBus} = useTravelContext()
     console.log("Search Data",searchData)
 
-    // console.log(busInfo)
+    console.log(filterBus)
 
     const handleSearchData = (e) => {
         e.preventDefault();
