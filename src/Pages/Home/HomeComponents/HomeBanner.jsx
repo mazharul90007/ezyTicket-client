@@ -21,9 +21,9 @@ const HomeBanner = () => {
     const [slideKey, setSlideKey] = useState(0);
 
     return (
-        <div className='h-[350px] md:h-[350px] lg:h-[500px] relative grid grid-cols-1 lg:grid-cols-12 overflow-hidden  shadow-lg'>
+        <div className='h-[450px] md:h-[480px] lg:h-[580px] relative grid grid-cols-1 overflow-hidden  shadow-lg'>
             {/* Left Side (Banner with Image and Overlay) */}
-            <div className='lg:col-span-9'>
+            <div className=''>
                 <Swiper
                     spaceBetween={30}
                     centeredSlides={true}
@@ -130,28 +130,6 @@ const HomeBanner = () => {
                         </div>
                     </SwiperSlide>
                 </Swiper>
-            </div>
-
-            {/* Right Side (Additional Content) */}
-            <div className='lg:col-span-3 bg-[#eaaa10] hidden lg:flex border-l-[6px] border-dashed border-white'>
-                <div className="flex flex-col items-center justify-center w-full p-2 -rotate-90 gap-3">
-                    <div>
-                        <p className="text-black text-2xl font-medium ">TICKET CODE : 123456789</p>
-                    </div>
-                    <div>
-                        <img src={Barcode} alt="barcode" className='w-auto max-w-full h-auto' />
-                    </div>
-
-                    {/* Ticket Info (Rotated Items) */}
-                    <div>
-                        <div className="flex gap-6">
-                            <div className="bg-white text-black font-bold text-xl p-4 rounded-lg">12</div>
-                            <div className="bg-white text-black font-bold text-xl p-4 rounded-lg">B</div>
-                            <div className="bg-white text-black font-bold text-xl p-4 rounded-lg">07</div>
-                            <div className="bg-white text-black font-bold text-xl p-4 rounded-lg">3F</div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     );

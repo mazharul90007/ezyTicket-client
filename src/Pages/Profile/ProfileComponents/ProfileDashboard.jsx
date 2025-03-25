@@ -7,7 +7,7 @@ const ProfileDashboard = () => {
                 <ul className="flex justify-evenly text-xl">
                     <li>Home</li>
                     <li>About</li>
-                    <li>Setting</li>
+                    <li>Settings</li>
                     <li>My Order</li>
                 </ul>
             </div>
