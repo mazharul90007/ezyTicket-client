@@ -1,7 +1,10 @@
 import { FaBus } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import useTravelContext from "../../../Hooks/TrevalHook/useTravelContext";
 const BusCard = ({ bus, time}) => {
     const {busName, } = bus
+    const {searchData, allBusData} =useTravelContext()
+
     return (
         <div className="flex flex-col justify-between border rounded-2xl">
             <div className="flex flex-col lg:flex-row justify-between gap-10 p-4 md:p-10 pb-0">
@@ -11,14 +14,14 @@ const BusCard = ({ bus, time}) => {
                     {/*  */}
                     <div className="md:max-w-[200px]">
                         <h1 className="text-xl font-black">{busName}</h1>
-                        <h1 className="text-xs">Route:Dhaka-Sirajganj</h1>
+                        <h1 className="text-xs">{bus?.from}</h1>
                     </div>
                 </div>
-                <div className="flex flex-col md:flex-row flex-grow justify-between ">
+                <div className="flex flex-col md:flex-row flex-grow gap-4 justify-between ">
                     {/* date */}
                     <div>
                         <h1 className="text-xl  font-black">{time}</h1>
-                        <p>25 mar 2025 <br />Dhaka</p>
+                        <p>{searchData?.date ? searchData.date : "25/03/2025"}<br /><span className="text-xs">{bus?.to}</span></p>
                     </div>
                     {/* hour */}
                     <div className="flex flex-col items-center">
@@ -37,7 +40,7 @@ const BusCard = ({ bus, time}) => {
                     </div>
                     {/* action button and set */}
                     <div className="flex flex-col gap-2  items-center">
-                        <button className="btn bg-main px-6 text-white">Buy Ticket</button>
+                        <Link to="/travel/bus-set" className="btn bg-main px-2 w-full text-white">Buy Ticket</Link>
                         <p className="text-xs"><span className="font-black">52</span> Sets (Available)</p>
                     </div>
                 </div>

@@ -19,6 +19,7 @@ import MyWishList from "../Pages/MyWishList/MyWishList";
 import Contact from "../Pages/Contact/Contact";
 import AllMovie from "../Pages/Entertainment/AllMovie/AllMovies";
 import MovieDetails from "../Pages/Entertainment/MovieDetails/MovieDetails";
+import TravelSelectSet from "../Pages/Travel/TravelTicekBook/TravelSelectSet";
 
 const Route = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ const Route = createBrowserRouter([
       {
         path: "/travel/bus-reservation",
         element: <BusReservationPage />,
+      },
+      {
+        path: "/travel/bus-set",
+        element: <TravelSelectSet />,
       },
       {
         path: "/travel/Bus-Ticket-Cancellation-policy",
