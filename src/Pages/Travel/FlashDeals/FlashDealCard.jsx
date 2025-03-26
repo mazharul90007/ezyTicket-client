@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom"
 import DiscountImage from "../../../assets/Travel_image/Discount/discount.webp"
+import useAuth from "../../../Hooks/useAuth"
 const FlashDealCard = ({deal}) => {
     const {title, image, discountedPrice, promoCode, originalPrice, icon} = deal
+    const {darkMode} = useAuth()
     return (
-        <div className="card bg-base-100 w-full shadow-sm">
+        <div className={` card w-full shadow-sm ${darkMode ? "bg-[#1d1d1d] text-white" : "bg-white text-[#111111]" }` }>
             <figure>
                 <img
                     src={image}
