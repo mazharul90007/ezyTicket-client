@@ -1,5 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import {useQuery} from '@tanstack/react-query'
+import useAxiosPublic from '../../../Hooks/useAxiosPublic';
 
 const useBusState = () => {
     const axiosPublic = useAxiosPublic()
@@ -11,7 +11,8 @@ const useBusState = () => {
         }
     })
 
-  return [allBusData, refetch];
-};
+    return [allBusData, refetch]
+}
 
-export default useBusState;
+export default useBusState
+
