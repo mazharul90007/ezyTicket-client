@@ -8,7 +8,7 @@ const useManager = () => {
     const axiosSecure = useAxiosSecure()
     const { data: isManager, isPending: isManagerLoading } = useQuery({
         queryKey: [user?.email, 'isManager'],
-        enabled: !!user?.email && !loading, 
+        enabled: !loading, 
         queryFn: async () => {
             console.log('asking or checking isManager', user)
             const res = await axiosSecure.get(`/users/manager/${user?.email}`);
