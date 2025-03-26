@@ -4,7 +4,7 @@ const BannerCard = ({ card, idx }) => {
     return (
         <motion.div 
         initial={{ opacity: 0, y: 200 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 * idx+0.8,  ease:"easeInOut" }}
         className='shadow-2xl rounded p-5 flex flex-col justify-between bg-white'>
             <div>
