@@ -1,6 +1,7 @@
 import React from "react";
 import { FaArrowAltCircleRight, FaStar } from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
 
 const trendingMovies = [
   {
@@ -30,6 +31,8 @@ const trendingMovies = [
 ];
 
 const TrendingMovies = () => {
+  const {darkMode}=useAuth()
+
   return (
     <section className="  py-12 px-4 md:px-10">
       <div className="flex justify-between">
@@ -38,7 +41,7 @@ const TrendingMovies = () => {
         🔥 Trending Movies
       </h2>
       <Link to='allmovies'>
-      <button className="btn text-end">View All <FaArrowAltCircleRight></FaArrowAltCircleRight> </button>
+      <button className="btn bg-green-600 text-white border-none text-end">View All <FaArrowAltCircleRight></FaArrowAltCircleRight> </button>
       </Link>
       </div>
     
@@ -46,7 +49,7 @@ const TrendingMovies = () => {
         {trendingMovies.map((movie) => (
           <div
             key={movie.id}
-            className="min-w-[280px] md:min-w-0 bg-zinc-900 rounded-xl shadow-lg hover:shadow-purple-600 transition hover:-translate-y-1 duration-300"
+            className={`min-w-[280px] md:min-w-0 ${darkMode? "text-white bg-gray-800":""} rounded-xl shadow-lg hover:shadow-green-600 transition hover:-translate-y-1 duration-300`}
           >
             <img
               src={movie.poster}
@@ -56,12 +59,12 @@ const TrendingMovies = () => {
             <div className="p-5">
               <h3 className="text-xl font-semibold mb-1">{movie.title}</h3>
               <p className="text-sm text-gray-400 mb-2">{movie.genre}</p>
-              <div className="flex items-center gap-1 text-yellow-400">
+              <div className="flex items-center gap-1 text-green-600">
                 <FaStar />
                 <span>{movie.rating}</span>
               </div>
               <Link to ={`/entertainment/allmovies/${movie.id}`}>
-                           <button className="mt-4 w-full bg-purple-600 hover:bg-purple-700 transition text-white py-2 cursor-pointer rounded-full font-semibold">
+                           <button className="mt-4 w-full bg-supporting hover:bg-green -700 transition text-white py-2 cursor-pointer rounded-full font-semibold">
                              Book Now
                            </button>
                            </Link>

@@ -26,7 +26,7 @@ const EventSection = () => {
                     <div className="md:col-span-6 h-full">
                         {events[0] &&
                             <Link to={`/eventdetailspublic/${events[0]._id}`} className="block h-full">
-                                <div className="relative rounded-xl overflow-hidden shadow-md h-full hover:scale-105 transform transition-transform cursor-pointer">
+                                <div className="relative rounded-lg overflow-hidden shadow-md h-full hover:scale-105 transform transition-transform cursor-pointer">
                                     <figure className="h-full">
                                         <img
                                             src={events[0].photo}
@@ -55,14 +55,11 @@ const EventSection = () => {
                             </Link>
                         }
                     </div>
-
-
-                    {/* Right Column - Grid Layout */}
                     {/* Right Column - Grid Layout */}
                     <div className="md:col-span-6 grid grid-cols-2 gap-4 h-full">
                         {events.slice(1, 5).map((event, index) => (
                             <Link key={index} to={`/eventdetailspublic/${event._id}`} className="block h-full">
-                                <div className="relative rounded-xl overflow-hidden shadow-md hover:scale-105 transform transition-transform cursor-pointer flex flex-col h-full">
+                                <div className="relative rounded-lg overflow-hidden shadow-md hover:scale-105 transform transition-transform cursor-pointer flex flex-col h-full">
                                     {/* Image with Overlay */}
                                     <img src={event.photo} alt="events" className="w-full h-full object-cover flex-1" />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-gray-200/20"></div> {/* Overlay */}

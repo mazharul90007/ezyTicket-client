@@ -2,6 +2,8 @@ import { MdOutlineEmail } from "react-icons/md";
 import useAuth from "../../../Hooks/useAuth";
 import noImage from "../../../assets/Common_image/noImage.png"
 import { FaHome, FaPhoneAlt, FaTicketAlt } from "react-icons/fa";
+import { FaFolderOpen } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 
 const ProfileDetails = () => {
@@ -18,10 +20,15 @@ const ProfileDetails = () => {
             <div className="text-xl text-gray-500 font-semibold text-center space-y-2">
                 <p className="flex items-center gap-2"><MdOutlineEmail /> {user?.email}</p>
 
-                <p className="flex items-center gap-2"><FaPhoneAlt /> {user?.phone? user.phone : 'Unkown'}</p>
+                <p className="flex items-center gap-2"><FaPhoneAlt /> {user?.phone ? user.phone : 'Unkown'}</p>
 
-                <p className="flex items-center gap-2"> <FaHome /> {user?.address? user.address : 'Unkown'}</p>
+                <p className="flex items-center gap-2"> <FaHome /> {user?.address ? user.address : 'Unkown'}</p>
             </div>
+            <Link to={'/dashboard'}>
+                <button className="py-2 md:py-3 px-4 md:px-6 bg-supporting flex items-center rounded mx-auto shadow-md hover:scale-95 transform transition-transform cursor-pointer my-4 text-white">
+                    <FaFolderOpen className="mr-2" /> My Dashboard
+                </button>
+            </Link>
             <div>
 
             </div>

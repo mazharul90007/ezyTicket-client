@@ -8,13 +8,16 @@ const TravelProvider = ({children}) => {
     const [searchData, setSearchData] = useState();
     const [districts] = useBusStandName()
     const [allBusData] = useBusState()
+    const [filterBus, setFilterBus] = useState()
 
 
     const travelData = {
         searchData,
         setSearchData,
         districts,
-        allBusData
+        allBusData,
+        filterBus,
+        setFilterBus
 
     }
   return (<TravelContext.Provider value={travelData} >{children}</TravelContext.Provider>)
