@@ -18,6 +18,7 @@ const EventDetails = () => {
   const { eventId } = useParams();
   const axiosPublic = useAxiosPublic();
   const [timeLeft, setTimeLeft] = useState("");
+  const [isSaved, setIsSaved] = useState(false);
 
   const {
     data: eventData,
@@ -31,7 +32,6 @@ const EventDetails = () => {
     },
   });
 
-  // Calculate time left until the event
   useEffect(() => {
     if (eventData?.dateTime) {
       const eventDate = new Date(eventData.dateTime);
@@ -48,11 +48,29 @@ const EventDetails = () => {
           );
           setTimeLeft(`${hours}h ${minutes}m`);
         }
-      }, 60000); // Update every minute
+      }, 60000);
 
-      return () => clearInterval(interval); // Cleanup the interval on component unmount
+      return () => clearInterval(interval);
     }
   }, [eventData]);
+
+  useEffect(() => {
+    const checkIfSaved = async () => {
+      if (user?.email) {
+        try {
+          const res = await axiosPublic.get(`/wishlist/${user.email}`);
+          const wishlistItems = res.data;
+          const eventExists = wishlistItems.some(
+            (item) => item.eventId === eventData?._id
+          );
+          setIsSaved(eventExists);
+        } catch (error) {
+          console.error("Error fetching wishlist:", error);
+        }
+      }
+    };
+    checkIfSaved();
+  }, [user?.email, eventData?._id]);
 
   const handleSaveEvent = async () => {
     if (!user?.email) {
@@ -60,23 +78,37 @@ const EventDetails = () => {
       return;
     }
 
-    const wishlistItem = {
-      eventId: eventData?._id,
-      title: eventData?.title,
-      dateTime: eventData?.dateTime,
-      location: eventData?.location,
-      price: eventData?.price,
-      photo: eventData?.photo,
-      userEmail: user.email,
-      userName: user.displayName,
-    };
+    if (isSaved) {
+      // Remove from wishlist
+      try {
+        await axiosPublic.delete(`/wishlist/${user.email}/${eventData?._id}`);
+        Swal.fire("Removed!", "Event removed from wishlist!", "success");
+        setIsSaved(false);
+      } catch (error) {
+        console.error("Error removing event:", error);
+        Swal.fire("Error", "Failed to remove event. Try again!", "error");
+      }
+    } else {
+      // Add to wishlist
+      const wishlistItem = {
+        eventId: eventData?._id,
+        title: eventData?.title,
+        dateTime: eventData?.dateTime,
+        location: eventData?.location,
+        price: eventData?.price,
+        photo: eventData?.photo,
+        userEmail: user.email,
+        userName: user.displayName,
+      };
 
-    try {
-      await axiosPublic.post("/wishlist", wishlistItem);
-      Swal.fire("Success!", "Event saved to wishlist!", "success");
-    } catch (error) {
-      console.error("Error saving event:", error);
-      Swal.fire("Error", "Failed to save event. Try again!", "error");
+      try {
+        await axiosPublic.post("/wishlist", wishlistItem);
+        Swal.fire("Success!", "Event saved to wishlist!", "success");
+        setIsSaved(true);
+      } catch (error) {
+        console.error("Error saving event:", error);
+        Swal.fire("Error", "Failed to save event. Try again!", "error");
+      }
     }
   };
 
@@ -137,12 +169,15 @@ const EventDetails = () => {
 
           {/* Wishlist Button */}
           <button
-            onClick={handleSaveEvent}
-            className="flex flex-row btn ml-20 md:ml-60 lg:ml-90 mt-10 hover:bg-green-400 hover:text-white"
-          >
-            <FaBookmark />
-            Save
-          </button>
+  onClick={handleSaveEvent}
+  className={`flex flex-row btn ml-20 md:ml-60 lg:ml-90 mt-10 ${
+    isSaved ? "bg-green-500 text-white" : "hover:bg-green-400 hover:text-white"
+  }`}
+>
+  <FaBookmark />
+  {isSaved ? "Saved" : "Save"}
+</button>
+
 
           {/* Description */}
           <div

@@ -34,7 +34,7 @@ const EventCards = () => {
     return <p className="text-center text-red-500">Error: {error.message}</p>;
 
   // Show only the first 3 events
-  const displayedEvents = events.slice(0, 3);
+  const displayedEvents = events.slice(0, 6);
 
   return (
     <div
