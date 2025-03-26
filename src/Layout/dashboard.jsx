@@ -6,31 +6,33 @@ import { FaHouseCircleExclamation } from "react-icons/fa6";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { IoMdMail } from "react-icons/io";
 import useAdmin from "../Hooks/useAdmin";
-import useAgent from "../Hooks/useAgent";
-// import logo from "../assets/icons/logo.png"
 import useAuth from "../Hooks/useAuth";
+import noImage from "../assets/Common_image/noImage.png"
+import useManager from "../Hooks/useManager";
+
 
 
 
 const Dashboard = () => {
     //TODO: get isAdmin value from the database
     const [isAdmin] = useAdmin();
-    const [isAgent] = useAgent();
+    const [isManager] = useManager();
     const { user } = useAuth();
+    console.log(isManager);
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-12">
             {/* Dashboard SideBar */}
-            <div className="md:col-span-3 md:min-h-screen bg-orange-100 px-4">
+            <div className="md:col-span-3 lg:col-span-2 md:min-h-screen bg-green-100 border-r border-gray-200 px-4">
                 <Link to={'/'}>
                     <div className="flex items-center justify-center gap-1 pt-4">
-                        <p className="text-2xl text-primary font-bold"> Ezy Tickets</p>
+                        <p className="text-3xl text-main font-bold"> Ezy Tickets</p>
                     </div>
                 </Link>
                 <div className="divider"></div>
                 {/* User Profile */}
                 <div className="flex flex-col items-center space-y-2 mb-4 text-center">
-                    <img src={user?.photoURL} alt="User Image" className="w-24 h-24 rounded-lg" />
+                    <img src={user?.photoURL ? user.photoURL : noImage} alt="User Image" className="w-24 h-24 rounded-lg" />
                     <h3 className="text-2xl font-bold">{user?.displayName}</h3>
                     <p className="font-semibold text-gray-500">{user?.email}</p>
                 </div>
@@ -57,7 +59,7 @@ const Dashboard = () => {
 
                         </>
                             :
-                            isAgent ?
+                            isManager ?
                                 <>
                                     <li>
                                         <NavLink to={'/dashboard/agentProfile'}><IoPerson /> Agent Profile</NavLink>
@@ -85,7 +87,7 @@ const Dashboard = () => {
                                         <NavLink to={'/dashboard/wishlist'}><FaCalendarAlt /> Wishlist</NavLink>
                                     </li>
                                     <li>
-                                        <NavLink to={'/dashboard/propertyBought'}><FaWallet /> Property Bought</NavLink>
+                                        <NavLink to={'/dashboard/propertyBought'}><FaWallet /> Ticket Bought</NavLink>
                                     </li>
                                     <li>
                                         <NavLink to={'/dashboard/myReview'}><FaShoppingCart />  My Review</NavLink>
@@ -99,14 +101,14 @@ const Dashboard = () => {
                         <NavLink to={'/'}><FaHome></FaHome>Home</NavLink>
                     </li>
                     <li>
-                        <NavLink to={'/support'}><IoMdMail />
+                        <NavLink to={'/contact'}><IoMdMail />
                             Support</NavLink>
                     </li>
                 </ul>
             </div>
 
             {/* Dashboard Content */}
-            <div className="flex-1 p-2 md:col-span-9 bg-blue-50">
+            <div className="flex-1 p-2 md:col-span-9 lg:col-span-10 bg-blue-50">
                 <Outlet></Outlet>
             </div>
         </div>
