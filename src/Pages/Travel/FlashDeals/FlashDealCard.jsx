@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom"
-import DiscountImage from "../../../assets/Travel_image/Discount/discount.webp"
 import useAuth from "../../../Hooks/useAuth"
 const FlashDealCard = ({deal}) => {
     const {title, image, discountedPrice, promoCode, originalPrice, icon} = deal

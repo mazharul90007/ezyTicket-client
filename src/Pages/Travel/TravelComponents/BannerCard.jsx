@@ -16,7 +16,7 @@ const BannerCard = ({ card, idx }) => {
                 <h3 className='text-xl text-supporting md:text-2xl font-semibold'>{title}</h3>
                 <p className=''>{description}</p>
             </div>
-            <button className='btn mt-4'>{linkText}</button>
+            <button className='btn mt-4 text-center  ezy-button'>{linkText}</button>
         </motion.div>
     )
 }
