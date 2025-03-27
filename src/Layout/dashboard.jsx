@@ -8,7 +8,10 @@ import { IoMdMail } from "react-icons/io";
 import useAdmin from "../Hooks/useAdmin";
 import useAuth from "../Hooks/useAuth";
 import noImage from "../assets/Common_image/noImage.png"
-import useManager from "../Hooks/useManager";
+// import useManager from "../Hooks/useManager";
+import useEventManager from "../Hooks/useEventManager";
+import useTravelManager from "../Hooks/useTravelManager";
+import useEntertainmentManager from "../Hooks/useEntertainmentManager";
 
 
 
@@ -16,19 +19,58 @@ import useManager from "../Hooks/useManager";
 const Dashboard = () => {
     //TODO: get isAdmin value from the database
     const [isAdmin] = useAdmin();
-    const [isManager] = useManager();
+    const [isEventManager] = useEventManager();
+    const [isTravelManager] = useTravelManager();
+    const [isEntertainmentManager] = useEntertainmentManager();
     const { user } = useAuth();
-    console.log(isManager);
+    console.log(isTravelManager);
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-12">
             {/* Dashboard SideBar */}
-            <div className="md:col-span-3 lg:col-span-2 md:min-h-screen bg-green-100 border-r border-gray-200 px-4">
+            <div className="md:col-span-3 md:min-h-screen bg-green-100 border-r border-gray-200 px-4">
                 <Link to={'/'}>
                     <div className="flex items-center justify-center gap-1 pt-4">
                         <p className="text-3xl text-main font-bold"> Ezy Tickets</p>
                     </div>
                 </Link>
+
+                <div>
+                    {
+                        isAdmin ? 
+                        <h2 className="dashboard-badge bg-green-100">
+                         ADMIN
+                        </h2>
+                        :
+                        isTravelManager ?
+                        <>
+                        <h2 className="dashboard-badge bg-purple-100">
+                         TRAVEL MANAGER
+                        </h2>
+                        </>
+                        :
+                        isEventManager ?
+                        <>
+                        <h2 className="dashboard-badge bg-teal-100">
+                         EVENT MANAGER
+                        </h2>
+                        </>
+                        :
+                        isEntertainmentManager ?
+                        <>
+                        <h2 className="dashboard-badge bg-amber-100">
+                         ENTERTAINMENT MANAGER
+                        </h2>
+                        </>
+                        :
+                        <>
+                        <h2 className="dashboard-badge bg-red-100">
+                         USER
+                        </h2>
+                        </>
+                    }
+                </div>
+
                 <div className="divider"></div>
                 {/* User Profile */}
                 <div className="flex flex-col items-center space-y-2 mb-4 text-center">
@@ -59,40 +101,81 @@ const Dashboard = () => {
 
                         </>
                             :
-                            isManager ?
+                            isEventManager ?
                                 <>
                                     <li>
-                                        <NavLink to={'/dashboard/agentProfile'}><IoPerson /> Agent Profile</NavLink>
+                                        <NavLink to={'/dashboard/managerProfile'}><IoPerson /> My Profile</NavLink>
                                     </li>
                                     <li>
-                                        <NavLink to={'/dashboard/addProperty'}><TbHomePlus /> Add Property</NavLink>
+                                        <NavLink to={'/dashboard/services'}><TbHomePlus />Add Post</NavLink>
                                     </li>
                                     <li>
-                                        <NavLink to={'/dashboard/addedProperties'}><FaList /> My added Properties</NavLink>
+                                        <NavLink to={'/dashboard/addedProperties'}><FaList /> My added Post</NavLink>
                                     </li>
                                     <li>
-                                        <NavLink to={'/dashboard/soldProperties'}><HiCurrencyDollar />My Sold Properties</NavLink>
+                                        <NavLink to={'/dashboard/soldProperties'}><HiCurrencyDollar />Ticket Sold</NavLink>
                                     </li>
                                     <li>
-                                        <NavLink to={'/dashboard/requestedProperties'}><FaHouseCircleExclamation />
-                                            Requested Properties</NavLink>
+                                        <NavLink to={'/dashboard/manageReview'}><FaHouseCircleExclamation />
+                                            Manage Review</NavLink>
                                     </li>
                                 </>
                                 :
-                                <>
-                                    <li>
-                                        <NavLink to={'/dashboard/userProfile'}><IoPerson /> My Profile</NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink to={'/dashboard/wishlist'}><FaCalendarAlt /> Wishlist</NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink to={'/dashboard/propertyBought'}><FaWallet /> Ticket Bought</NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink to={'/dashboard/myReview'}><FaShoppingCart />  My Review</NavLink>
-                                    </li>
-                                </>
+                                isTravelManager ?
+                                    <>
+                                        <li>
+                                            <NavLink to={'/dashboard/managerProfile'}><IoPerson /> My Profile</NavLink>
+                                        </li>
+                                        <li>
+                                            <NavLink to={'/dashboard/services'}><TbHomePlus />Add Post</NavLink>
+                                        </li>
+                                        <li>
+                                            <NavLink to={'/dashboard/addedProperties'}><FaList /> My added Post</NavLink>
+                                        </li>
+                                        <li>
+                                            <NavLink to={'/dashboard/soldProperties'}><HiCurrencyDollar />Ticket Sold</NavLink>
+                                        </li>
+                                        <li>
+                                            <NavLink to={'/dashboard/manageReview'}><FaHouseCircleExclamation />
+                                                Manage Review</NavLink>
+                                        </li>
+                                    </>
+
+                                    :
+                                    isEntertainmentManager ?
+                                        <>
+                                            <li>
+                                                <NavLink to={'/dashboard/managerProfile'}><IoPerson /> My Profile</NavLink>
+                                            </li>
+                                            <li>
+                                                <NavLink to={'/dashboard/services'}><TbHomePlus />Add Post</NavLink>
+                                            </li>
+                                            <li>
+                                                <NavLink to={'/dashboard/addedProperties'}><FaList /> My added Post</NavLink>
+                                            </li>
+                                            <li>
+                                                <NavLink to={'/dashboard/soldProperties'}><HiCurrencyDollar />Ticket Sold</NavLink>
+                                            </li>
+                                            <li>
+                                                <NavLink to={'/dashboard/manageReview'}><FaHouseCircleExclamation />
+                                                    Manage Review</NavLink>
+                                            </li>
+                                        </>
+                                        :
+                                        <>
+                                            <li>
+                                                <NavLink to={'/dashboard/userProfile'}><IoPerson /> My Profile</NavLink>
+                                            </li>
+                                            <li>
+                                                <NavLink to={'/dashboard/wishlist'}><FaCalendarAlt /> Wishlist</NavLink>
+                                            </li>
+                                            <li>
+                                                <NavLink to={'/dashboard/propertyBought'}><FaWallet /> Ticket Bought</NavLink>
+                                            </li>
+                                            <li>
+                                                <NavLink to={'/dashboard/myReview'}><FaShoppingCart />  My Review</NavLink>
+                                            </li>
+                                        </>
                     }
 
                     {/* Shared Nav Links */}
@@ -108,7 +191,7 @@ const Dashboard = () => {
             </div>
 
             {/* Dashboard Content */}
-            <div className="flex-1 p-2 md:col-span-9 lg:col-span-10 bg-blue-50">
+            <div className="flex-1 p-2 md:col-span-9 bg-blue-50">
                 <Outlet></Outlet>
             </div>
         </div>

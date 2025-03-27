@@ -19,3 +19,7 @@
     rounded-lg shadow-md hover:scale-95 transform transition-transform 
     cursor-pointer mx-auto md:mx-0;
 }
+
+.dashboard-badge {
+    @apply font-semibold py-1 px-3 border border-gray-200 w-fit mx-auto my-2 rounded-md
+}
