@@ -3,17 +3,19 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-
-
-
-
 @theme {
-    
     --color-main: #69c045;
     --color-supporting: #F88922;
     --color-button: #69C045;
-    --color-background: #F5F7F9;
+    --color-background: #F0FFF4;
     
     --font-roboto: "roboto", "sans-serif";
 }
 
+/* Reusable button class */
+.ezy-button {
+    @apply py-2 md:py-3 px-4 md:px-6 bg-supporting text-white font-semibold 
+    flex items-center justify-center md:justify-start 
+    rounded-lg shadow-md hover:scale-95 transform transition-transform 
+    cursor-pointer mx-auto md:mx-0;
+}

@@ -13,7 +13,7 @@ const PricingBanner = () => {
                     <p className="text-lg md:text-lg text-gray-500">
                         We believe your event experience should be simple, elegant, and hassle-free. Our aim is to create that experience so that you can focus on hosting your event while we take care of the rest.
                     </p>
-                    <button className="py-2 md:py-3 px-4 md:px-6 bg-supporting flex items-center justify-center md:justify-start rounded-lg shadow-md hover:scale-95 transform transition-transform cursor-pointer text-white font-semibold mx-auto md:mx-0">
+                    <button className="ezy-button">
                         Create Event
                         <FaArrowRight className="ml-2" />
                     </button>
