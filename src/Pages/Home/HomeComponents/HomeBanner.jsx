@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import bannerBus from '../../../assets/Home_image/banner-bus.jpg';
 import bannerCineplex from '../../../assets/Home_image/banner-cineplex.jpg';
-import bannerConcert from '../../../assets/Home_image/banner-concert.jpg';
 import Barcode from '../../../assets/Home_image/barcode1.png';
+import bannerConcert from '../../../assets/Home_image/tahsan.jpg';
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
