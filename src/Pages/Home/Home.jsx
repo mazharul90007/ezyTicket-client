@@ -43,7 +43,7 @@ const Home = () => {
       {showModal && (
         <div className="fixed inset-0 bg-black/10 bg-opacity-70 z-50 flex items-center justify-center">
           <div className="rounded-lg mx-4">
-            <img src={eidPopUp} alt="EidPopUp" className="max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg h-auto max-h-[80vh] mx-auto" />
+            <img src={eidPopUp} alt="EidPopUp" className="max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg h-auto max-h-[80vh] mx-auto rounded-md" />
             <div className='flex items-center justify-between'>
               <p className="mb-4 text-amber-600 text-lg">
                 Close in <span className="font-bold text-main text-3xl">{countdown}</span>.
