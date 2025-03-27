@@ -117,7 +117,7 @@ const EventCards = () => {
       <div className="flex justify-center mt-8">
         <Link
           to="/allevents"
-          className="bg-green-600 text-white px-6 py-3 rounded-lg text-lg hover:bg-green-700"
+          className="ezy-button"
         >
           View All
         </Link>
