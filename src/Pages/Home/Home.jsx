@@ -50,7 +50,7 @@ const Home = () => {
               </p>
               <button
                 onClick={handleClose}
-                className="bg-supporting text-white px-3 py-1 rounded hover:bg-supporting transition cursor-pointer"
+                className="bg-supporting text-white px-3 py-1 rounded hover:bg-supporting transition text-xs md:text-sm cursor-pointer"
               >
                 X
               </button>
