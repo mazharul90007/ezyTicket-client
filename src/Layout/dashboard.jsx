@@ -1,4 +1,4 @@
-import { FaBullhorn, FaCalendarAlt, FaHome, FaList, FaShoppingCart, FaUsers, FaWallet } from "react-icons/fa";
+import { FaBullhorn, FaBus, FaCalendarAlt, FaHome, FaList, FaShoppingCart, FaUsers, FaWallet } from "react-icons/fa";
 import { TbHomePlus } from "react-icons/tb";
 import { IoPerson } from "react-icons/io5";
 import { HiCurrencyDollar } from "react-icons/hi";
@@ -12,6 +12,8 @@ import noImage from "../assets/Common_image/noImage.png"
 import useEventManager from "../Hooks/useEventManager";
 import useTravelManager from "../Hooks/useTravelManager";
 import useEntertainmentManager from "../Hooks/useEntertainmentManager";
+import { MdEmojiEvents } from "react-icons/md";
+import { BiMoviePlay } from "react-icons/bi";
 
 
 
@@ -86,13 +88,13 @@ const Dashboard = () => {
                                 <NavLink to={'/dashboard/adminProfile'}><IoPerson /> Admin Profile</NavLink>
                             </li>
                             <li>
-                                <NavLink to={'/dashboard/manageEvents'}><FaHome></FaHome> Manage Events</NavLink>
+                                <NavLink to={'/dashboard/manageEvents'}><MdEmojiEvents /> Manage Events</NavLink>
                             </li>
                             <li>
-                                <NavLink to={'/dashboard/manageTravel'}><FaHome></FaHome> Manage Travel</NavLink>
+                                <NavLink to={'/dashboard/manageTravel'}><FaBus /> Manage Travel</NavLink>
                             </li>
                             <li>
-                                <NavLink to={'/dashboard/manageEntertainments'}><FaHome></FaHome> Manage Entertainments</NavLink>
+                                <NavLink to={'/dashboard/manageEntertainments'}><BiMoviePlay /> Manage Entertainments</NavLink>
                             </li>
                             <li>
                                 <NavLink to={'/dashboard/users'}><FaUsers />
