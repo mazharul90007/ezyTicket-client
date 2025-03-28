@@ -10,13 +10,14 @@ import { IoIosTime } from "react-icons/io";
 import useAuth from "../../../Hooks/useAuth";
 import { FaBookmark } from "react-icons/fa";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 const EventDetails = () => {
   const { darkMode } = useAuth();
   const { user } = useAuth();
   const { eventId } = useParams();
   const axiosPublic = useAxiosPublic();
+  const queryClient = useQueryClient();
   const [timeLeft, setTimeLeft] = useState("");
   const [isSaved, setIsSaved] = useState(false);
 
@@ -33,40 +34,40 @@ const EventDetails = () => {
   });
 
   useEffect(() => {
-    if (eventData?.dateTime) {
-      const eventDate = new Date(eventData.dateTime);
-      const interval = setInterval(() => {
-        const now = new Date();
-        const difference = eventDate - now;
-        if (difference <= 0) {
-          clearInterval(interval);
-          setTimeLeft("Event Started");
-        } else {
-          const hours = Math.floor(difference / (1000 * 60 * 60));
-          const minutes = Math.floor(
-            (difference % (1000 * 60 * 60)) / (1000 * 60)
-          );
-          setTimeLeft(`${hours}h ${minutes}m`);
-        }
-      }, 60000);
+    if (!eventData?.dateTime) return;
 
-      return () => clearInterval(interval);
-    }
-  }, [eventData]);
+    const eventDate = new Date(eventData.dateTime);
+
+    const updateTimer = () => {
+      const now = new Date();
+      const difference = eventDate - now;
+      if (difference <= 0) {
+        setTimeLeft("Event Started");
+        return;
+      }
+      const hours = Math.floor(difference / (1000 * 60 * 60));
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      setTimeLeft(`${hours}h ${minutes}m`);
+    };
+
+    updateTimer(); // Run immediately
+    const interval = setInterval(updateTimer, 60000);
+
+    return () => clearInterval(interval);
+  }, [eventData?.dateTime]);
 
   useEffect(() => {
     const checkIfSaved = async () => {
-      if (user?.email) {
-        try {
-          const res = await axiosPublic.get(`/wishlist/${user.email}`);
-          const wishlistItems = res.data;
-          const eventExists = wishlistItems.some(
-            (item) => item.eventId === eventData?._id
-          );
-          setIsSaved(eventExists);
-        } catch (error) {
-          console.error("Error fetching wishlist:", error);
-        }
+      if (!user?.email || !eventData?._id) return;
+
+      try {
+        const res = await axiosPublic.get(`/wishlist/${user.email}`);
+        const eventExists = res.data.some(
+          (item) => item.eventId === eventData._id
+        );
+        setIsSaved(eventExists);
+      } catch (error) {
+        console.error("Error fetching wishlist:", error);
       }
     };
     checkIfSaved();
@@ -78,44 +79,37 @@ const EventDetails = () => {
       return;
     }
 
-    if (isSaved) {
-      // Remove from wishlist
-      try {
+    try {
+      if (isSaved) {
         await axiosPublic.delete(`/wishlist/${user.email}/${eventData?._id}`);
-        Swal.fire("Removed!", "Event removed from wishlist!", "success");
         setIsSaved(false);
-      } catch (error) {
-        console.error("Error removing event:", error);
-        Swal.fire("Error", "Failed to remove event. Try again!", "error");
-      }
-    } else {
-      // Add to wishlist
-      const wishlistItem = {
-        eventId: eventData?._id,
-        title: eventData?.title,
-        dateTime: eventData?.dateTime,
-        location: eventData?.location,
-        price: eventData?.price,
-        photo: eventData?.photo,
-        userEmail: user.email,
-        userName: user.displayName,
-      };
-
-      try {
+        Swal.fire("Removed", "Event removed from wishlist!", "info");
+      } else {
+        const wishlistItem = {
+          eventId: eventData?._id,
+          title: eventData?.title,
+          dateTime: eventData?.dateTime,
+          location: eventData?.location,
+          price: eventData?.price,
+          photo: eventData?.photo,
+          userEmail: user.email,
+          userName: user.displayName,
+        };
         await axiosPublic.post("/wishlist", wishlistItem);
-        Swal.fire("Success!", "Event saved to wishlist!", "success");
         setIsSaved(true);
-      } catch (error) {
-        console.error("Error saving event:", error);
-        Swal.fire("Error", "Failed to save event. Try again!", "error");
+        Swal.fire("Success!", "Event saved to wishlist!", "success");
       }
+      queryClient.invalidateQueries(["wishlist", user?.email]);
+    } catch (error) {
+      console.error("Error updating wishlist:", error);
+      Swal.fire("Error", "Something went wrong. Try again!", "error");
     }
   };
 
   if (isLoading) return <Loading />;
   if (error) return <p className="text-red-500 text-center">{error.message}</p>;
 
-  const eventDate = eventData?.dateTime?.split("T")[0]; // Extract date part
+  const eventDate = eventData?.dateTime?.split("T")[0];
   const month = eventDate
     ? new Date(eventData?.dateTime).toLocaleString("default", { month: "long" })
     : "";
@@ -131,23 +125,16 @@ const EventDetails = () => {
         {/* Left Section */}
         <div className="lg:col-span-2">
           <div className="flex flex-wrap items-center gap-4">
-            {/* Calendar Box */}
             <div className="flex flex-col items-center bg-green-500 text-white px-4 py-2 rounded-md shadow-md">
               <span className="text-sm font-bold">{month}</span>
               <span className="text-3xl font-bold">{day}</span>
             </div>
 
-            {/* Title */}
-            <p
-              className={`${
-                darkMode ? "bg-black text-white" : "bg-white text-black"
-              } text-black font-bold text-2xl md:text-4xl`}
-            >
+            <p className={`text-black font-bold text-2xl md:text-4xl`}>
               {eventData?.title}
             </p>
           </div>
 
-          {/* Event Info */}
           <div className="flex flex-wrap gap-4 mt-4 text-sm md:text-lg">
             <p className="text-gray-500 flex items-center gap-1">
               <MdDateRange className="text-xl" /> {eventDate}
@@ -160,26 +147,24 @@ const EventDetails = () => {
             </p>
           </div>
 
-          {/* Event Image */}
           <img
             src={eventData?.photo}
             alt={eventData?.name}
             className="w-full h-64 md:h-80 object-cover rounded-lg shadow-md mt-4"
           />
 
-          {/* Wishlist Button */}
           <button
-  onClick={handleSaveEvent}
-  className={`flex flex-row btn ml-20 md:ml-60 lg:ml-90 mt-10 ${
-    isSaved ? "bg-green-500 text-white" : "hover:bg-green-400 hover:text-white"
-  }`}
->
-  <FaBookmark />
-  {isSaved ? "Saved" : "Save"}
-</button>
+            onClick={handleSaveEvent}
+            className={`flex flex-row btn ml-20 md:ml-60 lg:ml-90 mt-10 ${
+              isSaved
+                ? "bg-green-500 text-white"
+                : "hover:bg-green-400 hover:text-white"
+            }`}
+          >
+            <FaBookmark />
+            {isSaved ? "Saved" : "Save"}
+          </button>
 
-
-          {/* Description */}
           <div
             className={`${
               darkMode ? "bg-gray-600 text-white" : "bg-white text-black"
@@ -202,7 +187,6 @@ const EventDetails = () => {
             Event Information
           </h3>
 
-          {/* Countdown Timer */}
           <div className="bg-gray-200 p-4 rounded-lg text-center">
             <h4 className="text-lg text-black font-semibold">
               Event Starts In:
@@ -216,29 +200,17 @@ const EventDetails = () => {
           </p>
 
           <p className="text-lg flex items-center gap-2 mt-2">
-            <MdDateRange className="text-green-500 text-3xl md:text-4xl" />
-            Date: {eventDate}
-          </p>
-
-          <p className="text-lg flex items-center gap-2 mt-2">
             <IoMdPricetags className="text-green-500 text-3xl md:text-4xl" />
             Price: ${eventData?.price}
           </p>
 
-          <p className="text-lg flex items-center gap-2 mt-2">
-            <IoLocation className="text-green-500 text-3xl md:text-4xl" />
-            Location: {eventData?.location}
-          </p>
-
-          {/* Buttons */}
           <div className="flex flex-col md:flex-row justify-between gap-4 mt-6">
-            <button className="py-2 md:py-3 px-4 md:px-6 bg-supporting flex items-center justify-center md:justify-start rounded-lg shadow-md hover:scale-95 transform transition-transform cursor-pointer text-white font-semibold mx-auto md:mx-0">
+            <button className="py-2 px-4 bg-supporting rounded-lg shadow-md text-white font-semibold mx-auto md:mx-0">
               Buy Tickets
             </button>
-
             <Link
               to="/events"
-              className="w-full md:w-auto py-2 md:py-3 px-4 md:px-6 bg-gray-700 flex items-center justify-center rounded-lg shadow-md text-white font-semibold hover:bg-gray-600 transition"
+              className="py-2 px-4 bg-gray-700 rounded-lg shadow-md text-white font-semibold hover:bg-gray-600 transition"
             >
               Back
             </Link>
