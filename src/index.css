@@ -13,11 +13,30 @@
 }
 
 /* Reusable button class */
-.ezy-button {
+.ezy-button-primary {
+    @apply py-2 md:py-3 px-4 md:px-6 bg-main text-white font-semibold 
+    flex items-center justify-center md:justify-start 
+    rounded-lg shadow-md hover:scale-95 transform transition-transform 
+    cursor-pointer mx-auto md:mx-0;
+}
+.ezy-button-secondary {
     @apply py-2 md:py-3 px-4 md:px-6 bg-supporting text-white font-semibold 
     flex items-center justify-center md:justify-start 
     rounded-lg shadow-md hover:scale-95 transform transition-transform 
     cursor-pointer mx-auto md:mx-0;
+}
+
+.ezy-button-primary-sm {
+    @apply py-1 px-3 bg-main text-white font-semibold 
+    flex items-center justify-center md:justify-start 
+    rounded shadow hover:scale-95 transform transition-transform 
+    cursor-pointer mx-auto md:mx-0
+}
+.ezy-button-secondary-sm {
+    @apply py-1 px-3 bg-supporting text-white font-semibold 
+    flex items-center justify-center md:justify-start 
+    rounded shadow hover:scale-95 transform transition-transform 
+    cursor-pointer mx-auto md:mx-0
 }
 
 .dashboard-badge {

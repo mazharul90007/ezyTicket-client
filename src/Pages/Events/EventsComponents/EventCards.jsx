@@ -117,7 +117,7 @@ const EventCards = () => {
       <div className="flex justify-center mt-8">
         <Link
           to="/allevents"
-          className="ezy-button"
+          className="ezy-button-primary"
         >
           View All
         </Link>

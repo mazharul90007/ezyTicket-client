@@ -71,15 +71,21 @@ const ManageEvents = () => {
                                                 <span>Price: ${event.price}</span>
                                             </div>
                                         </td>
-                                        <td className="p-2">
-                                            <div className="flex gap-2 justify-end">
-                                                <button className="btn btn-sm btn-outline btn-primary">
-                                                    Accept
-                                                </button>
-                                                <button className="btn btn-sm btn-outline btn-error">
-                                                    Reject
-                                                </button>
-                                            </div>
+                                        <td className="p-2 flex justify-end">
+                                            {
+                                                event?.status === 'rejected' ?
+                                                    <p className="py-1 px-3 bg-red-100 text-red-600 border border-red-300 w-fit rounded">Rejected</p>
+                                                    :
+                                                    event?.status === 'verified' ?
+                                                        <p className="py-1 px-3 bg-green-100 text-green-600 border border-green-300 w-fit rounded">Verified</p>
+                                                        :
+                                                        <div className="flex gap-2 justify-end">
+                                                            <button className="ezy-button-primary-sm">
+                                                                Verify
+                                                            </button>
+                                                        </div>
+                                            }
+
                                         </td>
                                     </tr>
                                 ))

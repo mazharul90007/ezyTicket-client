@@ -232,7 +232,7 @@ const EventDetails = () => {
 
           {/* Buttons */}
           <div className="flex flex-col md:flex-row justify-between gap-4 mt-6">
-            <button className="py-2 md:py-3 px-4 md:px-6 bg-supporting flex items-center justify-center md:justify-start rounded-lg shadow-md hover:scale-95 transform transition-transform cursor-pointer text-white font-semibold mx-auto md:mx-0">
+            <button className="ezy-button-secondary">
               Buy Tickets
             </button>
 
