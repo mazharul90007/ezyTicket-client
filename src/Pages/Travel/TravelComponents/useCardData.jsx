@@ -1,42 +1,31 @@
-import { AiFillSafetyCertificate } from "react-icons/ai";
 import { AiFillDollarCircle } from "react-icons/ai";
-import { MdOutlineTravelExplore } from "react-icons/md";
-import { MdHealthAndSafety } from "react-icons/md";
-
+import { FaBus } from "react-icons/fa";
+import { FaMapLocationDot } from "react-icons/fa6";
+import { IoMdDoneAll } from "react-icons/io";
 
 const useCardData = () => {
-
     const travelCards = [
         {
-            title: "Book Direct",
-            description: "Get the best prices by booking your tickets directly with us.",
-            linkText: "Cheap Coach Tickets",
-            linkUrl: "#",
-            icon: <AiFillSafetyCertificate />
+          title: "Select Your Bus",
+          description: "Choose the best bus option for your journey.",
+          icon: <FaBus />,
         },
         {
-            title: "Keeping You Safe",
-            description: "We prioritize your safety with enhanced cleaning and security measures.",
-            linkText: "Explore Now",
-            linkUrl: "#",
-            icon: <MdHealthAndSafety />
+          title: "Booking & Confirm",
+          description: "Confirm your booking details and proceed.",
+          icon:<IoMdDoneAll />,
         },
         {
-            title: "No Booking Fees",
-            description: "Enjoy a hassle-free experience with no hidden charges or booking fees.",
-            linkText: "Sign up or Login",
-            linkUrl: "#",
-            icon: <AiFillDollarCircle />
+          title: "Booking Payment",
+          description: "Securely pay for your ticket online.",
+          icon: <AiFillDollarCircle />,
         },
         {
-            title: "Travel Now. Pay Later.",
-            description: "Book your tickets today and pay later with interest-free options.",
-            linkText: "Learn More",
-            buttonUrl: "#",
-            icon: <MdOutlineTravelExplore />
-        }
-    ];
-
+          title: "Start Your Roadtrip",
+          description: "Get ready to enjoy your journey.",
+          icon: <FaMapLocationDot/>,
+        },]
+      
 
     return [travelCards]
 }
