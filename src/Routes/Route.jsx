@@ -21,6 +21,7 @@ import AllMovie from "../Pages/Entertainment/AllMovie/AllMovies";
 import MovieDetails from "../Pages/Entertainment/MovieDetails/MovieDetails";
 import Dashboard from "../Layout/dashboard";
 import TravelSelectSet from "../Pages/Travel/TravelTicekBook/TravelSelectSet";
+import AddEvents from "../Pages/Dashboard/AddEvents/AddEvents";
 
 const Route = createBrowserRouter([
   {
@@ -125,6 +126,10 @@ const Route = createBrowserRouter([
           path: 'userProfile',
           element: <Profile></Profile>
 
+        },
+        {
+          path: 'addEvent',
+          element: <AddEvents></AddEvents>
         }
       ]
   }
