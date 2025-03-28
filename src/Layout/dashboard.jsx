@@ -37,37 +37,37 @@ const Dashboard = () => {
 
                 <div>
                     {
-                        isAdmin ? 
-                        <h2 className="dashboard-badge bg-green-100">
-                         ADMIN
-                        </h2>
-                        :
-                        isTravelManager ?
-                        <>
-                        <h2 className="dashboard-badge bg-purple-100">
-                         TRAVEL MANAGER
-                        </h2>
-                        </>
-                        :
-                        isEventManager ?
-                        <>
-                        <h2 className="dashboard-badge bg-teal-100">
-                         EVENT MANAGER
-                        </h2>
-                        </>
-                        :
-                        isEntertainmentManager ?
-                        <>
-                        <h2 className="dashboard-badge bg-amber-100">
-                         ENTERTAINMENT MANAGER
-                        </h2>
-                        </>
-                        :
-                        <>
-                        <h2 className="dashboard-badge bg-red-100">
-                         USER
-                        </h2>
-                        </>
+                        isAdmin ?
+                            <h2 className="dashboard-badge bg-green-100">
+                                ADMIN
+                            </h2>
+                            :
+                            isTravelManager ?
+                                <>
+                                    <h2 className="dashboard-badge bg-purple-100">
+                                        TRAVEL MANAGER
+                                    </h2>
+                                </>
+                                :
+                                isEventManager ?
+                                    <>
+                                        <h2 className="dashboard-badge bg-teal-100">
+                                            EVENT MANAGER
+                                        </h2>
+                                    </>
+                                    :
+                                    isEntertainmentManager ?
+                                        <>
+                                            <h2 className="dashboard-badge bg-amber-100">
+                                                ENTERTAINMENT MANAGER
+                                            </h2>
+                                        </>
+                                        :
+                                        <>
+                                            <h2 className="dashboard-badge bg-red-100">
+                                                USER
+                                            </h2>
+                                        </>
                     }
                 </div>
 
@@ -107,7 +107,7 @@ const Dashboard = () => {
                                         <NavLink to={'/dashboard/managerProfile'}><IoPerson /> My Profile</NavLink>
                                     </li>
                                     <li>
-                                        <NavLink to={'/dashboard/services'}><TbHomePlus />Add Post</NavLink>
+                                        <NavLink to={'/dashboard/addEvent'}><TbHomePlus />Add Post</NavLink>
                                     </li>
                                     <li>
                                         <NavLink to={'/dashboard/addedProperties'}><FaList /> My added Post</NavLink>
