@@ -355,7 +355,7 @@ const AddEvents = () => {
 
 
 
-                    <button className="ezy-button">Add Event</button>
+                    <button className="ezy-button-primary">Add Event</button>
                 </form>
             </div>
         </div>
