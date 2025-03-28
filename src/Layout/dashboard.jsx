@@ -38,33 +38,33 @@ const Dashboard = () => {
                 <div>
                     {
                         isAdmin ?
-                            <h2 className="dashboard-badge bg-green-100">
+                            <h2 className="dashboard-badge">
                                 ADMIN
                             </h2>
                             :
                             isTravelManager ?
                                 <>
-                                    <h2 className="dashboard-badge bg-purple-100">
+                                    <h2 className="dashboard-badge">
                                         TRAVEL MANAGER
                                     </h2>
                                 </>
                                 :
                                 isEventManager ?
                                     <>
-                                        <h2 className="dashboard-badge bg-teal-100">
+                                        <h2 className="dashboard-badge">
                                             EVENT MANAGER
                                         </h2>
                                     </>
                                     :
                                     isEntertainmentManager ?
                                         <>
-                                            <h2 className="dashboard-badge bg-amber-100">
+                                            <h2 className="dashboard-badge">
                                                 ENTERTAINMENT MANAGER
                                             </h2>
                                         </>
                                         :
                                         <>
-                                            <h2 className="dashboard-badge bg-red-100">
+                                            <h2 className="dashboard-badge">
                                                 USER
                                             </h2>
                                         </>
@@ -86,14 +86,17 @@ const Dashboard = () => {
                                 <NavLink to={'/dashboard/adminProfile'}><IoPerson /> Admin Profile</NavLink>
                             </li>
                             <li>
-                                <NavLink to={'/dashboard/manageProperties'}><FaHome></FaHome> Manage Properties</NavLink>
+                                <NavLink to={'/dashboard/manageEvents'}><FaHome></FaHome> Manage Events</NavLink>
+                            </li>
+                            <li>
+                                <NavLink to={'/dashboard/manageTravel'}><FaHome></FaHome> Manage Travel</NavLink>
+                            </li>
+                            <li>
+                                <NavLink to={'/dashboard/manageEntertainments'}><FaHome></FaHome> Manage Entertainments</NavLink>
                             </li>
                             <li>
                                 <NavLink to={'/dashboard/users'}><FaUsers />
                                     Manage Users</NavLink>
-                            </li>
-                            <li>
-                                <NavLink to={'/dashboard/manageReviews'}><FaList /> Manage Reviews</NavLink>
                             </li>
                             <li>
                                 <NavLink to={'/dashboard/advertiseProperty'}><FaBullhorn /> Advertise Property</NavLink>
