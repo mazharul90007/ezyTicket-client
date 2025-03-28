@@ -45,13 +45,19 @@ const EventDetails = () => {
         setTimeLeft("Event Started");
         return;
       }
-      const hours = Math.floor(difference / (1000 * 60 * 60));
+
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
       const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-      setTimeLeft(`${hours}h ${minutes}m`);
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+      setTimeLeft(`${days}d ${hours}h ${minutes}m ${seconds}s`);
     };
 
-    updateTimer(); // Run immediately
-    const interval = setInterval(updateTimer, 60000);
+    updateTimer();
+    const interval = setInterval(updateTimer, 100);
 
     return () => clearInterval(interval);
   }, [eventData?.dateTime]);
