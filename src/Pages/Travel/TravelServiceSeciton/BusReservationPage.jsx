@@ -3,7 +3,7 @@ import travelBannerImage from "../../../assets/Travel_image/travel-service/bg-bu
 import useTravelData from '../../../Hooks/TrevalHook/useTravelData';
 import Heading from '../../../components/Heading';
 const BusReservationPage = () => {
-  const [busServices] =  useTravelData()
+  const {busServices} =  useTravelData()
 
   const [serviceType, setServiceType] = useState('');
   const [name, setName] = useState('');

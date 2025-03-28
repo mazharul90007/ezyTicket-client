@@ -32,7 +32,7 @@ const TravelService = () => {
   //     image: BusImage6,
   //   },
   // ];
-  const [busServices] = useTravelData()
+  const {busServices} = useTravelData()
 
   return (
     <section className="container mx-auto px-5">
