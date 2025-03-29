@@ -26,6 +26,9 @@ const Dashboard = () => {
     // Active link style function
     const getNavLinkClass = ({ isActive }) => 
         isActive ? 'bg-supporting text-white' : 'hover:bg-green-200';
+    const closeMenu = ()=>{
+        setIsMobileMenuOpen(false)
+    }
 
     return (
         <div className="flex flex-col md:flex-row h-screen overflow-hidden">
@@ -87,7 +90,7 @@ const Dashboard = () => {
 
                     <div className="divider"></div>
                     
-                    {/* User Profile */}
+                    {/* ---User Profile--- */}
                     <div className="flex flex-col items-center space-y-2 mb-4 text-center">
                         <img src={user?.photoURL || noImage} alt="User" className="w-24 h-24 rounded-lg object-cover" />
                         <h3 className="text-2xl font-bold">{user?.displayName}</h3>
@@ -100,43 +103,63 @@ const Dashboard = () => {
                     <ul className="menu space-y-2">
                         {isAdmin ? (
                             <>
-                                <li><NavLink to="/dashboard/adminProfile" className={getNavLinkClass}><IoPerson /> Admin Profile</NavLink></li>
-                                <li><NavLink to="/dashboard/manageEvents" className={getNavLinkClass}><MdEmojiEvents /> Manage Events</NavLink></li>
-                                <li><NavLink to="/dashboard/manageTravel" className={getNavLinkClass}><FaBus /> Manage Travel</NavLink></li>
-                                <li><NavLink to="/dashboard/manageEntertainments" className={getNavLinkClass}><BiMoviePlay /> Manage Entertainments</NavLink></li>
-                                <li><NavLink to="/dashboard/users" className={getNavLinkClass}><FaUsers /> Manage Users</NavLink></li>
-                                <li><NavLink to="/dashboard/advertiseProperty" className={getNavLinkClass}><FaBullhorn /> Advertise Property</NavLink></li>
+                                <li onClick={closeMenu}><NavLink to="/dashboard/adminProfile" className={getNavLinkClass}><IoPerson /> Admin Profile</NavLink></li>
+
+                                <li onClick={closeMenu}><NavLink to="/dashboard/manageEvents" className={getNavLinkClass}><MdEmojiEvents /> Manage Events</NavLink></li>
+
+                                <li onClick={closeMenu}><NavLink to="/dashboard/manageTravel" className={getNavLinkClass}><FaBus /> Manage Travel</NavLink></li>
+
+                                <li onClick={closeMenu}><NavLink to="/dashboard/manageEntertainments" className={getNavLinkClass}><BiMoviePlay /> Manage Entertainments</NavLink></li>
+
+                                <li onClick={closeMenu}><NavLink to="/dashboard/users" className={getNavLinkClass}><FaUsers /> Manage Users</NavLink></li>
+
+                                <li onClick={closeMenu}><NavLink to="/dashboard/advertiseProperty" className={getNavLinkClass}><FaBullhorn /> Advertise Property</NavLink></li>
                             </>
                         ) : isEventManager ? (
                             <>
-                                <li><NavLink to="/dashboard/managerProfile" className={getNavLinkClass}><IoPerson /> My Profile</NavLink></li>
-                                <li><NavLink to="/dashboard/addEvent" className={getNavLinkClass}><TbHomePlus /> Add Post</NavLink></li>
-                                <li><NavLink to="/dashboard/addedProperties" className={getNavLinkClass}><FaList /> My added Post</NavLink></li>
-                                <li><NavLink to="/dashboard/soldProperties" className={getNavLinkClass}><HiCurrencyDollar /> Ticket Sold</NavLink></li>
-                                <li><NavLink to="/dashboard/manageReview" className={getNavLinkClass}><FaHouseCircleExclamation /> Manage Review</NavLink></li>
+                                <li onClick={closeMenu}><NavLink to="/dashboard/managerProfile" className={getNavLinkClass}><IoPerson /> My Profile</NavLink></li>
+
+                                <li onClick={closeMenu}><NavLink to="/dashboard/addEvent" className={getNavLinkClass}><TbHomePlus /> Add Post</NavLink></li>
+
+                                <li onClick={closeMenu}><NavLink to="/dashboard/addedProperties" className={getNavLinkClass}><FaList /> My added Post</NavLink></li>
+
+                                <li onClick={closeMenu}><NavLink to="/dashboard/soldProperties" className={getNavLinkClass}><HiCurrencyDollar /> Ticket Sold</NavLink></li>
+
+                                <li onClick={closeMenu}><NavLink to="/dashboard/manageReview" className={getNavLinkClass}><FaHouseCircleExclamation /> Manage Review</NavLink></li>
                             </>
                         ) : isTravelManager ? (
                             <>
-                                <li><NavLink to="/dashboard/managerProfile" className={getNavLinkClass}><IoPerson /> My Profile</NavLink></li>
-                                <li><NavLink to="/dashboard/services" className={getNavLinkClass}><TbHomePlus /> Add Post</NavLink></li>
-                                <li><NavLink to="/dashboard/addedProperties" className={getNavLinkClass}><FaList /> My added Post</NavLink></li>
-                                <li><NavLink to="/dashboard/soldProperties" className={getNavLinkClass}><HiCurrencyDollar /> Ticket Sold</NavLink></li>
-                                <li><NavLink to="/dashboard/manageReview" className={getNavLinkClass}><FaHouseCircleExclamation /> Manage Review</NavLink></li>
+                                <li onClick={closeMenu}><NavLink to="/dashboard/managerProfile" className={getNavLinkClass}><IoPerson /> My Profile</NavLink></li>
+
+                                <li onClick={closeMenu}><NavLink to="/dashboard/services" className={getNavLinkClass}><TbHomePlus /> Add Post</NavLink></li>
+
+                                <li onClick={closeMenu}><NavLink to="/dashboard/addedProperties" className={getNavLinkClass}><FaList /> My added Post</NavLink></li>
+
+                                <li onClick={closeMenu}><NavLink to="/dashboard/soldProperties" className={getNavLinkClass}><HiCurrencyDollar /> Ticket Sold</NavLink></li>
+
+                                <li onClick={closeMenu}><NavLink to="/dashboard/manageReview" className={getNavLinkClass}><FaHouseCircleExclamation /> Manage Review</NavLink></li>
                             </>
                         ) : isEntertainmentManager ? (
                             <>
-                                <li><NavLink to="/dashboard/managerProfile" className={getNavLinkClass}><IoPerson /> My Profile</NavLink></li>
-                                <li><NavLink to="/dashboard/services" className={getNavLinkClass}><TbHomePlus /> Add Post</NavLink></li>
-                                <li><NavLink to="/dashboard/addedProperties" className={getNavLinkClass}><FaList /> My added Post</NavLink></li>
-                                <li><NavLink to="/dashboard/soldProperties" className={getNavLinkClass}><HiCurrencyDollar /> Ticket Sold</NavLink></li>
-                                <li><NavLink to="/dashboard/manageReview" className={getNavLinkClass}><FaHouseCircleExclamation /> Manage Review</NavLink></li>
+                                <li onClick={closeMenu}><NavLink to="/dashboard/managerProfile" className={getNavLinkClass}><IoPerson /> My Profile</NavLink></li>
+
+                                <li onClick={closeMenu}><NavLink to="/dashboard/services" className={getNavLinkClass}><TbHomePlus /> Add Post</NavLink></li>
+
+                                <li onClick={closeMenu}><NavLink to="/dashboard/addedProperties" className={getNavLinkClass}><FaList /> My added Post</NavLink></li>
+
+                                <li onClick={closeMenu}><NavLink to="/dashboard/soldProperties" className={getNavLinkClass}><HiCurrencyDollar /> Ticket Sold</NavLink></li>
+
+                                <li onClick={closeMenu}><NavLink to="/dashboard/manageReview" className={getNavLinkClass}><FaHouseCircleExclamation /> Manage Review</NavLink></li>
                             </>
                         ) : (
                             <>
-                                <li><NavLink to="/dashboard/userProfile" className={getNavLinkClass}><IoPerson /> My Profile</NavLink></li>
-                                <li><NavLink to="/dashboard/wishlist" className={getNavLinkClass}><FaCalendarAlt /> Wishlist</NavLink></li>
-                                <li><NavLink to="/dashboard/propertyBought" className={getNavLinkClass}><FaWallet /> Ticket Bought</NavLink></li>
-                                <li><NavLink to="/dashboard/myReview" className={getNavLinkClass}><FaShoppingCart /> My Review</NavLink></li>
+                                <li onClick={closeMenu}><NavLink to="/dashboard/userProfile" className={getNavLinkClass}><IoPerson /> My Profile</NavLink></li>
+
+                                <li onClick={closeMenu}><NavLink to="/dashboard/wishlist" className={getNavLinkClass}><FaCalendarAlt /> Wishlist</NavLink></li>
+
+                                <li onClick={closeMenu}><NavLink to="/dashboard/propertyBought" className={getNavLinkClass}><FaWallet /> Ticket Bought</NavLink></li>
+
+                                <li onClick={closeMenu}><NavLink to="/dashboard/myReview" className={getNavLinkClass}><FaShoppingCart /> My Review</NavLink></li>
                             </>
                         )}
 
