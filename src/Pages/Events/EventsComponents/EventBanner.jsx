@@ -53,7 +53,7 @@ const EventBanner = () => {
                                 <p className="text-lg md:text-2xl mb-8">
                                     Thrilling Performance
                                 </p>
-                                <button className="ezy-button">
+                                <button className="ezy-button-primary">
                                     <FaTicketAlt className="mr-2" /> Discover More
                                 </button>
                             </div>

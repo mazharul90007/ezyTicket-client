@@ -5,6 +5,7 @@ import TravelSelectSet from './TravelTicekBook/TravelSelectSet'
 import AddTravelService from './AddTravelService/AddTravelService'
 import FlashDeals from './FlashDeals/FlashDeals'
 import useAuth from '../../Hooks/useAuth'
+import TravelFAQ from './TravelFAQ/TravelFAQ'
 
 const Travel = () => {
   const {darkMode} = useAuth()
@@ -16,6 +17,9 @@ const Travel = () => {
 
       <section className='container mx-auto px-4 pt-10 mb-20'>
         <FlashDeals/>
+      </section>
+      <section className='px-4 mb-20'>
+        <TravelFAQ/>
       </section>
 
       <div className='px-4 mb-20'>

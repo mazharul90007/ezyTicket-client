@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
-import useAuth from "../../../Hooks/useAuth";
-import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import useAuth from "../../../../Hooks/useAuth";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { FaTicketAlt } from "react-icons/fa";
 import { IoInformationCircle } from "react-icons/io5";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 
 
@@ -355,7 +355,7 @@ const AddEvents = () => {
 
 
 
-                    <button className="ezy-button">Add Event</button>
+                    <button className="ezy-button-primary">Add Event</button>
                 </form>
             </div>
         </div>

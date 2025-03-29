@@ -184,6 +184,8 @@ const EventDetails = () => {
         </div>
 
         {/* Right Sidebar */}
+
+      {/* Comment Sidebar */}
         <div
           className={`${
             darkMode ? "bg-gray-500 text-white" : "bg-white text-black"
@@ -211,7 +213,10 @@ const EventDetails = () => {
           </p>
 
           <div className="flex flex-col md:flex-row justify-between gap-4 mt-6">
-            <button className="ezy-button ">Buy Tickets</button>
+            <button className="py-2 md:py-3 px-4 md:px-6 bg-supporting flex items-center justify-center md:justify-start rounded-lg shadow-md hover:scale-95 transform transition-transform cursor-pointer text-white font-semibold mx-auto md:mx-0">
+              Buy Tickets
+            </button>
+
             <Link
               to="/events"
               className="py-2 px-4 bg-gray-700 rounded-lg shadow-md text-white font-semibold hover:bg-gray-600 transition"

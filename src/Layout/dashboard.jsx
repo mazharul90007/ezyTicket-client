@@ -1,4 +1,4 @@
-import { FaBullhorn, FaCalendarAlt, FaHome, FaList, FaShoppingCart, FaUsers, FaWallet } from "react-icons/fa";
+import { FaBullhorn, FaBus, FaCalendarAlt, FaHome, FaList, FaShoppingCart, FaUsers, FaWallet } from "react-icons/fa";
 import { TbHomePlus } from "react-icons/tb";
 import { IoPerson } from "react-icons/io5";
 import { HiCurrencyDollar } from "react-icons/hi";
@@ -7,192 +7,159 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 import { IoMdMail } from "react-icons/io";
 import useAdmin from "../Hooks/useAdmin";
 import useAuth from "../Hooks/useAuth";
-import noImage from "../assets/Common_image/noImage.png"
-// import useManager from "../Hooks/useManager";
+import noImage from "../assets/Common_image/noImage.png";
 import useEventManager from "../Hooks/useEventManager";
 import useTravelManager from "../Hooks/useTravelManager";
 import useEntertainmentManager from "../Hooks/useEntertainmentManager";
-
-
-
+import { MdEmojiEvents } from "react-icons/md";
+import { BiMoviePlay } from "react-icons/bi";
+import { useState } from "react";
 
 const Dashboard = () => {
-    //TODO: get isAdmin value from the database
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isAdmin] = useAdmin();
     const [isEventManager] = useEventManager();
     const [isTravelManager] = useTravelManager();
     const [isEntertainmentManager] = useEntertainmentManager();
     const { user } = useAuth();
-    console.log(isTravelManager);
+
+    // Active link style function
+    const getNavLinkClass = ({ isActive }) => 
+        isActive ? 'bg-supporting text-white' : 'hover:bg-green-200';
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-12">
-            {/* Dashboard SideBar */}
-            <div className="md:col-span-3 md:min-h-screen bg-green-100 border-r border-gray-200 px-4">
+        <div className="flex flex-col md:flex-row h-screen overflow-hidden">
+            {/* Mobile Header */}
+            <div className="md:hidden flex justify-between items-center p-4 bg-green-100 border-b border-gray-200">
                 <Link to={'/'}>
-                    <div className="flex items-center justify-center gap-1 pt-4">
-                        <p className="text-3xl text-main font-bold"> Ezy Tickets</p>
-                    </div>
+                    <p className="text-2xl text-main font-bold">Ezy Tickets</p>
                 </Link>
-
-                <div>
-                    {
-                        isAdmin ?
-                            <h2 className="dashboard-badge bg-green-100">
-                                ADMIN
-                            </h2>
-                            :
-                            isTravelManager ?
-                                <>
-                                    <h2 className="dashboard-badge bg-purple-100">
-                                        TRAVEL MANAGER
-                                    </h2>
-                                </>
-                                :
-                                isEventManager ?
-                                    <>
-                                        <h2 className="dashboard-badge bg-teal-100">
-                                            EVENT MANAGER
-                                        </h2>
-                                    </>
-                                    :
-                                    isEntertainmentManager ?
-                                        <>
-                                            <h2 className="dashboard-badge bg-amber-100">
-                                                ENTERTAINMENT MANAGER
-                                            </h2>
-                                        </>
-                                        :
-                                        <>
-                                            <h2 className="dashboard-badge bg-red-100">
-                                                USER
-                                            </h2>
-                                        </>
-                    }
-                </div>
-
-                <div className="divider"></div>
-                {/* User Profile */}
-                <div className="flex flex-col items-center space-y-2 mb-4 text-center">
-                    <img src={user?.photoURL ? user.photoURL : noImage} alt="User Image" className="w-24 h-24 rounded-lg" />
-                    <h3 className="text-2xl font-bold">{user?.displayName}</h3>
-                    <p className="font-semibold text-gray-500">{user?.email}</p>
-                </div>
-                <div className="divider"></div>
-                <ul className="menu space-y-4 text-lg font-semibold">
-                    {
-                        isAdmin ? <>
-                            <li>
-                                <NavLink to={'/dashboard/adminProfile'}><IoPerson /> Admin Profile</NavLink>
-                            </li>
-                            <li>
-                                <NavLink to={'/dashboard/manageProperties'}><FaHome></FaHome> Manage Properties</NavLink>
-                            </li>
-                            <li>
-                                <NavLink to={'/dashboard/users'}><FaUsers />
-                                    Manage Users</NavLink>
-                            </li>
-                            <li>
-                                <NavLink to={'/dashboard/manageReviews'}><FaList /> Manage Reviews</NavLink>
-                            </li>
-                            <li>
-                                <NavLink to={'/dashboard/advertiseProperty'}><FaBullhorn /> Advertise Property</NavLink>
-                            </li>
-
-                        </>
-                            :
-                            isEventManager ?
-                                <>
-                                    <li>
-                                        <NavLink to={'/dashboard/managerProfile'}><IoPerson /> My Profile</NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink to={'/dashboard/addEvent'}><TbHomePlus />Add Post</NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink to={'/dashboard/addedProperties'}><FaList /> My added Post</NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink to={'/dashboard/soldProperties'}><HiCurrencyDollar />Ticket Sold</NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink to={'/dashboard/manageReview'}><FaHouseCircleExclamation />
-                                            Manage Review</NavLink>
-                                    </li>
-                                </>
-                                :
-                                isTravelManager ?
-                                    <>
-                                        <li>
-                                            <NavLink to={'/dashboard/managerProfile'}><IoPerson /> My Profile</NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink to={'/dashboard/services'}><TbHomePlus />Add Post</NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink to={'/dashboard/addedProperties'}><FaList /> My added Post</NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink to={'/dashboard/soldProperties'}><HiCurrencyDollar />Ticket Sold</NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink to={'/dashboard/manageReview'}><FaHouseCircleExclamation />
-                                                Manage Review</NavLink>
-                                        </li>
-                                    </>
-
-                                    :
-                                    isEntertainmentManager ?
-                                        <>
-                                            <li>
-                                                <NavLink to={'/dashboard/managerProfile'}><IoPerson /> My Profile</NavLink>
-                                            </li>
-                                            <li>
-                                                <NavLink to={'/dashboard/services'}><TbHomePlus />Add Post</NavLink>
-                                            </li>
-                                            <li>
-                                                <NavLink to={'/dashboard/addedProperties'}><FaList /> My added Post</NavLink>
-                                            </li>
-                                            <li>
-                                                <NavLink to={'/dashboard/soldProperties'}><HiCurrencyDollar />Ticket Sold</NavLink>
-                                            </li>
-                                            <li>
-                                                <NavLink to={'/dashboard/manageReview'}><FaHouseCircleExclamation />
-                                                    Manage Review</NavLink>
-                                            </li>
-                                        </>
-                                        :
-                                        <>
-                                            <li>
-                                                <NavLink to={'/dashboard/userProfile'}><IoPerson /> My Profile</NavLink>
-                                            </li>
-                                            <li>
-                                                <NavLink to={'/dashboard/wishlist'}><FaCalendarAlt /> Wishlist</NavLink>
-                                            </li>
-                                            <li>
-                                                <NavLink to={'/dashboard/propertyBought'}><FaWallet /> Ticket Bought</NavLink>
-                                            </li>
-                                            <li>
-                                                <NavLink to={'/dashboard/myReview'}><FaShoppingCart />  My Review</NavLink>
-                                            </li>
-                                        </>
-                    }
-
-                    {/* Shared Nav Links */}
-                    <div className="divider"></div>
-                    <li>
-                        <NavLink to={'/'}><FaHome></FaHome>Home</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to={'/contact'}><IoMdMail />
-                            Support</NavLink>
-                    </li>
-                </ul>
+                <button 
+                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                    className="text-gray-700 focus:outline-none"
+                >
+                    {isMobileMenuOpen ? (
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    ) : (
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    )}
+                </button>
             </div>
 
-            {/* Dashboard Content */}
-            <div className="flex-1 p-2 md:col-span-9 bg-blue-50">
-                <Outlet></Outlet>
+            {/* Sidebar */}
+            <div className={`
+                ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} 
+                md:translate-x-0
+                fixed md:relative
+                w-64
+                bg-green-100 border-r border-gray-200
+                h-full
+                z-40
+                transition-transform duration-300 ease-in-out
+                overflow-y-auto
+            `}>
+                <div className="p-4">
+                    {/* Desktop Logo */}
+                    <Link to={'/'} className="hidden md:block">
+                        <div className="flex items-center justify-center gap-1 pt-4">
+                            <p className="text-3xl text-main font-bold">Ezy Tickets</p>
+                        </div>
+                    </Link>
+
+                    {/* User Role Badge */}
+                    <div className="mt-4 md:mt-0">
+                        {isAdmin ? (
+                            <h2 className="dashboard-badge bg-green-200 text-green-800">ADMIN</h2>
+                        ) : isTravelManager ? (
+                            <h2 className="dashboard-badge bg-purple-200 text-purple-800">TRAVEL MANAGER</h2>
+                        ) : isEventManager ? (
+                            <h2 className="dashboard-badge bg-teal-200 text-teal-800">EVENT MANAGER</h2>
+                        ) : isEntertainmentManager ? (
+                            <h2 className="dashboard-badge bg-amber-200 text-amber-800">ENTERTAINMENT MANAGER</h2>
+                        ) : (
+                            <h2 className="dashboard-badge bg-red-200 text-red-800">USER</h2>
+                        )}
+                    </div>
+
+                    <div className="divider"></div>
+                    
+                    {/* User Profile */}
+                    <div className="flex flex-col items-center space-y-2 mb-4 text-center">
+                        <img src={user?.photoURL || noImage} alt="User" className="w-24 h-24 rounded-lg object-cover" />
+                        <h3 className="text-2xl font-bold">{user?.displayName}</h3>
+                        <p className="font-semibold text-gray-500">{user?.email}</p>
+                    </div>
+                    
+                    <div className="divider"></div>
+                    
+                    {/* Navigation Menu */}
+                    <ul className="menu space-y-2">
+                        {isAdmin ? (
+                            <>
+                                <li><NavLink to="/dashboard/adminProfile" className={getNavLinkClass}><IoPerson /> Admin Profile</NavLink></li>
+                                <li><NavLink to="/dashboard/manageEvents" className={getNavLinkClass}><MdEmojiEvents /> Manage Events</NavLink></li>
+                                <li><NavLink to="/dashboard/manageTravel" className={getNavLinkClass}><FaBus /> Manage Travel</NavLink></li>
+                                <li><NavLink to="/dashboard/manageEntertainments" className={getNavLinkClass}><BiMoviePlay /> Manage Entertainments</NavLink></li>
+                                <li><NavLink to="/dashboard/users" className={getNavLinkClass}><FaUsers /> Manage Users</NavLink></li>
+                                <li><NavLink to="/dashboard/advertiseProperty" className={getNavLinkClass}><FaBullhorn /> Advertise Property</NavLink></li>
+                            </>
+                        ) : isEventManager ? (
+                            <>
+                                <li><NavLink to="/dashboard/managerProfile" className={getNavLinkClass}><IoPerson /> My Profile</NavLink></li>
+                                <li><NavLink to="/dashboard/addEvent" className={getNavLinkClass}><TbHomePlus /> Add Post</NavLink></li>
+                                <li><NavLink to="/dashboard/addedProperties" className={getNavLinkClass}><FaList /> My added Post</NavLink></li>
+                                <li><NavLink to="/dashboard/soldProperties" className={getNavLinkClass}><HiCurrencyDollar /> Ticket Sold</NavLink></li>
+                                <li><NavLink to="/dashboard/manageReview" className={getNavLinkClass}><FaHouseCircleExclamation /> Manage Review</NavLink></li>
+                            </>
+                        ) : isTravelManager ? (
+                            <>
+                                <li><NavLink to="/dashboard/managerProfile" className={getNavLinkClass}><IoPerson /> My Profile</NavLink></li>
+                                <li><NavLink to="/dashboard/services" className={getNavLinkClass}><TbHomePlus /> Add Post</NavLink></li>
+                                <li><NavLink to="/dashboard/addedProperties" className={getNavLinkClass}><FaList /> My added Post</NavLink></li>
+                                <li><NavLink to="/dashboard/soldProperties" className={getNavLinkClass}><HiCurrencyDollar /> Ticket Sold</NavLink></li>
+                                <li><NavLink to="/dashboard/manageReview" className={getNavLinkClass}><FaHouseCircleExclamation /> Manage Review</NavLink></li>
+                            </>
+                        ) : isEntertainmentManager ? (
+                            <>
+                                <li><NavLink to="/dashboard/managerProfile" className={getNavLinkClass}><IoPerson /> My Profile</NavLink></li>
+                                <li><NavLink to="/dashboard/services" className={getNavLinkClass}><TbHomePlus /> Add Post</NavLink></li>
+                                <li><NavLink to="/dashboard/addedProperties" className={getNavLinkClass}><FaList /> My added Post</NavLink></li>
+                                <li><NavLink to="/dashboard/soldProperties" className={getNavLinkClass}><HiCurrencyDollar /> Ticket Sold</NavLink></li>
+                                <li><NavLink to="/dashboard/manageReview" className={getNavLinkClass}><FaHouseCircleExclamation /> Manage Review</NavLink></li>
+                            </>
+                        ) : (
+                            <>
+                                <li><NavLink to="/dashboard/userProfile" className={getNavLinkClass}><IoPerson /> My Profile</NavLink></li>
+                                <li><NavLink to="/dashboard/wishlist" className={getNavLinkClass}><FaCalendarAlt /> Wishlist</NavLink></li>
+                                <li><NavLink to="/dashboard/propertyBought" className={getNavLinkClass}><FaWallet /> Ticket Bought</NavLink></li>
+                                <li><NavLink to="/dashboard/myReview" className={getNavLinkClass}><FaShoppingCart /> My Review</NavLink></li>
+                            </>
+                        )}
+
+                        <div className="divider"></div>
+                        <li><NavLink to="/" className={getNavLinkClass}><FaHome /> Home</NavLink></li>
+                        <li><NavLink to="/contact" className={getNavLinkClass}><IoMdMail /> Support</NavLink></li>
+                    </ul>
+                </div>
+            </div>
+
+            {/* Mobile Menu Overlay */}
+            {isMobileMenuOpen && (
+                <div 
+                    className="fixed inset-0 bg-black/20 bg-opacity-50 z-30 md:hidden"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                />
+            )}
+
+            {/* Main Content Area */}
+            <div className="flex-1 h-full overflow-y-auto">
+                <div className="p-4">
+                    <Outlet />
+                </div>
             </div>
         </div>
     );
