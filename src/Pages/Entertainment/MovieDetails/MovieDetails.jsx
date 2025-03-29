@@ -68,7 +68,7 @@ const MovieDetails = () => {
                 <p>Imdb: 7.8/10</p>
                 <div className="flex gap-4">
                   <button className="btn shadow-none bg-transparent text-white hover:shadow-white hover:shadow-md">
-                    Watch Now
+                    Watch Trailer
                   </button>
                   <button className="btn shadow-none bg-transparent text-white hover:shadow-white hover:shadow-md">
                     Book now

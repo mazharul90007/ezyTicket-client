@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { Movies } from "../AllMovie/AllMovies";
 import { useParams } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
+import { motion } from "framer-motion";
 
 const TicketBooking = () => {
   const { id } = useParams();
+  const [selectedTime, setSelectedTime] = useState(null);
 
+  const timeSlots = ["7:30 AM", "12:30 PM", "4:30 PM", "8:30 PM"];
   const movie = Movies.filter((movie) => movie.id == id)[0];
   const {darkMode}=useAuth()
 
@@ -27,7 +30,51 @@ const TicketBooking = () => {
   };
   return (
     <div>
-      <div className="pb-6">
+      <div className="pb-6 flex justify-around">
+{/* Selection Zone */}
+
+<div className="w-1/2  flex justify-center items-center px-4">
+      <div className={`${darkMode? "text-white bg-gray-500/20 backdrop-blur-3xl":"bg-green-300/20 backdrop-blur-3xl"}  p-6 rounded-lg shadow-lg w-11/12 md:w-2xl pb-8 mx-auto mt-10`}>
+        <h1 className="text-2xl font-bold  text-center mb-6">🎬 Pick Your One</h1>
+
+        {/* Pick Date Section */}
+        <div className="mb-4">
+          <h2 className="text-lg font-semibold  mb-2">📅 Pick Date:</h2>
+          <input type="date" className="w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300" />
+        </div>
+
+        {/* Pick Time Slot */}
+        <div className="mb-4">
+          <h2 className="text-lg font-semibold  mb-2">⏰ Pick Time Slot:</h2>
+          <div className="grid grid-cols-2 gap-3">
+            {timeSlots.map((time, index) => (
+              <motion.button
+                key={index}
+                whileTap={{ scale: 0.9 }}
+                className={`p-3 rounded-lg text-center border ${
+                  selectedTime === time
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-200 hover:bg-gray-300"
+                } transition`}
+                onClick={() => setSelectedTime(time)}
+              >
+                {time}
+              </motion.button>
+            ))}
+          </div>
+        </div>
+
+        {/* Seat Selection (Placeholder) */}
+        <div className="mb-4">
+          <h2 className="text-lg font-semibold  mb-2">💺 Seat Select:</h2>
+          <p className=" italic">Seat selection feature coming soon...</p>
+        </div>
+
+        {/* Confirm Button */}
+     
+      </div>
+    </div>
+
         {/* Booking form */}
         <section>
           <div className={`${darkMode? "text-white bg-gray-500/20 backdrop-blur-3xl":"bg-green-300/20 backdrop-blur-3xl"}  p-6 rounded-lg shadow-lg w-11/12 md:w-2xl pb-8 mx-auto mt-10`}>
