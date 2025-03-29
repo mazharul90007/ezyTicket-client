@@ -211,9 +211,7 @@ const EventDetails = () => {
           </p>
 
           <div className="flex flex-col md:flex-row justify-between gap-4 mt-6">
-            <button className="py-2 px-4 bg-supporting rounded-lg shadow-md text-white font-semibold mx-auto md:mx-0">
-              Buy Tickets
-            </button>
+            <button className="ezy-button ">Buy Tickets</button>
             <Link
               to="/events"
               className="py-2 px-4 bg-gray-700 rounded-lg shadow-md text-white font-semibold hover:bg-gray-600 transition"
