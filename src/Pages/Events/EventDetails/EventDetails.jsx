@@ -70,7 +70,7 @@ const EventDetails = () => {
       }
     };
     checkIfSaved();
-  }, [user?.email, eventData?._id]);
+  }, [user?.email, axiosPublic, eventData?._id]);
 
   const handleSaveEvent = async () => {
     if (!user?.email) {
