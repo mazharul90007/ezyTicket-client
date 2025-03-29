@@ -94,7 +94,7 @@ const ManageEvents = () => {
                                 </tr>
                             ) : (
                                 allEvents.map((event) => (
-                                    <tr key={event._id} className="hover:bg-gray-50 border-b">
+                                    <tr key={event._id} className="hover:bg-gray-50">
                                         <td className="p-2">
                                             <img src={event?.image ? event.image : noImage} alt={event.title} className="w-20 h-16 rounded" />
                                         </td>
