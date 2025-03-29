@@ -121,11 +121,11 @@ const Dashboard = () => {
 
                                 <li onClick={closeMenu}><NavLink to="/dashboard/addEvent" className={getNavLinkClass}><TbHomePlus /> Add Post</NavLink></li>
 
-                                <li onClick={closeMenu}><NavLink to="/dashboard/addedProperties" className={getNavLinkClass}><FaList /> My added Post</NavLink></li>
+                                <li onClick={closeMenu}><NavLink to="/dashboard/myAddedEvents" className={getNavLinkClass}><FaList /> My added Post</NavLink></li>
 
-                                <li onClick={closeMenu}><NavLink to="/dashboard/soldProperties" className={getNavLinkClass}><HiCurrencyDollar /> Ticket Sold</NavLink></li>
+                                <li onClick={closeMenu}><NavLink to="/dashboard/soldEventTickets" className={getNavLinkClass}><HiCurrencyDollar /> Ticket Sold</NavLink></li>
 
-                                <li onClick={closeMenu}><NavLink to="/dashboard/manageReview" className={getNavLinkClass}><FaHouseCircleExclamation /> Manage Review</NavLink></li>
+                                <li onClick={closeMenu}><NavLink to="/dashboard/manageEventReview" className={getNavLinkClass}><FaHouseCircleExclamation /> Manage Review</NavLink></li>
                             </>
                         ) : isTravelManager ? (
                             <>
