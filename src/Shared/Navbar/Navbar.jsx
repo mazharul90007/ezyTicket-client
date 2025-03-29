@@ -228,7 +228,7 @@ const Navbar = () => {
           to="/"
           className="text-3xl font-bold text-main flex items-center gap-2"
         >
-          <img className="w-28 h-12 object-cover" src="/icon.png" alt="" />
+         <span>EzyTicket</span>
           
         </Link>
       </div>
