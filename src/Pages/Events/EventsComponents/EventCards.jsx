@@ -32,6 +32,7 @@ const EventCards = () => {
 
   if (error)
     return <p className="text-center text-red-500">Error: {error.message}</p>;
+  //new comment
 
   // Show only the first 3 events
   const displayedEvents = events.slice(0, 6);
@@ -78,34 +79,39 @@ const EventCards = () => {
                   className={`${
                     darkMode ? "bg-gray-800 text-white" : "bg-white text-black"
                   } 
-              rounded-xl overflow-hidden  transform hover:scale-105 transition-all duration-300`}
+              rounded-xl overflow-hidden transform hover:scale-105 transition-all duration-300`}
                 >
-                  <img
-                    src={event.photo}
-                    alt={event.title}
-                    className="w-full h-56 object-cover rounded-t-xl"
-                  />
+                  <div
+                    className="shadow-2xl rounded-lg hover:scale-105 transform transition-transform 
+    cursor-pointer hover:shadow-supporting"
+                  >
+                    <img
+                      src={event.image}
+                      alt={event.title}
+                      className="w-full h-56 object-cover rounded-t-xl"
+                    />
 
-                  <div className="p-5 space-y-3">
-                    <h2 className="text-xl font-bold text-center">
-                      {event.title}
-                    </h2>
+                    <div className="p-5 space-y-3">
+                      <h2 className="text-xl font-bold text-center">
+                        {event.title}
+                      </h2>
 
-                    <div className="flex items-center justify-center text-lg font-semibold text-green-600">
-                      <MdAttachMoney className="text-2xl mr-2" />
-                      {event.price} Tk
-                    </div>
+                      <div className="flex items-center justify-center text-lg font-semibold text-green-600">
+                        <MdAttachMoney className="text-2xl mr-2" />
+                        {event.price} Tk
+                      </div>
 
-                    <div className="flex items-center justify-center gap-2">
-                      <MdDateRange className="text-lg text-green-600" />
-                      <span>
-                        {eventDate}, {eventTime}
-                      </span>
-                    </div>
+                      <div className="flex items-center justify-center gap-2">
+                        <MdDateRange className="text-lg text-green-600" />
+                        <span>
+                          {eventDate}, {eventTime}
+                        </span>
+                      </div>
 
-                    <div className="flex items-center justify-center gap-2">
-                      <MdLocationOn className="text-lg text-green-600" />
-                      <span>{event.location}</span>
+                      <div className="flex items-center justify-center gap-2">
+                        <MdLocationOn className="text-lg text-green-600" />
+                        <span>{event.location}</span>
+                      </div>
                     </div>
                   </div>
                 </Link>
@@ -117,7 +123,7 @@ const EventCards = () => {
 
       {/* View All Button */}
       <div className="flex justify-center mt-8">
-        <Link to="/allevents" className="ezy-button">
+        <Link to="/allevents" className="ezy-button-primary">
           View All
         </Link>
       </div>
