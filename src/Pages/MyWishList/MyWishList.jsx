@@ -16,7 +16,7 @@ const MyWishList = () => {
     queryFn: async () => {
       if (!user?.email) throw new Error("No user email found");
 
-      const response = await axiosPublic.get("/wishlist", {
+      const response = await axiosPublic.get(`/wishlist/${user?.email}`, {
         withCredentials: true, // Include credentials for authentication
       });
 

@@ -75,8 +75,10 @@ const EventCards = () => {
                 <Link
                   to={`/eventdetailspublic/${event._id}`}
                   key={event._id}
-                  className={`${darkMode ? "bg-gray-800 text-white" : ""} 
-              rounded-xl overflow-hidden shadow-xl transform hover:scale-105 transition-all duration-300`}
+                  className={`${
+                    darkMode ? "bg-gray-800 text-white" : "bg-white text-black"
+                  } 
+              rounded-xl overflow-hidden  transform hover:scale-105 transition-all duration-300`}
                 >
                   <img
                     src={event.photo}
@@ -115,10 +117,7 @@ const EventCards = () => {
 
       {/* View All Button */}
       <div className="flex justify-center mt-8">
-        <Link
-          to="/allevents"
-          className="ezy-button-primary"
-        >
+        <Link to="/allevents" className="ezy-button">
           View All
         </Link>
       </div>
