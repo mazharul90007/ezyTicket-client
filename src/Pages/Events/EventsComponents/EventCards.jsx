@@ -32,6 +32,7 @@ const EventCards = () => {
 
   if (error)
     return <p className="text-center text-red-500">Error: {error.message}</p>;
+  //new comment
 
   // Show only the first 3 events
   const displayedEvents = events.slice(0, 6);
