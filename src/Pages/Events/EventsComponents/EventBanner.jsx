@@ -45,7 +45,7 @@ const EventBanner = () => {
                     >
                         <div className="absolute inset-0 bg-black opacity-40"></div>
                         <div className="relative z-10 border-1 border-white p-2">
-                            <div className="border-1 border-white py-2 md:py-10 px-2 md:px-24">
+                            <div className="border-1 border-white py-2 md:py-10 px-2 md:px-24 flex flex-col items-center">
                                 <h1 className="text-4xl md:text-6xl font-bold uppercase">
                                     Feel the energy
                                 </h1>
@@ -53,7 +53,7 @@ const EventBanner = () => {
                                 <p className="text-lg md:text-2xl mb-8">
                                     Thrilling Performance
                                 </p>
-                                <button className="py-2 md:py-3 px-4 md:px-6 bg-supporting flex items-center rounded mx-auto shadow-md hover:scale-95 transform transition-transform cursor-pointer">
+                                <button className="ezy-button-primary">
                                     <FaTicketAlt className="mr-2" /> Discover More
                                 </button>
                             </div>

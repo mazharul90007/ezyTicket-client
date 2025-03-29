@@ -176,7 +176,7 @@ const Navbar = () => {
             <div className="divider"></div>
             <ul>
               <li>
-                <Link to="/mydashboard" className="hover:text-supporting">
+                <Link to="/dashboard" className="hover:text-supporting">
                   My Dashboard
                 </Link>
               </li>

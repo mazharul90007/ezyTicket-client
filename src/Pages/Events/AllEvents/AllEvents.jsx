@@ -142,7 +142,7 @@ const AllEvents = () => {
             className={`px-4 py-2 rounded-lg ${
               currentPage === 1
                 ? "bg-gray-400 cursor-not-allowed"
-                : "bg-green-600 text-white hover:bg-green-700"
+                : "ezy-button-primary"
             }`}
           >
             Previous
@@ -168,7 +168,7 @@ const AllEvents = () => {
             className={`px-4 py-2 rounded-lg ${
               currentPage === totalPages
                 ? "bg-gray-400 cursor-not-allowed"
-                : "bg-green-600 text-white hover:bg-green-700"
+                : "ezy-button-primary"
             }`}
           >
             Next
