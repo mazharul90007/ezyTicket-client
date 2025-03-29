@@ -23,6 +23,7 @@ import Dashboard from "../Layout/dashboard";
 import TravelSelectSet from "../Pages/Travel/TravelTicekBook/TravelSelectSet";
 import AddEvents from "../Pages/Dashboard/Events/AddEvents/AddEvents";
 import ManageEvents from "../Pages/Dashboard/Events/ManageEvents/ManageEvents";
+import MyAddedEvents from "../Pages/Dashboard/Events/MyAddedEvents/MyAddedEvents";
 
 const Route = createBrowserRouter([
   {
@@ -136,6 +137,10 @@ const Route = createBrowserRouter([
         {
           path: 'manageEvents',
           element: <ManageEvents></ManageEvents>
+        },
+        {
+          path: 'myAddedEvents',
+          element: <MyAddedEvents></MyAddedEvents>
         }
         // -----------Events route ends------------
       ]
