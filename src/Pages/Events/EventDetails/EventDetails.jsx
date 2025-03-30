@@ -34,11 +34,11 @@ const EventDetails = () => {
   });
 
   useEffect(() => {
-    if (!eventData?.dateTime) return;
+    if (!eventData?.eventDate) return;
 
-    const eventDate = new Date(eventData.dateTime);
+    const eventDate = new Date(eventData.eventDate);
 
-    const updateTimer = () => {
+    const upeventDater = () => {
       const now = new Date();
       const difference = eventDate - now;
       if (difference <= 0) {
@@ -56,11 +56,11 @@ const EventDetails = () => {
       setTimeLeft(`${days}d ${hours}h ${minutes}m ${seconds}s`);
     };
 
-    updateTimer();
-    const interval = setInterval(updateTimer, 100);
+    upeventDater();
+    const interval = setInterval(upeventDater, 100);
 
     return () => clearInterval(interval);
-  }, [eventData?.dateTime]);
+  }, [eventData?.eventDate]);
 
   useEffect(() => {
     const checkIfSaved = async () => {
@@ -94,7 +94,7 @@ const EventDetails = () => {
         const wishlistItem = {
           eventId: eventData?._id,
           title: eventData?.title,
-          dateTime: eventData?.dateTime,
+          eventDate: eventData?.eventDate,
           location: eventData?.location,
           price: eventData?.price,
           photo: eventData?.photo,
@@ -115,11 +115,13 @@ const EventDetails = () => {
   if (isLoading) return <Loading />;
   if (error) return <p className="text-red-500 text-center">{error.message}</p>;
 
-  const eventDate = eventData?.dateTime?.split("T")[0];
-  const month = eventDate
-    ? new Date(eventData?.dateTime).toLocaleString("default", { month: "long" })
+  const EventDate = eventData?.eventDate?.split("T")[0];
+  const month = EventDate
+    ? new Date(eventData?.eventDate).toLocaleString("default", {
+        month: "long",
+      })
     : "";
-  const day = eventDate ? new Date(eventData?.dateTime).getDate() : "";
+  const day = EventDate ? new Date(eventData?.eventDate).getDate() : "";
 
   return (
     <div
@@ -131,8 +133,8 @@ const EventDetails = () => {
         {/* Left Section */}
         <div className="lg:col-span-2">
           <div className="flex flex-wrap items-center gap-4">
-            <div className="flex flex-col items-center bg-green-500 text-white px-4 py-2 rounded-md shadow-md">
-              <span className="text-sm font-bold">{month}</span>
+            <div className="flex flex-col items-center bg-green-500 text-white px-6 py-4 rounded-md shadow-md">
+              <span className="text-xl font-bold">{month}</span>
               <span className="text-3xl font-bold">{day}</span>
             </div>
 
@@ -143,7 +145,7 @@ const EventDetails = () => {
 
           <div className="flex flex-wrap gap-4 mt-4 text-sm md:text-lg">
             <p className="text-gray-500 flex items-center gap-1">
-              <MdDateRange className="text-xl" /> {eventDate}
+              <MdDateRange className="text-xl" /> {eventData?.eventDate}
             </p>
             <p className="text-gray-500 flex items-center gap-1">
               <IoIosTime className="text-xl" /> {eventData?.duration}
@@ -154,7 +156,7 @@ const EventDetails = () => {
           </div>
 
           <img
-            src={eventData?.photo}
+            src={eventData?.image}
             alt={eventData?.name}
             className="w-full h-64 md:h-80 object-cover rounded-lg shadow-md mt-4"
           />
@@ -179,13 +181,13 @@ const EventDetails = () => {
             <h2 className="text-xl md:text-2xl font-bold text-black">
               {eventData?.name}
             </h2>
-            <p className="mt-2 text-md md:text-xl">{eventData?.description}</p>
+            <p className="mt-2 text-md md:text-xl">{eventData?.details}</p>
           </div>
         </div>
 
         {/* Right Sidebar */}
 
-      {/* Comment Sidebar */}
+        {/* Comment Sidebar */}
         <div
           className={`${
             darkMode ? "bg-gray-500 text-white" : "bg-white text-black"
@@ -204,7 +206,7 @@ const EventDetails = () => {
 
           <p className="text-lg flex items-center gap-2 mt-4">
             <IoPersonCircle className="text-green-500 text-3xl md:text-4xl" />
-            Organized by: {eventData?.organizedBy}
+            Total Ticket: {eventData?.totalTickets}
           </p>
 
           <p className="text-lg flex items-center gap-2 mt-2">
