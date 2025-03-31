@@ -4,7 +4,17 @@ import { FaBars, FaTimes, FaMoon, FaSun } from "react-icons/fa";
 import useAuth from "../../Hooks/useAuth";
 import nightSky from "../../assets/Navbar_image/sky.jpg";
 import noImage from "../../assets/Common_image/noImage.png";
-import { MdOutlineKeyboardDoubleArrowDown } from "react-icons/md";
+import { MdOutlineKeyboardDoubleArrowDown, MdOutlinePriceChange, MdOutlineMovieCreation, MdOutlineEventAvailable, MdOutlineDescription, MdOutlineContactSupport  } from "react-icons/md";
+import { RiCompassDiscoverLine } from "react-icons/ri";
+import { IoHomeOutline } from "react-icons/io5";
+import { ImEnter } from "react-icons/im";
+
+
+
+
+
+
+
 
 const Navbar = () => {
   const { darkMode, setDarkMode, user, logOut, setUser } = useAuth();
@@ -75,7 +85,10 @@ const Navbar = () => {
         }
         onClick={closeMenu}
       >
-        Home
+        <div className="flex gap-1">
+        <span className="text-lg"><IoHomeOutline /></span>
+        <span>Home</span>
+        </div>
       </NavLink>
       <NavLink
         to="/travel"
@@ -85,7 +98,10 @@ const Navbar = () => {
         }
         onClick={closeMenu}
       >
-        Travel
+        <div className="flex gap-1">
+        <span className="text-lg"><RiCompassDiscoverLine /></span>
+        <span>Travel</span>
+        </div>
       </NavLink>
       <NavLink
         to="/events"
@@ -95,7 +111,11 @@ const Navbar = () => {
         }
         onClick={closeMenu}
       >
-        Events
+        <div className="flex gap-1">
+        <span className="text-lg"><MdOutlineEventAvailable />
+        </span>
+        <span>Event</span>
+        </div>
       </NavLink>
       <NavLink
         to="/entertainment"
@@ -105,7 +125,11 @@ const Navbar = () => {
         }
         onClick={closeMenu}
       >
-        Entertainment
+        <div className="flex gap-1">
+        <span className="text-lg"><MdOutlineMovieCreation />
+        </span>
+        <span>Entertainment</span>
+        </div>
       </NavLink>
       <NavLink
         to="/pricing"
@@ -115,7 +139,11 @@ const Navbar = () => {
         }
         onClick={closeMenu}
       >
-        Pricing
+        <div className="flex gap-1">
+        <span className="text-lg"><MdOutlinePriceChange />
+        </span>
+        <span>Pricing</span>
+        </div>
       </NavLink>
       <NavLink
         to="/about"
@@ -125,7 +153,11 @@ const Navbar = () => {
         }
         onClick={closeMenu}
       >
-        About
+        <div className="flex gap-1">
+        <span className="text-lg"><MdOutlineDescription />
+        </span>
+        <span>About</span>
+        </div>
       </NavLink>
       <NavLink
         to="/contact"
@@ -135,7 +167,11 @@ const Navbar = () => {
         }
         onClick={closeMenu}
       >
-        Contact
+        <div className="flex gap-1">
+        <span className="text-lg"><MdOutlineContactSupport />
+        </span>
+        <span>Contact</span>
+        </div>
       </NavLink>
       {user ? (
         <div className="dropdown dropdown-end">
@@ -210,7 +246,11 @@ const Navbar = () => {
           }
           onClick={closeMenu}
         >
-          Login/SignUp
+          <div className="flex gap-1">
+        <span className="text-lg"><ImEnter />
+        </span>
+        <span>Login</span>
+        </div>
         </NavLink>
       )}
     </>
@@ -218,7 +258,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`navbar shadow px-6 py-4 fixed top-0 z-40 w-full bg-cover bg-center
+      className={`navbar shadow px-14 py-4 fixed top-0 z-40 w-full bg-cover bg-center
               ${darkMode ? "" : "bg-background"} `}
       style={darkMode ? { backgroundImage: `url(${nightSky})` } : {}}
     >
@@ -235,7 +275,7 @@ const Navbar = () => {
 
       {/* Right Side: Navigation Links (Desktop) */}
       <div
-        className={`hidden text-lg font-medium lg:flex space-x-6 ${darkMode ? "text-white" : "text-black"
+        className={`hidden text-sm font-medium lg:flex space-x-6 ${darkMode ? "text-white" : "text-black"
           }`}
       >
         {links}
@@ -245,11 +285,11 @@ const Navbar = () => {
       <button
         onClick={activeMode}
         aria-label="Toggle dark mode"
-        className={`text-xl border ${darkMode ? "border-white" : "border-black"
+        className={`cursor-pointer border ${darkMode ? "border-white" : "border-black"
           } p-2 ml-4 rounded-full shadow hover:scale-110 transition-transform transform`}
       >
         {!darkMode ? (
-          <FaMoon className="text-black" />
+          <FaMoon className="text-black " />
         ) : (
           <FaSun className="text-white" />
         )}
@@ -277,7 +317,7 @@ const Navbar = () => {
         className={`fixed top-20 -right-1 shadow-xl p-4 rounded-l-lg flex flex-col space-y-4 lg:hidden transition-all duration-500 ease-in-out transform z-40 ${menuOpen ? "translate-x-0" : "translate-x-full"
           } ${darkMode ? "text-white bg-gray-700" : "text-black bg-background"}`}
         style={{ pointerEvents: menuOpen ? "auto" : "none" }}
-        onClick={(e) => e.stopPropagation()} // Prevent clicks inside the menu from closing it
+        onClick={(e) => e.stopPropagation()}
       >
         {links}
       </div>
