@@ -74,24 +74,6 @@ const AllEvents = () => {
       <div className="py-10 w-11/12 mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {currentEvents.map((event) => {
-            const eventDate = new Date(event.dateTime).toLocaleDateString(
-              "en-US",
-              {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              }
-            );
-
-            const eventTime = new Date(event.dateTime).toLocaleTimeString(
-              "en-US",
-              {
-                hour: "numeric",
-                minute: "2-digit",
-                hour12: true,
-              }
-            );
-
             return (
               <Link
                 to={`/eventdetailspublic/${event._id}`}
@@ -102,7 +84,7 @@ const AllEvents = () => {
                 rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300`}
               >
                 <img
-                  src={event.photo}
+                  src={event.image}
                   alt={event.title}
                   className="w-full h-56 object-cover rounded-t-xl"
                 />
@@ -119,9 +101,7 @@ const AllEvents = () => {
 
                   <div className="flex items-center justify-center gap-2">
                     <MdDateRange className="text-lg text-green-600" />
-                    <span>
-                      {eventDate}, {eventTime}
-                    </span>
+                    <span>{event.eventDate}</span>
                   </div>
 
                   <div className="flex items-center justify-center gap-2">
@@ -142,7 +122,7 @@ const AllEvents = () => {
             className={`px-4 py-2 rounded-lg ${
               currentPage === 1
                 ? "bg-gray-400 cursor-not-allowed"
-                : "bg-green-600 text-white hover:bg-green-700"
+                : "ezy-button-primary"
             }`}
           >
             Previous
@@ -168,7 +148,7 @@ const AllEvents = () => {
             className={`px-4 py-2 rounded-lg ${
               currentPage === totalPages
                 ? "bg-gray-400 cursor-not-allowed"
-                : "bg-green-600 text-white hover:bg-green-700"
+                : "ezy-button-primary"
             }`}
           >
             Next

@@ -21,6 +21,9 @@ import AllMovie from "../Pages/Entertainment/AllMovie/AllMovies";
 import MovieDetails from "../Pages/Entertainment/MovieDetails/MovieDetails";
 import Dashboard from "../Layout/dashboard";
 import TravelSelectSet from "../Pages/Travel/TravelTicekBook/TravelSelectSet";
+import AddEvents from "../Pages/Dashboard/Events/AddEvents/AddEvents";
+import ManageEvents from "../Pages/Dashboard/Events/ManageEvents/ManageEvents";
+import MyAddedEvents from "../Pages/Dashboard/Events/MyAddedEvents/MyAddedEvents";
 
 const Route = createBrowserRouter([
   {
@@ -48,7 +51,7 @@ const Route = createBrowserRouter([
         path: "/profile",
         element: <Profile></Profile>,
       },
-      // travel route
+      // --------------Travel route start----------
       {
         path: "/travel",
         element: <Travel />,
@@ -69,9 +72,9 @@ const Route = createBrowserRouter([
         path: "/travel/Bus-Ticket-Cancellation-policy",
         element: <BusTicketCancellation />,
       },
-      // travel route end
+      // ------------travel route end-------------
 
-      //Events Section start
+      //-------------Events route start-----------
       {
         path: "/events",
         element: <Events></Events>,
@@ -85,7 +88,7 @@ const Route = createBrowserRouter([
         element: <AllEvents></AllEvents>,
       },
 
-      //event section end
+      //-------------event route end---------------
       {
         path: "/entertainment",
         element: <Entertainment></Entertainment>,
@@ -125,7 +128,21 @@ const Route = createBrowserRouter([
           path: 'userProfile',
           element: <Profile></Profile>
 
+        },
+        // ------------Events route start----------
+        {
+          path: 'addEvent',
+          element: <AddEvents></AddEvents>
+        },
+        {
+          path: 'manageEvents',
+          element: <ManageEvents></ManageEvents>
+        },
+        {
+          path: 'myAddedEvents',
+          element: <MyAddedEvents></MyAddedEvents>
         }
+        // -----------Events route ends------------
       ]
   }
 ]);

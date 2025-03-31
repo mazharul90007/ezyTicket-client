@@ -27,7 +27,7 @@ const TicketBooking = () => {
   };
   return (
     <div>
-      <div className=" pb-6">
+      <div className="pb-6">
         {/* Booking form */}
         <section>
           <div className={`${darkMode? "text-white bg-gray-500/20 backdrop-blur-3xl":"bg-green-300/20 backdrop-blur-3xl"}  p-6 rounded-lg shadow-lg w-11/12 md:w-2xl pb-8 mx-auto mt-10`}>

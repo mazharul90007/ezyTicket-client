@@ -228,7 +228,8 @@ const Navbar = () => {
           to="/"
           className="text-3xl font-bold text-main flex items-center gap-2"
         >
-          <span>EzyTicket</span>
+         <span>EzyTicket</span>
+          
         </Link>
       </div>
 
