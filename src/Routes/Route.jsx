@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainLayout from "../Layout/MainLayout";
 import Home from "../Pages/Home/Home";
 import About from "../Pages/About/About";
@@ -24,6 +24,7 @@ import TravelSelectSet from "../Pages/Travel/TravelTicekBook/TravelSelectSet";
 import AddEvents from "../Pages/Dashboard/Events/AddEvents/AddEvents";
 import ManageEvents from "../Pages/Dashboard/Events/ManageEvents/ManageEvents";
 import MyAddedEvents from "../Pages/Dashboard/Events/MyAddedEvents/MyAddedEvents";
+import PrivateRoute from "./PrivateRoute";
 
 const Route = createBrowserRouter([
   {
@@ -103,47 +104,47 @@ const Route = createBrowserRouter([
         element: <Pricing></Pricing>,
       },
       {
-        path:"/contact",
-        element:<Contact></Contact>
+        path: "/contact",
+        element: <Contact></Contact>
       },
-      
+
       {
-          path:"/entertainment/allmovies",
-          element:<AllMovie></AllMovie>
+        path: "/entertainment/allmovies",
+        element: <AllMovie></AllMovie>
       },
       {
-        path:`/entertainment/allmovies/:id`,
-        element:<MovieDetails></MovieDetails>
+        path: `/entertainment/allmovies/:id`,
+        element: <MovieDetails></MovieDetails>
 
       }
-      
+
     ],
   },
   {
     path: '/dashboard',
-    element: <Dashboard></Dashboard>,
+    element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
     errorElement: <Error></Error>,
-      children: [
-        {
-          path: 'userProfile',
-          element: <Profile></Profile>
+    children: [
+      {
+        path: 'profile',
+        element: <Profile></Profile>
 
-        },
-        // ------------Events route start----------
-        {
-          path: 'addEvent',
-          element: <AddEvents></AddEvents>
-        },
-        {
-          path: 'manageEvents',
-          element: <ManageEvents></ManageEvents>
-        },
-        {
-          path: 'myAddedEvents',
-          element: <MyAddedEvents></MyAddedEvents>
-        }
-        // -----------Events route ends------------
-      ]
+      },
+      // ------------Events route start----------
+      {
+        path: 'addEvent',
+        element: <AddEvents></AddEvents>
+      },
+      {
+        path: 'manageEvents',
+        element: <ManageEvents></ManageEvents>
+      },
+      {
+        path: 'myAddedEvents',
+        element: <MyAddedEvents></MyAddedEvents>
+      }
+      // -----------Events route ends------------
+    ]
   }
 ]);
 
