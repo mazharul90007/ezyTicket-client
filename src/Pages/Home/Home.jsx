@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 import HomeBanner from "./HomeComponents/HomeBanner";
 import HomeCategory from "./HomeComponents/HomeCategory";
 import EventSection from "./HomeComponents/EventSection";
 import eidPopUp from "../../assets/Home_image/eidPopUp.gif"
 
 const Home = () => {
-  const location = useLocation();
+  // const location = useLocation();
   const [showModal, setShowModal] = useState(true);
   const [countdown, setCountdown] = useState(6);
 
@@ -28,7 +28,7 @@ const Home = () => {
     setShowModal(false);
   };
 
-  console.log(location);
+  // console.log(location);
 
   return (
     <div className="pt-16 min-h-screen relative">

@@ -10,18 +10,17 @@ import {
   updateProfile,
 } from "firebase/auth";
 import app from "../Pages/Authentication/Firebase";
-// import axios from "axios";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 const googleProvider = new GoogleAuthProvider();
 const auth = getAuth(app);
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   const [darkMode, setDarkMode] = useState(false);
   const [user, setUser] = useState(null);
+  const [userInfo, setUserInfo] = useState([]);
   // console.log(user);
 
   const [loading, setLoading] = useState(true);
@@ -54,7 +53,6 @@ const AuthProvider = ({ children }) => {
       photoURL: photo,
     });
   };
-
 
   // onAuthStateChange
   useEffect(() => {
@@ -89,7 +87,6 @@ const AuthProvider = ({ children }) => {
     };
   }, [user?.displayName, user?.photoURL, axiosPublic]);
 
-
   const authInfo = {
     user,
     setUser,
@@ -102,6 +99,8 @@ const AuthProvider = ({ children }) => {
     signInWithGoogle,
     logOut,
     updateUserProfile,
+    userInfo,
+    setUserInfo
   };
 
   return (

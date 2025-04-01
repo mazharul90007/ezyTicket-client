@@ -105,7 +105,7 @@ const MyAddedEvents = () => {
                                         {event.totalTickets - event.soldTickets}
                                     </td>
                                     <td>
-                                        <span className={`badge ${event.status === 'approved' ? 'badge-outline badge-success' : event.status === 'rejected' ? 'badge-outline badge-error' : 'badge-outline badge-warning'}`}>
+                                        <span className={`badge ${event.status === 'verified' ? 'badge-outline badge-success' : event.status === 'rejected' ? 'badge-outline badge-error' : 'badge-outline badge-warning'}`}>
                                             {event.status || 'pending'}
                                         </span>
                                     </td>
