@@ -11,23 +11,38 @@ const TicketBooking = () => {
   const timeSlots = ["7:30 AM", "12:30 PM", "4:30 PM", "8:30 PM"];
   const movie = Movies.filter((movie) => movie.id == id)[0];
   const { darkMode } = useAuth();
+  console.log(selectedTime);
+ 
 
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     seats: 1,
+    date:"",
+    time:""
   });
-
+  console.log(formData);
+  console.log(name);
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    // setFormData({time:selectedTime})
   };
+  const handleTimeSelection = (time) => {
+    setSelectedTime(time);
+    setFormData((prevData) => ({
+      ...prevData,
+      time, // Update formData with selected time
+    }));
+  };
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Booking Confirmed:", formData);
+    console.log("Booking Confirmed:", formData,selectedTime);
     alert(`🎟 Booking Confirmed for ${movie.title}!`);
   };
+
   return (
     <div id="booksection">
       <div className="pb-6 flex flex-col md:flex-row justify-around">
@@ -50,6 +65,9 @@ const TicketBooking = () => {
               <h2 className="text-lg font-semibold  mb-2">📅 Pick Date:</h2>
               <input
                 type="date"
+                name="date"
+                value={formData.date}
+                onChange={handleChange}
                 className="w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
               />
             </div>
@@ -69,7 +87,7 @@ const TicketBooking = () => {
                         ? "bg-supporting "
                         : "bg-gray-200 hover:bg-gray-300"
                     } transition`}
-                    onClick={() => setSelectedTime(time)}
+                    onClick={() => handleTimeSelection(time)}
                   >
                     {time}
                   </motion.button>
