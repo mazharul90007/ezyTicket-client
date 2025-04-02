@@ -10,22 +10,20 @@ const About = () => {
       </div>
 
       {/* Features Section */}
-      <div className="grid md:grid-cols-3 gap-10 mt-16 max-w-6xl mx-auto">
-        {/** Feature Card */}
-        {[
-          { icon: "✈️", title: "Travel", desc: "Book your bus and flight tickets with ease. Enjoy real-time seat selection and instant confirmation." },
-          { icon: "🎭", title: "Events", desc: "Discover and book concerts, conferences, and sports events effortlessly with our secure platform." },
-          { icon: "🎬", title: "Entertainment", desc: "Get tickets for movies, theme parks, and more, all from one convenient place." }
-        ].map((feature, index) => (
-          <div key={index} className="bg-white text-gray-900 p-8 rounded-xl shadow-xl text-center flex flex-col items-center">
-            <div className="w-16 h-16 bg-green-100 flex items-center justify-center rounded-full text-3xl">
-              {feature.icon}
-            </div>
-            <h2 className="text-2xl font-semibold mt-4">{feature.title}</h2>
-            <p className="text-gray-600 mt-2">{feature.desc}</p>
-          </div>
-        ))}
-      </div>
+      <div className="card card-side bg-base-100 shadow-sm">
+  <figure>
+    <img
+      src=""
+      alt="Movie" />
+  </figure>
+  <div className="card-body">
+    <h2 className="card-title">New movie is released!</h2>
+    <p>Click the button to watch on Jetflix app.</p>
+    <div className="card-actions justify-end">
+      <button className="btn btn-primary">Watch</button>
+    </div>
+  </div>
+</div>
 
       {/* CTA Section */}
       <div className="flex justify-center mt-16">

@@ -80,7 +80,7 @@ const MyAddedEvents = () => {
                         </thead>
                         <tbody>
                             {addedEvents.map((event) => (
-                                <tr key={event._id} className="hover:bg-gray-50 border-b border-gray-300">
+                                <tr key={event._id} className="hover:bg-gray-50">
                                     <td className="p-2">
                                         <img src={event?.image ? event.image : noImage} alt={event.title} className="w-20 h-16 rounded" />
                                     </td>
@@ -105,7 +105,7 @@ const MyAddedEvents = () => {
                                         {event.totalTickets - event.soldTickets}
                                     </td>
                                     <td>
-                                        <span className={`badge ${event.status === 'approved' ? 'badge-outline badge-success' : event.status === 'rejected' ? 'badge-outline badge-error' : 'badge-outline badge-warning'}`}>
+                                        <span className={`badge ${event.status === 'verified' ? 'badge-outline badge-success' : event.status === 'rejected' ? 'badge-outline badge-error' : 'badge-outline badge-warning'}`}>
                                             {event.status || 'pending'}
                                         </span>
                                     </td>

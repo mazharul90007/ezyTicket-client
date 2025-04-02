@@ -14,12 +14,12 @@ const queryClient = new QueryClient()
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <TravelProvider>
-        <AuthProvider>
+      <AuthProvider>
+        <TravelProvider>
           <RouterProvider router={Route} />
           <ToastContainer />
-        </AuthProvider>
-      </TravelProvider>
+        </TravelProvider>
+      </AuthProvider>
     </QueryClientProvider>
   </StrictMode>,
 )

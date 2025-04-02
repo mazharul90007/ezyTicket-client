@@ -103,7 +103,7 @@ const Dashboard = () => {
                     <ul className="menu space-y-2">
                         {isAdmin ? (
                             <>
-                                <li onClick={closeMenu}><NavLink to="/dashboard/adminProfile" className={getNavLinkClass}><IoPerson /> Admin Profile</NavLink></li>
+                                <li onClick={closeMenu}><NavLink to="/dashboard/profile" className={getNavLinkClass}><IoPerson /> Admin Profile</NavLink></li>
 
                                 <li onClick={closeMenu}><NavLink to="/dashboard/manageEvents" className={getNavLinkClass}><MdEmojiEvents /> Manage Events</NavLink></li>
 
@@ -117,7 +117,7 @@ const Dashboard = () => {
                             </>
                         ) : isEventManager ? (
                             <>
-                                <li onClick={closeMenu}><NavLink to="/dashboard/managerProfile" className={getNavLinkClass}><IoPerson /> My Profile</NavLink></li>
+                                <li onClick={closeMenu}><NavLink to="/dashboard/profile" className={getNavLinkClass}><IoPerson /> My Profile</NavLink></li>
 
                                 <li onClick={closeMenu}><NavLink to="/dashboard/addEvent" className={getNavLinkClass}><TbHomePlus /> Add Post</NavLink></li>
 
@@ -129,7 +129,7 @@ const Dashboard = () => {
                             </>
                         ) : isTravelManager ? (
                             <>
-                                <li onClick={closeMenu}><NavLink to="/dashboard/managerProfile" className={getNavLinkClass}><IoPerson /> My Profile</NavLink></li>
+                                <li onClick={closeMenu}><NavLink to="/dashboard/profile" className={getNavLinkClass}><IoPerson /> My Profile</NavLink></li>
 
                                 <li onClick={closeMenu}><NavLink to="/dashboard/services" className={getNavLinkClass}><TbHomePlus /> Add Post</NavLink></li>
 
@@ -141,7 +141,7 @@ const Dashboard = () => {
                             </>
                         ) : isEntertainmentManager ? (
                             <>
-                                <li onClick={closeMenu}><NavLink to="/dashboard/managerProfile" className={getNavLinkClass}><IoPerson /> My Profile</NavLink></li>
+                                <li onClick={closeMenu}><NavLink to="/dashboard/profile" className={getNavLinkClass}><IoPerson /> My Profile</NavLink></li>
 
                                 <li onClick={closeMenu}><NavLink to="/dashboard/services" className={getNavLinkClass}><TbHomePlus /> Add Post</NavLink></li>
 
@@ -153,7 +153,7 @@ const Dashboard = () => {
                             </>
                         ) : (
                             <>
-                                <li onClick={closeMenu}><NavLink to="/dashboard/userProfile" className={getNavLinkClass}><IoPerson /> My Profile</NavLink></li>
+                                <li onClick={closeMenu}><NavLink to="/dashboard/profile" className={getNavLinkClass}><IoPerson /> My Profile</NavLink></li>
 
                                 <li onClick={closeMenu}><NavLink to="/dashboard/wishlist" className={getNavLinkClass}><FaCalendarAlt /> Wishlist</NavLink></li>
 
