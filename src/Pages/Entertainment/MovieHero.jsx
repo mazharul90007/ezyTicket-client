@@ -4,6 +4,7 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { Link } from "react-router-dom";
 
 const slides = [
   {
@@ -13,7 +14,7 @@ const slides = [
       "https://substack-post-media.s3.amazonaws.com/public/images/9184cb58-4f51-452c-8b63-3fd60b1ff306_1313x739.jpeg",
   },
   {
-    title: "Romance, Action & More 💘💥",
+    title: "Sci fi, Romance, Action & Top Thriller ",
     desc: "From heartwarming love stories to edge-of-your-seat thrillers.",
     image:
       "https://imageio.forbes.com/specials-images/imageserve/67508810cdaf3caeed2896b9/0x0.jpg?format=jpg&crop=1150,647,x0,y43,safe&height=900&width=1600&fit=bounds",
@@ -52,15 +53,21 @@ const MovieHeroSlider = () => {
 
               {/* Content */}
               <div className="relative z-10 text-center px-4 sm:px-8 md:px-12 max-w-4xl">
-                <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold leading-tight drop-shadow-[0_0_25px_#9333ea]">
-                  {slide.title}
+                <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold leading-tight ">
+                  {slide.title.split(" ").slice(0,3).join(" ")}
+                  <div className="text-[#69C045]">
+                  {slide.title.split(" ").slice(4,11).join(" ")}
+                  </div>
                 </h1>
                 <p className="mt-6 text-base sm:text-lg md:text-xl text-gray-300">
                   {slide.desc}
                 </p>
-                <button className="mt-8 bg-supporting px-8 py-3 rounded-full text-lg font-semibold shadow-lg transition duration-300">
-                  🎟️ Browse Movies
+                <Link to="/entertainment/allmovies">
+                <button className="mt-8 bg-green-600 px-8 py-3 rounded-full text-lg font-semibold shadow-lg transition duration-300">
+                  🎟️ Get Movies
                 </button>
+                </Link>
+                
               </div>
             </div>
           </SwiperSlide>

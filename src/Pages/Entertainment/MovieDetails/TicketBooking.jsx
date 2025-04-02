@@ -3,13 +3,22 @@ import { Movies } from "../AllMovie/AllMovies";
 import { useParams } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import { motion } from "framer-motion";
+import axios from "axios";
+
+import Swal from "sweetalert2";
 
 const TicketBooking = () => {
   const { id } = useParams();
   const [selectedTime, setSelectedTime] = useState(null);
 
   const timeSlots = ["7:30 AM", "12:30 PM", "4:30 PM", "8:30 PM"];
-  const movie = Movies.filter((movie) => movie.id == id)[0];
+  const seatRows = ["A", "B", "C", "D", "F"];
+  const seatPerRow = 8;
+  
+  const seatNumbers = seatRows.flatMap((row) =>
+    Array.from({ length: seatPerRow }, (_, i) => `${row}${i + 1}`)
+  );
+    const movie = Movies.filter((movie) => movie.id == id)[0];
   const { darkMode } = useAuth();
   console.log(selectedTime);
  
@@ -18,9 +27,10 @@ const TicketBooking = () => {
     name: "",
     email: "",
     phone: "",
-    seats: 1,
+    seat: 1,
     date:"",
-    time:""
+    time:"",
+    seats: [],
   });
   console.log(formData);
   console.log(name);
@@ -35,12 +45,46 @@ const TicketBooking = () => {
       time, // Update formData with selected time
     }));
   };
+
+  const handleSeatSelection = (seat) => {
+    setFormData((prevData) => {
+      const isSelected = prevData.seats.includes(seat);
+  
+      return {
+        ...prevData,
+        seats: isSelected
+          ? prevData.seats.filter((s) => s !== seat) // Remove if already selected
+          : [...prevData.seats, seat], // Add new selection
+      };
+    });
+  };
+  
   
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Booking Confirmed:", formData,selectedTime);
-    alert(`🎟 Booking Confirmed for ${movie.title}!`);
+    axios.post('http://localhost:3000/movie_tickets',formData)
+    .then(res=>{
+      Swal.fire({
+        title: "Ticket Booked!",
+        text: ` Booking Confirmed for ${movie.title}!`,
+        icon: "success"
+      });
+
+      setFormData(
+        {
+          name: "",
+          email: "",
+          phone: "",
+          seat: 1,
+          date:"",
+          time:"",
+          seats: [],
+        }
+      )
+     
+    })
+    
   };
 
   return (
@@ -94,12 +138,25 @@ const TicketBooking = () => {
                 ))}
               </div>
             </div>
+{/* Seat Selection */}
+<div className="mb-4">
+  <h2 className="text-lg font-semibold mb-2">💺 Select Your Seats:</h2>
+  <div className="grid grid-cols-5 md:grid-cols-8 gap-3 ">
+    {seatNumbers.map((seat) => (
+      <motion.button
+        key={seat}
+        whileTap={{ scale: 0.9 }}
+        className={`p-1 rounded-lg md:w-12 text-center border ${
+          formData.seats.includes(seat) ? "bg-green-500 " : ""
+        } transition`}
+        onClick={() => handleSeatSelection(seat)}
+      >
+        {seat}
+      </motion.button>
+    ))}
+  </div>
+</div>
 
-            {/* Seat Selection (Placeholder) */}
-            <div className="mb-4">
-              <h2 className="text-lg font-semibold  mb-2">💺 Seat Select:</h2>
-              <p className=" italic">Seat selection feature coming soon...</p>
-            </div>
 
             {/* Confirm Button */}
           </div>
@@ -173,8 +230,8 @@ const TicketBooking = () => {
                   Select Cineplex
                 </label>
                 <select
-                  name="seats"
-                  value={formData.seats}
+                  name="seat"
+                  value={formData.seat}
                   onChange={handleChange}
                   className="w-full p-2 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-green-500"
                   required
