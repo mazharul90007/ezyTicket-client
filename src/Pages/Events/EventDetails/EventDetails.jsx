@@ -33,6 +33,22 @@ const EventDetails = () => {
     },
   });
 
+  // Fetching more event suggestions (e.g., events based on location or category)
+  const {
+    data: suggestionsData,
+    isLoading: isSuggestionsLoading,
+    error: suggestionsError,
+  } = useQuery({
+    queryKey: ["suggestions", eventData?.location], // Assuming we're fetching based on location
+    queryFn: async () => {
+      const res = await axiosPublic.get(
+        `/events?location=${eventData?.location}`
+      );
+      return res.data;
+    },
+    enabled: !!eventData?.location, // Only run this query once eventData is available
+  });
+
   useEffect(() => {
     if (!eventData?.eventDate) return;
 
@@ -112,8 +128,13 @@ const EventDetails = () => {
     }
   };
 
-  if (isLoading) return <Loading />;
-  if (error) return <p className="text-red-500 text-center">{error.message}</p>;
+  if (isLoading || isSuggestionsLoading) return <Loading />;
+  if (error || suggestionsError)
+    return (
+      <p className="text-red-500 text-center">
+        {error?.message || suggestionsError?.message}
+      </p>
+    );
 
   const EventDate = eventData?.eventDate?.split("T")[0];
   const month = EventDate
@@ -183,11 +204,39 @@ const EventDetails = () => {
             </h2>
             <p className="mt-2 text-md md:text-xl">{eventData?.details}</p>
           </div>
+
+          {/* More suggestions section */}
+          <h2 className=" mt-10 text-4xl font-bold text-center">
+            More Suggestions
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+            {suggestionsData?.slice(0, 3).map((suggestedEvent) => (
+              <Link
+                to={`/eventdetailspublic/${suggestedEvent._id}`}
+                key={suggestedEvent._id}
+                className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
+              >
+                <img
+                  src={suggestedEvent.image}
+                  alt={suggestedEvent.title}
+                  className="w-full h-40 object-cover rounded-lg mb-4"
+                />
+                <h3 className="font-bold text-xl">{suggestedEvent.title}</h3>
+                <p className="text-gray-500 text-sm mt-2">
+                  {suggestedEvent.location}
+                </p>
+                <Link
+                  to={`/events/${suggestedEvent._id}`}
+                  className="text-blue-500 mt-4 block"
+                >
+                  View Details
+                </Link>
+              </Link>
+            ))}
+          </div>
         </div>
 
         {/* Right Sidebar */}
-
-        {/* Comment Sidebar */}
         <div
           className={`${
             darkMode ? "bg-gray-500 text-white" : "bg-white text-black"
