@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import noImage from "../../../../assets/Common_image/noImage.png"
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const ManageEvents = () => {
     const axiosSecure = useAxiosSecure();

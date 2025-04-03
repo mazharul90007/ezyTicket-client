@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import useAuth from "../../../../Hooks/useAuth";
+
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { MdEventAvailable } from "react-icons/md";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import noImage from "../../../../assets/Common_image/noImage.png"
+import useAuth from "../../../../Hooks/useAuth";
 
 const MyAddedEvents = () => {
     const axiosSecure = useAxiosSecure();
