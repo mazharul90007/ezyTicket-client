@@ -10,7 +10,6 @@ import LoginPage from "../Pages/Authentication/LoginPage";
 import RegisterPage from "../Pages/Authentication/RegisterPage";
 import EventDetails from "./../Pages/Events/EventDetails/EventDetails";
 import Pricing from "../Pages/Pricing/Pricing";
-import Profile from "../Pages/Profile/Profile";
 import BusReservationPage from "../Pages/Travel/TravelServiceSeciton/BusReservationPage";
 import TravelBusTicketPage from "../Pages/Travel/TravelTicekBook/TravelBusTicketPage";
 import BusTicketCancellation from "../components/BusTicketCancellation";
@@ -26,6 +25,7 @@ import PrivateRoute from "./PrivateRoute";
 import ManageEvents from "../Pages/Dashboard/Admin/ManageEvents/ManageEvents";
 import MyAddedEvents from "../Pages/Dashboard/Admin/MyAddedEvents/MyAddedEvents";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers/ManageUsers";
+import Profile from "../Pages/Dashboard/Profile/Profile";
 
 const Route = createBrowserRouter([
   {
@@ -49,10 +49,10 @@ const Route = createBrowserRouter([
         path: "/register",
         element: <RegisterPage></RegisterPage>,
       },
-      {
-        path: "/profile",
-        element: <Profile></Profile>,
-      },
+      // {
+      //   path: "/profile",
+      //   element: <Profile></Profile>,
+      // },
       // --------------Travel route start----------
       {
         path: "/travel",
