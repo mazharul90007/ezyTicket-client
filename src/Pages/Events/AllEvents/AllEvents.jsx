@@ -1,16 +1,18 @@
-import { MdDateRange, MdLocationOn, MdAttachMoney } from "react-icons/md";
+import { MdDateRange, MdAttachMoney } from "react-icons/md";
 import Loading from "../../../Shared/Loading/Loading";
 import useAuth from "../../../Hooks/useAuth";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { useState } from "react";
+import { FaBangladeshiTakaSign, FaRegClock } from "react-icons/fa6";
+import { GiTicket } from "react-icons/gi";
 
 const AllEvents = () => {
   const { darkMode } = useAuth();
   const axiosPublic = useAxiosPublic();
   const [currentPage, setCurrentPage] = useState(1);
-  const eventsPerPage = 6;
+  const eventsPerPage = 8;
 
   // ✅ Correct way to reference an image in `public/`
   const bannerImageUrl = "/AllEventBanner.jpg";
@@ -48,9 +50,8 @@ const AllEvents = () => {
 
   return (
     <div
-      className={`${
-        darkMode ? "bg-black text-white" : "bg-gray-50 text-black"
-      }`}
+      className={`${darkMode ? "bg-black text-white" : "bg-gray-50 text-black"
+        }`}
     >
       <div
         className="relative py-16 px-8 text-white text-center overflow-hidden h-[500px] md:h-[600px] lg:h-[680px] xl:h-[600px] flex justify-center items-center"
@@ -72,41 +73,53 @@ const AllEvents = () => {
 
       {/* Events Grid */}
       <div className="py-10 w-11/12 mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4">
           {currentEvents.map((event) => {
             return (
-              <Link
-                to={`/eventdetailspublic/${event._id}`}
-                key={event._id}
-                className={`${
-                  darkMode ? "bg-gray-800 text-white" : "bg-white text-black"
-                } 
-                rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300`}
-              >
-                <img
-                  src={event.image}
-                  alt={event.title}
-                  className="w-full h-56 object-cover rounded-t-xl"
-                />
+              <Link to={`/eventdetailspublic/${event._id}`}>
+                <div
+                  key={event._id}
+                  className={`${darkMode ? "bg-gray-800 text-white" : "bg-white text-black"
+                    } 
+                rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300 h-full flex flex-col`}
+                >
+                  <img
+                    src={event.image}
+                    alt={event.title}
+                    className="w-full h-56 object-cover rounded-t-xl"
+                  />
 
-                <div className="p-5 space-y-3">
-                  <h2 className="text-xl font-bold text-center">
-                    {event.title}
-                  </h2>
+                  <div className="p-5 flex flex-col flex-grow">
+                    <h2 className="text-xl font-bold flex-grow">
+                      {event.title}
+                    </h2>
 
-                  <div className="flex items-center justify-center text-lg font-semibold text-green-600">
-                    <MdAttachMoney className="text-2xl mr-2" />
-                    {event.price} Tk
-                  </div>
+                    <div className="mt-auto pt-2">
+                      {/* Price and Remaining Seat */}
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-1 text-green-600">
+                          <FaBangladeshiTakaSign />
+                          {event.price}
+                        </div>
+                        <div className="flex items-center gap-1 text-gray-500">
+                          <GiTicket />
+                          {event.totalTickets - event.soldTickets} Remaining
+                        </div>
+                      </div>
 
-                  <div className="flex items-center justify-center gap-2">
-                    <MdDateRange className="text-lg text-green-600" />
-                    <span>{event.eventDate}</span>
-                  </div>
+                      {/* Date and Duration */}
+                      <div className="flex items-center justify-between mt-2">
+                        <div className="flex items-center justify-center gap-2">
+                          <MdDateRange className=" text-green-600" />
+                          <span>{event.eventDate}</span>
+                        </div>
 
-                  <div className="flex items-center justify-center gap-2">
-                    <MdLocationOn className="text-lg text-green-600" />
-                    <span>{event.location}</span>
+                        <div className="flex items-center justify-center gap-2">
+                          <FaRegClock className=" text-green-600" />
+                          <span>{event.duration}</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </Link>
@@ -119,11 +132,10 @@ const AllEvents = () => {
           <button
             onClick={() => setCurrentPage(currentPage - 1)}
             disabled={currentPage === 1}
-            className={`px-4 py-2 rounded-lg ${
-              currentPage === 1
-                ? "bg-gray-400 cursor-not-allowed"
-                : "ezy-button-primary"
-            }`}
+            className={`px-4 py-2 rounded-lg ${currentPage === 1
+              ? "bg-gray-400 cursor-not-allowed"
+              : "ezy-button-primary"
+              }`}
           >
             Previous
           </button>
@@ -132,11 +144,10 @@ const AllEvents = () => {
             <button
               key={index}
               onClick={() => setCurrentPage(index + 1)}
-              className={`px-4 py-2 rounded-lg ${
-                currentPage === index + 1
-                  ? "bg-green-700 text-white"
-                  : "bg-gray-300 hover:bg-gray-400"
-              }`}
+              className={`px-4 py-2 rounded-lg ${currentPage === index + 1
+                ? "bg-green-700 text-white"
+                : "bg-gray-300 hover:bg-gray-400"
+                }`}
             >
               {index + 1}
             </button>
@@ -145,11 +156,10 @@ const AllEvents = () => {
           <button
             onClick={() => setCurrentPage(currentPage + 1)}
             disabled={currentPage === totalPages}
-            className={`px-4 py-2 rounded-lg ${
-              currentPage === totalPages
-                ? "bg-gray-400 cursor-not-allowed"
-                : "ezy-button-primary"
-            }`}
+            className={`px-4 py-2 rounded-lg ${currentPage === totalPages
+              ? "bg-gray-400 cursor-not-allowed"
+              : "ezy-button-primary"
+              }`}
           >
             Next
           </button>
