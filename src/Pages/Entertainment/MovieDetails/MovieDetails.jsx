@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Movies } from "../AllMovie/AllMovies";
 
 import { motion } from "framer-motion";
@@ -30,7 +30,7 @@ const MovieDetails = () => {
       <section>
         <div
           style={{
-            backgroundImage: `url(${movie.poster})`,
+            backgroundImage: `url(${movie?.poster})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -47,8 +47,8 @@ const MovieDetails = () => {
               className="w-full md:w-md "
             >
               <img
-                src={movie.poster}
-                alt={movie.title}
+                src={movie?.poster}
+                alt={movie?.title}
                 className="rounded-lg shadow-lg w-full"
               />
             </motion.div>
@@ -61,16 +61,24 @@ const MovieDetails = () => {
               className="w-full md:w-1/2 text-center md:text-left"
             >
               <h2 className=" gap-5 text-3xl md:text-5xl font-bold ">
-                {movie.title}
+                {movie?.title}
               </h2>
               <div className="flex flex-col text-lg gap-4 mt-3">
                 <p>Duration : 2 hrs 30 mins</p>
                 <p>Imdb: 7.8/10</p>
-                <div className="flex gap-4">
-                  <button className="btn shadow-none bg-transparent text-white hover:shadow-white hover:shadow-md">
-                    Watch Now
+                <div className="flex items-center justify-center md:justify-start gap-4">
+                  <Link to='https://www.youtube.com/watch?v=u9Mv98Gr5pY&ab_channel=SonyPicturesEntertainment'>
+                  <button  className="btn shadow-none bg-transparent text-white hover:shadow-white hover:shadow-md">
+                    Watch Trailer
                   </button>
-                  <button className="btn shadow-none bg-transparent text-white hover:shadow-white hover:shadow-md">
+                  </Link>
+                  
+                
+                  <button
+                  onClick={()=>document.getElementById("booksection")?.scrollIntoView({
+                    behavior:"smooth"
+                  })}
+                  className="btn shadow-none bg-transparent text-white hover:shadow-white hover:shadow-md">
                     Book now
                   </button>
                 </div>
