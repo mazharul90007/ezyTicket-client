@@ -1,4 +1,4 @@
-import { MdDateRange, MdAttachMoney } from "react-icons/md";
+import { MdDateRange } from "react-icons/md";
 import Loading from "../../../Shared/Loading/Loading";
 import useAuth from "../../../Hooks/useAuth";
 import { Link } from "react-router-dom";
@@ -80,14 +80,15 @@ const AllEvents = () => {
                 <div
                   key={event._id}
                   className={`${darkMode ? "bg-gray-800 text-white" : "bg-white text-black"
-                    } 
-                rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300 h-full flex flex-col`}
+                    } rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300 h-full flex flex-col group`}
                 >
-                  <img
-                    src={event.image}
-                    alt={event.title}
-                    className="w-full h-56 object-cover rounded-t-xl"
-                  />
+                  <div className="overflow-hidden">
+                    <img
+                      src={event.image}
+                      alt={event.title}
+                      className="w-full h-56 object-cover rounded-t-xl group-hover:scale-110 transition-transform duration-300"
+                    />
+                  </div>
 
                   <div className="p-5 flex flex-col flex-grow">
                     <h2 className="text-xl font-bold flex-grow">
