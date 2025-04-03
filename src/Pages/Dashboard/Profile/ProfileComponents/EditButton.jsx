@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
-import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { MdEdit } from 'react-icons/md';
+import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
 
 const EditButton = ({ user, refetch }) => {
   const [isOpen, setIsOpen] = useState(false);

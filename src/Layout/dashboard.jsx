@@ -7,7 +7,7 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 import { IoMdMail } from "react-icons/io";
 import useAdmin from "../Hooks/useAdmin";
 import useAuth from "../Hooks/useAuth";
-import noImage from "../assets/Common_image/noImage.png";
+// import noImage from "../assets/Common_image/noImage.png";
 import useEventManager from "../Hooks/useEventManager";
 import useTravelManager from "../Hooks/useTravelManager";
 import useEntertainmentManager from "../Hooks/useEntertainmentManager";
@@ -21,7 +21,7 @@ const Dashboard = () => {
     const [isEventManager] = useEventManager();
     const [isTravelManager] = useTravelManager();
     const [isEntertainmentManager] = useEntertainmentManager();
-    const { user } = useAuth();
+    const { user, userInfo } = useAuth();
 
     // Active link style function
     const getNavLinkClass = ({ isActive }) => 
@@ -92,15 +92,15 @@ const Dashboard = () => {
                     
                     {/* ---User Profile--- */}
                     <div className="flex flex-col items-center space-y-2 mb-4 text-center">
-                        <img src={user?.photoURL || noImage} alt="User" className="w-24 h-24 rounded-lg object-cover" />
-                        <h3 className="text-2xl font-bold">{user?.displayName}</h3>
+                        {/* <img src={userInfo?.photoURL || noImage} alt="User" className="w-24 h-24 rounded-lg object-cover" /> */}
+                        <h3 className="text-2xl font-bold">{userInfo?.name}</h3>
                         <p className="font-semibold text-gray-500">{user?.email}</p>
                     </div>
                     
                     <div className="divider"></div>
                     
                     {/* Navigation Menu */}
-                    <ul className="menu space-y-2">
+                    <ul className="menu space-y-2 w-full">
                         {isAdmin ? (
                             <>
                                 <li onClick={closeMenu}><NavLink to="/dashboard/profile" className={getNavLinkClass}><IoPerson /> Admin Profile</NavLink></li>

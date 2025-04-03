@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import useAuth from "../../Hooks/useAuth";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import AdminProfile from "./ProfileComponents/AdminProfile";
 import EntertainmentManagerProfile from "./ProfileComponents/EntertainmentManagerProfile";
 import EventManagerProfile from "./ProfileComponents/EventManagerProfile";
 import TravelManagerProfile from "./ProfileComponents/TravelManagerProfile";
 import UserProfile from "./ProfileComponents/UserProfile";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import useAuth from "../../../Hooks/useAuth";
+
 
 
 

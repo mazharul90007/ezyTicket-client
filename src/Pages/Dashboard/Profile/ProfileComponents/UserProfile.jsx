@@ -1,10 +1,10 @@
 import { MdOutlineEmail, MdEdit } from "react-icons/md";
-import useAuth from "../../../Hooks/useAuth";
-import noImage from "../../../assets/Common_image/noImage.png";
+import noImage from "../../../../assets/Common_image/noImage.png";
 import { FaHome, FaPhoneAlt, FaTicketAlt, FaUserCircle } from "react-icons/fa";
 import { FaFolderOpen } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import EditButton from "../ProfileComponents/EditButton"
+import useAuth from "../../../../Hooks/useAuth";
 
 
 const UserProfile = () => {
@@ -16,7 +16,7 @@ const UserProfile = () => {
                 {/* Profile Card */}
                 <div className="bg-white rounded-xl shadow-lg overflow-hidden">
                     {/* Profile Header */}
-                    <div className="bg-gradient-to-r from-main to-green-400 h-56 relative">
+                    <div className="bg-gradient-to-r from-main to-green-500 h-46 relative">
                         <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2">
                             <img
                                 src={userInfo?.photoURL || noImage}
