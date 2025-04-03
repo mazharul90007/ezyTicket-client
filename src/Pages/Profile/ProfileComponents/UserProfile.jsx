@@ -4,9 +4,11 @@ import noImage from "../../../assets/Common_image/noImage.png";
 import { FaHome, FaPhoneAlt, FaTicketAlt, FaUserCircle } from "react-icons/fa";
 import { FaFolderOpen } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import EditButton from "../ProfileComponents/EditButton"
+
 
 const UserProfile = () => {
-    const { user } = useAuth();
+    const { userInfo } = useAuth();
 
     return (
         <div className="min-h-screen">
@@ -17,7 +19,7 @@ const UserProfile = () => {
                     <div className="bg-gradient-to-r from-main to-green-400 h-56 relative">
                         <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2">
                             <img
-                                src={user?.photoURL || noImage}
+                                src={userInfo?.photoURL || noImage}
                                 alt="User"
                                 className="w-32 h-32 rounded-full border-4 border-white shadow-lg object-cover"
                             />
@@ -27,21 +29,21 @@ const UserProfile = () => {
                     {/* Profile Content */}
                     <div className="pt-20 pb-8 px-6 sm:px-8 text-center">
                         <h1 className="text-3xl font-bold text-gray-800 mb-1">
-                            {user?.displayName || 'Anonymous User'}
+                            {userInfo?.displayName || 'Anonymous User'}
                         </h1>
 
-                        <div className="flex justify-center space-x-4 mt-6 mb-8">
-                            <div className="bg-green-50 rounded-lg p-4 text-center w-24">
+                        <div className="flex justify-center gap-2  md:gap-4 lg:gap-8 mt-6 mb-8">
+                            <div className="bg-green-50 rounded-lg p-4 text-center w-32">
                                 <FaTicketAlt className="text-main text-2xl mx-auto mb-2" />
                                 <p className="font-semibold text-gray-700">12</p>
                                 <p className="text-xs text-gray-500">Tickets</p>
                             </div>
-                            <div className="bg-blue-50 rounded-lg p-4 text-center w-24">
+                            <div className="bg-blue-50 rounded-lg p-4 text-center w-32">
                                 <FaFolderOpen className="text-blue-500 text-2xl mx-auto mb-2" />
                                 <p className="font-semibold text-gray-700">5</p>
                                 <p className="text-xs text-gray-500">Events</p>
                             </div>
-                            <div className="bg-purple-50 rounded-lg p-4 text-center w-24">
+                            <div className="bg-purple-50 rounded-lg p-4 text-center w-32">
                                 <FaUserCircle className="text-purple-500 text-2xl mx-auto mb-2" />
                                 <p className="font-semibold text-gray-700">Member</p>
                                 <p className="text-xs text-gray-500">Since 2023</p>
@@ -60,7 +62,7 @@ const UserProfile = () => {
                                 <div>
                                     <p className="text-sm text-gray-500">Email</p>
                                     <p className="font-medium text-gray-800">
-                                        {user?.email || 'Not provided'}
+                                        {userInfo?.email || 'Not provided'}
                                     </p>
                                 </div>
                             </div>
@@ -72,7 +74,7 @@ const UserProfile = () => {
                                 <div>
                                     <p className="text-sm text-gray-500">Phone</p>
                                     <p className="font-medium text-gray-800">
-                                        {user?.phone || 'Not provided'}
+                                        {userInfo?.phone || 'Not provided'}
                                     </p>
                                 </div>
                             </div>
@@ -84,22 +86,23 @@ const UserProfile = () => {
                                 <div>
                                     <p className="text-sm text-gray-500">Address</p>
                                     <p className="font-medium text-gray-800">
-                                        {user?.address || 'Not provided'}
+                                        {userInfo?.address || 'Not provided'}
                                     </p>
                                 </div>
                             </div>
                         </div>
 
                         {/* Edit Button */}
-                        <div className="mt-8">
+                        {/* <div className="mt-8">
                             <Link
                                 to="/dashboard/edit-profile"
-                                className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-main hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-300"
+                                className="ezy-button-primary"
                             >
                                 <MdEdit className="mr-2" />
                                 Edit Profile
                             </Link>
-                        </div>
+                        </div> */}
+                        <EditButton user={userInfo}></EditButton>
                     </div>
                 </div>
 

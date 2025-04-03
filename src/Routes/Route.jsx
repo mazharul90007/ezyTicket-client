@@ -22,9 +22,10 @@ import MovieDetails from "../Pages/Entertainment/MovieDetails/MovieDetails";
 import Dashboard from "../Layout/dashboard";
 import TravelSelectSet from "../Pages/Travel/TravelTicekBook/TravelSelectSet";
 import AddEvents from "../Pages/Dashboard/Events/AddEvents/AddEvents";
-import ManageEvents from "../Pages/Dashboard/Events/ManageEvents/ManageEvents";
-import MyAddedEvents from "../Pages/Dashboard/Events/MyAddedEvents/MyAddedEvents";
 import PrivateRoute from "./PrivateRoute";
+import ManageEvents from "../Pages/Dashboard/Admin/ManageEvents/ManageEvents";
+import MyAddedEvents from "../Pages/Dashboard/Admin/MyAddedEvents/MyAddedEvents";
+import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers/ManageUsers";
 
 const Route = createBrowserRouter([
   {
@@ -125,10 +126,15 @@ const Route = createBrowserRouter([
     element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
     errorElement: <Error></Error>,
     children: [
+      // ---------Users route start ------------
       {
         path: 'profile',
         element: <Profile></Profile>
 
+      },
+      {
+        path: 'manageUsers',
+        element: <ManageUsers></ManageUsers>
       },
       // ------------Events route start----------
       {
