@@ -10,12 +10,13 @@ import useAuth from "../../../Hooks/useAuth";
 
 const EventInfo = () => {
   const { darkMode } = useAuth();
+
   const events = [
     {
       title: "Venue Events",
       description:
         "We organize in-person events that connect attendees, offering a memorable and engaging experience.",
-      icon: <FaCalendarAlt className="text-4xl text-supporting" />,
+      icon: <FaCalendarAlt className="text-4xl text-orange-500" />,
       backgroundImage:
         "https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     },
@@ -23,17 +24,9 @@ const EventInfo = () => {
       title: "Online Webinars",
       description:
         "Host seamless virtual events with interactive features for a fully immersive experience.",
-      icon: <FaChalkboardTeacher className="text-4xl text-pink-600" />,
+      icon: <FaChalkboardTeacher className="text-4xl text-pink-500" />,
       backgroundImage:
         "https://images.pexels.com/photos/3727459/pexels-photo-3727459.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    },
-    {
-      title: "Workshops",
-      description:
-        "Create educational workshops that engage your audience and help them develop new skills.",
-      icon: <FaChalkboardTeacher className="text-4xl text-blue-500" />,
-      backgroundImage:
-        "https://images.pexels.com/photos/716276/pexels-photo-716276.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     },
     {
       title: "Networking Events",
@@ -44,54 +37,50 @@ const EventInfo = () => {
         "https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     },
     {
+      title: "Workshops",
+      description: "Create educational workshops that engage your audience and help them develop new skills.",
+      icon: <FaChalkboardTeacher className="text-4xl text-blue-500" />,
+      color: "text-blue-500",
+      backgroundImage: "https://images.pexels.com/photos/716276/pexels-photo-716276.jpeg",
+    },
+    {
       title: "Conferences",
-      description:
-        "Organize large-scale conferences with a variety of speakers, workshops, and networking sessions.",
-      icon: <FaRegHandshake className="text-4xl text-orange-500" />,
-      backgroundImage:
-        "https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      description: "Organize large-scale conferences with a variety of speakers, workshops, and networking sessions.",
+      icon: <FaRegHandshake className="text-4xl text-red-500" />,
+      color: "text-orange-500",
+      backgroundImage: "https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg",
     },
     {
       title: "Concerts",
-      description:
-        "Organize large-scale Concerts with a variety of Band, Solos and Fest.",
-      icon: <IoMusicalNoteSharp className="text-4xl text-green-600" />,
-      backgroundImage:
-        "https://images.pexels.com/photos/1763067/pexels-photo-1763067.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    },
+      description: "Organize large-scale concerts with a variety of bands, solo artists, and festivals.",
+      icon: <IoMusicalNoteSharp className="text-4xl text-green-500" />,
+      color: "text-green-600",
+      backgroundImage: "https://images.pexels.com/photos/1763067/pexels-photo-1763067.jpeg",
+    }
   ];
 
   return (
     <div
-      className={`${
-        darkMode ? "bg-black text-white" : "bg-gray-50 text-black"
-      } px-4 py-12 text-center mt-10`}
+      className={`${darkMode ? "bg-gray-900 text-white" : "bg-gray-50 text-black"
+        } px-4 py-12 text-center mt-10`}
     >
-      {/* Title */}
       <h1 className="text-3xl font-semibold">
-        Experience Engaging Online and Venue Events with{" "}
-        <span className="text-green-400">EzyTicket</span>
+        Experience Engaging Online and Venue Events with
+        <span className="text-green-400"> EzyTicket</span>
       </h1>
-      {/* Description */}
-      <p className="mt-4 text-lg">
+      <p className="mt-4 text-lg max-w-3xl mx-auto">
         Organize venue events and host online events with unlimited
-        possibilities using our built-in virtual event platform. Build a unique
-        event experience for you and your attendees.
+        possibilities using our built-in virtual event platform.
       </p>
 
-      {/* Event Cards */}
       <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
         {events.map((event, index) => (
           <div
             key={index}
-            className="relative px-10 py-8 rounded-2xl shadow-lg transform transition-all duration-300 hover:shadow-2xl group overflow-hidden"
+            className="relative px-8 py-6 rounded-md shadow-md transform transition-all duration-300 hover:shadow-xl group overflow-hidden text-white cursor-pointer hover:scale-105"
           >
-            {/* Default Gradient Background */}
-            <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-teal-400 transition-opacity duration-500 group-hover:opacity-100"></div>
-
-            {/* Background Image (Hidden by Default, Shown on Hover) */}
             <div
-              className="absolute  inset-0 opacity-20 group-hover:opacity-100 transition-opacity duration-2000"
+              className="absolute inset-0 opacity-80 group-hover:opacity-80 group-hover:scale-110 transition-all duration-500 bg-cover bg-center"
               style={{
                 backgroundImage: `url(${event.backgroundImage})`,
                 backgroundSize: "cover",
@@ -99,19 +88,12 @@ const EventInfo = () => {
               }}
             ></div>
 
-            {/* Black Overlay for Readability */}
-            <div className="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-40 transition-opacity duration-500"></div>
+            <div className="absolute inset-0 bg-black bg-opacity-20 opacity-30 group-hover:opacity-60 transition-opacity duration-500"></div>
 
-            {/* Content */}
-            <div className="relative flex flex-col items-center">
-              {/* Event Icon */}
+            <div className="relative flex flex-col items-center text-center ">
               <div className="mb-4">{event.icon}</div>
-              {/* Event Title */}
-              <h3 className="text-2xl font-semibold text-white">
-                {event.title}
-              </h3>
-              {/* Event Description */}
-              <p className="mt-4 text-base text-white opacity-80">
+              <h3 className="text-2xl font-semibold ">{event.title}</h3>
+              <p className="mt-3 text-base max-w-sm">
                 {event.description}
               </p>
             </div>

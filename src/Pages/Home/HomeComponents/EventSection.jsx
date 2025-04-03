@@ -29,7 +29,7 @@ const EventSection = () => {
                                 <div className="relative rounded-lg overflow-hidden shadow-md h-full hover:scale-105 transform transition-transform cursor-pointer">
                                     <figure className="h-full">
                                         <img
-                                            src={events[0].photo}
+                                            src={events[0].image}
                                             alt="Shoes"
                                             className="w-full h-full object-cover"
                                         />
