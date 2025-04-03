@@ -2,6 +2,7 @@ import useAuth from "../../Hooks/useAuth";
 import MovieMarquee from "./Components/MovieMarquee";
 import FeaturedTrailers from "./FeaturedTrailers";
 import MovieHero from "./MovieHero";
+import MovieNews from "./MovieNews";
 import TrendingMovies from "./TrendingMovies";
 
 const Entertainment = () => {
@@ -18,6 +19,7 @@ const Entertainment = () => {
       <MovieHero></MovieHero>
       <TrendingMovies></TrendingMovies>
       <FeaturedTrailers></FeaturedTrailers>
+      <MovieNews></MovieNews>
       <MovieMarquee></MovieMarquee>
     </div>
   );

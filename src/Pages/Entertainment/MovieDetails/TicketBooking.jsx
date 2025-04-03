@@ -27,9 +27,10 @@ const TicketBooking = () => {
     name: "",
     email: "",
     phone: "",
-    seat: 1,
+    cineplex:"",
     date:"",
     time:"",
+    seat:1,
     seats: [],
   });
   console.log(formData);
@@ -76,7 +77,7 @@ const TicketBooking = () => {
           name: "",
           email: "",
           phone: "",
-          seat: 1,
+       
           date:"",
           time:"",
           seats: [],
@@ -230,8 +231,8 @@ const TicketBooking = () => {
                   Select Cineplex
                 </label>
                 <select
-                  name="seat"
-                  value={formData.seat}
+                  name="cineplex"
+                  value={formData.cineplex}
                   onChange={handleChange}
                   className="w-full p-2 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-green-500"
                   required

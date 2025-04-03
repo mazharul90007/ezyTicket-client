@@ -55,7 +55,7 @@ const MovieHeroSlider = () => {
               <div className="relative z-10 text-center px-4 sm:px-8 md:px-12 max-w-4xl">
                 <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold leading-tight ">
                   {slide.title.split(" ").slice(0,3).join(" ")}
-                  <div className="text-[#69C045]">
+                  <div className="text-green-600">
                   {slide.title.split(" ").slice(4,11).join(" ")}
                   </div>
                 </h1>
