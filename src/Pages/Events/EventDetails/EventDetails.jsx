@@ -313,50 +313,51 @@ const EventDetails = () => {
             </div>
           </div>
         </div>
-          {/* Comment Section */}
-          <div className="flex justify-center gap-10 mt-10">
-            <button
-              onClick={openModal}
-              className="btn bg-amber-300 text-black hover:bg-green-300 hover:text-white"
-            >
-              Add Comment
-            </button>
-            <button className="btn bg-gray-400 text-white hover:bg-gray-200 hover:text-black">
-              Comments
-            </button>
-          </div>
-          {/* Modal */}
-          {isModalOpen && (
-            <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50">
-              <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
-                <h2 className="text-xl font-bold mb-4">Add Comment</h2>
-                <textarea
-                  value={comment}
-                  onChange={(e) => setComment(e.target.value)}
-                  rows="4"
-                  className="w-full p-2 border rounded-md mb-4"
-                  placeholder="Write your comment here..."
-                />
-                <div className="flex justify-between">
-                  <button
-                    onClick={handleAddComment}
-                    className="bg-green-500 text-white px-4 py-2 rounded-lg"
-                  >
-                    Add Comment
-                  </button>
-                  <button
-                    onClick={closeModal}
-                    className="bg-gray-400 text-white px-4 py-2 rounded-lg"
-                  >
-                    Back
-                  </button>
-                </div>
+
+        {/* Comment Section Starts*/}
+        <div className="flex gap-4 mt-10">
+          <button className="ezy-button-primary-sm">
+            Comments
+          </button>
+          <button
+            onClick={openModal}
+            className="ezy-button-secondary-sm"
+          >
+            Add Comment
+          </button>
+        </div>
+        {/* Modal */}
+        {isModalOpen && (
+          <div className="fixed inset-0 bg-black/60 bg-opacity-75 flex items-center justify-center z-50">
+            <div className="bg-white p-6 rounded-lg shadow-lg w-3/5">
+              <h2 className="text-xl font-bold mb-4">Add Comment</h2>
+              <textarea
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                rows="4"
+                className="w-full p-2 border rounded-md mb-4"
+                placeholder="Write your comment here..."
+              />
+              <div className="flex justify-between">
+                <button
+                  onClick={handleAddComment}
+                  className="ezy-button-primary-sm"
+                >
+                  Add Comment
+                </button>
+                <button
+                  onClick={closeModal}
+                  className="bg-gray-400 text-white px-4 py-2 rounded-lg"
+                >
+                  Close
+                </button>
               </div>
             </div>
-          )}
-          {/* Comment Section */}
+          </div>
+        )}
+        {/* Comment Section ends */}
 
-        {/* More suggestions section */}
+        {/* More Events section */}
         <div className="mt-16">
           <h2 className="text-4xl font-bold text-start border-l-4 border-supporting pl-2 rounded">
             More Events
