@@ -1,52 +1,37 @@
-import { useQuery } from "@tanstack/react-query";
 import AdminProfile from "./ProfileComponents/AdminProfile";
 import EntertainmentManagerProfile from "./ProfileComponents/EntertainmentManagerProfile";
 import EventManagerProfile from "./ProfileComponents/EventManagerProfile";
 import TravelManagerProfile from "./ProfileComponents/TravelManagerProfile";
 import UserProfile from "./ProfileComponents/UserProfile";
-import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useAuth from "../../../Hooks/useAuth";
-
-
-
+import Loading from "../../../Shared/Loading/Loading";
 
 const Profile = () => {
-    const { user, userInfo, setUserInfo } = useAuth();
-    const axiosSecure = useAxiosSecure();
+    const { userInfo, userInfoLoading } = useAuth();
 
+    if (userInfoLoading) {
+        return (
+            <div className="my-36 w-full flex-col justify-center text-center items-center">
+                <p className="mt-4 text-gray-600">Data is Loading...</p>
+            </div>
+        );
+    }
 
-    //get user info from mongodb
-    useQuery({
-        queryKey: ['savedUser', user?.email],
-        queryFn: async () => {
-            if (!user?.email) return null; // Prevents API call if user is null
-            const res = await axiosSecure.get(`/users/${user.email}`);
-            setUserInfo(res.data[0]);
-            return res.data[0];
-        },
-        enabled: !!user?.email, // Ensures query only runs when user is logged in
-    });
-
-    const renderProfile = () => {
-        switch (userInfo?.role) {
-            case 'admin':
-                return <AdminProfile />;
-            case 'travelManager':
-                return <TravelManagerProfile />;
-            case 'eventManager':
-                return <EventManagerProfile />;
-            case 'entertainmentManager':
-                return <EntertainmentManagerProfile />;
-            default:
-                return <UserProfile></UserProfile>;
-        }
-    };
     return (
-        <div className="py-16">
-            {renderProfile()}
-
+        <div>
+            {
+                userInfo?.role === 'user' ? <AdminProfile></AdminProfile>
+                    :
+                    userInfo.role === 'travelManager' ? <TravelManagerProfile></TravelManagerProfile>
+                        :
+                        userInfo.role === 'eventManager' ? <EventManagerProfile></EventManagerProfile>
+                            :
+                            userInfo === 'entertainmentManager' ? <EntertainmentManagerProfile></EntertainmentManagerProfile>
+                                :
+                                <UserProfile></UserProfile>
+            }
         </div>
-    );
+    )
 };
 
 export default Profile;
