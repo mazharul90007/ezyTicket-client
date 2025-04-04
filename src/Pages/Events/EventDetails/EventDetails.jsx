@@ -28,6 +28,8 @@ const EventDetails = () => {
     seconds: 0,
   });
   const [isSaved, setIsSaved] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [comment, setComment] = useState("");
 
   const {
     data: eventData,
@@ -137,6 +139,32 @@ const EventDetails = () => {
       queryClient.invalidateQueries(["wishlist", user?.email]);
     } catch (error) {
       console.error("Error updating wishlist:", error);
+      Swal.fire("Error", "Something went wrong. Try again!", "error");
+    }
+  };
+  // Modal toggle
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
+  const handleAddComment = async () => {
+    if (!comment.trim()) {
+      Swal.fire("Error", "Please enter a comment.", "error");
+      return;
+    }
+
+    try {
+      const reviewData = {
+        eventId: eventData._id,
+        comment: comment,
+        userEmail: user?.email,
+      };
+
+      await axiosPublic.post("/event-reviews", reviewData); // Add comment to the database
+      Swal.fire("Success", "Your comment has been added!", "success");
+      setComment(""); // Reset the comment field
+      closeModal(); // Close the modal after submission
+    } catch (error) {
+      console.error("Error adding comment:", error);
       Swal.fire("Error", "Something went wrong. Try again!", "error");
     }
   };
@@ -285,6 +313,48 @@ const EventDetails = () => {
             </div>
           </div>
         </div>
+          {/* Comment Section */}
+          <div className="flex justify-center gap-10 mt-10">
+            <button
+              onClick={openModal}
+              className="btn bg-amber-300 text-black hover:bg-green-300 hover:text-white"
+            >
+              Add Comment
+            </button>
+            <button className="btn bg-gray-400 text-white hover:bg-gray-200 hover:text-black">
+              Comments
+            </button>
+          </div>
+          {/* Modal */}
+          {isModalOpen && (
+            <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50">
+              <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
+                <h2 className="text-xl font-bold mb-4">Add Comment</h2>
+                <textarea
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                  rows="4"
+                  className="w-full p-2 border rounded-md mb-4"
+                  placeholder="Write your comment here..."
+                />
+                <div className="flex justify-between">
+                  <button
+                    onClick={handleAddComment}
+                    className="bg-green-500 text-white px-4 py-2 rounded-lg"
+                  >
+                    Add Comment
+                  </button>
+                  <button
+                    onClick={closeModal}
+                    className="bg-gray-400 text-white px-4 py-2 rounded-lg"
+                  >
+                    Back
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+          {/* Comment Section */}
 
         {/* More suggestions section */}
         <div className="mt-16">
