@@ -37,12 +37,13 @@ const EventCards = () => {
   //new comment
 
   // Show only the first 3 events
-  const displayedEvents = events.slice(0, 8);
+  const displayedEvents = events.slice(0, 6);
 
   return (
     <div
-      className={`${darkMode ? "bg-black text-white" : "bg-gray-50 text-black"
-        } py-10`}
+      className={`${
+        darkMode ? "bg-black text-white" : "bg-gray-50 text-black"
+      } py-10`}
     >
       <h1 className="text-5xl font-bold text-center mt-5 mb-5">
         Explore Events
@@ -51,15 +52,16 @@ const EventCards = () => {
         Buy Your Event Tickets Anytime, Anywhere – Hassle-Free & Instant
         Confirmation!
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 mx-auto w-11/12">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-2 md:gap-4 mx-auto w-11/12">
         {displayedEvents.map((event) => {
           return (
             <div>
               <Link to={`/eventdetailspublic/${event._id}`}>
                 <div
                   key={event._id}
-                  className={`${darkMode ? "bg-gray-800 text-white" : "bg-white text-black"
-                    } rounded-md overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300 h-full flex flex-col group`}
+                  className={`${
+                    darkMode ? "bg-gray-800 text-white" : "bg-white text-black"
+                  } rounded-md overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300 h-full flex flex-col group`}
                 >
                   <div className="overflow-hidden">
                     <img
