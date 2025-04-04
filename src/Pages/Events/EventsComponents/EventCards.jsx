@@ -59,13 +59,13 @@ const EventCards = () => {
                 <div
                   key={event._id}
                   className={`${darkMode ? "bg-gray-800 text-white" : "bg-white text-black"
-                    } rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300 h-full flex flex-col group`}
+                    } rounded-md overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300 h-full flex flex-col group`}
                 >
                   <div className="overflow-hidden">
                     <img
                       src={event.image}
                       alt={event.title}
-                      className="w-full h-56 object-cover rounded-t-xl group-hover:scale-110 transition-transform duration-300"
+                      className="w-full h-56 object-cover rounded-t-md group-hover:scale-110 transition-transform duration-300"
                     />
                   </div>
 
@@ -77,25 +77,25 @@ const EventCards = () => {
                     <div className="mt-auto pt-2">
                       {/* Price and Remaining Seat */}
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-1 text-green-600">
+                        <div className="flex items-center gap-1 text-supporting font-semibold">
                           <FaBangladeshiTakaSign />
                           {event.price}
                         </div>
                         <div className="flex items-center gap-1 text-gray-500">
-                          <GiTicket />
+                          <GiTicket className="" />
                           {event.totalTickets - event.soldTickets} Remaining
                         </div>
                       </div>
 
                       {/* Date and Duration */}
                       <div className="flex items-center justify-between mt-2">
-                        <div className="flex items-center justify-center gap-2">
-                          <MdDateRange className=" text-green-600" />
+                        <div className="flex items-center justify-center gap-2 text-gray-500">
+                          <MdDateRange className="" />
                           <span>{event.eventDate}</span>
                         </div>
 
-                        <div className="flex items-center justify-center gap-2">
-                          <FaRegClock className=" text-green-600" />
+                        <div className="flex items-center justify-center gap-2 text-gray-500">
+                          <FaRegClock className="" />
                           <span>{event.duration}</span>
                         </div>
                       </div>
