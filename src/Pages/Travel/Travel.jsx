@@ -6,6 +6,7 @@ import AddTravelService from './AddTravelService/AddTravelService'
 import FlashDeals from './FlashDeals/FlashDeals'
 import useAuth from '../../Hooks/useAuth'
 import TravelFAQ from './TravelFAQ/TravelFAQ'
+import TravelUltimateCompanion from './TravelTicekBook/TravelUltimateCompanion'
 
 const Travel = () => {
   const {darkMode} = useAuth()
@@ -30,7 +31,7 @@ const Travel = () => {
 
       {/* set form */}
       <div id="scroll-section">
-        <TravelSelectSet />
+        <TravelUltimateCompanion/>
       </div>
     </section>
   )
