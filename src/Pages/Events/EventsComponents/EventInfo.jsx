@@ -61,8 +61,7 @@ const EventInfo = () => {
 
   return (
     <div
-      className={`${darkMode ? "bg-gray-900 text-white" : "bg-gray-50 text-black"
-        } px-4 py-12 text-center mt-10`}
+      className={`px-4 py-8 text-center`}
     >
       <h1 className="text-3xl font-semibold">
         Experience Engaging Online and Venue Events with
@@ -77,7 +76,7 @@ const EventInfo = () => {
         {events.map((event, index) => (
           <div
             key={index}
-            className="relative px-8 py-6 rounded-md shadow-md transform transition-all duration-300 hover:shadow-xl group overflow-hidden text-white cursor-pointer hover:scale-105"
+            className={`relative px-8 py-6 rounded-md shadow-md transform transition-all duration-300 hover:shadow-xl group overflow-hidden text-white cursor-pointer hover:scale-105 border ${darkMode && 'border-gray-600'}`}
           >
             <div
               className="absolute inset-0 opacity-80 group-hover:opacity-80 group-hover:scale-110 transition-all duration-500 bg-cover bg-center"

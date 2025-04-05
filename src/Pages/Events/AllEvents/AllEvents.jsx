@@ -73,7 +73,7 @@ const AllEvents = () => {
 
       {/* Events Grid */}
       <div className="py-10 w-11/12 mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-2 md:gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4">
           {currentEvents.map((event) => {
             return (
               <Link to={`/eventdetailspublic/${event._id}`}>
