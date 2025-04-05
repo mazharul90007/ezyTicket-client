@@ -8,23 +8,32 @@
     --color-supporting: #F88922;
     --color-button: #69C045;
     --color-background: #F0FFF4;
+
+    /* For Dark Theme */
+    --color-dark-supporting: #BD5D1A; /* For Supporting Text */
+    --color-dark-background: #121212; /* For Main Background*/
+    --color-dark-surface: #2A2A2A ; /* Cards, Modals, Containers */
+    --color-dark-accent: #53B17A; /* Buttons, highlights */
+    --color-dark-primary: #A0A0A0; /* Heading, Important Text */
+    --color-dark-secondary: #757575; /* Secondary text, labels */
+    --color-dark-border: #2D2D2D; /* Dividers, card borders */
     
-    --font-roboto: "roboto", "sans-serif";
+    --font-roboto: "roboto", "sans-serif"; /* Fonts */
 }
 
 /* Reusable button class */
 .ezy-button-primary {
-    @apply inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-main hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-300 cursor-pointer;
+    @apply inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-main hover:bg-green-700 focus:outline-none hover:scale-95 transform transition-all duration-300 cursor-pointer;
 }
 .ezy-button-secondary {
-    @apply inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-supporting hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transition-colors duration-300 cursor-pointer;
+    @apply inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-supporting hover:bg-amber-700 focus:outline-none hover:scale-95 transform transition-all duration-300 cursor-pointer;
 }
 
 .ezy-button-primary-sm {
-    @apply inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-main hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-300 cursor-pointer
+    @apply inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-main hover:bg-green-700 focus:outline-none hover:scale-95 transform transition-all duration-300 cursor-pointer
 }
 .ezy-button-secondary-sm {
-    @apply inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-supporting hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transition-colors duration-300 cursor-pointer
+    @apply inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-supporting hover:bg-amber-700 focus:outline-none hover:scale-95 transform transition-all duration-300 cursor-pointer
 }
 
 .dashboard-badge {

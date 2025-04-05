@@ -61,12 +61,12 @@ const AllEvents = () => {
           backgroundPosition: "center",
         }} // ✅ Correct usage
       >
-        <div className=" absolute inset-0 bg-black opacity-70 w-full h-full flex flex-col items-center justify-center">
+        <div className=" absolute inset-0 bg-black/90 opacity-70 w-full h-full flex flex-col items-center justify-center">
           <h1 className="text-4xl md:text-5xl font-bold text-white">
-            All Events
+          Your Next Adventure Awaits
           </h1>
-          <p className="text-lg text-gray-200 mt-2">
-            Explore our latest events and book your spot now!
+          <p className="text-2xl text-gray-200 mt-4">
+          Discover unforgettable experiences with EzyTicket - Where every event becomes a memory
           </p>
         </div>
       </div>

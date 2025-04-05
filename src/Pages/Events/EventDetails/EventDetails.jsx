@@ -11,6 +11,9 @@ import useAuth from "../../../Hooks/useAuth";
 import { FaBookmark } from "react-icons/fa";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import noImage from "../../../assets/Common_image/noImage.png";
+import { FaArrowRightLong, FaBangladeshiTakaSign, FaRegClock } from "react-icons/fa6";
+import { GiTicket } from "react-icons/gi";
 
 const EventDetails = () => {
   const { darkMode } = useAuth();
@@ -18,7 +21,12 @@ const EventDetails = () => {
   const { eventId } = useParams();
   const axiosPublic = useAxiosPublic();
   const queryClient = useQueryClient();
-  const [timeLeft, setTimeLeft] = useState("");
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
   const [isSaved, setIsSaved] = useState(false);
   const[(isAddCommentModalOpen, setIsAddCommentModalOpen)] = useState(false);
   const [isViewCommentsModalOpen, setIsViewCommentsModalOpen] = useState(false);
@@ -54,11 +62,17 @@ const EventDetails = () => {
 
     const eventDate = new Date(eventData.eventDate);
 
-    const upeventDater = () => {
+    const updateTimer = () => {
       const now = new Date();
       const difference = eventDate - now;
+
       if (difference <= 0) {
-        setTimeLeft("Event Started");
+        setTimeLeft({
+          days: 0,
+          hours: 0,
+          minutes: 0,
+          seconds: 0,
+        });
         return;
       }
 
@@ -69,11 +83,11 @@ const EventDetails = () => {
       const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-      setTimeLeft(`${days}d ${hours}h ${minutes}m ${seconds}s`);
+      setTimeLeft({ days, hours, minutes, seconds });
     };
 
-    upeventDater();
-    const interval = setInterval(upeventDater, 100);
+    updateTimer();
+    const interval = setInterval(updateTimer, 1000);
 
     return () => clearInterval(interval);
   }, [eventData?.eventDate]);
@@ -183,232 +197,249 @@ const EventDetails = () => {
   const EventDate = eventData?.eventDate?.split("T")[0];
   const month = EventDate
     ? new Date(eventData?.eventDate).toLocaleString("default", {
-        month: "long",
-      })
+      month: "long",
+    })
     : "";
   const day = EventDate ? new Date(eventData?.eventDate).getDate() : "";
 
   return (
-    <div
-      className={`${
-        darkMode ? "bg-black text-white" : "bg-white text-black"
-      } mt-15`}
-    >
-      <div className="container mx-auto w-11/12 p-6 grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8 px-4 md:px-10">
-        {/* Left Section */}
-        <div className="lg:col-span-2">
-          <div className="flex flex-wrap items-center gap-4">
-            <div className="flex flex-col items-center bg-green-500 text-white px-6 py-4 rounded-md shadow-md">
-              <span className="text-xl font-bold">{month}</span>
-              <span className="text-3xl font-bold">{day}</span>
-            </div>
-
-            <p className={`text-black font-bold text-2xl md:text-4xl`}>
-              {eventData?.title}
-            </p>
-          </div>
-
-          <div className="flex flex-wrap gap-4 mt-4 text-sm md:text-lg">
-            <p className="text-gray-500 flex items-center gap-1">
-              <MdDateRange className="text-xl" /> {eventData?.eventDate}
-            </p>
-            <p className="text-gray-500 flex items-center gap-1">
-              <IoIosTime className="text-xl" /> {eventData?.duration}
-            </p>
-            <p className="text-gray-500 flex items-center gap-1">
-              <IoLocation className="text-xl" /> {eventData?.location}
-            </p>
-          </div>
-
-          <img
-            src={eventData?.image}
-            alt={eventData?.name}
-            className="w-full h-64 md:h-80 object-cover rounded-lg shadow-md mt-4"
-          />
-
-          <button
-            onClick={handleSaveEvent}
-            className={`flex flex-row btn ml-20 md:ml-60 lg:ml-90 mt-10 ${
-              isSaved
-                ? "bg-green-500 text-white"
-                : "hover:bg-green-400 hover:text-white"
-            }`}
-          >
-            <FaBookmark />
-            {isSaved ? "Saved" : "Save"}
-          </button>
-
-          <div
-            className={`${
-              darkMode ? "bg-gray-600 text-white" : "bg-white text-black"
-            } mt-4 p-6 md:p-10 rounded-lg shadow`}
-          >
-            <h2 className="text-xl md:text-2xl font-bold text-black">
-              {eventData?.name}
-            </h2>
-            <p className="mt-2 text-md md:text-xl">{eventData?.details}</p>
-          </div>
-
-          {/* Comment Section */}
-          <div className="flex justify-center gap-10 mt-10">
-            <button
-              onClick={handleAddComment}
-              className="btn bg-amber-300 text-black hover:bg-green-300 hover:text-white"
-            >
-              Add Comment
-            </button>
-            <button
-              onClick={openModal}
-              className="btn bg-gray-400 text-white hover:bg-gray-200 hover:text-black"
-            >
-              Comments
-            </button>
-          </div>
-          {/* modal for add comment */}
-          {isModalOpen && (
-            <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50">
-              <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
-                <h2 className="text-xl font-bold mb-4">Add Comment</h2>
-                <textarea
-                  value={comment}
-                  onChange={(e) => setComment(e.target.value)}
-                  rows="4"
-                  className="w-full p-2 border rounded-md mb-4"
-                  placeholder="Write your comment here..."
-                />
-                <div className="flex justify-between">
-                  <button
-                    onClick={handleAddComment}
-                    className="bg-green-500 text-white px-4 py-2 rounded-lg"
-                  >
-                    Add Comment
-                  </button>
-                  <button
-                    onClick={closeModal}
-                    className="bg-gray-400 text-white px-4 py-2 rounded-lg"
-                  >
-                    Back
-                  </button>
-                </div>
+    <div className="bg-background py-24">
+      <div
+        className={`${darkMode ? "bg-black text-white" : "text-black"
+          } mx-auto w-11/12`}
+      >
+        <div>
+          <div className="flex items-start gap-4">
+            <div className="flex flex-col items-center text-center overflow-hidden rounded-md shadow-md">
+              <div className="text-xl font-semibold bg-supporting text-white w-full py-0.5 flex items-center justify-center">
+                {month}
+              </div>
+              <div className="text-4xl font-semibold bg-white py-2 px-6 flex items-center justify-center">
+                {day}
               </div>
             </div>
-          )}
-          {/* Modal for comment  */}
-          {isModalOpen && (
-            <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50">
-              <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
-                <h2 className="text-xl font-bold mb-4">Comments</h2>
 
-                {/* Loading or Error State for Comments */}
-                {isCommentsLoading ? (
-                  <Loading />
-                ) : commentsError ? (
-                  <p className="text-red-500">{commentsError?.message}</p>
-                ) : (
-                  <div>
-                    {commentsData?.map((comment) => (
-                      <div
-                        key={comment._id}
-                        className="flex items-center gap-4 mb-4"
-                      >
-                        {/* User Photo */}
-                        <img
-                          src={comment.userPhoto || "/default-avatar.png"} // Use a default avatar if no photo is available
-                          alt={comment.userEmail}
-                          className="w-10 h-10 rounded-full object-cover"
-                        />
-                        <div>
-                          {/* User Name */}
-                          <p className="font-semibold">{comment.userEmail}</p>
-                          {/* Comment */}
-                          <p className="text-gray-700">{comment.comment}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                <div className="flex justify-between mt-4">
-                  <button
-                    onClick={closeModal}
-                    className="bg-gray-400 text-white px-4 py-2 rounded-lg"
-                  >
-                    Close
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* More suggestions section */}
-          <h2 className=" mt-10 text-4xl font-bold text-center">
-            More Suggestions
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-            {suggestionsData?.slice(0, 3).map((suggestedEvent) => (
-              <Link
-                to={`/eventdetailspublic/${suggestedEvent._id}`}
-                key={suggestedEvent._id}
-                className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
-              >
-                <img
-                  src={suggestedEvent.image}
-                  alt={suggestedEvent.title}
-                  className="w-full h-40 object-cover rounded-lg mb-4"
-                />
-                <h3 className="font-bold text-xl">{suggestedEvent.title}</h3>
-                <p className="text-gray-500 text-sm mt-2">
-                  {suggestedEvent.location}
+            <div className="flex flex-col">
+              <p className={`text-black font-bold text-2xl md:text-4xl mb-4`}>
+                {eventData?.title}
+              </p>
+              <div className="flex flex-wrap gap-4 text-sm md:text-base mt-auto">
+                <p className="text-gray-500 flex items-center gap-1">
+                  <MdDateRange className="text-xl" /> {eventData?.eventDate}
                 </p>
-                <Link
-                  to={`/events/${suggestedEvent._id}`}
-                  className="text-blue-500 mt-4 block"
-                >
-                  View Details
-                </Link>
-              </Link>
-            ))}
+                <p className="text-gray-500 flex items-center gap-1">
+                  <IoIosTime className="text-xl" /> {eventData?.duration}
+                </p>
+                <p className="text-gray-500 flex items-center gap-1">
+                  <IoLocation className="text-xl" /> {eventData?.location}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Right Sidebar */}
-        <div
-          className={`${
-            darkMode ? "bg-gray-500 text-white" : "bg-white text-black"
-          } p-6 md:p-10 shadow-lg rounded-lg h-fit md:mt-35`}
-        >
-          <h3 className="text-xl md:text-2xl font-semibold mb-4">
-            Event Information
-          </h3>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6  mt-4">
+          {/* Left Section */}
+          <div className="lg:col-span-2">
+            <img
+              src={eventData?.image ? eventData.image : noImage}
+              alt={eventData?.name}
+              className="w-full h-[400px] md:h-[450px] lg:h-[500px] object-cover rounded-lg shadow-md"
+            />
 
-          <div className="bg-gray-200 p-4 rounded-lg text-center">
-            <h4 className="text-lg text-black font-semibold">
-              Event Starts In:
-            </h4>
-            <p className="text-xl text-black font-bold">{timeLeft}</p>
-          </div>
-
-          <p className="text-lg flex items-center gap-2 mt-4">
-            <IoPersonCircle className="text-green-500 text-3xl md:text-4xl" />
-            Total Ticket: {eventData?.totalTickets}
-          </p>
-
-          <p className="text-lg flex items-center gap-2 mt-2">
-            <IoMdPricetags className="text-green-500 text-3xl md:text-4xl" />
-            Price: ${eventData?.price}
-          </p>
-
-          <div className="flex flex-col md:flex-row justify-between gap-4 mt-6">
-            <button className="py-2 md:py-3 px-4 md:px-6 bg-supporting flex items-center justify-center md:justify-start rounded-lg shadow-md hover:scale-95 transform transition-transform cursor-pointer text-white font-semibold mx-auto md:mx-0">
-              Buy Tickets
+            <button
+              onClick={handleSaveEvent}
+              className={`flex flex-row btn ml-20 md:ml-60 lg:ml-90 mt-10 ${isSaved
+                ? "bg-green-500 text-white"
+                : "hover:bg-green-400 hover:text-white"
+                }`}
+            >
+              <FaBookmark />
+              {isSaved ? "Saved" : "Save"}
             </button>
 
-            <Link
-              to="/events"
-              className="py-2 px-4 bg-gray-700 rounded-lg shadow-md text-white font-semibold hover:bg-gray-600 transition"
+            <div
+              className={`${darkMode ? "bg-gray-600 text-white" : "bg-white text-black"
+                } mt-4 p-6 md:p-10 rounded-lg shadow`}
             >
-              Back
-            </Link>
+              <h2 className="text-xl md:text-2xl font-bold text-black">
+                {eventData?.name}
+              </h2>
+              <p className="mt-2 text-md md:text-xl">{eventData?.details}</p>
+            </div>
+          </div>
+
+          {/* Right Sidebar */}
+          <div
+            className={`${darkMode ? "bg-gray-500 text-white" : "bg-white text-black"
+              } p-6 md:p-10 shadow-lg rounded-lg h-fit lg:col-span-1`}
+          >
+            <h3 className="text-xl md:text-2xl font-semibold mb-4">
+              Event Details
+            </h3>
+            <div className="divider">Starts in</div>
+
+            <div className="rounded-lg text-center">
+              <div className="flex justify-center gap-4 md:gap-2 text-white">
+                {/* Days */}
+                <div className="flex flex-col items-center bg-green-600 py-2 px-5 font-semibold rounded">
+                  <span className="text-3xl md:text-3xl font-bold">
+                    {String(timeLeft.days).padStart(2, "0")}
+                  </span>
+                  <span className="text-sm uppercase tracking-wider">Days</span>
+                </div>
+
+                {/* Hours */}
+                <div className="flex flex-col items-center bg-green-600 py-2 px-6 font-semibold rounded">
+                  <span className="text-3xl md:text-3xl font-bold ">
+                    {String(timeLeft.hours).padStart(2, "0")}
+                  </span>
+                  <span className="text-sm uppercase tracking-wider">Hours</span>
+                </div>
+
+                {/* Minutes */}
+                <div className="flex flex-col items-center bg-green-600 py-2 px-6 font-semibold rounded">
+                  <span className="text-3xl md:text-3xl font-bold ">
+                    {String(timeLeft.minutes).padStart(2, "0")}
+                  </span>
+                  <span className="text-sm uppercase tracking-wider">Mins</span>
+                </div>
+
+                {/* Seconds */}
+                <div className="flex flex-col items-center bg-green-600 py-2 px-6 font-semibold rounded">
+                  <span className="text-3xl md:text-3xl font-bold ">
+                    {String(timeLeft.seconds).padStart(2, "0")}
+                  </span>
+                  <span className="text-sm uppercase tracking-wider">Secs</span>
+                </div>
+              </div>
+            </div>
+
+            <p className="text-lg flex items-center gap-2 mt-4">
+              <IoPersonCircle className="text-green-500 text-3xl md:text-4xl" />
+              Total Ticket: {eventData?.totalTickets}
+            </p>
+
+            <p className="text-lg flex items-center gap-2 mt-2">
+              <IoMdPricetags className="text-green-500 text-3xl md:text-4xl" />
+              Price: ${eventData?.price}
+            </p>
+
+            <div className="flex flex-col md:flex-row justify-between gap-4 mt-6">
+              <button className="ezy-button-secondary">Buy Tickets</button>
+            </div>
+          </div>
+        </div>
+
+        {/* Comment Section Starts*/}
+        <div className="flex gap-4 mt-10">
+          <button className="ezy-button-primary-sm">
+            Comments
+          </button>
+          <button
+            onClick={openModal}
+            className="ezy-button-secondary-sm"
+          >
+            Add Comment
+          </button>
+        </div>
+        {/* Modal */}
+        {isModalOpen && (
+          <div className="fixed inset-0 bg-black/60 bg-opacity-75 flex items-center justify-center z-50">
+            <div className="bg-white p-6 rounded-lg shadow-lg w-3/5">
+              <h2 className="text-xl font-bold mb-4">Add Comment</h2>
+              <textarea
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                rows="4"
+                className="w-full p-2 border rounded-md mb-4"
+                placeholder="Write your comment here..."
+              />
+              <div className="flex justify-between">
+                <button
+                  onClick={handleAddComment}
+                  className="ezy-button-primary-sm"
+                >
+                  Add Comment
+                </button>
+                <button
+                  onClick={closeModal}
+                  className="bg-gray-400 text-white px-4 py-2 rounded-lg"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+        {/* Comment Section ends */}
+
+        {/* More Events section */}
+        <div className="mt-16">
+          <h2 className="text-4xl font-bold text-start border-l-4 border-supporting pl-2 rounded">
+            More Events
+          </h2>
+          <div className="">
+            <div className="flex justify-end mb-4">
+              <Link to={'/allevents'}>
+                <button className="flex items-center gap-1 text-blue-500 hover:text-blue-700 transition-colors font-semibold cursor-pointer">
+                  Browse All <FaArrowRightLong />
+                </button>
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {suggestionsData?.slice(0, 3).map((suggestedEvent) => (
+                <Link to={`/eventdetailspublic/${suggestedEvent._id}`}>
+                  <div
+                    key={suggestedEvent._id}
+                    className={`${darkMode ? "bg-gray-800 text-white" : "bg-white text-black"
+                      } rounded-md overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300 h-full flex flex-col group`}
+                  >
+                    <div className="overflow-hidden">
+                      <img
+                        src={suggestedEvent.image}
+                        alt={suggestedEvent.title}
+                        className="w-full h-56 object-cover rounded-t-md group-hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
+
+                    <div className="p-5 flex flex-col flex-grow">
+                      <h2 className="text-xl font-bold flex-grow">
+                        {suggestedEvent.title}
+                      </h2>
+
+                      <div className="mt-auto pt-2">
+                        {/* Price and Remaining Seat */}
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-1 text-supporting font-semibold">
+                            <FaBangladeshiTakaSign />
+                            {suggestedEvent.price}
+                          </div>
+                          <div className="flex items-center gap-1 text-gray-500">
+                            <GiTicket className="" />
+                            {suggestedEvent.totalTickets - suggestedEvent.soldTickets} Remaining
+                          </div>
+                        </div>
+
+                        {/* Date and Duration */}
+                        <div className="flex items-center justify-between mt-2">
+                          <div className="flex items-center justify-center gap-2 text-gray-500">
+                            <MdDateRange className="" />
+                            <span>{suggestedEvent.eventDate}</span>
+                          </div>
+
+                          <div className="flex items-center justify-center gap-2 text-gray-500">
+                            <FaRegClock className="" />
+                            <span>{suggestedEvent.duration}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </div>
