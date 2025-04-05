@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom"
+import useAuth from "../../Hooks/useAuth"
 
 const Footer = () => {
+    const { darkMode } = useAuth();
 
     const navLinks = [
         {
@@ -46,7 +48,7 @@ const Footer = () => {
 
     return (
         <footer className="bg-[#1b1b1b]">
-            <section className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-20 lg:gap-5  text-white py-12 px-5">
+            <section className={`w-11/12 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-20 lg:gap-5   py-12 px-5 ${darkMode ? 'text-dark-primary' : 'text-gray-300'}`}>
                 {/* about us */}
                 <div className="flex flex-col ">
                     <h1 className="text-2xl font-semibold mb-3">About Us</h1>
