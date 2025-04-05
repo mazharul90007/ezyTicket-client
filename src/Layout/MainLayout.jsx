@@ -2,8 +2,10 @@ import { Outlet } from "react-router-dom";
 import Navbar from "../Shared/Navbar/Navbar";
 import Footer from "../Shared/Footer/Footer";
 import { ToastContainer } from "react-toastify";
+import useAuth from "../Hooks/useAuth";
 
 const MainLayout = () => {
+    const { darkMode } = useAuth();
     return (
         <div className="font-roboto flex flex-col min-h-screen">
             <div className="fixed top-0 left-0 right-0 z-50">
@@ -11,7 +13,7 @@ const MainLayout = () => {
             </div>
 
             {/* Main content area */}
-            <main className="flex-grow">
+            <main className={`flex-grow ${darkMode ? 'bg-dark-background' : 'bg-background'}`}>
                 <Outlet />
             </main>
             <Footer />

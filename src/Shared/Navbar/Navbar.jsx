@@ -140,10 +140,10 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`navbar shadow px-6 md:px-14 py-4 fixed top-0 z-40 w-full bg-cover bg-center ${
-        darkMode ? "" : "bg-background"
+      className={`navbar shadow-lg px-6 md:px-14 py-4 fixed top-0 z-40 w-full bg-cover bg-center ${
+        darkMode ? "bg-[#1A1A1A]" : "bg-background"
       }`}
-      style={darkMode ? { backgroundImage: `url(${nightSky})` } : {}}
+      // style={darkMode ? { backgroundImage: `url(${nightSky})` } : {}}
     >
       {/* Logo */}
       <div className="flex-1">
@@ -168,7 +168,7 @@ const Navbar = () => {
 
       {/* Mobile Menu Toggle */}
       <button onClick={toggleMenu} className="btn btn-ghost btn-circle lg:hidden ml-4" aria-label="Toggle menu">
-        {menuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+        {menuOpen ? <FaTimes size={24} className={darkMode && 'text-white'}/> : <FaBars size={24} className={darkMode && 'text-white'}/>}
       </button>
 
       {/* Backdrop */}
@@ -178,7 +178,7 @@ const Navbar = () => {
       <div
         className={`fixed top-20 right-0 shadow-xl p-4 rounded-l-lg flex flex-col space-y-4 lg:hidden transition-all duration-500 ease-in-out transform z-40 ${
           menuOpen ? "translate-x-0" : "translate-x-full"
-        } ${darkMode ? "text-white bg-gray-700" : "text-black bg-background"}`}
+        } ${darkMode ? "text-dark-primary bg-dark-surface" : "text-black bg-background"}`}
         onClick={(e) => e.stopPropagation()}
         style={{ pointerEvents: menuOpen ? "auto" : "none" }}
       >
