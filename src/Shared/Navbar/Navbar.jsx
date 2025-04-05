@@ -12,10 +12,10 @@ import {
   MdLogout,
 } from "react-icons/md";
 import { RiCompassDiscoverLine } from "react-icons/ri";
+import { GoInfo } from "react-icons/go";
 import { IoHomeOutline } from "react-icons/io5";
 import { ImEnter } from "react-icons/im";
 import useAuth from "../../Hooks/useAuth";
-import nightSky from "../../assets/Navbar_image/sky.jpg";
 import noImage from "../../assets/Common_image/noImage.png";
 import { CgProfile } from "react-icons/cg";
 
@@ -106,9 +106,8 @@ const Navbar = () => {
 
           <div
             id="dropdownMenu"
-            className={`absolute top-12 right-0 bg-base-100 rounded-md shadow-lg border border-gray-200 transition-all duration-300 z-50 ${
-              dropdownOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-5 pointer-events-none"
-            }`}
+            className={`absolute top-12 right-0 bg-base-100 rounded-md shadow-lg border  transition-all duration-300 z-50 ${darkMode ? 'bg-dark-surface border-dark-border' : 'border-gray-200'} ${dropdownOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-5 pointer-events-none"
+              }`}
           >
             <div className="p-4 text-center">
               <img
@@ -116,11 +115,11 @@ const Navbar = () => {
                 alt="User Avatar"
                 className="w-16 h-16 mx-auto rounded-full border mb-2"
               />
-              <h4 className="font-semibold text-gray-800">{user.displayName}</h4>
-              <p className="text-sm text-gray-500">{user.email}</p>
+              <h4 className={`font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-800'}`}>{user.displayName}</h4>
+              <p className={`text-sm ${darkMode? 'text-dark-primary' : 'text-gray-500'}`}>{user.email}</p>
             </div>
-            <div className="border-t">
-              <ul className="p-4 text-sm space-y-2 text-gray-600">
+            <div className={`border-t ${darkMode ? 'border-dark-secondary' : 'border-gray-200'}`}>
+              <ul className={`p-4 text-sm md:text-base space-y-2 ${darkMode? 'text-dark-primary': 'text-gray-600'}`}>
                 <li><Link to="/dashboard" className="hover:text-supporting flex items-center gap-2"><span><MdDashboard /></span>Dashboard</Link></li>
                 <li><Link to="/profile" className=" hover:text-supporting flex items-center gap-2"><span><CgProfile /></span>Profile</Link></li>
                 <li><button onClick={handleLogout} className="hover:text-supporting flex items-center gap-2"><span><MdLogout /></span>Logout</button></li>
@@ -140,14 +139,13 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`navbar shadow-lg px-6 md:px-14 py-4 fixed top-0 z-40 w-full bg-cover bg-center ${
-        darkMode ? "bg-[#1A1A1A]" : "bg-background"
-      }`}
-      // style={darkMode ? { backgroundImage: `url(${nightSky})` } : {}}
+      className={`navbar shadow-lg px-4 md:px-14 py-1 md:py-4 fixed top-0 z-40 w-full bg-cover bg-center ${darkMode ? "bg-[#1A1A1A]" : "bg-background"
+        }`}
+    // style={darkMode ? { backgroundImage: `url(${nightSky})` } : {}}
     >
       {/* Logo */}
       <div className="flex-1">
-        <Link to="/" className="text-3xl font-bold text-main flex items-center gap-2">
+        <Link to="/" className="text-xl md:text-3xl font-bold text-main flex items-center gap-2">
           EzyTicket
         </Link>
       </div>
@@ -161,14 +159,14 @@ const Navbar = () => {
       <button
         onClick={activeMode}
         aria-label="Toggle dark mode"
-        className={`border border-dashed ${darkMode ? "border-white" : "border-black"} text-xl p-2 ml-4 rounded-full shadow hover:scale-110 transition-transform`}
+        className={`border border-dashed ${darkMode ? "border-white" : "border-black"} text-base md:text-xl p-2 ml-4 rounded-full shadow hover:scale-110 transition-transform`}
       >
         {darkMode ? <FaSun className="text-white" /> : <FaMoon className="text-black" />}
       </button>
 
       {/* Mobile Menu Toggle */}
       <button onClick={toggleMenu} className="btn btn-ghost btn-circle lg:hidden ml-4" aria-label="Toggle menu">
-        {menuOpen ? <FaTimes size={24} className={darkMode && 'text-white'}/> : <FaBars size={24} className={darkMode && 'text-white'}/>}
+        {menuOpen ? <FaTimes size={24} className={darkMode && 'text-white'} /> : <FaBars size={24} className={darkMode && 'text-white'} />}
       </button>
 
       {/* Backdrop */}
@@ -176,9 +174,8 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed top-20 right-0 shadow-xl p-4 rounded-l-lg flex flex-col space-y-4 lg:hidden transition-all duration-500 ease-in-out transform z-40 ${
-          menuOpen ? "translate-x-0" : "translate-x-full"
-        } ${darkMode ? "text-dark-primary bg-dark-surface" : "text-black bg-background"}`}
+        className={`fixed top-20 right-0 shadow-xl p-4 rounded-l-lg flex flex-col space-y-4 lg:hidden transition-all duration-500 ease-in-out transform z-40 ${menuOpen ? "translate-x-0" : "translate-x-full"
+          } ${darkMode ? "text-dark-primary bg-dark-surface" : "text-black bg-background"}`}
         onClick={(e) => e.stopPropagation()}
         style={{ pointerEvents: menuOpen ? "auto" : "none" }}
       >
