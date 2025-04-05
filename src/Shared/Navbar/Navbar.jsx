@@ -20,7 +20,7 @@ import noImage from "../../assets/Common_image/noImage.png";
 import { CgProfile } from "react-icons/cg";
 
 const Navbar = () => {
-  const { darkMode, setDarkMode, user, logOut, setUser } = useAuth();
+  const { darkMode, setDarkMode, user, userInfo, logOut, setUser } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const location = useLocation();
@@ -98,7 +98,7 @@ const Navbar = () => {
             onClick={() => setDropdownOpen((prev) => !prev)}
           >
             <img
-              src={user.photoURL || noImage}
+              src={userInfo?.photoURL || noImage}
               alt="User"
               className="w-full h-full object-cover"
             />
@@ -112,7 +112,7 @@ const Navbar = () => {
           >
             <div className="p-4 text-center">
               <img
-                src={user.photoURL || noImage}
+                src={userInfo?.photoURL || noImage}
                 alt="User Avatar"
                 className="w-16 h-16 mx-auto rounded-full border mb-2"
               />
@@ -161,7 +161,7 @@ const Navbar = () => {
       <button
         onClick={activeMode}
         aria-label="Toggle dark mode"
-        className={`border ${darkMode ? "border-white" : "border-black"} p-2 ml-4 rounded-full shadow hover:scale-110 transition-transform`}
+        className={`border border-dashed ${darkMode ? "border-white" : "border-black"} text-xl p-2 ml-4 rounded-full shadow hover:scale-110 transition-transform`}
       >
         {darkMode ? <FaSun className="text-white" /> : <FaMoon className="text-black" />}
       </button>
