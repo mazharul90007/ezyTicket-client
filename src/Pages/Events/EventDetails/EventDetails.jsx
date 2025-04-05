@@ -12,7 +12,11 @@ import { FaBookmark } from "react-icons/fa";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import noImage from "../../../assets/Common_image/noImage.png";
-import { FaArrowRightLong, FaBangladeshiTakaSign, FaRegClock } from "react-icons/fa6";
+import {
+  FaArrowRightLong,
+  FaBangladeshiTakaSign,
+  FaRegClock,
+} from "react-icons/fa6";
 import { GiTicket } from "react-icons/gi";
 
 const EventDetails = () => {
@@ -180,16 +184,17 @@ const EventDetails = () => {
   const EventDate = eventData?.eventDate?.split("T")[0];
   const month = EventDate
     ? new Date(eventData?.eventDate).toLocaleString("default", {
-      month: "long",
-    })
+        month: "long",
+      })
     : "";
   const day = EventDate ? new Date(eventData?.eventDate).getDate() : "";
 
   return (
     <div className="bg-background py-24">
       <div
-        className={`${darkMode ? "bg-black text-white" : "text-black"
-          } mx-auto w-11/12`}
+        className={`${
+          darkMode ? "bg-black text-white" : "text-black"
+        } mx-auto w-11/12`}
       >
         <div>
           <div className="flex items-start gap-4">
@@ -232,18 +237,20 @@ const EventDetails = () => {
 
             <button
               onClick={handleSaveEvent}
-              className={`flex flex-row btn ml-20 md:ml-60 lg:ml-90 mt-10 ${isSaved
-                ? "bg-green-500 text-white"
-                : "hover:bg-green-400 hover:text-white"
-                }`}
+              className={`flex flex-row btn ml-20 md:ml-60 lg:ml-90 mt-10 ${
+                isSaved
+                  ? "bg-green-500 text-white"
+                  : "hover:bg-green-400 hover:text-white"
+              }`}
             >
               <FaBookmark />
               {isSaved ? "Saved" : "Save"}
             </button>
 
             <div
-              className={`${darkMode ? "bg-gray-600 text-white" : "bg-white text-black"
-                } mt-4 p-6 md:p-10 rounded-lg shadow`}
+              className={`${
+                darkMode ? "bg-gray-600 text-white" : "bg-white text-black"
+              } mt-4 p-6 md:p-10 rounded-lg shadow`}
             >
               <h2 className="text-xl md:text-2xl font-bold text-black">
                 {eventData?.name}
@@ -254,8 +261,9 @@ const EventDetails = () => {
 
           {/* Right Sidebar */}
           <div
-            className={`${darkMode ? "bg-gray-500 text-white" : "bg-white text-black"
-              } p-6 md:p-10 shadow-lg rounded-lg h-fit lg:col-span-1`}
+            className={`${
+              darkMode ? "bg-gray-500 text-white" : "bg-white text-black"
+            } p-6 md:p-10 shadow-lg rounded-lg h-fit lg:col-span-1`}
           >
             <h3 className="text-xl md:text-2xl font-semibold mb-4">
               Event Details
@@ -277,7 +285,9 @@ const EventDetails = () => {
                   <span className="text-3xl md:text-3xl font-bold ">
                     {String(timeLeft.hours).padStart(2, "0")}
                   </span>
-                  <span className="text-sm uppercase tracking-wider">Hours</span>
+                  <span className="text-sm uppercase tracking-wider">
+                    Hours
+                  </span>
                 </div>
 
                 {/* Minutes */}
@@ -316,13 +326,8 @@ const EventDetails = () => {
 
         {/* Comment Section Starts*/}
         <div className="flex gap-4 mt-10">
-          <button className="ezy-button-primary-sm">
-            Comments
-          </button>
-          <button
-            onClick={openModal}
-            className="ezy-button-secondary-sm"
-          >
+          <button className="ezy-button-primary-sm">Comments</button>
+          <button onClick={openModal} className="ezy-button-secondary-sm">
             Add Comment
           </button>
         </div>
@@ -364,20 +369,23 @@ const EventDetails = () => {
           </h2>
           <div className="">
             <div className="flex justify-end mb-4">
-              <Link to={'/allevents'}>
+              <Link to={"/allevents"}>
                 <button className="flex items-center gap-1 text-blue-500 hover:text-blue-700 transition-colors font-semibold cursor-pointer">
                   Browse All <FaArrowRightLong />
                 </button>
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {suggestionsData?.slice(0, 3).map((suggestedEvent) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {suggestionsData?.slice(0, 4).map((suggestedEvent) => (
                 <Link to={`/eventdetailspublic/${suggestedEvent._id}`}>
                   <div
                     key={suggestedEvent._id}
-                    className={`${darkMode ? "bg-gray-800 text-white" : "bg-white text-black"
-                      } rounded-md overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300 h-full flex flex-col group`}
+                    className={`${
+                      darkMode
+                        ? "bg-gray-800 text-white"
+                        : "bg-white text-black"
+                    } rounded-md overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300 h-full flex flex-col group`}
                   >
                     <div className="overflow-hidden">
                       <img
@@ -401,7 +409,9 @@ const EventDetails = () => {
                           </div>
                           <div className="flex items-center gap-1 text-gray-500">
                             <GiTicket className="" />
-                            {suggestedEvent.totalTickets - suggestedEvent.soldTickets} Remaining
+                            {suggestedEvent.totalTickets -
+                              suggestedEvent.soldTickets}{" "}
+                            Remaining
                           </div>
                         </div>
 
