@@ -37,7 +37,7 @@ const EventCards = () => {
   //new comment
 
   // Show only the first 3 events
-  const displayedEvents = events.slice(0, 6);
+  const displayedEvents = events.slice(0, 4);
 
   return (
     <div
@@ -52,7 +52,7 @@ const EventCards = () => {
         Buy Your Event Tickets Anytime, Anywhere – Hassle-Free & Instant
         Confirmation!
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-2 md:gap-4 mx-auto w-11/12">
+      <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-2 md:gap-4 mx-auto w-11/12">
         {displayedEvents.map((event) => {
           return (
             <div>
