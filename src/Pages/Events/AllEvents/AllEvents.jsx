@@ -79,7 +79,7 @@ const AllEvents = () => {
               <Link to={`/eventdetailspublic/${event._id}`}>
                 <div
                   key={event._id}
-                  className={`${darkMode ? "bg-gray-800 text-white" : "bg-white text-black"
+                  className={`${darkMode ? "bg-dark-surface text-dark-primary" : "bg-white text-black"
                     } rounded-md overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300 h-full flex flex-col group`}
                 >
                   <div className="overflow-hidden">
