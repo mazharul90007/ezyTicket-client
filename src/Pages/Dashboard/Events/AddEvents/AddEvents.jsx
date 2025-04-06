@@ -37,6 +37,7 @@ const AddEvents = () => {
                 duration: data.duration,
                 location: data.location,
                 details: data.details,
+                organizer: data.organizer,
                 image: res.data.data.display_url,
                 totalTickets: parseInt(data.totalTickets),
                 soldTickets: parseInt(0),
@@ -254,7 +255,7 @@ const AddEvents = () => {
                     {/* Event Details */}
                     <div className="form-control w-full my-4 flex flex-col">
                         <div className="label">
-                            <span className="label-text">Property Details</span>
+                            <span className="label-text">Event Details</span>
                         </div>
                         <textarea
                             className="textarea textarea-bordered h-36 w-full focus:outline-none focus:border-supporting focus:shadow"
@@ -262,6 +263,18 @@ const AddEvents = () => {
                             {...register('details')}
                         >
                         </textarea>
+                    </div>
+
+                    {/* Event Location */}
+                    <div className="form-control w-full my-4">
+                        <div className="label">
+                            <span className="label-text">Organized By</span>
+                        </div>
+                        <input
+                            type="text"
+                            placeholder="Organizer Company"
+                            {...register('organizer', { required: true })}
+                            className="input input-bordered w-full focus:outline-none focus:border-supporting focus:shadow" />
                     </div>
 
                     {/* Event Image */}

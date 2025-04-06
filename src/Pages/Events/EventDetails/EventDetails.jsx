@@ -6,6 +6,7 @@ import useAuth from "../../../Hooks/useAuth";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import Loading from "../../../Shared/Loading/Loading";
 import noImage from "../../../assets/Common_image/noImage.png";
+import { BsFillCalendar2DateFill } from "react-icons/bs";
 
 // Icons
 import { FaBookmark, FaArrowRightLong, FaBangladeshiTakaSign, FaRegClock } from "react-icons/fa6";
@@ -13,6 +14,7 @@ import { IoPersonCircle, IoLocation } from "react-icons/io5";
 import { MdDateRange } from "react-icons/md";
 import { IoMdPricetags, IoIosTime, IoMdCloseCircleOutline } from "react-icons/io";
 import { GiTicket } from "react-icons/gi";
+import { FaMapMarkerAlt, FaMoneyCheckAlt } from "react-icons/fa";
 
 const EventDetails = () => {
   // Hooks and state
@@ -301,27 +303,42 @@ const EventDetails = () => {
 
           {/* Right Sidebar */}
           <div className="rounded-lg h-fit lg:col-span-1">
-            {/* Event Details */}
+            {/* -----------------Event Details----------------- */}
             <div className={`${darkMode ? "bg-dark-surface text-dark-primary" : "bg-white text-black"} p-2 md:p-4 shadow-md`}>
               <h3 className="text-xl md:text-2xl font-semibold mb-4">Event Details</h3>
               <div className="divider">Starts in</div>
               <div className="rounded-lg text-center">
                 <CountdownTimer />
               </div>
-              <p className="text-lg flex items-center gap-2 mt-4">
-                <IoPersonCircle className="text-gray-500 text-xl md:text-2xl" />
-                Total Ticket: {eventData?.totalTickets}
-              </p>
-              <p className="text-lg flex items-center gap-2 mt-2">
-                <IoMdPricetags className="text-gray-500 text-xl md:text-2xl" />
-                Price: ${eventData?.price}
-              </p>
-              <div className="flex flex-col md:flex-row justify-between gap-4 mt-6">
-                <button onClick={() => setCheckout(true)} className="ezy-button-secondary">Book Now</button>
+
+              <div className="space-y-6 pt-4">
+                <div className="text-base md:text-lg flex items-center text-gray-500 gap-2 mt-4">
+                  <IoPersonCircle className="text-main text-lg md:text-xl" />
+                  Organized by: <span className="text-lg md:text-xl text-gray-600 font-semibold">{eventData?.organizer}</span>
+                </div>
+
+                <div className="text-base md:text-lg flex items-center text-gray-500 gap-2 mt-4">
+                  <BsFillCalendar2DateFill className="text-main text-lg md:text-xl" />
+                  Date & Time: <span className="text-lg md:text-xl text-gray-600 font-semibold">{eventData?.eventDate} {eventData?.eventTime}</span>
+                </div>
+
+                <div className="text-base md:text-lg flex items-center text-gray-500 gap-2 mt-4">
+                  <FaMapMarkerAlt className="text-main text-lg md:text-xl" />
+                  Location: <span className="text-lg md:text-xl text-gray-600 font-semibold">{eventData?.location}</span>
+                </div>
+
+                <div className="text-base md:text-lg flex items-center text-gray-500 gap-2 mt-4">
+                  <FaMoneyCheckAlt className="text-main text-lg md:text-xl" />
+                  Price: <span className="text-lg md:text-xl text-gray-600 font-semibold">Tk {eventData?.price}</span> /per person
+                </div>
+              </div>
+
+              <div className="flex flex-col md:flex-row justify-between gap-4 mt-6 mx-auto">
+                <button onClick={() => setCheckout(true)} className="w-full ezy-button-primary py-3 rounded-lg font-bold flex items-center justify-center gap-2">Book Now</button>
               </div>
             </div>
 
-            {/* Billing Information */}
+            {/* -------------------Billing Information--------------- */}
             <div className={`relative mt-8 ${checkout ? 'block' : 'hidden'} ${darkMode ? "bg-dark-surface text-dark-primary" : "bg-white text-black"} p-6 rounded-lg shadow-lg`}>
               {/* X Button to close the checkout panel */}
               <button
