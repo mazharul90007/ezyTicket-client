@@ -20,8 +20,7 @@ import {
 import { GiTicket } from "react-icons/gi";
 
 const EventDetails = () => {
-  const { darkMode } = useAuth();
-  const { user } = useAuth();
+  const { user, darkMode } = useAuth();
   const { eventId } = useParams();
   const axiosPublic = useAxiosPublic();
   const queryClient = useQueryClient();
@@ -190,25 +189,23 @@ const EventDetails = () => {
   const day = EventDate ? new Date(eventData?.eventDate).getDate() : "";
 
   return (
-    <div className="bg-background py-24">
+    <div className={`py-24 ${darkMode ? 'bg-dark-background text-dark-primary' : 'bg-background'}`}>
       <div
-        className={`${
-          darkMode ? "bg-black text-white" : "text-black"
-        } mx-auto w-11/12`}
+        className={`mx-auto w-11/12`}
       >
         <div>
           <div className="flex items-start gap-4">
-            <div className="flex flex-col items-center text-center overflow-hidden rounded-md shadow-md">
-              <div className="text-xl font-semibold bg-supporting text-white w-full py-0.5 flex items-center justify-center">
+            <div className={`flex flex-col items-center text-center overflow-hidden rounded-md shadow-md border ${darkMode ? 'border-gray-600' : 'border-gray-100'}`}>
+              <div className={`text-xl font-semibold ${darkMode? 'bg-dark-supporting text-dark-primary' : 'bg-supporting text-white'} w-full py-0.5 flex items-center justify-center`}>
                 {month}
               </div>
-              <div className="text-4xl font-semibold bg-white py-2 px-6 flex items-center justify-center">
+              <div className={`text-4xl font-semibold ${darkMode ? 'bg-dark-surface' : 'bg-white'} py-2 px-6 flex items-center justify-center`}>
                 {day}
               </div>
             </div>
 
             <div className="flex flex-col">
-              <p className={`text-black font-bold text-2xl md:text-4xl mb-4`}>
+              <p className={`font-bold text-2xl md:text-4xl mb-4`}>
                 {eventData?.title}
               </p>
               <div className="flex flex-wrap gap-4 text-sm md:text-base mt-auto">
@@ -249,7 +246,7 @@ const EventDetails = () => {
 
             <div
               className={`${
-                darkMode ? "bg-gray-600 text-white" : "bg-white text-black"
+                darkMode ? "bg-dark-surface text-dark-primary" : "bg-white text-black"
               } mt-4 p-6 md:p-10 rounded-lg shadow`}
             >
               <h2 className="text-xl md:text-2xl font-bold text-black">
@@ -262,7 +259,7 @@ const EventDetails = () => {
           {/* Right Sidebar */}
           <div
             className={`${
-              darkMode ? "bg-gray-500 text-white" : "bg-white text-black"
+              darkMode ? "bg-dark-surface text-dark-primary" : "bg-white text-black"
             } p-6 md:p-10 shadow-lg rounded-lg h-fit lg:col-span-1`}
           >
             <h3 className="text-xl md:text-2xl font-semibold mb-4">
@@ -273,7 +270,7 @@ const EventDetails = () => {
             <div className="rounded-lg text-center">
               <div className="flex justify-center gap-4 md:gap-2 text-white">
                 {/* Days */}
-                <div className="flex flex-col items-center bg-green-600 py-2 px-5 font-semibold rounded">
+                <div className={`flex flex-col items-center ${darkMode ? 'bg-green-800 text-dark-primary' : 'bg-green-600 text-white'} py-2 px-5 font-semibold rounded`}>
                   <span className="text-3xl md:text-3xl font-bold">
                     {String(timeLeft.days).padStart(2, "0")}
                   </span>
@@ -281,7 +278,7 @@ const EventDetails = () => {
                 </div>
 
                 {/* Hours */}
-                <div className="flex flex-col items-center bg-green-600 py-2 px-6 font-semibold rounded">
+                <div className={`flex flex-col items-center ${darkMode ? 'bg-green-800 text-dark-primary' : 'bg-green-600 text-white'} py-2 px-5 font-semibold rounded`}>
                   <span className="text-3xl md:text-3xl font-bold ">
                     {String(timeLeft.hours).padStart(2, "0")}
                   </span>
@@ -291,7 +288,7 @@ const EventDetails = () => {
                 </div>
 
                 {/* Minutes */}
-                <div className="flex flex-col items-center bg-green-600 py-2 px-6 font-semibold rounded">
+                <div className={`flex flex-col items-center ${darkMode ? 'bg-green-800 text-dark-primary' : 'bg-green-600 text-white'} py-2 px-5 font-semibold rounded`}>
                   <span className="text-3xl md:text-3xl font-bold ">
                     {String(timeLeft.minutes).padStart(2, "0")}
                   </span>
@@ -299,7 +296,7 @@ const EventDetails = () => {
                 </div>
 
                 {/* Seconds */}
-                <div className="flex flex-col items-center bg-green-600 py-2 px-6 font-semibold rounded">
+                <div className={`flex flex-col items-center ${darkMode ? 'bg-green-800 text-dark-primary' : 'bg-green-600 text-white'} py-2 px-5 font-semibold rounded`}>
                   <span className="text-3xl md:text-3xl font-bold ">
                     {String(timeLeft.seconds).padStart(2, "0")}
                   </span>
@@ -309,12 +306,12 @@ const EventDetails = () => {
             </div>
 
             <p className="text-lg flex items-center gap-2 mt-4">
-              <IoPersonCircle className="text-green-500 text-3xl md:text-4xl" />
+              <IoPersonCircle className="text-gray-500 text-xl md:text-2xl" />
               Total Ticket: {eventData?.totalTickets}
             </p>
 
             <p className="text-lg flex items-center gap-2 mt-2">
-              <IoMdPricetags className="text-green-500 text-3xl md:text-4xl" />
+              <IoMdPricetags className="text-gray-500 text-xl md:text-2xl" />
               Price: ${eventData?.price}
             </p>
 
@@ -334,7 +331,7 @@ const EventDetails = () => {
         {/* Modal */}
         {isModalOpen && (
           <div className="fixed inset-0 bg-black/60 bg-opacity-75 flex items-center justify-center z-50">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-3/5">
+            <div className={`${darkMode ? 'bg-gray-200': 'bg-white'} p-6 rounded-lg shadow-lg w-11/12 md:w-3/5`}>
               <h2 className="text-xl font-bold mb-4">Add Comment</h2>
               <textarea
                 value={comment}
@@ -370,7 +367,7 @@ const EventDetails = () => {
           <div className="">
             <div className="flex justify-end mb-4">
               <Link to={"/allevents"}>
-                <button className="flex items-center gap-1 text-blue-500 hover:text-blue-700 transition-colors font-semibold cursor-pointer">
+                <button className="flex items-center gap-1 text-main hover:text-supporting transition-colors font-semibold cursor-pointer">
                   Browse All <FaArrowRightLong />
                 </button>
               </Link>
@@ -383,7 +380,7 @@ const EventDetails = () => {
                     key={suggestedEvent._id}
                     className={`${
                       darkMode
-                        ? "bg-gray-800 text-white"
+                        ? "bg-dark-surface text-dark-primary"
                         : "bg-white text-black"
                     } rounded-md overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300 h-full flex flex-col group`}
                   >
