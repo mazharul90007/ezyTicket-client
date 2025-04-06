@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import travelBannerImage from "../../../assets/Travel_image/Bus3.jpg"
 import BannerCard from "./BannerCard";
 import useCardData from "./useCardData";
+import SelectPlaceTime from "../TravelTicekBook/SelectPlaceTime";
 
 const TravelBanner = () => {
     const [travelCards] = useCardData()
@@ -16,39 +17,41 @@ const TravelBanner = () => {
 
 
     return (
-        <div className="relative mb-40 h-[1350px] md:h-[880px] lg:h-[680px] xl:h-[650px]">
-            <div
-                className="hero md:min-h-[600px] min-h-screen "
-                style={{
-                    backgroundImage: `url(${travelBannerImage})`,
-                }}>
-                <div className="hero-overlay"></div>
-                <div className="hero-content text-neutral-content text-center">
-                    <div className="">
-                        <h1 className='text-2xl font-bold md:text-3xl lg:text-5xl'>Smart Bus Ticket Booking <br /><span className="text-main">Fast, Easy & Secure!</span> </h1>
-                        <p className='my-4'>Book Your Bus Tickets Anytime, Anywhere – Hassle-Free & Instant Confirmation!</p>
-                        <Link to={"/travel/bus-ticket-book"}  className="btn bg-main border-none text-white ">Buy Ticket</Link >
+        <>
+            <div className="relative mb-40 h-[700px] md:h-[700px] lg:h-[500px] xl:h-[500px]">
+                <div
+                    className="hero md:min-h-[600px] min-h-screen "
+                    style={{
+                        backgroundImage: `url(${travelBannerImage})`,
+                    }}>
+                    <div className="hero-overlay"></div>
+                    <div className="hero-content text-neutral-content text-center">
+                        <div className="">
+                            <h1 className='text-2xl font-bold md:text-3xl lg:text-5xl'>Smart Bus Ticket Booking <br /><span className="text-main">Fast, Easy & Secure!</span> </h1>
+                            <p className='my-4'>Book Your Bus Tickets Anytime, Anywhere – Hassle-Free & Instant Confirmation!</p>
+
+                        </div>
                     </div>
                 </div>
-            </div>
-            {/* cards */}
-            <div className="flex justify-center items-center">
-                <div className=" absolute z-20 top-[520px]">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-10 container mx-auto px-5">
-                        {
-                            travelCards.map((card, idx) => <BannerCard
-                                key={idx}
-                                idx={idx}
-                                card={card}
-                            ></BannerCard>)
-                        }
+                {/* cards */}
+
+                <div className="flex justify-center items-center">
+                    <div className=" absolute z-20 top-[520px]  ">
+                        <div className="text-black shadow-2xl">
+                            <SelectPlaceTime />
+                        </div>
                     </div>
+
                 </div>
 
             </div>
 
-        </div>
+            <div>
+                <BannerCard/>
+            </div>
+
+        </>
     )
 }
 
-export default TravelBanner
+export default TravelBanner;
