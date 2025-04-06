@@ -27,6 +27,7 @@ import MyAddedEvents from "../Pages/Dashboard/Admin/MyAddedEvents/MyAddedEvents"
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import Profile from "../Pages/Dashboard/Profile/Profile";
 import ManageEventReview from "../Pages/Dashboard/Events/ManageEventReviews/ManageEventReview";
+import Checkout from "../Pages/Checkout/Checkout";
 
 const Route = createBrowserRouter([
   {
@@ -50,10 +51,6 @@ const Route = createBrowserRouter([
         path: "/register",
         element: <RegisterPage></RegisterPage>,
       },
-      // {
-      //   path: "/profile",
-      //   element: <Profile></Profile>,
-      // },
       // --------------Travel route start----------
       {
         path: "/travel",
