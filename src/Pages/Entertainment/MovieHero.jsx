@@ -36,6 +36,7 @@ const slides = [
 const MovieHeroSlider = () => {
   return (
     <div className="relative text-white">
+      {/* <h1 className="text-center text-5xl font-bold " m>Book your Pleasure!</h1> */}
       <Swiper
         centeredSlides={true}
         slidesPerView={"auto"}

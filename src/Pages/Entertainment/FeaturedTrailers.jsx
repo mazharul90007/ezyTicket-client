@@ -26,9 +26,9 @@ const trailers = [
 
 const FeaturedTrailers = () => {
   return (
-    <section className=" py-16 px-4 md:px-10">
-      <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-        🎬 Featured Trailers
+    <section className="  mt-24 px-4 md:px-10">
+         <h2 className="text-3xl mb-4 border-l-4 pl-3 text-supporting md:text-4xl font-bold ">
+        Featured Trailers
       </h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
