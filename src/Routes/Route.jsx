@@ -10,7 +10,6 @@ import LoginPage from "../Pages/Authentication/LoginPage";
 import RegisterPage from "../Pages/Authentication/RegisterPage";
 import EventDetails from "./../Pages/Events/EventDetails/EventDetails";
 import Pricing from "../Pages/Pricing/Pricing";
-import Profile from "../Pages/Profile/Profile";
 import BusReservationPage from "../Pages/Travel/TravelServiceSeciton/BusReservationPage";
 import TravelBusTicketPage from "../Pages/Travel/TravelTicekBook/TravelBusTicketPage";
 import BusTicketCancellation from "../components/BusTicketCancellation";
@@ -26,6 +25,9 @@ import PrivateRoute from "./PrivateRoute";
 import ManageEvents from "../Pages/Dashboard/Admin/ManageEvents/ManageEvents";
 import MyAddedEvents from "../Pages/Dashboard/Admin/MyAddedEvents/MyAddedEvents";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers/ManageUsers";
+import Profile from "../Pages/Dashboard/Profile/Profile";
+import ManageEventReview from "../Pages/Dashboard/Events/ManageEventReviews/ManageEventReview";
+import Checkout from "../Pages/Checkout/Checkout";
 
 const Route = createBrowserRouter([
   {
@@ -48,10 +50,6 @@ const Route = createBrowserRouter([
       {
         path: "/register",
         element: <RegisterPage></RegisterPage>,
-      },
-      {
-        path: "/profile",
-        element: <Profile></Profile>,
       },
       // --------------Travel route start----------
       {
@@ -106,52 +104,59 @@ const Route = createBrowserRouter([
       },
       {
         path: "/contact",
-        element: <Contact></Contact>
+        element: <Contact></Contact>,
       },
 
       {
         path: "/entertainment/allmovies",
-        element: <AllMovie></AllMovie>
+        element: <AllMovie></AllMovie>,
       },
       {
         path: `/entertainment/allmovies/:id`,
-        element: <MovieDetails></MovieDetails>
-
-      }
-
+        element: <MovieDetails></MovieDetails>,
+      },
     ],
   },
   {
-    path: '/dashboard',
-    element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
     errorElement: <Error></Error>,
     children: [
       // ---------Users route start ------------
       {
-        path: 'profile',
-        element: <Profile></Profile>
+        path: "profile",
+        element: <Profile></Profile>,
+      },
+      {
+        path: "manageUsers",
+        element: <ManageUsers></ManageUsers>,
+      },
 
-      },
-      {
-        path: 'manageUsers',
-        element: <ManageUsers></ManageUsers>
-      },
       // ------------Events route start----------
+
       {
-        path: 'addEvent',
-        element: <AddEvents></AddEvents>
+        path: "addEvent",
+        element: <AddEvents></AddEvents>,
       },
       {
-        path: 'manageEvents',
-        element: <ManageEvents></ManageEvents>
+        path: "manageEventReview",
+        element: <ManageEventReview></ManageEventReview>,
       },
       {
-        path: 'myAddedEvents',
-        element: <MyAddedEvents></MyAddedEvents>
-      }
+        path: "manageEvents",
+        element: <ManageEvents></ManageEvents>,
+      },
+      {
+        path: "myAddedEvents",
+        element: <MyAddedEvents></MyAddedEvents>,
+      },
       // -----------Events route ends------------
-    ]
-  }
+    ],
+  },
 ]);
 
 export default Route;

@@ -44,7 +44,7 @@ const SelectPlaceTime = () => {
     console.log(filterBus, "search", searchData)
     return (
         <section className="bg-white rounded">
-            <form onSubmit={handleSearchData} className="border p-8 rounded border-black/20 flex flex-col lg:flex-row justify-between items-center gap-5 shadow-2xl ">
+            <form onSubmit={handleSearchData} className=" p-8 rounded border-black/20 flex flex-col lg:flex-row justify-between items-center gap-5 ">
                 <select name="fromDistrict" defaultValue={!searchData ? "From": searchData?.stand1} className="select select-success w-full" required>
                     <option disabled={true} >From</option>
                     {

@@ -4,9 +4,11 @@ import EventCard from "./EventCard";
 import { MdDateRange } from "react-icons/md";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import useAuth from "../../../Hooks/useAuth";
 
 const EventSection = () => {
     const axiosPublic = useAxiosPublic();
+    const {darkMode} = useAuth();
 
     const { data: events = [] } = useQuery({
         queryKey: ['events'],
@@ -19,7 +21,7 @@ const EventSection = () => {
     return (
         <div className="py-16 w-11/12 mx-auto">
             <p className="text-xl text-supporting font-semibold mb-1 border-l-4 border-supporting pl-2">Events</p>
-            <h3 className="text-4xl font-bold">Buy Events Ticket Easily</h3>
+            <h3 className={`text-4xl font-bold ${darkMode && 'text-dark-primary'}`}>Buy Events Ticket Easily</h3>
             <div className="my-8">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-6 h-[500px]">
                     {/* Left Column - Single Event */}

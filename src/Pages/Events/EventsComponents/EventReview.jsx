@@ -67,27 +67,27 @@ const EventReview = () => {
   return (
     <div
       className={`${
-        darkMode ? "bg-black text-white" : "bg-gray-50 text-black"
+        darkMode ? "text-dark-primary" : "text-black"
       }  px-4 py-12 
        text-center mt-10 `}
     >
       {/* Title */}
       <h1 className="text-3xl font-semibold ">
-        What Event Organizers Are Saying About{" "}
-        <span className="text-green-400">ezyTicket</span>
+        What Users Are Saying About{" "}
+        <span className="text-main">EzyTicket Events</span>
       </h1>
 
       {/* Carousel */}
       <div className="mt-12 relative max-w-4xl mx-auto">
         {/* Carousel Cards */}
-        <div className="bg-gradient-to-r from-green-300 to-green-600 p-6 rounded-2xl shadow-lg transform transition-all duration-500 ease-in-out">
-          <h3 className="text-2xl font-semibold text-white">
+        <div className={`${darkMode ? 'bg-dark-surface text-dark-primary' : 'bg-gradient-to-r from-main/70 to-main text-white'} p-6 rounded-2xl shadow-lg transform transition-all duration-500 ease-in-out`}>
+          <h3 className="text-2xl font-semibold">
             {reviews[currentIndex].organizer}
           </h3>
-          <p className="mt-4 text-base text-white">
+          <p className="mt-4 text-base">
             {reviews[currentIndex].review}
           </p>
-          <div className="mt-4 flex justify-center text-white">
+          <div className="mt-4 flex justify-center">
             {renderStars(reviews[currentIndex].stars)}
           </div>
         </div>
@@ -100,7 +100,7 @@ const EventReview = () => {
             key={index}
             onClick={() => setCurrentIndex(index)}
             className={`w-3 h-3 rounded-full cursor-pointer transition duration-300 ${
-              currentIndex === index ? "bg-blue-500" : "bg-gray-300"
+              currentIndex === index ? "bg-supporting" : "bg-gray-300"
             }`}
           ></div>
         ))}

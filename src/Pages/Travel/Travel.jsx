@@ -1,12 +1,10 @@
 import React from 'react'
 import TravelBanner from './TravelComponents/TravelBanner'
 import TravelService from './TravelServiceSeciton/TravelService'
-import TravelSelectSet from './TravelTicekBook/TravelSelectSet'
 import AddTravelService from './AddTravelService/AddTravelService'
 import FlashDeals from './FlashDeals/FlashDeals'
 import useAuth from '../../Hooks/useAuth'
 import TravelFAQ from './TravelFAQ/TravelFAQ'
-
 const Travel = () => {
   const {darkMode} = useAuth()
   return (
@@ -18,10 +16,7 @@ const Travel = () => {
       <section className='container mx-auto px-4 pt-10 mb-20'>
         <FlashDeals/>
       </section>
-      <section className='px-4 mb-20'>
-        <TravelFAQ/>
-      </section>
-
+     
       <div className='px-4 mb-20'>
         <TravelService />
       </div>
@@ -29,11 +24,15 @@ const Travel = () => {
       <AddTravelService />
 
       {/* set form */}
-      <div id="scroll-section">
-        <TravelSelectSet />
+      <div id="scroll-section ">
+        {/* <TravelUltimateCompanion/> */}
       </div>
+      <section className='px-4 my-20'>
+        <TravelFAQ/>
+      </section>
+
     </section>
   )
 }
 
-export default Travel
+export default Travel;

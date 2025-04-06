@@ -14,23 +14,29 @@ const TicketBooking = () => {
   const timeSlots = ["7:30 AM", "12:30 PM", "4:30 PM", "8:30 PM"];
   const seatRows = ["A", "B", "C", "D", "F"];
   const seatPerRow = 8;
-  
+
   const seatNumbers = seatRows.flatMap((row) =>
     Array.from({ length: seatPerRow }, (_, i) => `${row}${i + 1}`)
   );
-    const movie = Movies.filter((movie) => movie.id == id)[0];
+  const movie = Movies.filter((movie) => movie.id == id)[0];
   const { darkMode } = useAuth();
   console.log(selectedTime);
- 
+
 
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
+<<<<<<< HEAD
     cineplex:"",
     date:"",
     time:"",
     seat:1,
+=======
+    seat: 1,
+    date: "",
+    time: "",
+>>>>>>> 845278d9c6ebc2a02e29d33e5703038a5eafb1b9
     seats: [],
   });
   console.log(formData);
@@ -50,7 +56,7 @@ const TicketBooking = () => {
   const handleSeatSelection = (seat) => {
     setFormData((prevData) => {
       const isSelected = prevData.seats.includes(seat);
-  
+
       return {
         ...prevData,
         seats: isSelected
@@ -59,19 +65,34 @@ const TicketBooking = () => {
       };
     });
   };
-  
-  
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:3000/movie_tickets',formData)
-    .then(res=>{
-      Swal.fire({
-        title: "Ticket Booked!",
-        text: ` Booking Confirmed for ${movie.title}!`,
-        icon: "success"
-      });
+    axios.post('http://localhost:3000/movie_tickets', formData)
+      .then(res => {
+        Swal.fire({
+          title: "Ticket Booked!",
+          text: ` Booking Confirmed for ${movie.title}!`,
+          icon: "success"
+        });
 
+        setFormData(
+          {
+            name: "",
+            email: "",
+            phone: "",
+            seat: 1,
+            date: "",
+            time: "",
+            seats: [],
+          }
+        )
+
+      })
+
+<<<<<<< HEAD
       setFormData(
         {
           name: "",
@@ -86,6 +107,8 @@ const TicketBooking = () => {
      
     })
     
+=======
+>>>>>>> 845278d9c6ebc2a02e29d33e5703038a5eafb1b9
   };
 
   return (
@@ -95,11 +118,10 @@ const TicketBooking = () => {
 
         <div className="md:w-1/2  flex justify-center items-center px-4">
           <div
-            className={`${
-              darkMode
+            className={`${darkMode
                 ? "text-white bg-gray-500/20 backdrop-blur-3xl"
                 : "bg-green-300/20 backdrop-blur-3xl"
-            }  p-6 rounded-lg shadow-lg w-11/12 md:w-2xl pb-8 mx-auto mt-10`}
+              }  p-6 rounded-lg shadow-lg w-11/12 md:w-2xl pb-8 mx-auto mt-10`}
           >
             <h1 className="text-2xl font-bold  text-center mb-6">
               🎬 Pick Your One
@@ -127,11 +149,10 @@ const TicketBooking = () => {
                   <motion.button
                     key={index}
                     whileTap={{ scale: 0.9 }}
-                    className={`p-3 rounded-lg text-black text-center border ${
-                      selectedTime === time
+                    className={`p-3 rounded-lg text-black text-center border ${selectedTime === time
                         ? "bg-supporting "
                         : "bg-gray-200 hover:bg-gray-300"
-                    } transition`}
+                      } transition`}
                     onClick={() => handleTimeSelection(time)}
                   >
                     {time}
@@ -139,24 +160,23 @@ const TicketBooking = () => {
                 ))}
               </div>
             </div>
-{/* Seat Selection */}
-<div className="mb-4">
-  <h2 className="text-lg font-semibold mb-2">💺 Select Your Seats:</h2>
-  <div className="grid grid-cols-5 md:grid-cols-8 gap-3 ">
-    {seatNumbers.map((seat) => (
-      <motion.button
-        key={seat}
-        whileTap={{ scale: 0.9 }}
-        className={`p-1 rounded-lg md:w-12 text-center border ${
-          formData.seats.includes(seat) ? "bg-green-500 " : ""
-        } transition`}
-        onClick={() => handleSeatSelection(seat)}
-      >
-        {seat}
-      </motion.button>
-    ))}
-  </div>
-</div>
+            {/* Seat Selection */}
+            <div className="mb-4">
+              <h2 className="text-lg font-semibold mb-2">💺 Select Your Seats:</h2>
+              <div className="grid grid-cols-5 md:grid-cols-8 gap-3 ">
+                {seatNumbers.map((seat) => (
+                  <motion.button
+                    key={seat}
+                    whileTap={{ scale: 0.9 }}
+                    className={`p-1 rounded-lg md:w-12 text-center border ${formData.seats.includes(seat) ? "bg-green-500 " : ""
+                      } transition`}
+                    onClick={() => handleSeatSelection(seat)}
+                  >
+                    {seat}
+                  </motion.button>
+                ))}
+              </div>
+            </div>
 
 
             {/* Confirm Button */}
@@ -166,11 +186,10 @@ const TicketBooking = () => {
         {/* Booking form */}
         <section >
           <div
-            className={`${
-              darkMode
+            className={`${darkMode
                 ? "text-white bg-gray-500/20 backdrop-blur-3xl"
                 : "bg-green-300/20 backdrop-blur-3xl"
-            }  p-6 rounded-lg shadow-lg   pb-8 mx-auto mt-10`}
+              }  p-6 rounded-lg shadow-lg   pb-8 mx-auto mt-10`}
           >
             <h2 className="text-2xl font-bold text-center mb-4">
               🎟 Book Your Ticket

@@ -11,6 +11,8 @@ import {
 } from "firebase/auth";
 import app from "../Pages/Authentication/Firebase";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const googleProvider = new GoogleAuthProvider();
 const auth = getAuth(app);
@@ -22,9 +24,11 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [userInfo, setUserInfo] = useState([]);
   // console.log(user);
-
   const [loading, setLoading] = useState(true);
+  const [userInfoLoading, setUserInfoLoading] = useState(true);
   const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
+
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -87,6 +91,20 @@ const AuthProvider = ({ children }) => {
     };
   }, [user?.displayName, user?.photoURL, axiosPublic]);
 
+  //get user info from mongodb
+  useQuery({
+    queryKey: ['savedUser', user?.email],
+    queryFn: async () => {
+      setUserInfoLoading(true)
+      if (!user?.email) return null; // Prevents API call if user is null
+      const res = await axiosSecure.get(`/users/${user.email}`);
+      setUserInfo(res.data[0]);
+      setUserInfoLoading(false);
+      return res.data[0];
+    },
+    enabled: !!user?.email, // Ensures query only runs when user is logged in
+  });
+
   const authInfo = {
     user,
     setUser,
@@ -94,6 +112,7 @@ const AuthProvider = ({ children }) => {
     setDarkMode,
     loading,
     setLoading,
+    userInfoLoading,
     createUser,
     signIn,
     signInWithGoogle,

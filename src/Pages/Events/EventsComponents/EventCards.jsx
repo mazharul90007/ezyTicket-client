@@ -1,9 +1,11 @@
-import { MdDateRange, MdLocationOn, MdAttachMoney } from "react-icons/md";
+import { MdDateRange } from "react-icons/md";
 import Loading from "../../../Shared/Loading/Loading";
 import useAuth from "../../../Hooks/useAuth";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import { FaBangladeshiTakaSign, FaRegClock } from "react-icons/fa6";
+import { GiTicket } from "react-icons/gi";
 
 const EventCards = () => {
   const { darkMode } = useAuth();
@@ -35,13 +37,11 @@ const EventCards = () => {
   //new comment
 
   // Show only the first 3 events
-  const displayedEvents = events.slice(0, 6);
+  const displayedEvents = events.slice(0, 4);
 
   return (
     <div
-      className={`${
-        darkMode ? "bg-black text-white" : "bg-gray-50 text-black"
-      } py-10`}
+      className={`py-10`}
     >
       <h1 className="text-5xl font-bold text-center mt-5 mb-5">
         Explore Events
@@ -50,75 +50,59 @@ const EventCards = () => {
         Buy Your Event Tickets Anytime, Anywhere – Hassle-Free & Instant
         Confirmation!
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto w-11/12">
-        {displayedEvents.map((event) => {
-          const eventDate = new Date(event.dateTime).toLocaleDateString(
-            "en-US",
-            {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            }
-          );
+      <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-2 md:gap-4 mx-auto w-11/12">
+        {displayedEvents.map((event) =>
+          <div>
+            <Link to={`/eventdetailspublic/${event._id}`}>
+              <div
+                key={event._id}
+                className={`${darkMode ? "bg-dark-surface text-white" : "bg-white text-black"
+                  } rounded-md overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300 h-full flex flex-col group`}
+              >
+                <div className="overflow-hidden">
+                  <img
+                    src={event.image}
+                    alt={event.title}
+                    className="w-full h-56 object-cover rounded-t-md group-hover:scale-110 transition-transform duration-300"
+                  />
+                </div>
 
-          const eventTime = new Date(event.dateTime).toLocaleTimeString(
-            "en-US",
-            {
-              hour: "numeric",
-              minute: "2-digit",
-              hour12: true,
-            }
-          );
+                <div className="p-5 flex flex-col flex-grow">
+                  <h2 className="text-xl font-bold flex-grow">
+                    {event.title}
+                  </h2>
 
-          return (
-            <div>
-              <div>
-                <Link
-                  to={`/eventdetailspublic/${event._id}`}
-                  key={event._id}
-                  className={`${
-                    darkMode ? "bg-gray-800 text-white" : "bg-white text-black"
-                  } 
-              rounded-xl overflow-hidden transform hover:scale-105 transition-all duration-300`}
-                >
-                  <div
-                    className="shadow-2xl rounded-lg hover:scale-105 transform transition-transform 
-    cursor-pointer hover:shadow-supporting"
-                  >
-                    <img
-                      src={event.image}
-                      alt={event.title}
-                      className="w-full h-56 object-cover rounded-t-xl"
-                    />
+                  <div className="mt-auto pt-2">
+                    {/* Price and Remaining Seat */}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-1 text-supporting font-semibold">
+                        <FaBangladeshiTakaSign />
+                        {event.price}
+                      </div>
+                      <div className="flex items-center gap-1 text-gray-500">
+                        <GiTicket className="" />
+                        {event.totalTickets - event.soldTickets} Remaining
+                      </div>
+                    </div>
 
-                    <div className="p-5 space-y-3">
-                      <h2 className="text-xl font-bold text-center">
-                        {event.title}
-                      </h2>
-
-                      <div className="flex items-center justify-center text-lg font-semibold text-green-600">
-                        <MdAttachMoney className="text-2xl mr-2" />
-                        {event.price} Tk
+                    {/* Date and Duration */}
+                    <div className="flex items-center justify-between mt-2">
+                      <div className="flex items-center justify-center gap-2 text-gray-500">
+                        <MdDateRange className="" />
+                        <span>{event.eventDate}</span>
                       </div>
 
-                      <div className="flex items-center justify-center gap-2">
-                        <MdDateRange className="text-lg text-green-600" />
-                        <span>
-                          {eventDate}, {eventTime}
-                        </span>
-                      </div>
-
-                      <div className="flex items-center justify-center gap-2">
-                        <MdLocationOn className="text-lg text-green-600" />
-                        <span>{event.location}</span>
+                      <div className="flex items-center justify-center gap-2 text-gray-500">
+                        <FaRegClock className="" />
+                        <span>{event.duration}</span>
                       </div>
                     </div>
                   </div>
-                </Link>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            </Link>
+          </div>
+        )}
       </div>
 
       {/* View All Button */}
