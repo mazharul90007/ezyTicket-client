@@ -27,9 +27,16 @@ const TicketBooking = () => {
     name: "",
     email: "",
     phone: "",
+<<<<<<< HEAD
+    cineplex:"",
+    date:"",
+    time:"",
+    seat:1,
+=======
     seat: 1,
     date: "",
     time: "",
+>>>>>>> 845278d9c6ebc2a02e29d33e5703038a5eafb1b9
     seats: [],
   });
   console.log(formData);
@@ -85,6 +92,23 @@ const TicketBooking = () => {
 
       })
 
+<<<<<<< HEAD
+      setFormData(
+        {
+          name: "",
+          email: "",
+          phone: "",
+       
+          date:"",
+          time:"",
+          seats: [],
+        }
+      )
+     
+    })
+    
+=======
+>>>>>>> 845278d9c6ebc2a02e29d33e5703038a5eafb1b9
   };
 
   return (
@@ -226,8 +250,8 @@ const TicketBooking = () => {
                   Select Cineplex
                 </label>
                 <select
-                  name="seat"
-                  value={formData.seat}
+                  name="cineplex"
+                  value={formData.cineplex}
                   onChange={handleChange}
                   className="w-full p-2 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-green-500"
                   required

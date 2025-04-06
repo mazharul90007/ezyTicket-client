@@ -2,6 +2,7 @@ import useAuth from "../../Hooks/useAuth";
 import MovieMarquee from "./Components/MovieMarquee";
 import FeaturedTrailers from "./FeaturedTrailers";
 import MovieHero from "./MovieHero";
+import MovieNews from "./MovieNews";
 import TrendingMovies from "./TrendingMovies";
 
 const Entertainment = () => {
@@ -10,7 +11,7 @@ const Entertainment = () => {
 
 
   return ( 
-    <div className={`pt-16 bg-gradient-to-br ${
+    <div className={`pt-20 bg-gradient-to-br ${
       darkMode
         ? "from-black via-blue-900 to-purple-900 text-white"
         : "from-green-200 via-green-50 to-green-200 text-black"
@@ -18,6 +19,7 @@ const Entertainment = () => {
       <MovieHero></MovieHero>
       <TrendingMovies></TrendingMovies>
       <FeaturedTrailers></FeaturedTrailers>
+      <MovieNews></MovieNews>
       <MovieMarquee></MovieMarquee>
     </div>
   );
