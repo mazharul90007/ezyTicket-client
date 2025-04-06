@@ -111,7 +111,7 @@ const Navbar = () => {
           >
             <div className="p-4 text-center">
               <img
-                src={userInfo?.photoURL || noImage}
+                src={userInfo?.photoURL? userInfo.photoURL : noImage}
                 alt="User Avatar"
                 className="w-16 h-16 mx-auto rounded-full border mb-2"
               />
