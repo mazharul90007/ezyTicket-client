@@ -179,7 +179,7 @@ const Dashboard = () => {
 
             {/* Main Content Area */}
             <div className="flex-1 h-full overflow-y-auto">
-                <div className="p-4">
+                <div >
                     <Outlet />
                 </div>
             </div>
