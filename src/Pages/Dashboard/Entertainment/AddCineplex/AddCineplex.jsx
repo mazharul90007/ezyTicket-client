@@ -44,7 +44,7 @@ const AddCineplex = () => {
         // axios.post('/api/cinema/register', formData)
       };
   return (
-    <div className="max-h-screen">
+    <div className="md:max-h-screen">
       {/* <div className="bg-gradient-to-b from-purple-700 via-purple-800 to-purple-500">
         <h1 className="text-5xl font-thin text-center bg-sky-900  text-white py-5">
           Add Your Cinema Hall
@@ -52,12 +52,12 @@ const AddCineplex = () => {
       </div> */}
 
       <div className="relative">
-        <img src="/addcine2.jpg" alt="" />
+        <img src="/addcine2.jpg" alt="" className="w-full h-auto object-cover"/>
         <div className="absolute inset-0 bg-black/40 bg-opacity-50"></div>
         
 
 
-        <div className="max-w-3xl absolute top-70 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white p-6  text-center mx-auto   shadow-2xl rounded-xl mt-10">
+        <div className="max-w-3xl min-w-xs absolute top-70 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white md:p-6  text-center mx-auto   shadow-2xl rounded-xl mt-10">
       <h1 className="text-3xl font-semibold mb-6 text-center text-purple-700">Register Your Cinema Hall</h1>
       
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -92,7 +92,8 @@ const AddCineplex = () => {
           className="w-full p-3 border rounded-lg"
         />
 
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-4 border-2 p-3 rounded-lg border-neutral-500">
+            <label className="text-xl text-neutral-500 ">Facilities : </label>
           <label className="flex items-center gap-2">
             <input type="checkbox" name="ac" onChange={handleChange} />
             AC
