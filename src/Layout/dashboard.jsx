@@ -90,9 +90,8 @@ const Dashboard = () => {
 
                     <div className="divider"></div>
                     
-                    {/* ---User Profile--- */}
+                    {/* ----------------User Profile---------------- */}
                     <div className="flex flex-col items-center space-y-2 mb-4 text-center">
-                        {/* <img src={userInfo?.photoURL || noImage} alt="User" className="w-24 h-24 rounded-lg object-cover" /> */}
                         <h3 className="text-2xl font-bold">{userInfo?.name}</h3>
                         <p className="font-semibold text-gray-500">{user?.email}</p>
                     </div>
