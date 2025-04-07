@@ -142,13 +142,13 @@ const Dashboard = () => {
                             <>
                                 <li onClick={closeMenu}><NavLink to="/dashboard/profile" className={getNavLinkClass}><IoPerson /> My Profile</NavLink></li>
 
-                                <li onClick={closeMenu}><NavLink to="/dashboard/services" className={getNavLinkClass}><TbHomePlus /> Add Post</NavLink></li>
+                                <li onClick={closeMenu}><NavLink to="/dashboard/addcineplex" className={getNavLinkClass}><TbHomePlus /> Add Cinema Hall</NavLink></li>
 
-                                <li onClick={closeMenu}><NavLink to="/dashboard/addedProperties" className={getNavLinkClass}><FaList /> My added Post</NavLink></li>
+                                <li onClick={closeMenu}><NavLink to="/dashboard/mycineplex" className={getNavLinkClass}><FaList /> My Cinema Hall</NavLink></li>
 
-                                <li onClick={closeMenu}><NavLink to="/dashboard/soldProperties" className={getNavLinkClass}><HiCurrencyDollar /> Ticket Sold</NavLink></li>
+                                <li onClick={closeMenu}><NavLink to="/dashboard/ticketcineplex" className={getNavLinkClass}><HiCurrencyDollar /> Ticket Sold</NavLink></li>
 
-                                <li onClick={closeMenu}><NavLink to="/dashboard/manageReview" className={getNavLinkClass}><FaHouseCircleExclamation /> Manage Review</NavLink></li>
+                                <li onClick={closeMenu}><NavLink to="/dashboard/managecineplex" className={getNavLinkClass}><FaHouseCircleExclamation /> Manage Cineplex</NavLink></li>
                             </>
                         ) : (
                             <>
