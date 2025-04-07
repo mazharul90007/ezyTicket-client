@@ -3,39 +3,43 @@ import {
   FaUser,
   FaEnvelope,
   FaLock,
-  FaGoogle,
   FaFacebookF,
   FaEye,
   FaEyeSlash,
 } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 import useAuth from "../../Hooks/useAuth";
-import { FcGoogle } from "react-icons/fc";
 
 function RegisterPage() {
-  const {
-    createUser,
-    signInWithGoogle,
-
-    darkMode,
-    setLoading,
-  } = useAuth();
+  const { createUser, signInWithGoogle, darkMode, setLoading } = useAuth();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm();
+
+  const password = watch("password");
+  const confirmPassword = watch("confirmPassword");
 
   const onSubmit = async (data) => {
     const { email, password } = data;
     try {
       await createUser(email, password);
-      toast.success("Registration successful!");
+      Swal.fire({
+        icon: "success",
+        title: "Registration Successful",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       navigate("/");
     } catch (error) {
       toast.error("Registration failed");
@@ -47,7 +51,12 @@ function RegisterPage() {
   const handleGoogleSignUp = async () => {
     try {
       await signInWithGoogle();
-      toast.success("Signed in with Google!");
+      Swal.fire({
+        icon: "success",
+        title: "Signed in with Google!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       navigate("/");
     } catch (err) {
       toast.error("Google Sign-In failed");
@@ -58,7 +67,7 @@ function RegisterPage() {
 
   return (
     <div
-      className={`min-h-screen flex items-center justify-center pt-20 bg-gradient-to-br ${
+      className={`min-h-screen flex items-center justify-center pt-20 bg-gradient-to-br py-20 ${
         darkMode
           ? "from-black via-blue-900 to-purple-900"
           : "from-green-200 via-green-50 to-green-200"
@@ -187,10 +196,66 @@ function RegisterPage() {
             )}
           </div>
 
+          {/* Confirm Password */}
+          <div>
+            <label className="block mb-1">Confirm Password</label>
+            <div
+              className={`flex items-center rounded-lg px-3 relative ${
+                darkMode ? "bg-white/20" : "bg-green-100"
+              }`}
+            >
+              <FaLock
+                className={`mr-2 ${darkMode ? "text-gray-200" : "text-black"}`}
+              />
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                placeholder="Confirm password"
+                {...register("confirmPassword", {
+                  required: "Please confirm your password",
+                  validate: (value) =>
+                    value === password || "Passwords do not match",
+                })}
+                className={`py-2 w-full pr-10 outline-none ${
+                  darkMode
+                    ? "bg-transparent text-white placeholder-gray-300"
+                    : "text-gray-600 placeholder-gray-600"
+                }`}
+              />
+              <div
+                className="absolute right-3 cursor-pointer"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              >
+                {showConfirmPassword ? (
+                  <FaEyeSlash
+                    className={`${
+                      darkMode ? "text-gray-300" : "text-gray-700"
+                    }`}
+                  />
+                ) : (
+                  <FaEye
+                    className={`${
+                      darkMode ? "text-gray-300" : "text-gray-700"
+                    }`}
+                  />
+                )}
+              </div>
+            </div>
+            {errors.confirmPassword && (
+              <p className="text-red-300 text-sm mt-1">
+                {errors.confirmPassword.message}
+              </p>
+            )}
+          </div>
+
           {/* Submit */}
           <button
             type="submit"
-            className="w-full bg-purple-700 hover:bg-purple-800 transition text-white font-bold py-3 rounded-lg"
+            disabled={password !== confirmPassword}
+            className={`w-full bg-purple-700 hover:bg-purple-800 transition text-white font-bold py-3 rounded-lg ${
+              password !== confirmPassword
+                ? "opacity-50 cursor-not-allowed"
+                : ""
+            }`}
           >
             Register
           </button>
@@ -204,7 +269,6 @@ function RegisterPage() {
               onClick={handleGoogleSignUp}
               className="p-2 border border-gray-300 text-3xl font-bold rounded-full hover:scale-95 transform transition-transform cursor-pointer mx-auto md:mx-0 shadow-md"
             >
-              {/* <FaGoogle /> Login with Google */}
               <FcGoogle />
             </button>
 
@@ -212,7 +276,6 @@ function RegisterPage() {
               onClick={""}
               className="p-2 border border-gray-300 text-3xl font-bold text-blue-500 rounded-full hover:scale-95 transform transition-transform cursor-pointer mx-auto md:mx-0 shadow-md"
             >
-              {/* <FaGoogle /> Login with Google */}
               <FaFacebookF />
             </button>
           </div>
