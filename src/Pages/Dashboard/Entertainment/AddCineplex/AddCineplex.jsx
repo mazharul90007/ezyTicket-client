@@ -18,7 +18,8 @@ const AddCineplex = () => {
       });
     
       const handleChange = (e) => {
-        const { name, value, type, checked } = e.target;
+        const { name, value, checked } = e.target;
+        // type,
     
         if (name in formData.facilities) {
           setFormData({
@@ -45,14 +46,10 @@ const AddCineplex = () => {
       };
   return (
     <div className="md:max-h-screen">
-      {/* <div className="bg-gradient-to-b from-purple-700 via-purple-800 to-purple-500">
-        <h1 className="text-5xl font-thin text-center bg-sky-900  text-white py-5">
-          Add Your Cinema Hall
-        </h1>
-      </div> */}
+    
 
       <div className="relative">
-        <img src="/addcine2.jpg" alt="" className="w-full h-auto object-cover"/>
+        <img src="/addcine2.jpg" alt="" className=""/>
         <div className="absolute inset-0 bg-black/40 bg-opacity-50"></div>
         
 

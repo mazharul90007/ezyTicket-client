@@ -29,9 +29,10 @@ import Profile from "../Pages/Dashboard/Profile/Profile";
 import ManageEventReview from "../Pages/Dashboard/Events/ManageEventReviews/ManageEventReview";
 import Checkout from "../Pages/Checkout/Checkout";
 import AddCineplex from "../Pages/Dashboard/Entertainment/AddCineplex/AddCineplex";
-import MyCineplex from "../Pages/Dashboard/Entertainment/MyCineplex/MyCineplex";
 import SoldedCineTicket from "../Pages/Dashboard/Entertainment/SoldedCineTicket/SoldedCineTicket";
 import ManageCineplex from "../Pages/Dashboard/Entertainment/ManageCineplex/ManageCineplex";
+import AddMovie from "../Pages/Dashboard/Entertainment/AddMovie/AddMovie";
+import MovieManager from "../Pages/Dashboard/Entertainment/MovieManager/MovieManager";
 
 const Route = createBrowserRouter([
   {
@@ -69,7 +70,7 @@ const Route = createBrowserRouter([
         element: <BusReservationPage />,
       },
       {
-        path: "/travel/bus-set",
+        path: "/travel/bus-set/:id",
         element: <TravelSelectSet />,
       },
       {
@@ -167,16 +168,21 @@ const Route = createBrowserRouter([
         element:<AddCineplex></AddCineplex>
       },
       {
-        path:'mycineplex',
-        element:<MyCineplex></MyCineplex>
+        path:'addmovie',
+        element:<AddMovie></AddMovie>
+
+      },
+      {
+        path:'managecineplex',
+        element:<ManageCineplex></ManageCineplex>
       },
       {
         path:'ticketcineplex',
         element:<SoldedCineTicket></SoldedCineTicket>
       },
       {
-        path:'managecineplex',
-        element:<ManageCineplex></ManageCineplex>
+        path:'managemovie',
+        element:<MovieManager></MovieManager>
       }
 
     ],
