@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { saveUserInformation } from "../../API/Utils";
 
 function LoginPage() {
   const { signIn, signInWithGoogle, setLoading, darkMode } = useAuth();
@@ -48,7 +49,9 @@ function LoginPage() {
   const handleGoogleSignIn = async () => {
     try {
       const result = await signInWithGoogle();
-      console.log(result);
+      const user = result?.user;
+      // Save user information in db if the user is new
+      await saveUserInformation(user);
       Swal.fire({
         icon: "success",
         title: "Login Successful",
