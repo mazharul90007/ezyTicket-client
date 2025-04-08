@@ -15,12 +15,14 @@ import { MdDateRange } from "react-icons/md";
 import { IoMdPricetags, IoIosTime, IoMdCloseCircleOutline } from "react-icons/io";
 import { GiTicket } from "react-icons/gi";
 import { FaMapMarkerAlt, FaMoneyCheckAlt } from "react-icons/fa";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const EventDetails = () => {
   // Hooks and state
   const { user, darkMode, userInfo } = useAuth();
   const { eventId } = useParams();
   const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
 
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, mins: 0, secs: 0 });
@@ -136,6 +138,11 @@ const EventDetails = () => {
       date: new Date().toISOString()
     };
     console.log(checkoutData);
+
+    const res = await axiosSecure.post('/order', checkoutData);
+    if(res.data){
+      window.location.replace(res.data.url);
+    }
   }
 
 
@@ -456,13 +463,6 @@ const EventDetails = () => {
 
                 {/* Checkout Button */}
                 <Link
-                  // to={'/checkout'}
-                  // state={{
-                  //   ticketQuantity,
-                  //   subtotal: (eventData?.price * ticketQuantity).toFixed(2),
-                  //   serviceFee: (eventData?.price * ticketQuantity * 0.05).toFixed(2),
-                  //   total: (eventData?.price * ticketQuantity * 1.05).toFixed(2)
-                  // }}
                   className="block mt-6"
                 >
                   <div className="relative group"> {/* Tooltip container */}
@@ -470,8 +470,8 @@ const EventDetails = () => {
                       onClick={handleCheckout}
                       disabled={!userInfo?.name || !userInfo?.email || !userInfo?.phone || !userInfo?.address}
                       className={`w-full ezy-button-primary py-3 rounded-lg font-bold flex items-center justify-center gap-2 ${(!userInfo?.name || !userInfo?.email || !userInfo?.phone || !userInfo?.address)
-                          ? 'opacity-50 !cursor-not-allowed'
-                          : ''
+                        ? 'opacity-50 !cursor-not-allowed'
+                        : ''
                         }`}
                     >
                       <FaBangladeshiTakaSign />
@@ -480,9 +480,9 @@ const EventDetails = () => {
 
                     {/* Tooltip that appears when disabled */}
                     {(!userInfo?.name || !userInfo?.email || !userInfo?.phone || !userInfo?.address) && (
-                      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 text-red-500 bg-gray-800 text-white text-sm rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2  bg-gray-800 text-white text-sm rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
                         Please update your full information to checkout
-                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-b-0 border-t-4 border-gray-800 border-transparent"></div>
+                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-b-0 border-t-4 border-gray-800"></div>
                       </div>
                     )}
                   </div>

@@ -28,6 +28,8 @@ import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import Profile from "../Pages/Dashboard/Profile/Profile";
 import ManageEventReview from "../Pages/Dashboard/Events/ManageEventReviews/ManageEventReview";
 import Checkout from "../Pages/Checkout/Checkout";
+import PaymentSuccess from "../Pages/PaymentSuccess/PaymentSuccess";
+import PaymentFail from "../Pages/PaymentFail/PaymentFail";
 
 const Route = createBrowserRouter([
   {
@@ -50,6 +52,14 @@ const Route = createBrowserRouter([
       {
         path: "/register",
         element: <RegisterPage></RegisterPage>,
+      },
+      {
+        path: "/payment/success/:tran_id",
+        element: <PaymentSuccess></PaymentSuccess>,
+      },
+      {
+        path: "/payment/fail/:tran_id",
+        element: <PaymentFail></PaymentFail>,
       },
       // --------------Travel route start----------
       {
