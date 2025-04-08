@@ -120,8 +120,11 @@ const Navbar = () => {
             </div>
             <div className={`border-t ${darkMode ? 'border-dark-secondary' : 'border-gray-200'}`}>
               <ul className={`p-4 text-sm md:text-base space-y-2 ${darkMode? 'text-dark-primary': 'text-gray-600'}`}>
+
                 <li><Link to="/dashboard" className="hover:text-supporting flex items-center gap-2"><span><MdDashboard /></span>Dashboard</Link></li>
+
                 <li><Link to="/profile" className=" hover:text-supporting flex items-center gap-2"><span><CgProfile /></span>Profile</Link></li>
+                
                 <li><button onClick={handleLogout} className="hover:text-supporting flex items-center gap-2"><span><MdLogout /></span>Logout</button></li>
               </ul>
             </div>

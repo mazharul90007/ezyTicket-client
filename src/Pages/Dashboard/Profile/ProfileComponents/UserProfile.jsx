@@ -8,8 +8,7 @@ import useAuth from "../../../../Hooks/useAuth";
 
 
 const UserProfile = () => {
-    const { userInfo } = useAuth();
-
+    const { userInfo, user, refetchUserInfo } = useAuth();
     return (
         <div className="min-h-screen">
             <div className="w-10/12 mx-auto">
@@ -19,7 +18,7 @@ const UserProfile = () => {
                     <div className="bg-gradient-to-r from-main to-green-500 h-46 relative">
                         <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2">
                             <img
-                                src={userInfo?.photoURL || noImage}
+                                src={userInfo?.photoURL || user?.photoURL || noImage}
                                 alt="User"
                                 className="w-32 h-32 rounded-full border-4 border-white shadow-lg object-cover"
                             />
@@ -29,7 +28,7 @@ const UserProfile = () => {
                     {/* Profile Content */}
                     <div className="pt-20 pb-8 px-6 sm:px-8 text-center">
                         <h1 className="text-3xl font-bold text-gray-800 mb-1">
-                            {userInfo?.displayName || 'Anonymous User'}
+                            {userInfo?.name || 'Anonymous User'}
                         </h1>
 
                         <div className="flex justify-center gap-2  md:gap-4 lg:gap-8 mt-6 mb-8">
@@ -93,16 +92,7 @@ const UserProfile = () => {
                         </div>
 
                         {/* Edit Button */}
-                        {/* <div className="mt-8">
-                            <Link
-                                to="/dashboard/edit-profile"
-                                className="ezy-button-primary"
-                            >
-                                <MdEdit className="mr-2" />
-                                Edit Profile
-                            </Link>
-                        </div> */}
-                        <EditButton user={userInfo}></EditButton>
+                        <EditButton user={userInfo} refetch={refetchUserInfo}></EditButton>
                     </div>
                 </div>
 

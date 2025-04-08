@@ -20,7 +20,7 @@ const Profile = () => {
     return (
         <div>
             {
-                userInfo?.role === 'user' ? <AdminProfile></AdminProfile>
+                userInfo?.role === 'admin' ? <AdminProfile></AdminProfile>
                     :
                     userInfo.role === 'travelManager' ? <TravelManagerProfile></TravelManagerProfile>
                         :

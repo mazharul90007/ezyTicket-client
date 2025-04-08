@@ -13,9 +13,9 @@ const SelectPlaceTime = () => {
 
     // Data from Travel Provider
     const {searchData, setSearchData,districts, filterBus, setFilterBus} = useTravelContext()
-    console.log("Search Data",searchData)
+    // console.log("Search Data",searchData)
 
-    console.log(filterBus)
+    // console.log(filterBus)
 
     const handleSearchData = (e) => {
         e.preventDefault();
@@ -41,7 +41,7 @@ const SelectPlaceTime = () => {
     // useEffect( ()=>{
        
     // },[searchData])
-    console.log(filterBus, "search", searchData)
+    // console.log(filterBus, "search", searchData)
     return (
         <section className="bg-white rounded">
             <form onSubmit={handleSearchData} className=" p-8 rounded border-black/20 flex flex-col lg:flex-row justify-between items-center gap-5 ">
