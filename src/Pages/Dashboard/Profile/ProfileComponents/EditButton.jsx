@@ -1,56 +1,87 @@
-import { useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
-import { toast } from 'react-hot-toast';
 import { MdEdit } from 'react-icons/md';
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 const EditButton = ({ user, refetch }) => {
-  const [isOpen, setIsOpen] = useState(false);
   const axiosSecure = useAxiosSecure();
+  const modalRef = useRef(null);
+
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     reset
-  } = useForm({
-    defaultValues: {
-      name: user?.displayName || '',
+  } = useForm();
+
+  // Set initial form values
+  useEffect(() => {
+    reset({
+      name: user?.name || '',
       phone: user?.phone || '',
       address: user?.address || '',
       email: user?.email || ''
+    });
+  }, [user, reset]);
+
+  // Modal functions using ref
+  const openModal = () => {
+    if (modalRef.current) {
+      modalRef.current.showModal();
     }
-  });
+  };
+
+  const closeModal = () => {
+    if (modalRef.current) {
+      refetch();
+      modalRef.current.close();
+    }
+  };
 
   const onSubmit = async (data) => {
     try {
       const res = await axiosSecure.patch(`/users/${user?.email}`, data);
+
       if (res.data.modifiedCount > 0) {
-        toast.success('Profile updated successfully');
-        refetch();
-        setIsOpen(false);
+        await refetch();
+        await Swal.fire({
+          title: "Updated!",
+          text: 'Profile Update Successful',
+          icon: "success",
+          timer: 2000,
+          showConfirmButton: false
+        });
+        closeModal();
       }
     } catch (error) {
-      toast.error('Failed to update profile');
       console.error(error);
+      await Swal.fire({
+        title: "Error!",
+        text: error.response?.data?.message || 'Profile Update Failed',
+        icon: "error",
+        timer: 2000,
+        showConfirmButton: false
+      });
+      closeModal();
     }
   };
 
   return (
     <>
-      {/* Modal toggle button - Add this to your profile pages */}
       <button
-        onClick={() => setIsOpen(true)}
+        onClick={openModal}
         className="ezy-button-primary mt-8"
       >
         <MdEdit className="mr-2" />
         Edit Profile
       </button>
 
-      {/* DaisyUI Modal */}
-      <dialog open={isOpen} className="modal modal-bottom sm:modal-middle">
+      <dialog ref={modalRef} id='updateProfile' className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
           <h3 className="font-bold text-lg">Edit Profile</h3>
           <form onSubmit={handleSubmit(onSubmit)} className="mt-4 space-y-4">
+            {/* Name Field */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Full Name</span>
@@ -58,13 +89,14 @@ const EditButton = ({ user, refetch }) => {
               <input
                 type="text"
                 {...register('name', { required: 'Name is required' })}
-                className="input input-bordered w-full"
+                className="input input-bordered w-full focus:outline-none"
               />
               {errors.name && (
                 <span className="text-error text-sm">{errors.name.message}</span>
               )}
             </div>
 
+            {/* Email Field */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -77,41 +109,52 @@ const EditButton = ({ user, refetch }) => {
               />
             </div>
 
+            {/* Phone Field */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Phone Number</span>
               </label>
               <input
                 type="tel"
-                {...register('phone')}
-                className="input input-bordered w-full"
+                {...register('phone', { required: 'Phone Number is required' })}
+                className="input input-bordered w-full focus:outline-none"
               />
+              {errors.phone && (
+                <span className="text-error text-sm">{errors.phone.message}</span>
+              )}
             </div>
 
+            {/* Address Field */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Address</span>
               </label>
               <input
                 type="text"
-                {...register('address')}
-                className="input input-bordered w-full"
+                {...register('address', {required: 'Address is required'})}
+                className="input input-bordered w-full focus:outline-none"
               />
+              {errors.address && (
+                <span className="text-error text-sm">{errors.address.message}</span>
+              )}
             </div>
 
+            {/* Buttons */}
             <div className="modal-action">
               <button
                 type="button"
-                onClick={() => {
-                  reset();
-                  setIsOpen(false);
-                }}
+                onClick={closeModal}
                 className="btn btn-ghost"
+                disabled={isSubmitting}
               >
                 Close
               </button>
-              <button type="submit" className="ezy-button-primary-sm">
-                Update Profile
+              <button
+                type="submit"
+                className="ezy-button-primary-sm"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Updating...' : 'Update Profile'}
               </button>
             </div>
           </form>

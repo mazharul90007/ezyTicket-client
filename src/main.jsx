@@ -17,7 +17,7 @@ createRoot(document.getElementById('root')).render(
       <AuthProvider>
         <TravelProvider>
           <RouterProvider router={Route} />
-          <ToastContainer />
+          <ToastContainer/>
         </TravelProvider>
       </AuthProvider>
     </QueryClientProvider>

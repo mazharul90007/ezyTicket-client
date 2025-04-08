@@ -92,17 +92,17 @@ const AuthProvider = ({ children }) => {
   }, [user?.displayName, user?.photoURL, axiosPublic]);
 
   //get user info from mongodb
-  useQuery({
+  const { data: userData, refetch: refetchUserInfo } = useQuery({
     queryKey: ['savedUser', user?.email],
     queryFn: async () => {
-      setUserInfoLoading(true)
-      if (!user?.email) return null; // Prevents API call if user is null
+      setUserInfoLoading(true);
+      if (!user?.email) return null;
       const res = await axiosSecure.get(`/users/${user.email}`);
       setUserInfo(res.data[0]);
       setUserInfoLoading(false);
       return res.data[0];
     },
-    enabled: !!user?.email, // Ensures query only runs when user is logged in
+    enabled: !!user?.email,
   });
 
   const authInfo = {
@@ -118,8 +118,9 @@ const AuthProvider = ({ children }) => {
     signInWithGoogle,
     logOut,
     updateUserProfile,
-    userInfo,
-    setUserInfo
+    userInfo: userData || userInfo,
+    setUserInfo,
+    refetchUserInfo,
   };
 
   return (
