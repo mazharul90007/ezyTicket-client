@@ -65,7 +65,7 @@ const Route = createBrowserRouter([
         element: <BusReservationPage />,
       },
       {
-        path: "/travel/bus-set",
+        path: "/travel/bus-set/:id",
         element: <TravelSelectSet />,
       },
       {

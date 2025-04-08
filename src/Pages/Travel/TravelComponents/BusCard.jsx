@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import useTravelContext from "../../../Hooks/TrevalHook/useTravelContext";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 const BusCard = ({ bus, time}) => {
-    const {busName, } = bus
+  
     const {searchData} =useTravelContext()
-    console.log(bus)
+    // console.log(bus)
 
     return (
         <div className="flex flex-col justify-between border rounded-2xl">
@@ -15,7 +15,7 @@ const BusCard = ({ bus, time}) => {
                     <img className="w-full md:w-20 h-[150px] md:h-20 object-cover" src="https://t4.ftcdn.net/jpg/02/69/47/51/360_F_269475198_k41qahrZ1j4RK1sarncMiFHpcmE2qllQ.jpg" alt="Bus Image" />
                     {/*  */}
                     <div className="md:max-w-[200px]">
-                        <h1 className="text-xl font-black">{busName}</h1>
+                        <h1 className="text-xl font-black">{bus?.busName}</h1>
                         <h1 className="text-xs">{bus?.from}</h1>
                     </div>
                 </div>
@@ -42,7 +42,7 @@ const BusCard = ({ bus, time}) => {
                     </div>
                     {/* action button and set */}
                     <div className="flex flex-col gap-2  items-center">
-                        <Link to="/travel/bus-set" className="btn bg-main px-2 w-full text-white">Buy Ticket</Link>
+                        <Link to={`/travel/bus-set/${bus?._id}`} state={bus} className="btn bg-main px-2 w-full text-white">Buy Ticket</Link>
                         <p className="text-xs"><span className="font-black">52</span> Sets (Available)</p>
                     </div>
                 </div>
