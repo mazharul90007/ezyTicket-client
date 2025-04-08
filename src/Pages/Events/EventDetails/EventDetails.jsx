@@ -41,6 +41,8 @@ const EventDetails = () => {
   const [isSaved, setIsSaved] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [comment, setComment] = useState("");
+
+  const [comments, setComments] = useState();
   const [ticketQuantity, setTicketQuantity] = useState(1);
   const [checkout, setCheckout] = useState(false);
 
@@ -67,6 +69,21 @@ const EventDetails = () => {
     },
     enabled: !!eventData?.location,
   });
+
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const res = await axiosPublic.get(`/event-reviews?eventId=${eventId}`);
+        setComments(res.data);
+      } catch (error) {
+        console.error("Error fetching comments:", error);
+      }
+    };
+
+    if (eventId) {
+      fetchComments();
+    }
+  }, [eventId]); // Only rerun when eventId changes
 
   // Effects
   useEffect(() => {
@@ -277,6 +294,19 @@ const EventDetails = () => {
           darkMode ? "bg-gray-200" : "bg-white"
         } p-6 rounded-lg shadow-lg w-11/12 md:w-3/5`}
       >
+        <div className="mt-2">
+          {comments?.length > 0 ? (
+            comments.map((comment, index) => (
+              <div key={index} className="border-b py-2">
+                <p className="font-semibold">{comment.userEmail}</p>
+                <p>{comment.comment}</p>
+              </div>
+            ))
+          ) : (
+            <p>No comments yet.</p>
+          )}
+        </div>
+
         <h2 className="text-xl font-bold mb-4">Add Comment</h2>
         <textarea
           value={comment}
@@ -285,6 +315,7 @@ const EventDetails = () => {
           className="w-full p-2 border rounded-md mb-4"
           placeholder="Write your comment here..."
         />
+
         <div className="flex justify-between">
           <button onClick={handleAddComment} className="ezy-button-primary-sm">
             Add Comment
@@ -678,12 +709,11 @@ const EventDetails = () => {
 
         {/* Comment Section */}
         <div className="flex gap-4 mt-10">
-          <button className="ezy-button-primary-sm">Comments</button>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="ezy-button-secondary-sm"
+            className="ezy-button-secondary-sm p-10 ml-85 items-center"
           >
-            Add Comment
+            Comments
           </button>
         </div>
 
