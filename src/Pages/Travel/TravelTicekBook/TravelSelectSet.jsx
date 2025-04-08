@@ -27,8 +27,10 @@ const TravelSelectSet = () => {
         const name = form.name.value;
         const email = form.email.value;
         const number = form.number.value;
+        const address = form.address.value;
         const totalPrices = selectedSeats.length * seatPrice;
-        const passengerData = {name,email,number,selectedSeats, totalPrices, seatPrice}
+        const passengerData = {name,email,number,selectedSeats,address, totalPrices, seatPrice}
+        console.log(passengerData)
 
         Swal.fire({
             title: "Ticket Book Successfully",
@@ -151,8 +153,18 @@ const TravelSelectSet = () => {
                                 required
                             />
                         </div>
+                        <div className="mb-4">
+                            <label className="block text-sm font-medium">Address</label>
+                            <input
+                                type="text"
+                                name="address"
+                                className="w-full border border-gray-300 rounded-lg px-4 py-2 mt-1"
+                                placeholder="Enter your address"
+                                required
+                            />
+                        </div>
                         {/* Booking Button */}
-                        <input type="submit" disabled={selectedSeats.length <1} className="w-full bg-main btn  py-2 rounded-lg font-semibold" />
+                        <input type="submit" value={"Checkout"} disabled={selectedSeats.length <1} className="w-full bg-main btn  py-2 rounded-lg font-semibold" />
                     </form>
                 </div>
             </div>
