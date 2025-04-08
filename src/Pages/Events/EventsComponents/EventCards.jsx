@@ -34,11 +34,13 @@ const EventCards = () => {
 
   if (error)
     return <p className="text-center text-red-500">Error: {error.message}</p>;
-  //new comment
 
-  // Show only the first 3 events
-  const displayedEvents = events.slice(0, 4);
 
+ 
+  const verifiedEvents = events.filter((event) => event.status === "verified");
+
+  
+  const displayedEvents = verifiedEvents.slice(0, 4);
   return (
     <div
       className={`py-10`}
