@@ -65,7 +65,7 @@ const EventInfo = () => {
     >
       <h1 className="text-3xl font-semibold">
         Experience Engaging Online and Venue Events with
-        <span className="text-green-400"> EzyTicket</span>
+        <span className="text-main"> EzyTicket</span>
       </h1>
       <p className="mt-4 text-lg max-w-3xl mx-auto">
         Organize venue events and host online events with unlimited

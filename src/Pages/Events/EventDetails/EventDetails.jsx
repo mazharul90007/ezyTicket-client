@@ -119,6 +119,26 @@ const EventDetails = () => {
     }
   };
 
+  //Handle Checkout
+  const handleCheckout = async () => {
+    const checkoutData = {
+      name: userInfo?.name,
+      email: userInfo?.email,
+      phone: userInfo?.phone,
+      address: userInfo?.address,
+      price: parseFloat((eventData?.price * ticketQuantity * 1.05).toFixed(2)),
+      product: eventData?.title,
+      productCategory: eventData?.category,
+      eventId: eventData?._id,
+      quantity: ticketQuantity,
+      status: 'pending',
+      paymentMethod: 'card',
+      date: new Date().toISOString()
+    };
+    console.log(checkoutData);
+  }
+
+
   const handleAddComment = async () => {
     if (!comment.trim()) {
       Swal.fire("Error", "Please enter a comment.", "error");
@@ -357,7 +377,7 @@ const EventDetails = () => {
 
               <div className="space-y-4">
                 {/* User Information */}
-                <div className={`p-4 rounded-lg ${darkMode ? "bg-dark-background" : "bg-gray-50"}`}>
+                <div className={`p-4 rounded-lg overflow-scroll ${darkMode ? "bg-dark-background" : "bg-gray-50"}`}>
                   <h4 className="text-lg font-semibold mb-3 text-supporting">Your Information</h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
@@ -436,19 +456,36 @@ const EventDetails = () => {
 
                 {/* Checkout Button */}
                 <Link
-                  to={'/checkout'}
-                  state={{
-                    ticketQuantity,
-                    subtotal: (eventData?.price * ticketQuantity).toFixed(2),
-                    serviceFee: (eventData?.price * ticketQuantity * 0.05).toFixed(2),
-                    total: (eventData?.price * ticketQuantity * 1.05).toFixed(2)
-                  }}
+                  // to={'/checkout'}
+                  // state={{
+                  //   ticketQuantity,
+                  //   subtotal: (eventData?.price * ticketQuantity).toFixed(2),
+                  //   serviceFee: (eventData?.price * ticketQuantity * 0.05).toFixed(2),
+                  //   total: (eventData?.price * ticketQuantity * 1.05).toFixed(2)
+                  // }}
                   className="block mt-6"
                 >
-                  <button className="w-full ezy-button-primary py-3 rounded-lg font-bold flex items-center justify-center gap-2">
-                    <FaBangladeshiTakaSign />
-                    Proceed to Checkout ({ticketQuantity} {ticketQuantity > 1 ? 'Tickets' : 'Ticket'})
-                  </button>
+                  <div className="relative group"> {/* Tooltip container */}
+                    <button
+                      onClick={handleCheckout}
+                      disabled={!userInfo?.name || !userInfo?.email || !userInfo?.phone || !userInfo?.address}
+                      className={`w-full ezy-button-primary py-3 rounded-lg font-bold flex items-center justify-center gap-2 ${(!userInfo?.name || !userInfo?.email || !userInfo?.phone || !userInfo?.address)
+                          ? 'opacity-50 !cursor-not-allowed'
+                          : ''
+                        }`}
+                    >
+                      <FaBangladeshiTakaSign />
+                      Proceed to Checkout ({ticketQuantity} {ticketQuantity > 1 ? 'Tickets' : 'Ticket'})
+                    </button>
+
+                    {/* Tooltip that appears when disabled */}
+                    {(!userInfo?.name || !userInfo?.email || !userInfo?.phone || !userInfo?.address) && (
+                      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 text-red-500 bg-gray-800 text-white text-sm rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                        Please update your full information to checkout
+                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-b-0 border-t-4 border-gray-800 border-transparent"></div>
+                      </div>
+                    )}
+                  </div>
                 </Link>
 
                 <p className="text-center text-sm text-gray-500 mt-2">
