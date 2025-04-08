@@ -28,16 +28,6 @@ const AddMovie = () => {
     setMovieData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleCinemaHallChange = (e) => {
-    const { options } = e.target;
-    const selected = [];
-    for (let i = 0; i < options.length; i++) {
-      if (options[i].selected) {
-        selected.push(options[i].value);
-      }
-    }
-    setMovieData((prev) => ({ ...prev, cinemaHalls: selected }));
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -141,9 +131,18 @@ const AddMovie = () => {
                 <label key={idx} className="flex items-center space-x-2">
                   <input
                     type="checkbox"
+                    name="cinemaHalls"
                     value={hall}
                     checked={movieData.cinemaHalls.includes(hall)}
-                    onChange={handleCinemaHallChange}
+                    onChange={(e) => {
+                        const { checked, value } = e.target;
+                        setMovieData((prev) => ({
+                          ...prev,
+                          cinemaHalls: checked
+                            ? [...prev.cinemaHalls, value]
+                            : prev.cinemaHalls.filter((h) => h !== value),
+                        }));
+                      }}
                     className="checkbox checkbox-primary"
                   />
                   <span className="text-sm">{hall}</span>
