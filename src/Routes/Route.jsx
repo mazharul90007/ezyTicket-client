@@ -28,8 +28,16 @@ import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import Profile from "../Pages/Dashboard/Profile/Profile";
 import ManageEventReview from "../Pages/Dashboard/Events/ManageEventReviews/ManageEventReview";
 import Checkout from "../Pages/Checkout/Checkout";
+<<<<<<< HEAD
 import PaymentSuccess from "../Pages/PaymentSuccess/PaymentSuccess";
 import PaymentFail from "../Pages/PaymentFail/PaymentFail";
+=======
+import AddCineplex from "../Pages/Dashboard/Entertainment/AddCineplex/AddCineplex";
+import SoldedCineTicket from "../Pages/Dashboard/Entertainment/SoldedCineTicket/SoldedCineTicket";
+import ManageCineplex from "../Pages/Dashboard/Entertainment/ManageCineplex/ManageCineplex";
+import AddMovie from "../Pages/Dashboard/Entertainment/AddMovie/AddMovie";
+import MovieManager from "../Pages/Dashboard/Entertainment/MovieManager/MovieManager";
+>>>>>>> ee0cd43d9675770f9f8aaa8b993194189de0018c
 
 const Route = createBrowserRouter([
   {
@@ -165,6 +173,31 @@ const Route = createBrowserRouter([
         element: <MyAddedEvents></MyAddedEvents>,
       },
       // -----------Events route ends------------
+
+
+      // -----------Entertaiment route start------------
+      {
+        path:'addcineplex',
+        element:<AddCineplex></AddCineplex>
+      },
+      {
+        path:'addmovie',
+        element:<AddMovie></AddMovie>
+
+      },
+      {
+        path:'managecineplex',
+        element:<ManageCineplex></ManageCineplex>
+      },
+      {
+        path:'ticketcineplex',
+        element:<SoldedCineTicket></SoldedCineTicket>
+      },
+      {
+        path:'managemovie',
+        element:<MovieManager></MovieManager>
+      }
+
     ],
   },
 ]);

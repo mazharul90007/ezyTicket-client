@@ -142,13 +142,18 @@ const Dashboard = () => {
                             <>
                                 <li onClick={closeMenu}><NavLink to="/dashboard/profile" className={getNavLinkClass}><IoPerson /> My Profile</NavLink></li>
 
-                                <li onClick={closeMenu}><NavLink to="/dashboard/services" className={getNavLinkClass}><TbHomePlus /> Add Post</NavLink></li>
+                                <li onClick={closeMenu}><NavLink to="/dashboard/addcineplex" className={getNavLinkClass}><TbHomePlus /> Add Cinema Hall</NavLink></li>
 
-                                <li onClick={closeMenu}><NavLink to="/dashboard/addedProperties" className={getNavLinkClass}><FaList /> My added Post</NavLink></li>
+                                <li onClick={closeMenu}><NavLink to="/dashboard/addmovie" className={getNavLinkClass}><TbHomePlus /> Add Movie Show</NavLink></li>
 
-                                <li onClick={closeMenu}><NavLink to="/dashboard/soldProperties" className={getNavLinkClass}><HiCurrencyDollar /> Ticket Sold</NavLink></li>
 
-                                <li onClick={closeMenu}><NavLink to="/dashboard/manageReview" className={getNavLinkClass}><FaHouseCircleExclamation /> Manage Review</NavLink></li>
+                                <li onClick={closeMenu}><NavLink to="/dashboard/ticketcineplex" className={getNavLinkClass}><HiCurrencyDollar /> Ticket Manager</NavLink></li>
+                                
+
+                                <li onClick={closeMenu}><NavLink to="/dashboard/managemovie" className={getNavLinkClass}><FaHouseCircleExclamation /> Manage Movies</NavLink></li>
+
+                                
+                                <li onClick={closeMenu}><NavLink to="/dashboard/managecineplex" className={getNavLinkClass}><FaList /> Manage Halls</NavLink></li>
                             </>
                         ) : (
                             <>
@@ -179,7 +184,7 @@ const Dashboard = () => {
 
             {/* Main Content Area */}
             <div className="flex-1 h-full overflow-y-auto">
-                <div className="p-4">
+                <div >
                     <Outlet />
                 </div>
             </div>
