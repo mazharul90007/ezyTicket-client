@@ -4,7 +4,7 @@ import HomeBanner from "./HomeComponents/HomeBanner";
 import HomeCategory from "./HomeComponents/HomeCategory";
 import EventSection from "./HomeComponents/EventSection";
 import eidPopUp from "../../assets/Home_image/eidPopUp.gif";
-import { getUserInformation } from "../../API/Utils";
+// import { getUserInformation } from "../../API/Utils";
 
 const Home = () => {
   // const location = useLocation();
@@ -30,8 +30,8 @@ const Home = () => {
   };
 
   // console.log(location);
-  const result = getUserInformation();
-  console.log(result);
+  // const result = getUserInformation();
+  // console.log(result);
 
   return (
     <div className="pt-16 min-h-screen relative">

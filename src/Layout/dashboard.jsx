@@ -144,11 +144,16 @@ const Dashboard = () => {
 
                                 <li onClick={closeMenu}><NavLink to="/dashboard/addcineplex" className={getNavLinkClass}><TbHomePlus /> Add Cinema Hall</NavLink></li>
 
-                                <li onClick={closeMenu}><NavLink to="/dashboard/mycineplex" className={getNavLinkClass}><FaList /> My Cinema Hall</NavLink></li>
+                                <li onClick={closeMenu}><NavLink to="/dashboard/addmovie" className={getNavLinkClass}><TbHomePlus /> Add Movie Show</NavLink></li>
 
-                                <li onClick={closeMenu}><NavLink to="/dashboard/ticketcineplex" className={getNavLinkClass}><HiCurrencyDollar /> Ticket Sold</NavLink></li>
 
-                                <li onClick={closeMenu}><NavLink to="/dashboard/managecineplex" className={getNavLinkClass}><FaHouseCircleExclamation /> Manage Cineplex</NavLink></li>
+                                <li onClick={closeMenu}><NavLink to="/dashboard/ticketcineplex" className={getNavLinkClass}><HiCurrencyDollar /> Ticket Manager</NavLink></li>
+                                
+
+                                <li onClick={closeMenu}><NavLink to="/dashboard/managemovie" className={getNavLinkClass}><FaHouseCircleExclamation /> Manage Movies</NavLink></li>
+
+                                
+                                <li onClick={closeMenu}><NavLink to="/dashboard/managecineplex" className={getNavLinkClass}><FaList /> Manage Halls</NavLink></li>
                             </>
                         ) : (
                             <>
