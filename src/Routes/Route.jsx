@@ -28,6 +28,10 @@ import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import Profile from "../Pages/Dashboard/Profile/Profile";
 import ManageEventReview from "../Pages/Dashboard/Events/ManageEventReviews/ManageEventReview";
 import Checkout from "../Pages/Checkout/Checkout";
+import AddCineplex from "../Pages/Dashboard/Entertainment/AddCineplex/AddCineplex";
+import MyCineplex from "../Pages/Dashboard/Entertainment/MyCineplex/MyCineplex";
+import SoldedCineTicket from "../Pages/Dashboard/Entertainment/SoldedCineTicket/SoldedCineTicket";
+import ManageCineplex from "../Pages/Dashboard/Entertainment/ManageCineplex/ManageCineplex";
 
 const Route = createBrowserRouter([
   {
@@ -155,6 +159,26 @@ const Route = createBrowserRouter([
         element: <MyAddedEvents></MyAddedEvents>,
       },
       // -----------Events route ends------------
+
+
+      // -----------Entertaiment route start------------
+      {
+        path:'addcineplex',
+        element:<AddCineplex></AddCineplex>
+      },
+      {
+        path:'mycineplex',
+        element:<MyCineplex></MyCineplex>
+      },
+      {
+        path:'ticketcineplex',
+        element:<SoldedCineTicket></SoldedCineTicket>
+      },
+      {
+        path:'managecineplex',
+        element:<ManageCineplex></ManageCineplex>
+      }
+
     ],
   },
 ]);
