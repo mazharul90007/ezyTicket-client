@@ -10,13 +10,20 @@ import useAuth from "../../../Hooks/useAuth";
 import { IoStar } from "react-icons/io5";
 import { MdCast, MdDirectionsBike, MdLocalMovies } from "react-icons/md";
 import TicketBooking from "./TicketBooking";
+import useEntertainmentData from "../../../Hooks/EntertainmentHook/useEntertainmentData";
 
-const MovieDetails = () => {
+
+const MovieDetailsPage = () => {
   // const [isavailable,seIsAvailablr]=useState('A4');
   const { darkMode } = useAuth();
   const { id } = useParams();
 
-  const movie = Movies.filter((movie) => movie.id == id)[0];
+  const {movies}=useEntertainmentData();
+  
+  const movie = movies.filter((movie) => movie._id == id)[0];
+
+
+
 
   return (
     <div
@@ -30,7 +37,7 @@ const MovieDetails = () => {
       <section>
         <div
           style={{
-            backgroundImage: `url(${movie?.poster})`,
+            backgroundImage: `url(${movie?.imageLink})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -47,9 +54,9 @@ const MovieDetails = () => {
               className="w-full md:w-md "
             >
               <img
-                src={movie?.poster}
+                src={movie?.imageLink }
                 alt={movie?.title}
-                className="rounded-lg shadow-lg w-full"
+                className="rounded-lg shadow-lg h-96"
               />
             </motion.div>
 
@@ -61,10 +68,10 @@ const MovieDetails = () => {
               className="w-full md:w-1/2 text-center md:text-left"
             >
               <h2 className=" gap-5 text-3xl md:text-5xl font-bold ">
-                {movie?.title}
+                {movie?.name}
               </h2>
               <div className="flex flex-col text-lg gap-4 mt-3">
-                <p>Duration : 2 hrs 30 mins</p>
+                <p>{movie.duration}</p>
                 <p>Imdb: 7.8/10</p>
                 <div className="flex items-center justify-center md:justify-start gap-4">
                   <Link to='https://www.youtube.com/watch?v=u9Mv98Gr5pY&ab_channel=SonyPicturesEntertainment'>
@@ -83,6 +90,18 @@ const MovieDetails = () => {
                   </button>
                 </div>
               </div>
+              <div className="flex mt-10">
+                <h1 className="my-auto mr-4">Showing On:</h1>
+                {
+                  movie.cinemaHalls.map((cinemaHall, index) => (
+
+                    <div className="border-2 border-purple-800 rounded-4xl py-2 px-3 mr-3" key={index}>
+                      <p>{cinemaHall}</p>
+
+                    </div>
+                  ))
+                }
+              </div>
             </motion.div>
           </div>
         </div>
@@ -90,7 +109,7 @@ const MovieDetails = () => {
       <div className="mt-12 w-10/12 pl-8 mx-auto ">
         <h1 className="text-3xl font-semibold">About the movie</h1>
         <p className="mt-4  text-lg ">
-          {movie.description ||
+          {movie?.description ||
             "The amazing viewer experience got in the theatre. This is the movie of all time. Book now to experience the best of the best."}
         </p>
 
@@ -98,13 +117,13 @@ const MovieDetails = () => {
         <ul className="mt-4  text-lg space-y-2">
           <li className="flex items-center gap-2">
             <MdLocalMovies />
-            Genre: {movie.genre}
+            Genre: {movie?.genre}
           </li>
           <li className="flex items-center gap-2">
             <MdDirectionsBike></MdDirectionsBike>Director: Jeremy Workman
           </li>
           <li className="flex items-center gap-2">
-            <IoStar /> Rating: {movie.rating}
+            <IoStar /> Rating: {movie?.rating}
           </li>
           <li className="flex items-center gap-2">
             <MdCast></MdCast> Casts: Tilda Swinton, Paul Bettany, Josh Brolin,
@@ -118,4 +137,4 @@ const MovieDetails = () => {
   );
 };
 
-export default MovieDetails;
+export default MovieDetailsPage;

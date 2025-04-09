@@ -1,21 +1,25 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
 
 const MovieManager = () => {
 
     const [movies,setMovies]=useState([]);
+    const axiosSecure= useAxiosSecure();
+
 
 console.log(movies);
     useEffect(()=>{
-       axios.get('http://localhost:3000/allmovies')
-       .then(res=>setMovies(res.data))
+       axiosSecure.get('/allmovies')
+       .then(res=>
+        
+        setMovies(res.data))
     },[])
 
     const handleDelete=(id)=>{  
         const confirmDelete = window.confirm("Are you sure you want to delete this movie?");
         if (confirmDelete) {
-            axios.delete(`http://localhost:3000/allmovies/${id}`)
+            axiosSecure.delete(`/allmovies/${id}`)
             .then(res=>{
                 if(res.data.deletedCount>0){
                     setMovies(movies.filter(movie => movie._id !== id));

@@ -11,7 +11,7 @@ const TicketBooking = () => {
   const { id } = useParams();
   const [selectedTime, setSelectedTime] = useState(null);
 
-  const timeSlots = ["7:30 AM", "12:30 PM", "4:30 PM", "8:30 PM"];
+  const timeSlots = ["11:00 AM", "01:30 PM", "5:30 PM", "8:00 PM"];
   const seatRows = ["A", "B", "C", "D", "F"];
   const seatPerRow = 8;
 
@@ -20,7 +20,7 @@ const TicketBooking = () => {
   );
   const movie = Movies.filter((movie) => movie.id == id)[0];
   const { darkMode } = useAuth();
-  console.log(selectedTime);
+  // console.log(selectedTime);
 
 
   const [formData, setFormData] = useState({
@@ -32,8 +32,8 @@ const TicketBooking = () => {
     time: "",
     seats: [],
   });
-  console.log(formData);
-  console.log(name);
+  // console.log(formData);
+  // console.log(name);
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     // setFormData({time:selectedTime})
@@ -137,7 +137,7 @@ const TicketBooking = () => {
               </div>
             </div>
             {/* Seat Selection */}
-            <div className="mb-4">
+            {/* <div className="mb-4">
               <h2 className="text-lg font-semibold mb-2">💺 Select Your Seats:</h2>
               <div className="grid grid-cols-5 md:grid-cols-8 gap-3 ">
                 {seatNumbers.map((seat) => (
@@ -152,7 +152,7 @@ const TicketBooking = () => {
                   </motion.button>
                 ))}
               </div>
-            </div>
+            </div> */}
 
 
             {/* Confirm Button */}
@@ -172,7 +172,7 @@ const TicketBooking = () => {
             </h2>
 
             <p className="text-center  mb-4">
-              Movie: <span className=" font-semibold">{movie.title}</span>
+              Movie: <span className=" font-semibold">{movie?.name}</span>
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-4">

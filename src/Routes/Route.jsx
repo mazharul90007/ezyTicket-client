@@ -34,6 +34,7 @@ import ManageCineplex from "../Pages/Dashboard/Entertainment/ManageCineplex/Mana
 import AddMovie from "../Pages/Dashboard/Entertainment/AddMovie/AddMovie";
 import MovieManager from "../Pages/Dashboard/Entertainment/MovieManager/MovieManager";
 import MovieDetails from "../Pages/Dashboard/Entertainment/MovieManager/MovieDetails/MovieDetails";
+import MovieDetailsPage from "../Pages/Entertainment/MovieDetails/MovieDetailsPage";
 
 
 const Route = createBrowserRouter([
@@ -128,7 +129,7 @@ const Route = createBrowserRouter([
       },
       {
         path: `/entertainment/allmovies/:id`,
-        element: <MovieDetails></MovieDetails>,
+        element: <MovieDetailsPage></MovieDetailsPage>,
       },
     ],
   },
