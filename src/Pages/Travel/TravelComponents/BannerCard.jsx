@@ -7,7 +7,7 @@ const BannerCard = () => {
     return (
         <section className="pt-20">
             <div className="text-center flex justify-center items-center text-2xl md:text-3xl lg:text-5xl mb-10">
-                <h1>Buy tickets in 4 easy steps</h1>
+                <h1 className={`text-2xl font-bold md:text-3xl lg:text-5xl ${darkMode ? "text-white": "text-black"}`}>Buy tickets in 4 easy steps</h1>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-10 container mx-auto px-5">
                 {
