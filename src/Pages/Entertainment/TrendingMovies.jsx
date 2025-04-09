@@ -35,13 +35,13 @@ const TrendingMovies = () => {
   const { darkMode } = useAuth();
 
   const {movies}=useEntertainmentData();
-  console.log(movies);
+
 
   return (
     <section className=" mt-24  px-4 md:px-10">
       <div className="flex justify-between">
         <h2 className="text-3xl border-l-4 pl-3 mb-4 text-supporting md:text-4xl font-bold ">
-          Trending Movies
+          Now Showing
         </h2>
 
         <Link to="allmovies">

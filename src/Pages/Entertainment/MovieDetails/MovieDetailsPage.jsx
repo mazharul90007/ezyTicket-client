@@ -29,7 +29,7 @@ const MovieDetailsPage = () => {
     <div
       className={`pt-16 bg-gradient-to-br ${
         darkMode
-          ? "from-black via-blue-900 to-purple-900 text-white"
+          ? "bg-neutral-900 text-white"
           : "from-green-200 via-green-50 to-green-200 text-black"
       }`}
     >
@@ -41,11 +41,11 @@ const MovieDetailsPage = () => {
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
-          className="relative bg-cover "
+          className="relative bg-cover text-white "
         >
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/80 md:via-black/80  to-black/90" />
 
-          <div className="relative container mx-auto py-16  px-6 flex flex-col md:flex-row items-center justify-center gap-10">
+          <div className="relative container  mx-auto py-16  px-6 flex flex-col md:flex-row items-center justify-center gap-10">
             {/* Left Side - Image */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -65,13 +65,13 @@ const MovieDetailsPage = () => {
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
-              className="w-full md:w-1/2 text-center md:text-left"
+              className="w-full md:w-1/2 text-center  md:text-left"
             >
-              <h2 className=" gap-5 text-3xl md:text-5xl font-bold ">
+              <h2 className=" gap-5 text-3xl md:text-5xl  font-bold ">
                 {movie?.name}
               </h2>
               <div className="flex flex-col text-lg gap-4 mt-3">
-                <p>{movie.duration}</p>
+                <p>{movie?.duration}</p>
                 <p>Imdb: 7.8/10</p>
                 <div className="flex items-center justify-center md:justify-start gap-4">
                   <Link to='https://www.youtube.com/watch?v=u9Mv98Gr5pY&ab_channel=SonyPicturesEntertainment'>
@@ -93,9 +93,9 @@ const MovieDetailsPage = () => {
               <div className="flex mt-10">
                 <h1 className="my-auto mr-4">Showing On:</h1>
                 {
-                  movie.cinemaHalls.map((cinemaHall, index) => (
+                  movie?.cinemaHalls.map((cinemaHall, index) => (
 
-                    <div className="border-2 border-purple-800 rounded-4xl py-2 px-3 mr-3" key={index}>
+                    <div className="border-2 border-purple-800 hover:bg-purple-800 transition-all duration-300 rounded-4xl py-2 px-3 mr-3" key={index}>
                       <p>{cinemaHall}</p>
 
                     </div>

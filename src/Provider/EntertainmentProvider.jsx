@@ -4,19 +4,29 @@ import useAxiosSecure from "../Hooks/useAxiosSecure";
 export const EntertainmentContext = createContext();
 
 const EntertainmentProvider = ({ children }) => {
+
+
   const [movies, setMovies] = useState([]);
+  const [halls, setHalls] = useState([]);
+
+
  const axiosSecure= useAxiosSecure();
 
    useEffect(()=>{
+
+    axiosSecure.get('/cinemahalls')
+            .then(res=>
+            setHalls(res.data))
+
          axiosSecure.get('/allmovies')
          .then(res=>
-          
           setMovies(res.data))
-      },[movies])
+      },[])
 
   const entertainmenInfo = {
     movies,
     setMovies,
+    halls
     
   };
 
