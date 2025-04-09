@@ -169,6 +169,8 @@ const EventDetails = () => {
       address: userInfo?.address,
       price: parseFloat((eventData?.price * ticketQuantity * 1.05).toFixed(2)),
       product: eventData?.title,
+      unitPrice: eventData?.price,
+      charge: parseFloat((eventData?.price * ticketQuantity * 0.05).toFixed(2)),
       productCategory: eventData?.category,
       eventId: eventData?._id,
       quantity: ticketQuantity,
@@ -222,8 +224,8 @@ const EventDetails = () => {
       >
         <div
           className={`text-xl font-semibold ${darkMode
-              ? "bg-dark-supporting text-dark-primary"
-              : "bg-supporting text-white"
+            ? "bg-dark-supporting text-dark-primary"
+            : "bg-supporting text-white"
             } w-full py-0.5 flex items-center justify-center`}
         >
           {month}
@@ -244,8 +246,8 @@ const EventDetails = () => {
         <div
           key={unit}
           className={`flex flex-col items-center ${darkMode
-              ? "bg-green-800 text-dark-primary"
-              : "bg-green-600 text-white"
+            ? "bg-green-800 text-dark-primary"
+            : "bg-green-600 text-white"
             } py-1 lg:py-2 px-3 lg:px-5 font-semibold rounded`}
         >
           <span className="text-3xl md:text-3xl font-bold">
@@ -413,8 +415,8 @@ const EventDetails = () => {
             <button
               onClick={handleSaveEvent}
               className={`flex flex-row btn ml-20 md:ml-60 lg:ml-90 mt-10 ${isSaved
-                  ? "bg-green-500 text-white"
-                  : "hover:bg-green-400 hover:text-white"
+                ? "bg-green-500 text-white"
+                : "hover:bg-green-400 hover:text-white"
                 }`}
             >
               <FaBookmark /> {isSaved ? "Saved" : "Save"}
@@ -422,8 +424,8 @@ const EventDetails = () => {
 
             <div
               className={`${darkMode
-                  ? "bg-dark-surface text-dark-primary"
-                  : "bg-white text-black"
+                ? "bg-dark-surface text-dark-primary"
+                : "bg-white text-black"
                 } mt-4 p-6 md:p-10 rounded-lg shadow`}
             >
               <h2 className="text-xl md:text-2xl font-bold text-black">
@@ -438,8 +440,8 @@ const EventDetails = () => {
             {/* -----------------Event Details----------------- */}
             <div
               className={`${darkMode
-                  ? "bg-dark-surface text-dark-primary"
-                  : "bg-white text-black"
+                ? "bg-dark-surface text-dark-primary"
+                : "bg-white text-black"
                 } p-2 md:p-4 shadow-md`}
             >
               <h3 className="text-xl md:text-2xl font-semibold mb-4">
@@ -498,8 +500,8 @@ const EventDetails = () => {
             {/* -------------------Billing Information--------------- */}
             <div
               className={`relative mt-8 ${checkout ? "block" : "hidden"} ${darkMode
-                  ? "bg-dark-surface text-dark-primary"
-                  : "bg-white text-black"
+                ? "bg-dark-surface text-dark-primary"
+                : "bg-white text-black"
                 } p-6 rounded-lg shadow-lg`}
             >
               {/* X Button to close the checkout panel */}
@@ -657,11 +659,11 @@ const EventDetails = () => {
                         !userInfo?.address
                       }
                       className={`w-full ezy-button-primary py-3 rounded-lg font-bold flex items-center justify-center gap-2 ${!userInfo?.name ||
-                          !userInfo?.email ||
-                          !userInfo?.phone ||
-                          !userInfo?.address
-                          ? "opacity-50 !cursor-not-allowed"
-                          : ""
+                        !userInfo?.email ||
+                        !userInfo?.phone ||
+                        !userInfo?.address
+                        ? "opacity-50 !cursor-not-allowed"
+                        : ""
                         }`}
                     >
                       <FaBangladeshiTakaSign />
