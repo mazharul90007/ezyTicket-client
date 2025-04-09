@@ -58,11 +58,11 @@ const PaymentSuccess = () => {
                             <div>
                                 <div className="flex items-center gap-2">
                                     <p className="text-sm font-medium text-gray-500">Order ID: </p>
-                                    <p className="text-lg font-semibold">{data._id}</p>
+                                    <p className="text-lg font-semibold text-gray-600">{data._id}</p>
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <p className="text-sm font-medium text-gray-500">Transaction ID: </p>
-                                    <p className="text-lg font-semibold">{data.transactionId}</p>
+                                    <p className="text-lg font-semibold text-gray-600">{data.transactionId}</p>
                                 </div>
                             </div>
                             <div className="text-right">
