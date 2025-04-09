@@ -54,7 +54,7 @@ const PaymentSuccess = () => {
                     </div>
 
                     <div className="border-t border-gray-200 px-6 py-5">
-                        <div className="flex justify-between items-start">
+                        <div className="flex flex-col md:flex-row justify-between items-start">
                             <div>
                                 <div className="flex items-center gap-2">
                                     <p className="text-sm font-medium text-gray-500">Order ID: </p>
@@ -65,9 +65,9 @@ const PaymentSuccess = () => {
                                     <p className="text-lg font-semibold text-gray-600">{data.transactionId}</p>
                                 </div>
                             </div>
-                            <div className="text-right">
+                            <div className="md:text-right flex md:flex-col items-center md:items-end gap-2">
                                 <p className="text-sm font-medium text-gray-500">Date</p>
-                                <p className="mt-1 text-lg">
+                                <p className="text-sm md:text-lg">
                                     {data.paymentTime}
                                 </p>
                             </div>
