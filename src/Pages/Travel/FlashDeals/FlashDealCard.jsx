@@ -13,7 +13,11 @@ const FlashDealCard = ({ deal }) => {
                     alt={title} />
             </figure> */}
             <div className=" rounded grid grid-cols-5 gap-5 h-full">
-                <div className="col-span-2 bg-main p-2 py-8 rounded flex flex-col items-center  -ml-4 -mt-4">
+                <div 
+                style={{
+                    backgroundImage: `url(${image})`,
+                  }}
+                className="col-span-2 bg-main p-2 py-8 rounded flex flex-col items-center  -ml-4 -mt-4 bg-cover h-full z-10 text-white">
                     <div>
                         <p className="text-sm">Up To</p>
                         <p className="font-bold"><span className="text-yellow-500">{discount} </span>Discount</p>
@@ -30,7 +34,7 @@ const FlashDealCard = ({ deal }) => {
                     <div>
                         <span className="font-black">Use Code:</span> <span className="text-supporting">{promoCode}</span>
                     </div>
-                    <Link to={"/travel/bus-ticket-book"} className="btn bg-main border-none text-white">Buy Now</Link>
+                    <Link to={"/travel/bus-ticket-book"} className="btn bg-main border-none text-white">Book Now</Link>
                 </div>
             </div>
         </div>
