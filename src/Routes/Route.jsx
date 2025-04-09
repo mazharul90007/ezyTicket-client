@@ -17,7 +17,6 @@ import AllEvents from "../Pages/Events/AllEvents/AllEvents";
 import MyWishList from "../Pages/MyWishList/MyWishList";
 import Contact from "../Pages/Contact/Contact";
 import AllMovie from "../Pages/Entertainment/AllMovie/AllMovies";
-import MovieDetails from "../Pages/Entertainment/MovieDetails/MovieDetails";
 import Dashboard from "../Layout/dashboard";
 import TravelSelectSet from "../Pages/Travel/TravelTicekBook/TravelSelectSet";
 import AddEvents from "../Pages/Dashboard/Events/AddEvents/AddEvents";
@@ -34,6 +33,8 @@ import SoldedCineTicket from "../Pages/Dashboard/Entertainment/SoldedCineTicket/
 import ManageCineplex from "../Pages/Dashboard/Entertainment/ManageCineplex/ManageCineplex";
 import AddMovie from "../Pages/Dashboard/Entertainment/AddMovie/AddMovie";
 import MovieManager from "../Pages/Dashboard/Entertainment/MovieManager/MovieManager";
+import MovieDetails from "../Pages/Dashboard/Entertainment/MovieManager/MovieDetails/MovieDetails";
+
 
 const Route = createBrowserRouter([
   {
@@ -192,6 +193,11 @@ const Route = createBrowserRouter([
       {
         path:'managemovie',
         element:<MovieManager></MovieManager>
+      },
+      {
+        path:'managemovie/moviedetails/:id',
+        element:<MovieDetails></MovieDetails> 
+        
       }
 
     ],

@@ -66,12 +66,17 @@ const AddCineplex = () => {
     });
   };
   return (
-    <div className="md:max-h-screen">
-      <div className="relative">
-        <img src="/addcine2.jpg" alt="" className="" />
+    <div className="md:max-h-screen"
+   
+    >
+      <div className="relative h-[700px] md:h-[1100px] bg-cover bg-center"
+      style={{ backgroundImage: "url('/addcine2.jpg')" }}
+      >
+
+        {/* <img src="/addcine2.jpg" alt="" className="w-full min-h-auto object-cover" /> */}
         <div className="absolute inset-0 bg-black/40 bg-opacity-50"></div>
 
-        <div className="max-w-3xl min-w-xs absolute top-70 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white md:p-6  text-center mx-auto   shadow-2xl rounded-xl mt-10">
+        <div className="max-w-3xl min-w-xs absolute top-80 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white md:p-6  text-center mx-auto   shadow-2xl rounded-xl mt-10">
           <h1 className="text-3xl font-semibold mb-6 text-center text-purple-700">
             Register Your Cinema Hall
           </h1>
