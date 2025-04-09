@@ -10,6 +10,7 @@ const FlashDeals = () => {
         {
           id: 1,
           title: "Up to 20% Discount on Eid-ul-Fitr Return Bus Tickets!",
+          discount:"20%",
           originalPrice: 1200,
           discountedPrice: 1000,
           promoCode: "EIDRETURN20",
@@ -21,6 +22,7 @@ const FlashDeals = () => {
           title: "Up to 15% Discount on Eid-ul-Fitr Bus Tickets!",
           originalPrice: 2000,
           discountedPrice: 1800,
+          discount:"15%",
           promoCode: "EID15",
           icon: <FaBus/>,
           image: DiscountImage2
@@ -30,6 +32,7 @@ const FlashDeals = () => {
           title: "10% Eid Discount on Bus Tickets with Programming Hero",
           originalPrice: 1000,
           discountedPrice: 900,
+          discount:"10%",
           promoCode: "EIDPH10",
           icon: <FaBus/>,
           image: DiscountImage3
@@ -45,7 +48,7 @@ const FlashDeals = () => {
                     subtitle={"Limited-Time Bus Ticket Discounts - Grab Exclusive Flash Deals for Affordable and Convenient Travel Before They're Gone!"}
                 />
             </div>
-            <div className="flex flex-col md:flex-row justify-between mt-10 gap-5">
+            <div className="flex flex-col md:flex-row justify-between mt-15 gap-10">
                 {
                     flashDeals.map((deal, idx) => <FlashDealCard key={idx} deal={deal}/>)
                 }
