@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import useEntertainmentData from "../../../../Hooks/EntertainmentHook/useEntertainmentData";
 
 
 const AddMovie = () => {
@@ -19,13 +20,12 @@ const AddMovie = () => {
     cinemaHalls: [],
   });
 
-  const cinemaHallOptions = [
-    "Hall 1",
-    "Hall 2",
-    "Hall 3",
-    "Premium Cineplex",
-    "IMAX Theater",
-  ];
+const {halls}=useEntertainmentData();
+
+
+const hallNames = halls.map(hall => hall.name); 
+console.log(hallNames);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -164,7 +164,7 @@ const AddMovie = () => {
               Select Cinema Halls
             </label>
             <div className="border rounded-lg p-4 space-y-2">
-              {cinemaHallOptions.map((hall, idx) => (
+              {hallNames.map((hall, idx) => (
                 <label key={idx} className="flex items-center space-x-2">
                   <input
                     type="checkbox"

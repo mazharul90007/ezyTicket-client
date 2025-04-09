@@ -1,90 +1,84 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Movies } from "../AllMovie/AllMovies";
 import { useParams } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import { motion } from "framer-motion";
-import axios from "axios";
 
 import Swal from "sweetalert2";
+import useEntertainmentData from "../../../Hooks/EntertainmentHook/useEntertainmentData";
 
 const TicketBooking = () => {
   const { id } = useParams();
   const [selectedTime, setSelectedTime] = useState(null);
+  const { userInfo,darkMode } = useAuth();
+  const { movies,halls } = useEntertainmentData();
 
-  const timeSlots = ["7:30 AM", "12:30 PM", "4:30 PM", "8:30 PM"];
-  const seatRows = ["A", "B", "C", "D", "F"];
-  const seatPerRow = 8;
+  const timeSlots = ["11:00 AM", "01:30 PM", "5:30 PM", "8:00 PM"];
+  
+  const cinemaHalls = movies.filter((m) => m._id == id)[0]?.cinemaHalls;
 
-  const seatNumbers = seatRows.flatMap((row) =>
-    Array.from({ length: seatPerRow }, (_, i) => `${row}${i + 1}`)
-  );
-  const movie = Movies.filter((movie) => movie.id == id)[0];
-  const { darkMode } = useAuth();
-  console.log(selectedTime);
+  const movie = movies.filter((movie) => movie._id == id)[0];
 
 
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    seat: 1,
+    name: userInfo?.name || "",
+    email: userInfo?.email || "",
+    phone: userInfo?.phone || "",
+    cineplex:"",
     date: "",
     time: "",
-    seats: [],
+    seats: 1,
+    priceperticket: 500,
+    address: userInfo?.address || "",
+
   });
-  console.log(formData);
-  console.log(name);
+
+  useEffect(()=>{
+
+    const selectedHall = halls.filter((h) => h.name == formData.cineplex)[0];
+    console.log(selectedHall?.price);
+  
+    if(selectedHall){
+      setFormData((prevData) => ({
+        ...prevData,priceperticket:selectedHall.price
+      }));}
+  },[formData.cineplex, halls])
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    // setFormData({time:selectedTime})
   };
   const handleTimeSelection = (time) => {
     setSelectedTime(time);
     setFormData((prevData) => ({
       ...prevData,
-      time, // Update formData with selected time
+      time,
     }));
   };
 
-  const handleSeatSelection = (seat) => {
-    setFormData((prevData) => {
-      const isSelected = prevData.seats.includes(seat);
-
-      return {
-        ...prevData,
-        seats: isSelected
-          ? prevData.seats.filter((s) => s !== seat) // Remove if already selected
-          : [...prevData.seats, seat], // Add new selection
-      };
-    });
-  };
-
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:3000/movie_tickets', formData)
-      .then(res => {
-        Swal.fire({
-          title: "Ticket Booked!",
-          text: ` Booking Confirmed for ${movie.title}!`,
-          icon: "success"
-        });
+    console.log(formData);
+    // axios.post('http://localhost:3000/movie_tickets', formData)
+    //   .then(res => {
+    //     Swal.fire({
+    //       title: "Ticket Booked!",
+    //       text: ` Booking Confirmed for ${movie.title}!`,
+    //       icon: "success"
+    //     });
 
-        setFormData(
-          {
-            name: "",
-            email: "",
-            phone: "",
-            seat: 1,
-            date: "",
-            time: "",
-            seats: [],
-          }
-        )
+    //     setFormData(
+    //       {
+    //         name: "",
+    //         email: "",
+    //         phone: "",
+    //         seat: 1,
+    //         date: "",
+    //         time: "",
+    //         seats: [],
+    //       }
+    //     )
 
-      })
-
+    //   })
   };
 
   return (
@@ -94,10 +88,11 @@ const TicketBooking = () => {
 
         <div className="md:w-1/2  flex justify-center items-center px-4">
           <div
-            className={`${darkMode
+            className={`${
+              darkMode
                 ? "text-white bg-gray-500/20 backdrop-blur-3xl"
                 : "bg-green-300/20 backdrop-blur-3xl"
-              }  p-6 rounded-lg shadow-lg w-11/12 md:w-2xl pb-8 mx-auto mt-10`}
+            }  p-6 rounded-lg shadow-lg w-11/12 md:w-2xl pb-8 mx-auto mt-10`}
           >
             <h1 className="text-2xl font-bold  text-center mb-6">
               🎬 Pick Your One
@@ -116,165 +111,179 @@ const TicketBooking = () => {
             </div>
 
             {/* Pick Time Slot */}
-            <div className="mb-4">
-              <h2 className="text-lg font-semibold  mb-2">
-                ⏰ Pick Time Slot:
-              </h2>
-              <div className="grid grid-cols-2 gap-3">
-                {timeSlots.map((time, index) => (
-                  <motion.button
-                    key={index}
-                    whileTap={{ scale: 0.9 }}
-                    className={`p-3 rounded-lg text-black text-center border ${selectedTime === time
-                        ? "bg-supporting "
-                        : "bg-gray-200 hover:bg-gray-300"
-                      } transition`}
-                    onClick={() => handleTimeSelection(time)}
-                  >
-                    {time}
-                  </motion.button>
-                ))}
-              </div>
-            </div>
-            {/* Seat Selection */}
-            <div className="mb-4">
-              <h2 className="text-lg font-semibold mb-2">💺 Select Your Seats:</h2>
-              <div className="grid grid-cols-5 md:grid-cols-8 gap-3 ">
-                {seatNumbers.map((seat) => (
-                  <motion.button
-                    key={seat}
-                    whileTap={{ scale: 0.9 }}
-                    className={`p-1 rounded-lg md:w-12 text-center border ${formData.seats.includes(seat) ? "bg-green-500 " : ""
-                      } transition`}
-                    onClick={() => handleSeatSelection(seat)}
-                  >
-                    {seat}
-                  </motion.button>
-                ))}
-              </div>
-            </div>
+            <div className="mb-6">
+  <h2 className="text-xl font-semiboldmb-4 flex items-center gap-2">
+    ⏰ Pick a Showtime
+  </h2>
+  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+    {timeSlots.map((time, index) => (
+      <motion.button
+        key={index}
+        whileTap={{ scale: 0.95 }}
+        whileHover={{ scale: 1.02 }}
+        className={`p-4 rounded-2xl border transition-all duration-300 font-medium text-sm shadow-sm ${
+          selectedTime === time
+            ? "bg-purple-600 text-white shadow-md ring-2 ring-purple-400"
+            : "bg-white text-gray-800 hover:bg-gray-100 border-gray-300"
+        }`}
+        onClick={() => handleTimeSelection(time)}
+      >
+        🎬 {time}
+      </motion.button>
+    ))}
+  </div>
+</div>
 
 
-            {/* Confirm Button */}
+            <div>
+              <label className="block text-sm ml-1 mt-2  mb-1">
+                Select Cineplex
+              </label>
+              <select
+                name="cineplex"
+                value={formData.cineplex}
+                onChange={handleChange}
+                className="w-full p-2 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-green-500"
+                required
+              >
+                {cinemaHalls?.map((num) => (
+                  <option key={num} value={num}>
+                    {num}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm ml-1 mt-2  mb-1">
+                Number of Seats
+              </label>
+              <select
+                name="seats"
+                value={formData.seats}
+                onChange={handleChange}
+                className="w-full p-2 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-green-500"
+                required
+              >
+                {[1, 2, 3, 4, 5, 6].map((num) => (
+                  <option key={num} value={num}>
+                    {num}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
         </div>
 
         {/* Booking form */}
-        <section >
+        <section>
           <div
-            className={`${darkMode
+            className={`${
+              darkMode
                 ? "text-white bg-gray-500/20 backdrop-blur-3xl"
                 : "bg-green-300/20 backdrop-blur-3xl"
-              }  p-6 rounded-lg shadow-lg   pb-8 mx-auto mt-10`}
+            }  p-6 rounded-lg shadow-lg   pb-8 mx-auto mt-10`}
           >
             <h2 className="text-2xl font-bold text-center mb-4">
               🎟 Book Your Ticket
             </h2>
 
             <p className="text-center  mb-4">
-              Movie: <span className=" font-semibold">{movie.title}</span>
+              Movie: <span className=" font-semibold">{movie?.name}</span>
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="md:flex gap-3 ">
-                {/* Name */}
-                <div>
-                  <label className="block text-sm ml-1 mt-2  mb-1">
-                    Full Name
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Enter your name"
-                    className="w-full  p-2 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-green-500"
-                    required
-                  />
+              <div
+                className={`p-4 rounded-lg overflow-scroll ${
+                  darkMode ? "bg-dark-background" : "bg-gray-50"
+                }`}
+              >
+                <h4 className="text-lg font-semibold mb-3 text-supporting">
+                  Your Information
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-sm text-gray-500">Full Name</p>
+                    <p className="font-medium">
+                      {userInfo?.name || "Not provided"}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500">Email</p>
+                    <p className="font-medium">
+                      {userInfo?.email || "Not provided"}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500">Phone</p>
+                    <p className="font-medium">
+                      {userInfo?.phone || "Not provided"}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500">Address</p>
+                    <p className="font-medium">
+                      {userInfo?.address || "Not provided"}
+                    </p>
+                  </div>
                 </div>
-
-                {/* Email */}
-                <div>
-                  <label className="block text-sm ml-1 mt-2  mb-1">Email</label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="Enter your email"
-                    className="w-full  p-2 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-green-500"
-                  />
+                <div className="mt-2 text-supporting">
+                  * If you want to edit information go to{" "}
+                  <a href="/dashboard/profile">
+                    <span className="text-green-600 font-medium underline cursor-pointer">
+                      Profile page
+                    </span>
+                  </a>
                 </div>
               </div>
-              {/* Phone */}
+
               <div>
-                <label className="block text-sm ml-1 mt-2  mb-1">Phone</label>
+                <label className="block text-sm ml-1 mt-2  mb-1">
+                  Price per Ticket
+                </label>
                 <input
-                  type="text"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  placeholder="Enter your number"
-                  className="w-full p-2 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-green-500"
+                  type="number"
+                  name="price"
+                  value={formData.priceperticket}
+                  placeholder="Ticket Price"
+                  className="w-full p-2 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-neutral-500"
                   required
+                  disabled
                 />
               </div>
-              {/* Date Selection */}
 
-              <div>
-                <label className="block text-sm ml-1 mt-2  mb-1">
-                  Select Cineplex
-                </label>
-                <select
-                  name="cineplex"
-                  value={formData.cineplex}
-                  onChange={handleChange}
-                  className="w-full p-2 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-green-500"
-                  required
-                >
-                  {[
-                    "AMC Theatres",
-                    "Regal Cinemas",
-                    "Cineplex Odeon",
-                    "IMAX",
-                    "Cinemark Theatres",
-                    "Showcase Cinemas",
-                    "Vue Cinemas",
-                    "Odeon Cinemas",
-                    "Cinépolis",
-                    "Pathé Cinemas",
-                    "Megaplex Theatres",
-                    "Event Cinemas",
-                    "Broadway Circuit",
-                  ].map((num) => (
-                    <option key={num} value={num}>
-                      {num}
-                    </option>
-                  ))}
-                </select>
+              <div
+                className={`p-4 rounded-lg ${
+                  darkMode ? "bg-dark-background" : "bg-gray-50"
+                }`}
+              >
+                <h4 className="text-lg font-semibold mb-3 text-supporting">
+                  Order Summary
+                </h4>
+                <div className="space-y-2">
+                  <div className="flex justify-between">
+                    <span>
+                      Ticket Price ({formData.seats} × Tk {formData.priceperticket})
+                    </span>
+                    <span className="font-medium">
+                      Tk {(formData.priceperticket * Number(formData.seats)).toFixed(2)}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Service Fee (5%)</span>
+                    <span className="font-medium">
+                      Tk {(formData.priceperticket * Number(formData.seats)* 0.05).toFixed(2)}
+                    </span>
+                  </div>
+                  <div className="border-t border-gray-300 pt-2 mt-2 flex justify-between font-bold text-lg">
+                    <span>Total</span>
+                    <span className="text-supporting">
+                      Tk {(formData.priceperticket * Number(formData.seats) * 1.05).toFixed(2)}
+                    </span>
+                  </div>
+                </div>
               </div>
 
-              {/* Number of Seats */}
-              <div>
-                <label className="block text-sm ml-1 mt-2  mb-1">
-                  Number of Seats
-                </label>
-                <select
-                  name="seats"
-                  value={formData.seats}
-                  onChange={handleChange}
-                  className="w-full p-2 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-green-500"
-                  required
-                >
-                  {[1, 2, 3, 4, 5, 6].map((num) => (
-                    <option key={num} value={num}>
-                      {num}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Submit Button */}
               <button
                 type="submit"
                 className="w-full bg-green-600  cursor-pointer transition text-white py-2 rounded-lg font-semibold"
