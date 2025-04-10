@@ -2,16 +2,17 @@ import EventCard from "./EventCard";
 import { MdDateRange } from "react-icons/md";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import tanoura from "../../../assets/Home_image/tanoura.jpg"
+// import useAuth from "../../../Hooks/useAuth";
+import cinema from "../../../assets/Home_image/banner-cineplex.jpg"
 import { useEffect, useState } from "react";
 import { useInView } from "framer-motion";
 import { motion } from "framer-motion";
-import { FaBus, FaCalendarAlt, FaHeadphonesAlt, FaMapMarkerAlt, FaRegSmile, FaStar, FaTag, FaTicketAlt } from "react-icons/fa";
+import { FaBus, FaCalendarAlt, FaChair, FaFilm, FaHeadphonesAlt, FaMapMarkerAlt, FaRegSmile, FaStar, FaTag, FaTicketAlt } from "react-icons/fa";
+import { LuPopcorn } from "react-icons/lu";
 import useAuth from "../../../Hooks/useAuth";
 
-const EventSection = () => {
+const EntertainmentSection = () => {
     const { darkMode } = useAuth();
-
     const { ref, inView } = useInView({
         triggerOnce: false,
         threshold: 0.3,
@@ -26,9 +27,8 @@ const EventSection = () => {
             setAnimate(false);
         }
     }, [inView]);
-
     return (
-        <section id="eventSection" className="mb-16" ref={ref}>
+        <section id="entertainmentSection" className="mb-16" ref={ref}>
             <div className="w-11/12 mx-auto px-4">
                 {/* Animated Image */}
                 <div className="mb-12 flex justify-center w-full h-[400px] md:h-[500px] lg:h-[600px]">
@@ -41,7 +41,7 @@ const EventSection = () => {
                         className="w-full h-full"
                     >
                         <img
-                            src={tanoura}
+                            src={cinema}
                             alt="Tanoura Dance"
                             className="object-cover w-full h-full rounded-xl"
                         />
@@ -52,33 +52,33 @@ const EventSection = () => {
 
                 {/* Text + Features */}
                 <div className="flex flex-col lg:flex-row gap-12">
-                    {/* Left - Text */}
+                    {/* Left - Text Content */}
                     <div className="lg:w-1/2">
                         <h2 className={`text-3xl md:text-5xl font-bold ${darkMode ? 'text-dark-primary' : 'text-gray-700'} mb-6`}>
-                            Get Your Event Tickets <br /> With EzyTicket
+                            Book Your Seat & <br /> Enjoy The Show
                         </h2>
 
                         <div className="space-y-6">
                             <div className="flex items-start gap-4">
-                                <FaTicketAlt className="text-xl md:text-2xl text-main mt-1" />
+                                <FaFilm className="text-2xl text-main mt-1" />
                                 <div>
                                     <h3 className={`text-xl md:text-2xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-700'} mb-1 md:mb-2`}>
-                                        Book Event Tickets Quickly and Easily
+                                        Latest Blockbusters & Classics
                                     </h3>
                                     <p className={`text-sm md:text-base ${darkMode ? 'text-dark-secondary' : 'text-gray-600'}`}>
-                                        Whether it’s concerts, theater, or festivals, we make it easy to book your event tickets online.
+                                        From Hollywood hits to indie gems, we've got all the movies you love in one place.
                                     </p>
                                 </div>
                             </div>
 
                             <div className="flex items-start gap-4">
-                                <FaStar className="text-xl md:text-2xl text-main mt-1" />
+                                <FaTicketAlt className="text-2xl text-main mt-1" />
                                 <div>
                                     <h3 className={`text-xl md:text-2xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-700'} mb-1 md:mb-2`}>
-                                        Exclusive Offers for Events
+                                        Instant Ticket Booking
                                     </h3>
                                     <p className={`text-sm md:text-base ${darkMode ? 'text-dark-secondary' : 'text-gray-600'}`}>
-                                        We offer exclusive discounts and unbeatable prices on the best events in town.
+                                        Secure your seats in seconds with our lightning-fast booking system.
                                     </p>
                                 </div>
                             </div>
@@ -88,56 +88,54 @@ const EventSection = () => {
                     {/* Right - Features */}
                     <div className="lg:w-1/2 rounded-xl">
                         <h3 className="text-2xl md:text-3xl font-bold text-main mb-4 md:mb-6">
-                            Why Choose EzyTicket for Your Events?
+                            Why Movie Lovers Choose Us
                         </h3>
 
                         <div className="space-y-6">
                             <div className="flex items-start gap-4">
-                                <FaCalendarAlt className="text-xl md:text-2xl text-main mt-1" />
+                                <FaCalendarAlt className="text-2xl text-main mt-1" />
                                 <div>
-                                    <h4 className={`text-lg md:text-xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-800'}`}>Top Events & Shows</h4>
+                                    <h4 className={`text-lg md:text-xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-800'}`}>Showtimes For All Schedules</h4>
                                     <p className={`text-sm md:text-base ${darkMode ? 'text-dark-secondary' : 'text-gray-600'}`}>
-                                        Choose from a wide variety of events, from live concerts to theater performances.
+                                        Morning matinees, evening shows, or late-night screenings - we've got you covered.
                                     </p>
                                 </div>
                             </div>
 
                             <div className="flex items-start gap-4">
-                                <FaHeadphonesAlt className="text-xl md:text-2xl text-main mt-1" />
+                                <FaChair className="text-2xl text-main mt-1" />
                                 <div>
-                                    <h4 className={`text-lg md:text-xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-800'}`}>Seamless Booking Experience</h4>
+                                    <h4 className={`text-lg md:text-xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-800'}`}>Best Seat Selection</h4>
                                     <p className={`text-sm md:text-base ${darkMode ? 'text-dark-secondary' : 'text-gray-600'}`}>
-                                        With just a few clicks, secure your tickets and enjoy a seamless experience.
+                                        Choose your perfect spot with our interactive seat maps.
                                     </p>
                                 </div>
                             </div>
 
                             <div className="flex items-start gap-4">
-                                <FaTag className="text-xl md:text-2xl text-main mt-1" />
+                                <LuPopcorn className="text-2xl text-main mt-1" />
                                 <div>
-                                    <h4 className={`text-lg md:text-xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-800'}`}>Exclusive Discounts</h4>
+                                    <h4 className={`text-lg md:text-xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-800'}`}>Combo Deals</h4>
                                     <p className={`text-sm md:text-base ${darkMode ? 'text-dark-secondary' : 'text-gray-600'}`}>
-                                        Enjoy amazing deals and discounts on your event bookings.
+                                        Special discounts on ticket+popcorn combos and other snacks.
                                     </p>
                                 </div>
                             </div>
                         </div>
 
                         <div className="mt-8">
-                            <Link to={'/events'}>
-                                <button className="ezy-button-primary w-fit py-3 text-lg font-semibold">
-                                    Book Your Event Ticket Now
+                            <Link to={'/entertainment'}>
+                                <button className="ezy-button-primary w-fit py-3 text-lg font-semibold flex items-center gap-2">
+                                    <FaTicketAlt /> Book Movie Tickets Now
                                 </button>
                             </Link>
                         </div>
                     </div>
                 </div>
 
-
             </div>
         </section>
-
     );
 };
 
-export default EventSection;
+export default EntertainmentSection;

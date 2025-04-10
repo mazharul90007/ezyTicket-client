@@ -9,7 +9,7 @@ const Travel = () => {
   const {darkMode} = useAuth()
   return (
     <section 
-    className={`${darkMode ? "bg-[#111111] " : "bg-white "} overflow-x-hidden`}
+    className={`${darkMode ? "bg-[#111111] " : ""} overflow-x-hidden`}
     >
       <TravelBanner />
 

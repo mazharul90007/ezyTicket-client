@@ -2,6 +2,7 @@ import useAuth from "../../../Hooks/useAuth";
 import { LuPopcorn } from "react-icons/lu";
 import { FaBus } from "react-icons/fa";
 import { GiMicrophone } from "react-icons/gi";
+import { Link } from "react-router-dom";
 
 const HomeCategory = () => {
     const { darkMode } = useAuth()
@@ -15,15 +16,17 @@ const HomeCategory = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 py-8">
                     {/* Bus */}
-                    <div className={`md:col-span-1 shadow p-8 ${darkMode ? 'bg-dark-surface hover:bg-[#3D3D3D]' : 'bg-white'} rounded-lg cursor-pointer hover:scale-105 transform transition-all duration-300`}>
-                        <div className="mb-4 text-7xl text-dark-accent font-bold">
-                            <FaBus />
+                    <a href="busSection">
+                        <div className={`md:col-span-1 shadow p-8 ${darkMode ? 'bg-dark-surface hover:bg-[#3D3D3D]' : 'bg-white'} rounded-lg cursor-pointer hover:scale-105 transform transition-all duration-300`}>
+                            <div className="mb-4 text-7xl text-dark-accent font-bold">
+                                <FaBus />
+                            </div>
+
+                            <h3 className={`text-2xl font-semibold ${darkMode && 'text-dark-primary'}`}><span className={`${darkMode ? 'text-dark-supporting' : 'text-supporting'}`}>Bus </span>Ticket</h3>
+
+                            <p className={`text-lg ${darkMode && 'text-dark-secondary'}`}>Your journey starts here! Book bus tickets effortlessly on EzyTicket. </p>
                         </div>
-
-                        <h3 className={`text-2xl font-semibold ${darkMode && 'text-dark-primary'}`}><span className={`${darkMode ? 'text-dark-supporting' : 'text-supporting'}`}>Bus </span>Ticket</h3>
-
-                        <p className={`text-lg ${darkMode && 'text-dark-secondary'}`}>Your journey starts here! Book bus tickets effortlessly on EzyTicket. </p>
-                    </div>
+                    </a>
 
                     {/* Event */}
                     <div className={`md:col-span-1 shadow p-8 ${darkMode ? 'bg-dark-surface hover:bg-[#3D3D3D]' : 'bg-white'} rounded-lg cursor-pointer hover:scale-105 transform transition-all duration-300`}>

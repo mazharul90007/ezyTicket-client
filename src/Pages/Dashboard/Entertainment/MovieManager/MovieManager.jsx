@@ -8,13 +8,13 @@ const MovieManager = () => {
     const axiosSecure= useAxiosSecure();
 
 
-console.log(movies);
+// console.log(movies);
     useEffect(()=>{
        axiosSecure.get('/allmovies')
        .then(res=>
         
         setMovies(res.data))
-    },[])
+    },[axiosSecure])
 
     const handleDelete=(id)=>{  
         const confirmDelete = window.confirm("Are you sure you want to delete this movie?");
