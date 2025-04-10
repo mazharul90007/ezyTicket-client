@@ -180,7 +180,7 @@ const EventDetails = () => {
     };
     console.log(checkoutData);
 
-    const res = await axiosSecure.post('/order', checkoutData);
+    const res = await axiosSecure.post("/order", checkoutData);
     if (res.data) {
       window.location.replace(res.data.url);
     }
@@ -193,12 +193,24 @@ const EventDetails = () => {
     }
 
     try {
+      const localTime = new Date().toLocaleString(); // Get local time as a readable string
+
       await axiosPublic.post("/event-reviews", {
         eventId: eventData._id,
         comment: comment,
-        userEmail: user?.email,
+        customerEmail: user?.email,
+        customerName: user?.displayName,
+        customerPhoto: user?.photoURL,
+        time: localTime,
+        category: "event",
+        status: "pending",
       });
-      Swal.fire("Success", "Your comment has been added!", "success");
+
+      Swal.fire(
+        "Success",
+        "Your comment has been submitted for review.",
+        "success"
+      );
       setComment("");
       setIsModalOpen(false);
     } catch (error) {
@@ -212,27 +224,30 @@ const EventDetails = () => {
     const EventDate = eventData?.eventDate?.split("T")[0];
     const month = EventDate
       ? new Date(eventData?.eventDate).toLocaleString("default", {
-        month: "long",
-      })
+          month: "long",
+        })
       : "";
     const day = EventDate ? new Date(eventData?.eventDate).getDate() : "";
 
     return (
       <div
-        className={`flex flex-col items-center text-center overflow-hidden rounded-md shadow-md border ${darkMode ? "border-gray-600" : "border-gray-100"
-          }`}
+        className={`flex flex-col items-center text-center overflow-hidden rounded-md shadow-md border ${
+          darkMode ? "border-gray-600" : "border-gray-100"
+        }`}
       >
         <div
-          className={`text-xl font-semibold ${darkMode
-            ? "bg-dark-supporting text-dark-primary"
-            : "bg-supporting text-white"
-            } w-full py-0.5 flex items-center justify-center`}
+          className={`text-xl font-semibold ${
+            darkMode
+              ? "bg-dark-supporting text-dark-primary"
+              : "bg-supporting text-white"
+          } w-full py-0.5 flex items-center justify-center`}
         >
           {month}
         </div>
         <div
-          className={`text-4xl font-semibold ${darkMode ? "bg-dark-surface" : "bg-white"
-            } py-2 px-6 flex items-center justify-center`}
+          className={`text-4xl font-semibold ${
+            darkMode ? "bg-dark-surface" : "bg-white"
+          } py-2 px-6 flex items-center justify-center`}
         >
           {day}
         </div>
@@ -245,10 +260,11 @@ const EventDetails = () => {
       {Object.entries(timeLeft).map(([unit, value]) => (
         <div
           key={unit}
-          className={`flex flex-col items-center ${darkMode
-            ? "bg-green-800 text-dark-primary"
-            : "bg-green-600 text-white"
-            } py-1 lg:py-2 px-3 lg:px-5 font-semibold rounded`}
+          className={`flex flex-col items-center ${
+            darkMode
+              ? "bg-green-800 text-dark-primary"
+              : "bg-green-600 text-white"
+          } py-1 lg:py-2 px-3 lg:px-5 font-semibold rounded`}
         >
           <span className="text-3xl md:text-3xl font-bold">
             {String(value).padStart(2, "0")}
@@ -265,9 +281,10 @@ const EventDetails = () => {
         <button
           onClick={() => setTicketQuantity((prev) => Math.max(1, prev - 1))}
           className={`w-8 h-8 rounded-full flex items-center justify-center text-xl font-bold 
-            ${ticketQuantity <= 1
-              ? "bg-gray-300 cursor-not-allowed"
-              : "bg-supporting text-white hover:bg-supporting-dark"
+            ${
+              ticketQuantity <= 1
+                ? "bg-gray-300 cursor-not-allowed"
+                : "bg-supporting text-white hover:bg-supporting-dark"
             }`}
           disabled={ticketQuantity <= 1}
         >
@@ -277,9 +294,10 @@ const EventDetails = () => {
         <button
           onClick={() => setTicketQuantity((prev) => Math.min(4, prev + 1))}
           className={`w-8 h-8 rounded-full flex items-center justify-center text-xl font-bold 
-            ${ticketQuantity >= 4
-              ? "bg-gray-300 cursor-not-allowed"
-              : "bg-supporting text-white hover:bg-supporting-dark"
+            ${
+              ticketQuantity >= 4
+                ? "bg-gray-300 cursor-not-allowed"
+                : "bg-supporting text-white hover:bg-supporting-dark"
             }`}
           disabled={ticketQuantity >= 4}
         >
@@ -293,17 +311,33 @@ const EventDetails = () => {
   const CommentModal = () => (
     <div className="fixed inset-0 bg-black/60 bg-opacity-75 flex items-center justify-center z-50">
       <div
-        className={`${darkMode ? "bg-gray-200" : "bg-white"
-          } p-6 rounded-lg shadow-lg w-11/12 md:w-3/5`}
+        className={`${
+          darkMode ? "bg-gray-200" : "bg-white"
+        } p-6 rounded-lg shadow-lg w-11/12 md:w-3/5`}
       >
         <div className="mt-2">
           {comments?.length > 0 ? (
-            comments.map((comment, index) => (
-              <div key={index} className="border-b py-2">
-                <p className="font-semibold">{comment.userEmail}</p>
-                <p>{comment.comment}</p>
-              </div>
-            ))
+            comments
+              .filter((comment) => comment.eventId === eventData._id) // Filter comments by eventId
+              .map((comment, index) => (
+                <div
+                  key={index}
+                  className="border-b py-2 flex items-start gap-4"
+                >
+                  {/* User Image */}
+                  <img
+                    src={comment.customerPhoto || noImage} // Display user photo or default image
+                    alt={comment.customerName}
+                    className="w-10 h-10 rounded-full object-cover"
+                  />
+                  <div className="flex flex-col">
+                    <p className="font-semibold">{comment.customerName}</p>
+                    <p>{comment.comment}</p>
+                    <p className="text-sm text-gray-500">{comment.time}</p>{" "}
+                    {/* Show the time */}
+                  </div>
+                </div>
+              ))
           ) : (
             <p>No comments yet.</p>
           )}
@@ -336,8 +370,9 @@ const EventDetails = () => {
   const SuggestedEventCard = ({ event }) => (
     <Link to={`/eventdetailspublic/${event._id}`}>
       <div
-        className={`${darkMode ? "bg-dark-surface text-dark-primary" : "bg-white text-black"
-          } rounded-md overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300 h-full flex flex-col group`}
+        className={`${
+          darkMode ? "bg-dark-surface text-dark-primary" : "bg-white text-black"
+        } rounded-md overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300 h-full flex flex-col group`}
       >
         <div className="overflow-hidden">
           <img
@@ -377,8 +412,9 @@ const EventDetails = () => {
 
   return (
     <div
-      className={`py-24 ${darkMode ? "bg-dark-background text-dark-primary" : "bg-background"
-        }`}
+      className={`py-24 ${
+        darkMode ? "bg-dark-background text-dark-primary" : "bg-background"
+      }`}
     >
       <div className="mx-auto w-11/12">
         {/* Event Header */}
@@ -414,19 +450,21 @@ const EventDetails = () => {
 
             <button
               onClick={handleSaveEvent}
-              className={`flex flex-row btn ml-20 md:ml-60 lg:ml-90 mt-10 ${isSaved
-                ? "bg-green-500 text-white"
-                : "hover:bg-green-400 hover:text-white"
-                }`}
+              className={`flex flex-row btn ml-35 md:ml-60 lg:ml-90 mt-10 ${
+                isSaved
+                  ? "bg-green-500 text-white"
+                  : "hover:bg-green-400 hover:text-white"
+              }`}
             >
               <FaBookmark /> {isSaved ? "Saved" : "Save"}
             </button>
 
             <div
-              className={`${darkMode
-                ? "bg-dark-surface text-dark-primary"
-                : "bg-white text-black"
-                } mt-4 p-6 md:p-10 rounded-lg shadow`}
+              className={`${
+                darkMode
+                  ? "bg-dark-surface text-dark-primary"
+                  : "bg-white text-black"
+              } mt-4 p-6 md:p-10 rounded-lg shadow`}
             >
               <h2 className="text-xl md:text-2xl font-bold text-black">
                 {eventData?.name}
@@ -439,10 +477,11 @@ const EventDetails = () => {
           <div className="rounded-lg h-fit lg:col-span-1">
             {/* -----------------Event Details----------------- */}
             <div
-              className={`${darkMode
-                ? "bg-dark-surface text-dark-primary"
-                : "bg-white text-black"
-                } p-2 md:p-4 shadow-md`}
+              className={`${
+                darkMode
+                  ? "bg-dark-surface text-dark-primary"
+                  : "bg-white text-black"
+              } p-2 md:p-4 shadow-md`}
             >
               <h3 className="text-xl md:text-2xl font-semibold mb-4">
                 Event Details
@@ -499,10 +538,11 @@ const EventDetails = () => {
 
             {/* -------------------Billing Information--------------- */}
             <div
-              className={`relative mt-8 ${checkout ? "block" : "hidden"} ${darkMode
-                ? "bg-dark-surface text-dark-primary"
-                : "bg-white text-black"
-                } p-6 rounded-lg shadow-lg`}
+              className={`relative mt-8 ${checkout ? "block" : "hidden"} ${
+                darkMode
+                  ? "bg-dark-surface text-dark-primary"
+                  : "bg-white text-black"
+              } p-6 rounded-lg shadow-lg`}
             >
               {/* X Button to close the checkout panel */}
               <button
@@ -522,8 +562,9 @@ const EventDetails = () => {
               <div className="space-y-4">
                 {/* User Information */}
                 <div
-                  className={`p-4 rounded-lg overflow-scroll ${darkMode ? "bg-dark-background" : "bg-gray-50"
-                    }`}
+                  className={`p-4 rounded-lg overflow-scroll ${
+                    darkMode ? "bg-dark-background" : "bg-gray-50"
+                  }`}
                 >
                   <h4 className="text-lg font-semibold mb-3 text-supporting">
                     Your Information
@@ -566,8 +607,9 @@ const EventDetails = () => {
 
                 {/* Event Information */}
                 <div
-                  className={`p-4 rounded-lg ${darkMode ? "bg-dark-background" : "bg-gray-50"
-                    }`}
+                  className={`p-4 rounded-lg ${
+                    darkMode ? "bg-dark-background" : "bg-gray-50"
+                  }`}
                 >
                   <h4 className="text-lg font-semibold mb-3 text-supporting">
                     Event Details
@@ -600,8 +642,9 @@ const EventDetails = () => {
 
                 {/* Ticket Quantity */}
                 <div
-                  className={`p-4 rounded-lg ${darkMode ? "bg-dark-background" : "bg-gray-50"
-                    }`}
+                  className={`p-4 rounded-lg ${
+                    darkMode ? "bg-dark-background" : "bg-gray-50"
+                  }`}
                 >
                   <h4 className="text-lg font-semibold mb-3 text-supporting">
                     Ticket Quantity
@@ -611,8 +654,9 @@ const EventDetails = () => {
 
                 {/* Payment Summary */}
                 <div
-                  className={`p-4 rounded-lg ${darkMode ? "bg-dark-background" : "bg-gray-50"
-                    }`}
+                  className={`p-4 rounded-lg ${
+                    darkMode ? "bg-dark-background" : "bg-gray-50"
+                  }`}
                 >
                   <h4 className="text-lg font-semibold mb-3 text-supporting">
                     Order Summary
@@ -644,9 +688,7 @@ const EventDetails = () => {
                 </div>
 
                 {/* Checkout Button */}
-                <Link
-                  className="block mt-6"
-                >
+                <Link className="block mt-6">
                   <div className="relative group">
                     {" "}
                     {/* Tooltip container */}
@@ -658,13 +700,14 @@ const EventDetails = () => {
                         !userInfo?.phone ||
                         !userInfo?.address
                       }
-                      className={`w-full ezy-button-primary py-3 rounded-lg font-bold flex items-center justify-center gap-2 ${!userInfo?.name ||
+                      className={`w-full ezy-button-primary py-3 rounded-lg font-bold flex items-center justify-center gap-2 ${
+                        !userInfo?.name ||
                         !userInfo?.email ||
                         !userInfo?.phone ||
                         !userInfo?.address
-                        ? "opacity-50 !cursor-not-allowed"
-                        : ""
-                        }`}
+                          ? "opacity-50 !cursor-not-allowed"
+                          : ""
+                      }`}
                     >
                       <FaBangladeshiTakaSign />
                       Proceed to Checkout ({ticketQuantity}{" "}
@@ -675,11 +718,11 @@ const EventDetails = () => {
                       !userInfo?.email ||
                       !userInfo?.phone ||
                       !userInfo?.address) && (
-                        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2  bg-gray-800 text-sm rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-                          Please update your full information to checkout
-                          <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-b-0 border-t-4 border-gray-800"></div>
-                        </div>
-                      )}
+                      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2  bg-gray-800 text-sm rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                        Please update your full information to checkout
+                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-b-0 border-t-4 border-gray-800"></div>
+                      </div>
+                    )}
                   </div>
                 </Link>
 
@@ -695,7 +738,11 @@ const EventDetails = () => {
         <div className="flex gap-4 mt-10">
           <button
             onClick={() => setIsModalOpen(true)}
+
+            
+
             className="ezy-button-secondary-sm p-10"
+
           >
             Comments
           </button>
