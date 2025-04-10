@@ -22,12 +22,9 @@ function LoginPage() {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
   } = useForm();
 
   const [showPassword, setShowPassword] = useState(false);
-  const [retypePassword, setRetypePassword] = useState("");
-  const [passwordMatch, setPasswordMatch] = useState(true);
 
   const onSubmit = async (data) => {
     const { email, password } = data;
@@ -50,7 +47,6 @@ function LoginPage() {
     try {
       const result = await signInWithGoogle();
       const user = result?.user;
-      // Save user information in db if the user is new
       await saveUserInformation(user);
       Swal.fire({
         icon: "success",
@@ -67,186 +63,148 @@ function LoginPage() {
 
   return (
     <div
-      className={`min-h-screen flex items-center justify-center mt-18 bg-gradient-to-br py-20 ${
+      className={`min-h-screen grid md:grid-cols-2 px-6 ${
         darkMode
-          ? "from-black via-blue-900 to-purple-900"
-          : "from-green-200 via-green-50 to-green-200"
+          ? "bg-gradient-to-r from-purple-900  via-blue-900 to-black "
+          : "bg-white"
       }`}
     >
+      {/* Left Panel */}
       <div
-        className={`${
-          darkMode ? "bg-white/10 text-white" : "bg-white text-black"
-        } backdrop-blur-md p-10 rounded-2xl shadow-xl w-full max-w-md`}
+        className={`hidden md:flex items-center justify-center p-10 ${
+          darkMode
+            ? "bg-gradient-to-r from-purple-900  via-blue-900 to-black "
+            : "bg-white"
+        }`}
       >
-        <h2 className="text-3xl font-bold text-center mb-6">Welcome Back</h2>
-
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-          {/* Email Field */}
-          <div>
-            <label className="block mb-1">Email</label>
-            <div
-              className={`flex items-center ${
-                darkMode ? "bg-white/20" : "bg-green-100"
-              } rounded-lg px-3 py-2`}
-            >
-              <FaEnvelope
-                className={`${darkMode ? "text-gray-200" : "text-black"} mr-2`}
-              />
-              <input
-                type="email"
-                placeholder="Enter email"
-                {...register("email", { required: true })}
-                className={`${
-                  darkMode
-                    ? "outline-none bg-transparent text-white placeholder-gray-300"
-                    : "outline-none text-gray-500 placeholder-gray-600"
-                } py-2 w-full`}
-              />
-            </div>
-            {errors.email && (
-              <p className="text-red-300 text-sm mt-1">Email is required</p>
-            )}
-          </div>
-
-          {/* Password Field */}
-          <div>
-            <label className="block mb-1">Password</label>
-            <div
-              className={`flex items-center justify-between ${
-                darkMode ? "bg-white/20" : "bg-green-100"
-              } rounded-lg px-3 py-2`}
-            >
-              <div className="flex items-center w-full">
-                <FaLock
-                  className={`${
-                    darkMode ? "text-gray-200" : "text-black"
-                  } mr-2`}
-                />
-                <input
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Enter password"
-                  {...register("password", { required: true })}
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    setPasswordMatch(value === retypePassword);
-                  }}
-                  className={`${
-                    darkMode
-                      ? "outline-none bg-transparent text-white placeholder-gray-300"
-                      : "outline-none text-gray-500 placeholder-gray-600"
-                  } py-2 w-full`}
-                />
-              </div>
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className={`ml-2 text-xl ${
-                  darkMode ? "text-gray-300" : "text-gray-600"
-                }`}
-              >
-                {showPassword ? <FaEyeSlash /> : <FaEye />}
-              </button>
-            </div>
-            {errors.password && (
-              <p className="text-red-300 text-sm mt-1">Password is required</p>
-            )}
-          </div>
-
-          {/* Retype Password Field */}
-          <div className="mt-4">
-            <label className="block mb-1">Retype Password</label>
-            <div
-              className={`flex items-center justify-between ${
-                darkMode ? "bg-white/20" : "bg-green-100"
-              } rounded-lg px-3 py-2`}
-            >
-              <div className="flex items-center w-full">
-                <FaLock
-                  className={`${
-                    darkMode ? "text-gray-200" : "text-black"
-                  } mr-2`}
-                />
-                <input
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Retype password"
-                  value={retypePassword}
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    setRetypePassword(value);
-                    setPasswordMatch(value === watch("password"));
-                  }}
-                  className={`${
-                    darkMode
-                      ? "outline-none bg-transparent text-white placeholder-gray-300"
-                      : "outline-none text-gray-500 placeholder-gray-600"
-                  } py-2 w-full`}
-                />
-              </div>
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className={`ml-2 text-xl ${
-                  darkMode ? "text-gray-300" : "text-gray-600"
-                }`}
-              >
-                {showPassword ? <FaEyeSlash /> : <FaEye />}
-              </button>
-            </div>
-            {!passwordMatch && (
-              <p className="text-red-300 text-sm mt-1">
-                Passwords do not match
-              </p>
-            )}
-          </div>
-
-          {/* Login Button */}
-          <button
-            type="submit"
-            disabled={!passwordMatch}
-            className={`w-full text-center py-2 md:py-3 bg-supporting rounded-lg shadow-md transform transition-transform cursor-pointer text-white font-semibold mx-auto md:mx-0 ${
-              !passwordMatch
-                ? "opacity-50 cursor-not-allowed"
-                : "hover:scale-95"
+        <div className="text-center space-y-6">
+          <h1
+            className={`text-5xl font-extrabold ${
+              darkMode ? "text-white" : "text-green-700"
+            } drop-shadow`}
+          >
+            Welcome Back!
+          </h1>
+          <p
+            className={`text-lg ${
+              darkMode ? "text-gray-300" : "text-gray-700"
+            } max-w-md mx-auto`}
+          >
+            Dive into your dashboard and manage everything in one place. Fast,
+            secure, and stylish.
+          </p>
+          <p
+            className={`text-md italic ${
+              darkMode ? "text-amber-300" : "text-green-500"
             }`}
           >
-            Login
-          </button>
-        </form>
-
-        {/* Social Login */}
-        <div className="text-center mt-4">
-          <div className="divider">OR</div>
-          <div className="flex gap-2 justify-center">
-            <button
-              onClick={handleGoogleSignIn}
-              className="p-2 border border-gray-300 text-3xl font-bold rounded-full hover:scale-95 transform transition-transform cursor-pointer mx-auto md:mx-0 shadow-md"
-            >
-              <FcGoogle />
-            </button>
-
-            <button
-              onClick={""}
-              className="p-2 border border-gray-300 text-3xl font-bold text-blue-500 rounded-full hover:scale-95 transform transition-transform cursor-pointer mx-auto md:mx-0 shadow-md"
-            >
-              <FaFacebookF />
-            </button>
-          </div>
+            "The journey of a thousand miles begins with a single login."
+          </p>
         </div>
+      </div>
 
-        {/* Register Link */}
-        <p
-          className={`text-center text-sm ${
-            darkMode ? "text-gray-300" : "text-gray-500"
-          } mt-6`}
+      {/* Right Form Panel */}
+      <div
+        className={`flex items-center justify-center py-20 ${
+          darkMode
+            ? "bg-gradient-to-r from-black via-blue-900 to-purple-900 text-white"
+            : "bg-white text-black"
+        }`}
+      >
+        <div
+          className={`${
+            darkMode
+              ? "bg-white/10 backdrop-blur-md border border-white/20 text-white"
+              : "bg-white text-black"
+          } p-10 rounded-2xl shadow-2xl w-full max-w-md`}
         >
-          Don’t have an account?{" "}
-          <Link
-            to={"/register"}
-            className="text-amber-600 font-semibold underline"
-          >
-            Register
-          </Link>
-        </p>
+          <h2 className="text-3xl font-bold text-center mb-6">Sign In</h2>
+
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+            {/* Email Field */}
+            <div>
+              <label className="block mb-1">Email</label>
+              <div className="flex items-center bg-green-100 rounded-lg px-3 py-2">
+                <FaEnvelope className="text-black mr-2" />
+                <input
+                  type="email"
+                  placeholder="Enter email"
+                  {...register("email", { required: true })}
+                  className="outline-none text-gray-700 placeholder-gray-600 py-2 w-full bg-transparent"
+                />
+              </div>
+              {errors.email && (
+                <p className="text-red-500 text-sm mt-1">Email is required</p>
+              )}
+            </div>
+
+            {/* Password Field */}
+            <div>
+              <label className="block mb-1">Password</label>
+              <div className="flex items-center justify-between bg-green-100 rounded-lg px-3 py-2">
+                <div className="flex items-center w-full">
+                  <FaLock className="text-black mr-2" />
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Enter password"
+                    {...register("password", { required: true })}
+                    className="outline-none text-gray-700 placeholder-gray-600 py-2 w-full bg-transparent"
+                  />
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="ml-2 text-xl text-gray-600"
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
+              </div>
+              {errors.password && (
+                <p className="text-red-500 text-sm mt-1">
+                  Password is required
+                </p>
+              )}
+            </div>
+
+            {/* Login Button */}
+            <button
+              type="submit"
+              className="w-full text-center py-3 bg-supporting rounded-lg shadow-md transition-transform hover:scale-95 text-white font-semibold"
+            >
+              Login
+            </button>
+          </form>
+
+          {/* Social Login */}
+          <div className="text-center mt-4">
+            <div className="divider">OR</div>
+            <div className="flex gap-2 justify-center">
+              <button
+                onClick={handleGoogleSignIn}
+                className="p-2 border border-gray-300 text-3xl rounded-full hover:scale-95 transition-transform shadow-md"
+              >
+                <FcGoogle />
+              </button>
+              <button
+                onClick={""}
+                className="p-2 border border-gray-300 text-3xl text-blue-500 rounded-full hover:scale-95 transition-transform shadow-md"
+              >
+                <FaFacebookF />
+              </button>
+            </div>
+          </div>
+
+          {/* Register Link */}
+          <p className="text-center text-sm mt-6 text-gray-300">
+            Don’t have an account?{" "}
+            <Link
+              to={"/register"}
+              className="text-amber-400 font-semibold underline"
+            >
+              Register
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );
