@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Movies } from "../AllMovie/AllMovies";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import { motion } from "framer-motion";
 
 import Swal from "sweetalert2";
 import useEntertainmentData from "../../../Hooks/EntertainmentHook/useEntertainmentData";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { FaBangladeshiTakaSign } from "react-icons/fa6";
 
 const TicketBooking = () => {
   const { id } = useParams();
   const [selectedTime, setSelectedTime] = useState(null);
   const { userInfo,darkMode } = useAuth();
   const { movies,halls } = useEntertainmentData();
+  const axiosSecure= useAxiosSecure()
 
   const timeSlots = ["11:00 AM", "01:30 PM", "5:30 PM", "8:00 PM"];
   
@@ -30,6 +33,8 @@ const TicketBooking = () => {
     seats: 1,
     priceperticket: 500,
     address: userInfo?.address || "",
+    movieName: movie?.name || "",
+    // totalPrice: (formData?.priceperticket * Number(formData?.seats) * 1.05)
 
   });
 
@@ -55,30 +60,57 @@ const TicketBooking = () => {
     }));
   };
 
+
+
+
+  const handleCheckout = async () => {
+    const checkoutData = {
+      name: userInfo?.name,
+      email: userInfo?.email,
+      phone: userInfo?.phone,
+      address: userInfo?.address,
+      price: parseFloat((formData?.priceperticket * Number(formData.seats) * 1.05).toFixed(2)),
+      product: formData?.movieName,
+      unitPrice: formData?.priceperticket,
+      charge: parseFloat((formData?.priceperticket * Number(formData.seats) * 0.05).toFixed(2)),
+      productCategory: movie?.category,
+      eventId: movie?._id,
+      quantity: Number(formData.seats),
+      status: "pending",
+      paymentMethod: "card",
+      date: new Date().toISOString(),
+    };
+    console.log(checkoutData);
+
+    const res = await axiosSecure.post('/order', checkoutData);
+    if (res.data) {
+      window.location.replace(res.data.url);
+    }
+  };
+
+
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
-    // axios.post('http://localhost:3000/movie_tickets', formData)
-    //   .then(res => {
-    //     Swal.fire({
-    //       title: "Ticket Booked!",
-    //       text: ` Booking Confirmed for ${movie.title}!`,
-    //       icon: "success"
-    //     });
+    axiosSecure.post('/movie_tickets', formData)
+      .then(() => {
+        Swal.fire({
+          title: "Ticket Booked!",
+          text: ` Booking Confirmed for ${movie.title}!`,
+          icon: "success"
+        });
 
-    //     setFormData(
-    //       {
-    //         name: "",
-    //         email: "",
-    //         phone: "",
-    //         seat: 1,
-    //         date: "",
-    //         time: "",
-    //         seats: [],
-    //       }
-    //     )
+        setFormData(
+          {     
+            date: "",
+            time: "",
+            seats: [],
+          }
+        )
 
-    //   })
+      })
   };
 
   return (
@@ -284,12 +316,47 @@ const TicketBooking = () => {
                 </div>
               </div>
 
-              <button
-                type="submit"
-                className="w-full bg-green-600  cursor-pointer transition text-white py-2 rounded-lg font-semibold"
-              >
-                🎟 Confirm Booking
-              </button>
+              <Link
+                  className="block mt-6"
+                >
+                  <div className="relative group">
+                    {" "}
+                    {/* Tooltip container */}
+                    <button
+                      onClick={handleCheckout}
+                      disabled={
+                        !userInfo?.name ||
+                        !userInfo?.email ||
+                        !userInfo?.phone ||
+                        !userInfo?.address
+                      }
+                      className={`w-full ezy-button-primary py-3 rounded-lg font-bold flex items-center justify-center gap-2 ${!userInfo?.name ||
+                        !userInfo?.email ||
+                        !userInfo?.phone ||
+                        !userInfo?.address
+                        ? "opacity-50 !cursor-not-allowed"
+                        : ""
+                        }`}
+                    >
+                      <FaBangladeshiTakaSign />
+                      Proceed to Checkout 
+                    </button>
+                    {/* Tooltip that appears when disabled */}
+                    {(!userInfo?.name ||
+                      !userInfo?.email ||
+                      !userInfo?.phone ||
+                      !userInfo?.address) && (
+                        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2  bg-gray-800 text-sm rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                          Please update your full information to checkout
+                          <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-b-0 border-t-4 border-gray-800"></div>
+                        </div>
+                      )}
+                  </div>
+                </Link>
+
+                <p className="text-center text-sm text-gray-500 mt-2">
+                  Secure payment processing powered by Stripe
+                </p>
             </form>
           </div>
         </section>

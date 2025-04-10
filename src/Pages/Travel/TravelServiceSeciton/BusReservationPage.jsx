@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import travelBannerImage from "../../../assets/Travel_image/travel-service/bg-bus.jpg"
 import useTravelData from '../../../Hooks/TrevalHook/useTravelData';
-import Heading from '../../../components/Heading';
+import Swal from 'sweetalert2'
 const BusReservationPage = () => {
-  const {busServices} =  useTravelData()
+  const { busServices } = useTravelData()
 
   const [serviceType, setServiceType] = useState('');
   const [name, setName] = useState('');
@@ -16,6 +16,11 @@ const BusReservationPage = () => {
     e.preventDefault();
     // Handle form submission
     console.log({ serviceType, name, email, phone, date, message });
+    Swal.fire({
+      title: "We will Contact with you vary soon",
+      icon: "success",
+      draggable: true
+    });
   };
 
   return (
@@ -27,11 +32,10 @@ const BusReservationPage = () => {
       >
         <div className="absolute inset-0 "></div>
         <div className="text-center text-white relative z-10">
-          <Heading
-          color="text-main"
-          title="Book Your Bus Easily"
-          subtitle="Experience a fast, secure, and hassle-free way to reserve bus tickets. Choose your starting point, destination, and travel date effortlessly with our user-friendly booking system."
-          />
+          <div className={` text-center container mx-auto`}>
+            <h1 className={`text-3xl font-bold md:text-4xl lg:text-6xl text-main`}>Book Your Bus Easily</h1>
+            <p className='mt-5 md:w-10/12 mx-auto text-white'>Experience a fast, secure, and hassle-free way to reserve bus tickets. Choose your starting point, destination, and travel date effortlessly with our user-friendly booking system.</p>
+          </div>
         </div>
       </div>
 
@@ -43,17 +47,17 @@ const BusReservationPage = () => {
             <label className="block text-sm font-medium text-gray-700">Select Service Type</label>
             <div className="mt-1 grid grid-cols-2 gap-4">
               {
-                busServices?.map((service,idx)=><button
-                key={idx}
-                type="button"
-                onClick={() => setServiceType(`${service.title}`)}
-                className={`p-4 border rounded-lg flex items-center justify-center ${serviceType === `${service?.title}` ? 'bg-main text-white' : 'bg-gray-100'}`}
-              >
-                {service?.icon} {service?.title}
-              </button>)
+                busServices?.map((service, idx) => <button
+                  key={idx}
+                  type="button"
+                  onClick={() => setServiceType(`${service.title}`)}
+                  className={`p-4 border rounded-lg flex items-center justify-center ${serviceType === `${service?.title}` ? 'bg-main text-white' : 'bg-gray-100'}`}
+                >
+                  {service?.icon} {service?.title}
+                </button>)
               }
-              
-             
+
+
             </div>
           </div>
 

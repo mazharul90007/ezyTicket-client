@@ -5,12 +5,15 @@ import useAuth from "../../../Hooks/useAuth";
 import { MdLocalMovies } from "react-icons/md";
 import "./allmovie.css";
 import Select from "react-select";
+import useEntertainmentData from "../../../Hooks/EntertainmentHook/useEntertainmentData";
+import MovieCard from "../Components/MovieCard";
 
 export const Movies = [
   {
     id: 21,
     title: "Venom",
-    poster:"https://imageio.forbes.com/specials-images/imageserve/67508810cdaf3caeed2896b9/0x0.jpg?format=jpg&crop=1150,647,x0,y43,safe&height=900&width=1600&fit=bounds",
+    poster:
+      "https://imageio.forbes.com/specials-images/imageserve/67508810cdaf3caeed2896b9/0x0.jpg?format=jpg&crop=1150,647,x0,y43,safe&height=900&width=1600&fit=bounds",
     genre: "Sci-Fi, Action",
     rating: 4.8,
   },
@@ -40,14 +43,16 @@ export const Movies = [
   {
     id: 2,
     title: "Wicked",
-    poster:"https://ionabmargit.pages.dev/hwmkbvp-wicked-2024-poster-images-wepnwrd/wicked_2024_poster.jpg",
+    poster:
+      "https://ionabmargit.pages.dev/hwmkbvp-wicked-2024-poster-images-wepnwrd/wicked_2024_poster.jpg",
     genre: "Musical, Fantasy",
     rating: 4.8,
   },
   {
     id: 3,
     title: "Den of Thieves 2: Pantera",
-    poster:"https://www.impawards.com/2024/posters/den_of_thieves_two_pantera_ver3.jpg",
+    poster:
+      "https://www.impawards.com/2024/posters/den_of_thieves_two_pantera_ver3.jpg",
     genre: "Action, Thriller",
     rating: 4.7,
   },
@@ -187,6 +192,9 @@ const AllMovies = () => {
   const [selectedLocations, setSelectedLocations] = useState([]);
 
   const { darkMode } = useAuth();
+  const { halls,movies } = useEntertainmentData();
+
+  console.log(movies);
 
   const options = [
     { value: "london", label: "London" },
@@ -263,32 +271,40 @@ const AllMovies = () => {
           />
         </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-4 md:gap-10 overflow-x-auto no-scrollbar md:overflow-visible">
-        {Movies.map((movie) => (
-          <div
-            key={movie.id}
-            className={`min-w-[280px] flex flex-col justify-between md:min-w-0 ${darkMode? "text-white bg-gray-800":""} rounded-xl shadow-lg hover:shadow-green-600 transition hover:-translate-y-1 duration-300`}
-          >
-            <img
-              src={movie.poster}
-              alt={movie.title}
-              className="rounded-t-xl h-56 w-full object-cover"
-            />
-            <div className="p-5">
-              <h3 className="text-xl font-semibold mb-1">{movie.title}</h3>
-              <p className="text-sm text-gray-400 mb-2">{movie.genre}</p>
-              <div className="flex items-center gap-1 text-yellow-400">
-                <FaStar />
-                <span>{movie.rating}</span>
-              </div>
-              <Link to={`/entertainment/allmovies/${movie.id}`}>
-                <button className="mt-4 w-full bg-green-600 hover:bg-green-700 transition text-white py-2 cursor-pointer rounded-full font-semibold">
-                  Book Now
-                </button>
-              </Link>
-            </div>
+
+      <div className="flex justify-between">
+       
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-4 md:gap-10 overflow-x-auto no-scrollbar md:overflow-visible">
+          {movies.map((movie) => (
+          <MovieCard movie={movie}></MovieCard>
+          ))}
+        </div>
+
+
+        
+        <div className="w-64 h-96 overflow-auto">
+          <label className="block text-xl ml-1 mt-2 mb-2">
+            Select Cineplex
+          </label>
+          <div className="space-y-2">
+            {halls.map((cineplex) => (
+              <label
+                key={cineplex._id}
+                className="flex items-center gap-2 text-white bg-gray-800 rounded-lg px-3 py-2 cursor-pointer hover:bg-gray-700 transition"
+              >
+                <input
+                  type="radio"
+                  name="cineplex"
+                  value={cineplex.name}
+                  className="accent-green-500"
+                  required
+                />
+                {cineplex.name}
+              </label>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
     </section>
   );
