@@ -7,8 +7,6 @@ import "swiper/css/pagination";
 import { Link } from "react-router-dom";
 
 const slides = [
-  
-
   {
     title: "",
     image: "/starcineplex.webp",
@@ -36,7 +34,14 @@ const slides = [
 const MovieHeroSlider = () => {
   return (
     <div className="relative text-white">
-      {/* <h1 className="text-center text-5xl font-bold " m>Book your Pleasure!</h1> */}
+   <div className="bg-white/10 backdrop-blur-md text-supporting text-center py-3 px-6 text-base  shadow-md  mb-2  flex flex-col md:flex-row items-center justify-center gap-4">
+  <span>🎟️ Enjoy instant booking + exclusive online discounts!</span>
+  <span className="hidden md:inline-block">|</span>
+  <span>🎬 Book your seat now — Experience Movies Like Never Before!</span>
+  <span className="hidden md:inline-block">|</span>
+  <span>🎥 We bring all the screens across the country — just for you!</span>
+</div>
+
       <Swiper
         centeredSlides={true}
         slidesPerView={"auto"}
@@ -52,7 +57,7 @@ const MovieHeroSlider = () => {
             key={idx}
             className="!w-[80%] md:!w-[60%] lg:!w-[80%] mx-auto transition-all duration-500 ease-in-out"
           >
-            <div className="relative h-56 md:h-64 lg:h-96 overflow-hidden rounded-xl shadow-lg">
+            <div className="relative h-56 md:h-64 lg:h-96 overflow-hidden rounded-xl border-2 border-purple-800 shadow-lg">
               <img
                 src={slide.image}
                 alt={`Slide ${idx + 1}`}
