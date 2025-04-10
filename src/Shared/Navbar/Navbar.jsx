@@ -78,7 +78,7 @@ const Navbar = () => {
   ];
 
   const navLinkClasses = ({ isActive }) =>
-    `flex items-center gap-2 hover:text-supporting ${isActive ? "text-supporting" : ""}`;
+    `flex items-center gap-2 hover:text-green-700 ${isActive ? "text-green-700" : ""}`;
 
   const renderLinks = (
     <>
