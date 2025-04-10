@@ -280,6 +280,9 @@ const AllMovies = () => {
           <MovieCard movie={movie}></MovieCard>
           ))}
         </div>
+
+
+        
         <div className="w-64 h-96 overflow-auto">
           <label className="block text-xl ml-1 mt-2 mb-2">
             Select Cineplex

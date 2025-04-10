@@ -40,7 +40,7 @@ const TrendingMovies = () => {
 
  
   return (
-    <section className=" mt-24  px-4 md:px-10">
+    <section className=" mt-24  mx-4 md:px-10">
       <div className="flex justify-between">
         <h2 className="text-3xl border-l-4 pl-3 mb-4 text-supporting md:text-4xl font-bold ">
           Now Showing
@@ -55,10 +55,18 @@ const TrendingMovies = () => {
       <div className="flex gap-10 flex-row-reverse">
        
 
-        <div className="flex flex-1 flex-col gap-8 md:grid md:grid-cols-3 md:gap-10 overflow-x-auto no-scrollbar md:overflow-visible">
-          {movies.map((movie) => <MovieCard movie={movie}></MovieCard>)}
+       
+      </div>
+      <div className="flex justify-between">
+        
+
+        <div className="grid grid-cols-1 sm:grid-cols-2  gap-8 md:grid-cols-3 lg:grid-cols-4 md:gap-10 overflow-x-auto no-scrollbar md:overflow-visible">
+          {movies.map((movie) => (
+          <MovieCard movie={movie}></MovieCard>
+          ))}
         </div>
       </div>
+      
     </section>
   );
 };

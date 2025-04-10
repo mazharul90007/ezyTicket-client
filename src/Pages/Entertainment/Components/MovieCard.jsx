@@ -11,7 +11,7 @@ const MovieCard = ({ movie }) => {
       key={movie.id}
       className={`min-w-[280px] relative group flex flex-col justify-between md:min-w-0 ${
         darkMode ? "text-white bg-gray-800" : "bg-white"
-      } rounded-xl shadow-lg transition hover:-translate-y-1 duration-300`}
+      } rounded-t-xl shadow-lg transition hover:-translate-y-1 duration-300`}
     >
       {/* Background Image with Overlay */}
       <div className="relative h-80 w-62 overflow-hidden rounded-t-xl">
