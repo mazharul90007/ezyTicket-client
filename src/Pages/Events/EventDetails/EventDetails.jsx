@@ -738,7 +738,7 @@ const EventDetails = () => {
         <div className="flex gap-4 mt-10">
           <button
             onClick={() => setIsModalOpen(true)}
-            className="ezy-button-secondary-sm p-10 ml-38 md:ml-85 items-center"
+            className="ezy-button-secondary-sm p-10  items-center"
           >
             Comments
           </button>
