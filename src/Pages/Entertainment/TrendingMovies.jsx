@@ -1,9 +1,20 @@
 import React from "react";
 import { FaArrowAltCircleRight, FaStar } from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
-import useAuth from "../../Hooks/useAuth";
+
 import useEntertainmentData from "../../Hooks/EntertainmentHook/useEntertainmentData";
 import MovieCard from "./Components/MovieCard";
+
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/pagination";
+
+// import required modules
+import { FreeMode, Pagination, Navigation } from "swiper/modules";
 
 // const trendingMovies = [
 //   {
@@ -33,12 +44,8 @@ import MovieCard from "./Components/MovieCard";
 // ];
 
 const TrendingMovies = () => {
-  const { darkMode } = useAuth();
+  const { movies } = useEntertainmentData();
 
-  const {movies}=useEntertainmentData();
-
-
- 
   return (
     <section className=" mt-24  mx-4 md:px-10">
       <div className="flex justify-between">
@@ -52,21 +59,52 @@ const TrendingMovies = () => {
           </button>
         </Link>
       </div>
-      <div className="flex gap-10 flex-row-reverse">
-       
-
-       
-      </div>
-      <div className="flex justify-between">
-        
-
+      
+      {/* <div className="flex justify-between">
         <div className="grid grid-cols-1 sm:grid-cols-2  gap-8 md:grid-cols-3 lg:grid-cols-4 md:gap-10 overflow-x-auto no-scrollbar md:overflow-visible">
           {movies.map((movie) => (
-          <MovieCard movie={movie}></MovieCard>
+            <MovieCard movie={movie}></MovieCard>
           ))}
         </div>
+      </div> */}
+
+      <div>
+        <Swiper
+        
+          spaceBetween={30}
+          freeMode={true}
+          pagination={{
+            clickable: true,
+          }}
+          navigation={true}
+          modules={[FreeMode,Navigation, Pagination]}
+          breakpoints={{
+            // when window width is >= 0px
+            0: {
+              slidesPerView: 2,
+            },
+            // when window width is >= 768px (medium screens)
+            768: {
+              slidesPerView: 3,
+            },
+            // when window width is >= 1024px (large screens)
+            1024: {
+              slidesPerView: 4,
+            },
+            
+              1280:{
+                slidesPerView: 5,
+              }
+            
+          }}
+          className="mySwiper text-white mt-10"
+        >
+          {movies.map((movie) => (
+            <SwiperSlide><MovieCard movie={movie}></MovieCard></SwiperSlide>
+            
+          ))}
+        </Swiper>
       </div>
-      
     </section>
   );
 };

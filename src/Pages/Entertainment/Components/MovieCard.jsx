@@ -9,7 +9,7 @@ const MovieCard = ({ movie }) => {
   return (
     <div
       key={movie.id}
-      className={`min-w-[280px] relative group flex flex-col justify-between md:min-w-0 ${
+      className={`min-w-[280px]  w-62 relative group flex flex-col justify-between md:min-w-0 ${
         darkMode ? "text-white bg-gray-800" : "bg-white"
       } rounded-t-xl shadow-lg transition hover:-translate-y-1 duration-300`}
     >
