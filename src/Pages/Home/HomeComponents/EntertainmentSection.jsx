@@ -31,7 +31,7 @@ const EntertainmentSection = () => {
         <section id="entertainmentSection" className="mb-16" ref={ref}>
             <div className="w-11/12 mx-auto px-4">
                 {/* Animated Image */}
-                <div className="mb-12 flex justify-center w-full h-[600px]">
+                <div className="mb-12 flex justify-center w-full h-[400px] md:h-[500px] lg:h-[600px]">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.5, y: 20 }}
                         animate={animate ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.5, y: 20 }}
@@ -54,7 +54,7 @@ const EntertainmentSection = () => {
                 <div className="flex flex-col lg:flex-row gap-12">
                     {/* Left - Text Content */}
                     <div className="lg:w-1/2">
-                        <h2 className={`text-5xl font-bold ${darkMode ? 'text-dark-primary' : 'text-gray-700'} mb-6`}>
+                        <h2 className={`text-3xl md:text-5xl font-bold ${darkMode ? 'text-dark-primary' : 'text-gray-700'} mb-6`}>
                             Book Your Seat & <br /> Enjoy The Show
                         </h2>
 
@@ -62,10 +62,10 @@ const EntertainmentSection = () => {
                             <div className="flex items-start gap-4">
                                 <FaFilm className="text-2xl text-main mt-1" />
                                 <div>
-                                    <h3 className={`text-2xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-700'} mb-2`}>
+                                    <h3 className={`text-xl md:text-2xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-700'} mb-1 md:mb-2`}>
                                         Latest Blockbusters & Classics
                                     </h3>
-                                    <p className={darkMode ? 'text-dark-secondary' : 'text-gray-600'}>
+                                    <p className={`text-sm md:text-base ${darkMode ? 'text-dark-secondary' : 'text-gray-600'}`}>
                                         From Hollywood hits to indie gems, we've got all the movies you love in one place.
                                     </p>
                                 </div>
@@ -74,10 +74,10 @@ const EntertainmentSection = () => {
                             <div className="flex items-start gap-4">
                                 <FaTicketAlt className="text-2xl text-main mt-1" />
                                 <div>
-                                    <h3 className={`text-2xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-700'} mb-2`}>
+                                    <h3 className={`text-xl md:text-2xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-700'} mb-1 md:mb-2`}>
                                         Instant Ticket Booking
                                     </h3>
-                                    <p className={darkMode ? 'text-dark-secondary' : 'text-gray-600'}>
+                                    <p className={`text-sm md:text-base ${darkMode ? 'text-dark-secondary' : 'text-gray-600'}`}>
                                         Secure your seats in seconds with our lightning-fast booking system.
                                     </p>
                                 </div>
@@ -86,8 +86,8 @@ const EntertainmentSection = () => {
                     </div>
 
                     {/* Right - Features */}
-                    <div className="lg:w-1/2 p-8 rounded-xl">
-                        <h3 className="text-3xl font-bold text-main mb-6">
+                    <div className="lg:w-1/2 rounded-xl">
+                        <h3 className="text-2xl md:text-3xl font-bold text-main mb-4 md:mb-6">
                             Why Movie Lovers Choose Us
                         </h3>
 
@@ -95,8 +95,8 @@ const EntertainmentSection = () => {
                             <div className="flex items-start gap-4">
                                 <FaCalendarAlt className="text-2xl text-main mt-1" />
                                 <div>
-                                    <h4 className={`text-xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-800'}`}>Showtimes For All Schedules</h4>
-                                    <p className={darkMode ? 'text-dark-secondary' : 'text-gray-600'}>
+                                    <h4 className={`text-lg md:text-xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-800'}`}>Showtimes For All Schedules</h4>
+                                    <p className={`text-sm md:text-base ${darkMode ? 'text-dark-secondary' : 'text-gray-600'}`}>
                                         Morning matinees, evening shows, or late-night screenings - we've got you covered.
                                     </p>
                                 </div>
@@ -105,8 +105,8 @@ const EntertainmentSection = () => {
                             <div className="flex items-start gap-4">
                                 <FaChair className="text-2xl text-main mt-1" />
                                 <div>
-                                    <h4 className={`text-xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-800'}`}>Best Seat Selection</h4>
-                                    <p className={darkMode ? 'text-dark-secondary' : 'text-gray-600'}>
+                                    <h4 className={`text-lg md:text-xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-800'}`}>Best Seat Selection</h4>
+                                    <p className={`text-sm md:text-base ${darkMode ? 'text-dark-secondary' : 'text-gray-600'}`}>
                                         Choose your perfect spot with our interactive seat maps.
                                     </p>
                                 </div>
@@ -115,8 +115,8 @@ const EntertainmentSection = () => {
                             <div className="flex items-start gap-4">
                                 <LuPopcorn className="text-2xl text-main mt-1" />
                                 <div>
-                                    <h4 className={`text-xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-800'}`}>Combo Deals</h4>
-                                    <p className={darkMode ? 'text-dark-secondary' : 'text-gray-600'}>
+                                    <h4 className={`text-lg md:text-xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-800'}`}>Combo Deals</h4>
+                                    <p className={`text-sm md:text-base ${darkMode ? 'text-dark-secondary' : 'text-gray-600'}`}>
                                         Special discounts on ticket+popcorn combos and other snacks.
                                     </p>
                                 </div>
