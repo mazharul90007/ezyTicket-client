@@ -38,6 +38,7 @@ import MovieDetailsPage from "../Pages/Entertainment/MovieDetails/MovieDetailsPa
 import AddBusService from "../Pages/Dashboard/Travel/AddBusService/AddBusService";
 import ManageReviews from "../Pages/Dashboard/Travel/ManageReviews/ManageReviews";
 import MyBusServices from "../Pages/Dashboard/Travel/MyBusServices/MyBusServices";
+import SoldTickets from "../Pages/Dashboard/Travel/SoldTickets/SoldTickets";
 
 
 const Route = createBrowserRouter([
@@ -215,6 +216,10 @@ const Route = createBrowserRouter([
       {
         path: 'MyBusServices',
         element: <MyBusServices> </MyBusServices>
+      },
+      {
+        path: 'SoldTickets',
+        element: <SoldTickets> </SoldTickets>
       }
     ],
   },

@@ -51,13 +51,13 @@ const AddBusService = () => {
       };
     
       return (
-        <div className="max-w-3xl mx-auto my-10 p-8 bg-green-50 rounded-lg shadow-md">
+        <div className="max-w-5xl mx-auto mt-2 p-8 bg-green-50 rounded-lg shadow-md">
           <h2 className="text-3xl font-bold text-center mb-6">Add Bus Service</h2>
     
           <form onSubmit={handleSubmit} className="space-y-6">
            
             <div className="border-l-4 border-green-400 pl-4 mb-4">
-              <h3 className="text-xl font-semibold">🚌 Bus Details</h3>
+              <h3 className="text-xl font-semibold"> Bus Details</h3>
             </div>
     
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -153,7 +153,7 @@ const AddBusService = () => {
     
            
             <div className="border-l-4 border-green-400 pl-4 mt-6">
-              <h3 className="text-xl font-semibold">👤 Added By</h3>
+              <h3 className="text-xl font-semibold"> Added By</h3>
             </div>
     
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

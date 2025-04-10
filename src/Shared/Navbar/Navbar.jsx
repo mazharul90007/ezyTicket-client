@@ -123,7 +123,7 @@ const Navbar = () => {
 
                 <li><Link to="/dashboard" className="hover:text-supporting flex items-center gap-2"><span><MdDashboard /></span>Dashboard</Link></li>
 
-                <li><Link to="/profile" className=" hover:text-supporting flex items-center gap-2"><span><CgProfile /></span>Profile</Link></li>
+                <li><Link to="/dashboard/profile" className=" hover:text-supporting flex items-center gap-2"><span><CgProfile /></span>Profile</Link></li>
                 
                 <li><button onClick={handleLogout} className="hover:text-supporting flex items-center gap-2"><span><MdLogout /></span>Logout</button></li>
               </ul>
