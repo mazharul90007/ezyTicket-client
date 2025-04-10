@@ -31,7 +31,7 @@ const EventSection = () => {
         <section id="eventSection" className="mb-16" ref={ref}>
             <div className="w-11/12 mx-auto px-4">
                 {/* Animated Image */}
-                <div className="mb-12 flex justify-center w-full h-[600px]">
+                <div className="mb-12 flex justify-center w-full h-[400px] md:h-[500px] lg:h-[600px]">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.5, y: 20 }}
                         animate={animate ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.5, y: 20 }}
@@ -54,30 +54,30 @@ const EventSection = () => {
                 <div className="flex flex-col lg:flex-row gap-12">
                     {/* Left - Text */}
                     <div className="lg:w-1/2">
-                        <h2 className={`text-5xl font-bold ${darkMode ? 'text-dark-primary' : 'text-gray-700'} mb-6`}>
+                        <h2 className={`text-3xl md:text-5xl font-bold ${darkMode ? 'text-dark-primary' : 'text-gray-700'} mb-6`}>
                             Get Your Event Tickets <br /> With EzyTicket
                         </h2>
 
                         <div className="space-y-6">
                             <div className="flex items-start gap-4">
-                                <FaTicketAlt className="text-2xl text-main mt-1" />
+                                <FaTicketAlt className="text-xl md:text-2xl text-main mt-1" />
                                 <div>
-                                    <h3 className={`text-2xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-700'} mb-2`}>
+                                    <h3 className={`text-xl md:text-2xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-700'} mb-1 md:mb-2`}>
                                         Book Event Tickets Quickly and Easily
                                     </h3>
-                                    <p className={darkMode ? 'text-dark-secondary' : 'text-gray-600'}>
+                                    <p className={`text-sm md:text-base ${darkMode ? 'text-dark-secondary' : 'text-gray-600'}`}>
                                         Whether it’s concerts, theater, or festivals, we make it easy to book your event tickets online.
                                     </p>
                                 </div>
                             </div>
 
                             <div className="flex items-start gap-4">
-                                <FaStar className="text-2xl text-main mt-1" />
+                                <FaStar className="text-xl md:text-2xl text-main mt-1" />
                                 <div>
-                                    <h3 className={`text-2xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-700'} mb-2`}>
+                                    <h3 className={`text-xl md:text-2xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-700'} mb-1 md:mb-2`}>
                                         Exclusive Offers for Events
                                     </h3>
-                                    <p className={darkMode ? 'text-dark-secondary' : 'text-gray-600'}>
+                                    <p className={`text-sm md:text-base ${darkMode ? 'text-dark-secondary' : 'text-gray-600'}`}>
                                         We offer exclusive discounts and unbeatable prices on the best events in town.
                                     </p>
                                 </div>
@@ -87,36 +87,36 @@ const EventSection = () => {
 
                     {/* Right - Features */}
                     <div className="lg:w-1/2 rounded-xl">
-                        <h3 className="text-3xl font-bold text-main mb-6">
+                        <h3 className="text-2xl md:text-3xl font-bold text-main mb-4 md:mb-6">
                             Why Choose EzyTicket for Your Events?
                         </h3>
 
                         <div className="space-y-6">
                             <div className="flex items-start gap-4">
-                                <FaCalendarAlt className="text-2xl text-main mt-1" />
+                                <FaCalendarAlt className="text-xl md:text-2xl text-main mt-1" />
                                 <div>
-                                    <h4 className={`text-xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-800'}`}>Top Events & Shows</h4>
-                                    <p className={darkMode ? 'text-dark-secondary' : 'text-gray-600'}>
+                                    <h4 className={`text-lg md:text-xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-800'}`}>Top Events & Shows</h4>
+                                    <p className={`text-sm md:text-base ${darkMode ? 'text-dark-secondary' : 'text-gray-600'}`}>
                                         Choose from a wide variety of events, from live concerts to theater performances.
                                     </p>
                                 </div>
                             </div>
 
                             <div className="flex items-start gap-4">
-                                <FaHeadphonesAlt className="text-2xl text-main mt-1" />
+                                <FaHeadphonesAlt className="text-xl md:text-2xl text-main mt-1" />
                                 <div>
-                                    <h4 className={`text-xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-800'}`}>Seamless Booking Experience</h4>
-                                    <p className={darkMode ? 'text-dark-secondary' : 'text-gray-600'}>
+                                    <h4 className={`text-lg md:text-xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-800'}`}>Seamless Booking Experience</h4>
+                                    <p className={`text-sm md:text-base ${darkMode ? 'text-dark-secondary' : 'text-gray-600'}`}>
                                         With just a few clicks, secure your tickets and enjoy a seamless experience.
                                     </p>
                                 </div>
                             </div>
 
                             <div className="flex items-start gap-4">
-                                <FaTag className="text-2xl text-main mt-1" />
+                                <FaTag className="text-xl md:text-2xl text-main mt-1" />
                                 <div>
-                                    <h4 className={`text-xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-800'}`}>Exclusive Discounts</h4>
-                                    <p className={darkMode ? 'text-dark-secondary' : 'text-gray-600'}>
+                                    <h4 className={`text-lg md:text-xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-800'}`}>Exclusive Discounts</h4>
+                                    <p className={`text-sm md:text-base ${darkMode ? 'text-dark-secondary' : 'text-gray-600'}`}>
                                         Enjoy amazing deals and discounts on your event bookings.
                                     </p>
                                 </div>
