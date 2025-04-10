@@ -35,6 +35,7 @@ import AddMovie from "../Pages/Dashboard/Entertainment/AddMovie/AddMovie";
 import MovieManager from "../Pages/Dashboard/Entertainment/MovieManager/MovieManager";
 import MovieDetails from "../Pages/Dashboard/Entertainment/MovieManager/MovieDetails/MovieDetails";
 import MovieDetailsPage from "../Pages/Entertainment/MovieDetails/MovieDetailsPage";
+import AddBusService from "../Pages/Dashboard/Travel/AddBusService/AddBusService";
 
 
 const Route = createBrowserRouter([
@@ -199,8 +200,12 @@ const Route = createBrowserRouter([
         path:'managemovie/moviedetails/:id',
         element:<MovieDetails></MovieDetails> 
         
+      },
+      //add bus service page r, added by susanto
+      {
+        path: 'add-bus-service',
+        element: <AddBusService> </AddBusService>
       }
-
     ],
   },
 ]);
