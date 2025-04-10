@@ -36,6 +36,7 @@ import MovieManager from "../Pages/Dashboard/Entertainment/MovieManager/MovieMan
 import MovieDetails from "../Pages/Dashboard/Entertainment/MovieManager/MovieDetails/MovieDetails";
 import MovieDetailsPage from "../Pages/Entertainment/MovieDetails/MovieDetailsPage";
 import AddBusService from "../Pages/Dashboard/Travel/AddBusService/AddBusService";
+import ManageReviews from "../Pages/Dashboard/Travel/ManageReviews/ManageReviews";
 
 
 const Route = createBrowserRouter([
@@ -201,10 +202,14 @@ const Route = createBrowserRouter([
         element:<MovieDetails></MovieDetails> 
         
       },
-      //add bus service page r, added by susanto
+      //add bus service page, review manage, added by susanto
       {
         path: 'add-bus-service',
         element: <AddBusService> </AddBusService>
+      },
+      {
+        path: 'manageReview',
+        element: <ManageReviews> </ManageReviews>
       }
     ],
   },
