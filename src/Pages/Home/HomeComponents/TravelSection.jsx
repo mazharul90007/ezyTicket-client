@@ -4,8 +4,11 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import useAuth from "../../../Hooks/useAuth";
 
 const TravelSection = () => {
+    const { darkMode } = useAuth();
+
     const { ref, inView } = useInView({
         triggerOnce: false,
         threshold: 0.3,
@@ -25,7 +28,7 @@ const TravelSection = () => {
         <section id="travelSection" className="mb-16" ref={ref}>
             <div className="w-11/12 mx-auto px-4">
                 {/* Animated Coach Image */}
-                <div className="mb-8 flex justify-center">
+                <div className="mb-12 flex justify-center">
                     <motion.img
                         src={coach}
                         alt="Luxury travel coach"
@@ -41,7 +44,7 @@ const TravelSection = () => {
                 <div className="flex flex-col lg:flex-row gap-12">
                     {/* Left - Text */}
                     <div className="lg:w-1/2">
-                        <h2 className="text-6xl font-bold text-gray-700 mb-6">
+                        <h2 className={`text-5xl font-bold ${darkMode ? 'text-dark-primary' : 'text-gray-700'} mb-6`}>
                             Make your Journey <br /> Hassle Free
                         </h2>
 
@@ -49,10 +52,10 @@ const TravelSection = () => {
                             <div className="flex items-start gap-4">
                                 <FaBus className="text-2xl text-main mt-1" />
                                 <div>
-                                    <h3 className="text-2xl font-semibold text-gray-700 mb-2">
+                                    <h3 className={`text-2xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-700'} mb-2`}>
                                         Experience The Most Hassle-free Bus Ticket Booking
                                     </h3>
-                                    <p className="text-gray-600">
+                                    <p className={darkMode ? 'text-dark-secondary' : 'text-gray-600'}>
                                         Our seamless booking process ensures you get the best buses without any complications.
                                     </p>
                                 </div>
@@ -61,10 +64,10 @@ const TravelSection = () => {
                             <div className="flex items-start gap-4">
                                 <FaTag className="text-2xl text-main mt-1" />
                                 <div>
-                                    <h3 className="text-2xl font-semibold text-gray-700 mb-2">
+                                    <h3 className={`text-2xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-700'} mb-2`}>
                                         Get Great Deals With Reasonable Rates
                                     </h3>
-                                    <p className="text-gray-600">
+                                    <p className={darkMode ? 'text-dark-secondary' : 'text-gray-600'}>
                                         We bring you exclusive discounts you won't find elsewhere.
                                     </p>
                                 </div>
@@ -82,8 +85,8 @@ const TravelSection = () => {
                             <div className="flex items-start gap-4">
                                 <FaMapMarkerAlt className="text-2xl text-main mt-1" />
                                 <div>
-                                    <h4 className="text-xl font-semibold text-gray-800">Top Destinations</h4>
-                                    <p className="text-gray-600">
+                                    <h4 className={`text-xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-800'}`}>Top Destinations</h4>
+                                    <p className={darkMode ? 'text-dark-secondary' : 'text-gray-600'}>
                                         With reasonable rates to top Bus Services and destinations Countrywide.
                                     </p>
                                 </div>
@@ -92,8 +95,8 @@ const TravelSection = () => {
                             <div className="flex items-start gap-4">
                                 <FaRegSmile className="text-2xl text-main mt-1" />
                                 <div>
-                                    <h4 className="text-xl font-semibold text-gray-800">Satisfaction Guaranteed</h4>
-                                    <p className="text-gray-600">
+                                    <h4 className={`text-xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-800'}`}>Satisfaction Guaranteed</h4>
+                                    <p className={darkMode ? 'text-dark-secondary' : 'text-gray-600'}>
                                         24/7 customer support and flexible cancellation policies.
                                     </p>
                                 </div>
@@ -102,8 +105,8 @@ const TravelSection = () => {
                             <div className="flex items-start gap-4">
                                 <FaTag className="text-2xl text-main mt-1" />
                                 <div>
-                                    <h4 className="text-xl font-semibold text-gray-800">Exclusive Discounts</h4>
-                                    <p className="text-gray-600">
+                                    <h4 className={`text-xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-800'}`}>Exclusive Discounts</h4>
+                                    <p className={darkMode ? 'text-dark-secondary' : 'text-gray-600'}>
                                         Special member-only deals and last-minute offers.
                                     </p>
                                 </div>
