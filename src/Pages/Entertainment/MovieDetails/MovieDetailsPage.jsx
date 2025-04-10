@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Movies } from "../AllMovie/AllMovies";
+
 
 import { motion } from "framer-motion";
 import { FaBus, FaCheckSquare } from "react-icons/fa";
@@ -45,13 +45,13 @@ const MovieDetailsPage = () => {
         >
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/80 md:via-black/80  to-black/90" />
 
-          <div className="relative container  mx-auto py-16  px-6 flex flex-col md:flex-row items-center justify-center gap-10">
+          <div className="relative container  mx-auto py-16  px-6 flex flex-col md:flex-row items-center justify-center ">
             {/* Left Side - Image */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
-              className="w-full md:w-md "
+              className="w-full md:w-xs"
             >
               <img
                 src={movie?.imageLink }

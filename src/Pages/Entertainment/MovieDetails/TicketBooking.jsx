@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Movies } from "../AllMovie/AllMovies";
 import { Link, useParams } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import { motion } from "framer-motion";
@@ -12,42 +11,41 @@ import { FaBangladeshiTakaSign } from "react-icons/fa6";
 const TicketBooking = () => {
   const { id } = useParams();
   const [selectedTime, setSelectedTime] = useState(null);
-  const { userInfo,darkMode } = useAuth();
-  const { movies,halls } = useEntertainmentData();
-  const axiosSecure= useAxiosSecure()
+  const { userInfo, darkMode } = useAuth();
+  const { movies, halls } = useEntertainmentData();
+  const axiosSecure = useAxiosSecure();
 
   const timeSlots = ["11:00 AM", "01:30 PM", "5:30 PM", "8:00 PM"];
-  
+
   const cinemaHalls = movies.filter((m) => m._id == id)[0]?.cinemaHalls;
 
   const movie = movies.filter((movie) => movie._id == id)[0];
-
 
   const [formData, setFormData] = useState({
     name: userInfo?.name || "",
     email: userInfo?.email || "",
     phone: userInfo?.phone || "",
-    cineplex:"",
+    cineplex: "",
     date: "",
     time: "",
     seats: 1,
-    priceperticket: 500,
+    priceperticket: 0,
     address: userInfo?.address || "",
     movieName: movie?.name || "",
     // totalPrice: (formData?.priceperticket * Number(formData?.seats) * 1.05)
-
   });
 
-  useEffect(()=>{
-
+  useEffect(() => {
     const selectedHall = halls.filter((h) => h.name == formData.cineplex)[0];
     console.log(selectedHall?.price);
-  
-    if(selectedHall){
+
+    if (selectedHall) {
       setFormData((prevData) => ({
-        ...prevData,priceperticket:selectedHall.price
-      }));}
-  },[formData.cineplex, halls])
+        ...prevData,
+        priceperticket: selectedHall.price,
+      }));
+    }
+  }, [formData.cineplex, halls]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -60,19 +58,20 @@ const TicketBooking = () => {
     }));
   };
 
-
-
-
   const handleCheckout = async () => {
     const checkoutData = {
       name: userInfo?.name,
       email: userInfo?.email,
       phone: userInfo?.phone,
       address: userInfo?.address,
-      price: parseFloat((formData?.priceperticket * Number(formData.seats) * 1.05).toFixed(2)),
+      price: parseFloat(
+        (formData?.priceperticket * Number(formData.seats) * 1.05).toFixed(2)
+      ),
       product: formData?.movieName,
       unitPrice: formData?.priceperticket,
-      charge: parseFloat((formData?.priceperticket * Number(formData.seats) * 0.05).toFixed(2)),
+      charge: parseFloat(
+        (formData?.priceperticket * Number(formData.seats) * 0.05).toFixed(2)
+      ),
       productCategory: movie?.category,
       eventId: movie?._id,
       quantity: Number(formData.seats),
@@ -82,35 +81,28 @@ const TicketBooking = () => {
     };
     console.log(checkoutData);
 
-    const res = await axiosSecure.post('/order', checkoutData);
+    const res = await axiosSecure.post("/order", checkoutData);
     if (res.data) {
       window.location.replace(res.data.url);
     }
   };
 
-
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
-    axiosSecure.post('/movie_tickets', formData)
-      .then(() => {
-        Swal.fire({
-          title: "Ticket Booked!",
-          text: ` Booking Confirmed for ${movie.title}!`,
-          icon: "success"
-        });
+    axiosSecure.post("/movie_tickets", formData).then(() => {
+      Swal.fire({
+        title: "Ticket Booked!",
+        text: ` Booking Confirmed for ${movie.title}!`,
+        icon: "success",
+      });
 
-        setFormData(
-          {     
-            date: "",
-            time: "",
-            seats: [],
-          }
-        )
-
-      })
+      setFormData({
+        date: "",
+        time: "",
+        seats: [],
+      });
+    });
   };
 
   return (
@@ -144,28 +136,27 @@ const TicketBooking = () => {
 
             {/* Pick Time Slot */}
             <div className="mb-6">
-  <h2 className="text-xl font-semiboldmb-4 flex items-center gap-2">
-    ⏰ Pick a Showtime
-  </h2>
-  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-    {timeSlots.map((time, index) => (
-      <motion.button
-        key={index}
-        whileTap={{ scale: 0.95 }}
-        whileHover={{ scale: 1.02 }}
-        className={`p-4 rounded-2xl border transition-all duration-300 font-medium text-sm shadow-sm ${
-          selectedTime === time
-            ? "bg-purple-600 text-white shadow-md ring-2 ring-purple-400"
-            : "bg-white text-gray-800 hover:bg-gray-100 border-gray-300"
-        }`}
-        onClick={() => handleTimeSelection(time)}
-      >
-        🎬 {time}
-      </motion.button>
-    ))}
-  </div>
-</div>
-
+              <h2 className="text-xl font-semiboldmb-4 flex items-center gap-2">
+                ⏰ Pick a Showtime
+              </h2>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                {timeSlots.map((time, index) => (
+                  <motion.button
+                    key={index}
+                    whileTap={{ scale: 0.95 }}
+                    whileHover={{ scale: 1.02 }}
+                    className={`p-4 rounded-2xl border transition-all duration-300 font-medium text-sm shadow-sm ${
+                      selectedTime === time
+                        ? "bg-purple-600 text-white shadow-md ring-2 ring-purple-400"
+                        : "bg-white text-gray-800 hover:bg-gray-100 border-gray-300"
+                    }`}
+                    onClick={() => handleTimeSelection(time)}
+                  >
+                    🎬 {time}
+                  </motion.button>
+                ))}
+              </div>
+            </div>
 
             <div>
               <label className="block text-sm ml-1 mt-2  mb-1">
@@ -295,68 +286,85 @@ const TicketBooking = () => {
                 <div className="space-y-2">
                   <div className="flex justify-between">
                     <span>
-                      Ticket Price ({formData.seats} × Tk {formData.priceperticket})
+                      Ticket Price ({formData.seats} × Tk{" "}
+                      {formData.priceperticket})
                     </span>
                     <span className="font-medium">
-                      Tk {(formData.priceperticket * Number(formData.seats)).toFixed(2)}
+                      Tk{" "}
+                      {(
+                        formData.priceperticket * Number(formData.seats)
+                      ).toFixed(2)}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span>Service Fee (5%)</span>
                     <span className="font-medium">
-                      Tk {(formData.priceperticket * Number(formData.seats)* 0.05).toFixed(2)}
+                      Tk{" "}
+                      {(
+                        formData.priceperticket *
+                        Number(formData.seats) *
+                        0.05
+                      ).toFixed(2)}
                     </span>
                   </div>
                   <div className="border-t border-gray-300 pt-2 mt-2 flex justify-between font-bold text-lg">
                     <span>Total</span>
                     <span className="text-supporting">
-                      Tk {(formData.priceperticket * Number(formData.seats) * 1.05).toFixed(2)}
+                      Tk{" "}
+                      {(
+                        formData.priceperticket *
+                        Number(formData.seats) *
+                        1.05
+                      ).toFixed(2)}
                     </span>
                   </div>
                 </div>
               </div>
 
-              <Link
-                  className="block mt-6"
-                >
-                  <div className="relative group">
-                    {" "}
-                    {/* Tooltip container */}
-                    <button
-                      onClick={handleCheckout}
-                      disabled={
-                        !userInfo?.name ||
-                        !userInfo?.email ||
-                        !userInfo?.phone ||
-                        !userInfo?.address
-                      }
-                      className={`w-full ezy-button-primary py-3 rounded-lg font-bold flex items-center justify-center gap-2 ${!userInfo?.name ||
-                        !userInfo?.email ||
-                        !userInfo?.phone ||
-                        !userInfo?.address
-                        ? "opacity-50 !cursor-not-allowed"
-                        : ""
-                        }`}
-                    >
-                      <FaBangladeshiTakaSign />
-                      Proceed to Checkout 
-                    </button>
-                    {/* Tooltip that appears when disabled */}
-                    {(!userInfo?.name ||
+              <Link className="block mt-6">
+                <div className="relative group">
+                  {" "}
+                  {/* Tooltip container */}
+                  <button
+                    onClick={handleCheckout}
+                    disabled={
+                      !userInfo?.name ||
                       !userInfo?.email ||
                       !userInfo?.phone ||
-                      !userInfo?.address) && (
-                        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2  bg-gray-800 text-sm rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-                          Please update your full information to checkout
-                          <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-b-0 border-t-4 border-gray-800"></div>
-                        </div>
-                      )}
-                  </div>
-                </Link>
+                      !userInfo?.address ||
+                      !formData?.priceperticket ||
+                      !formData?.time ||
+                      !formData?.date 
 
-                <p className="text-center text-sm text-gray-500 mt-2">
-                  Secure payment processing powered by Stripe
-                </p>
+                    }
+                    className={`w-full ezy-button-primary py-3 rounded-lg font-bold flex items-center justify-center gap-2 ${
+                      !userInfo?.name ||
+                      !userInfo?.email ||
+                      !userInfo?.phone ||
+                      !userInfo?.address
+                        ? "opacity-50 !cursor-not-allowed"
+                        : ""
+                    }`}
+                  >
+                    <FaBangladeshiTakaSign />
+                    Proceed to Checkout
+                  </button>
+                  {/* Tooltip that appears when disabled */}
+                  {(!userInfo?.name ||
+                    !userInfo?.email ||
+                    !userInfo?.phone ||
+                    !userInfo?.address) && (
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2  bg-gray-800 text-sm rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                      Please update your full information to checkout
+                      <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-b-0 border-t-4 border-gray-800"></div>
+                    </div>
+                  )}
+                </div>
+              </Link>
+
+              <p className="text-center text-sm text-gray-500 mt-2">
+                Secure payment processing powered by Stripe
+              </p>
             </form>
           </div>
         </section>
