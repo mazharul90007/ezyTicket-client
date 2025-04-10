@@ -15,19 +15,19 @@ const AllMovies = () => {
   const [isComingActive, setisComingActive] = useState(false);
   const [isAdvancedActive, setisAdvancedActive] = useState(false);
   const [selectedLocations, setSelectedLocations] = useState([]);
-  const [showMovie, setShowMovie] = useState([]);
+  // const [showMovie, setShowMovie] = useState([]);
 
 
   const { darkMode } = useAuth();
-  const { halls,movies,setMovies } = useEntertainmentData();
+  const { halls,movies } = useEntertainmentData();
 
 
   const options = [
-    { value: "london", label: "London" },
-    { value: "new_york", label: "New York" },
-    { value: "paris", label: "Paris" },
-    { value: "tokyo", label: "Tokyo" },
-    { value: "berlin", label: "Berlin" },
+    { value: "london", label: "Dhaka" },
+    { value: "new_york", label: "Jessore" },
+    { value: "paris", label: "Khulna" },
+    { value: "tokyo", label: "Mirpur" },
+    { value: "berlin", label: "Dhanmondi" },
   ];
   
 
@@ -106,10 +106,10 @@ console.log(showingHanll);
         </div>
       </div>
 
-      <div className="flex justify-between">
+      <div className="flex flex-col-reverse md:justify-between">
        
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-4 md:gap-10 overflow-x-auto no-scrollbar md:overflow-visible">
+        <div className="grid xs:grid-cols-1 sm:grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-4 md:gap-10 overflow-x-auto no-scrollbar md:overflow-visible ">
           {movies.map((movie) => (
           <MovieCard movie={movie}></MovieCard>
           ))}

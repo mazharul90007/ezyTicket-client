@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+
+import useAxiosPublic from '../../../../../Hooks/useAxiosPublic';
 
 const MovieDetails = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
+  const axiosSecure=useAxiosPublic();
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/allmovies/${id}`)
+    axiosSecure.get(`/allmovies/${id}`)
       .then(res => {
         setMovie(res.data);
         setLoading(false);
