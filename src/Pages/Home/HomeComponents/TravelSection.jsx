@@ -1,17 +1,11 @@
-import EventCard from "./EventCard";
-import { MdDateRange } from "react-icons/md";
-import { FaBangladeshiTakaSign } from "react-icons/fa6";
-import { Link } from "react-router-dom";
-// import useAuth from "../../../Hooks/useAuth";
-import tanoura from "../../../assets/Home_image/tanoura.jpg"
-import { useEffect, useState } from "react";
-import { useInView } from "framer-motion";
+import coach from "../../../assets/Home_image/coach3.png";
+import { FaPlane, FaTag, FaMapMarkerAlt, FaRegSmile, FaBus } from "react-icons/fa";
 import { motion } from "framer-motion";
-import { FaBus, FaCalendarAlt, FaHeadphonesAlt, FaMapMarkerAlt, FaRegSmile, FaStar, FaTag, FaTicketAlt } from "react-icons/fa";
+import { useInView } from "react-intersection-observer";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-const EventSection = () => {
-    // const { darkMode } = useAuth();
-
+const TravelSection = () => {
     const { ref, inView } = useInView({
         triggerOnce: false,
         threshold: 0.3,
@@ -28,25 +22,18 @@ const EventSection = () => {
     }, [inView]);
 
     return (
-        <section id="eventSection" className="mb-16" ref={ref}>
+        <section id="travelSection" className="mb-16" ref={ref}>
             <div className="w-11/12 mx-auto px-4">
-                {/* Animated Image */}
+                {/* Animated Coach Image */}
                 <div className="mb-8 flex justify-center">
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.5, y: 20 }}
-                        animate={animate ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.5, y: 20 }}
+                    <motion.img
+                        src={coach}
+                        alt="Luxury travel coach"
+                        className="w-full max-w-4xl rounded-xl"
+                        initial={{ x: 300, scale: 0.5, opacity: 0 }}
+                        animate={animate ? { x: 0, scale: 1, opacity: 1 } : { x: 300, scale: 0.5, opacity: 0 }}
                         transition={{ duration: 1, ease: "easeOut" }}
-                        whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                        viewport={{ once: false }}
-                    >
-                        <img
-                            src={tanoura}
-                            alt="Tanoura Dance"
-                            className="w-full max-w-4xl rounded-xl"
-                        />
-                    </motion.div>
-
-
+                    />
 
                 </div>
 
@@ -54,31 +41,31 @@ const EventSection = () => {
                 <div className="flex flex-col lg:flex-row gap-12">
                     {/* Left - Text */}
                     <div className="lg:w-1/2">
-                        <h2 className="text-5xl font-bold gray-700 mb-6">
-                            Get Your Event Tickets <br /> With EzyTicket
+                        <h2 className="text-6xl font-bold text-gray-700 mb-6">
+                            Make your Journey <br /> Hassle Free
                         </h2>
 
                         <div className="space-y-6">
                             <div className="flex items-start gap-4">
-                                <FaTicketAlt className="text-2xl text-main mt-1" />
+                                <FaBus className="text-2xl text-main mt-1" />
                                 <div>
                                     <h3 className="text-2xl font-semibold text-gray-700 mb-2">
-                                        Book Event Tickets Quickly and Easily
+                                        Experience The Most Hassle-free Bus Ticket Booking
                                     </h3>
                                     <p className="text-gray-600">
-                                        Whether it’s concerts, theater, or festivals, we make it easy to book your event tickets online.
+                                        Our seamless booking process ensures you get the best buses without any complications.
                                     </p>
                                 </div>
                             </div>
 
                             <div className="flex items-start gap-4">
-                                <FaStar className="text-2xl text-main mt-1" />
+                                <FaTag className="text-2xl text-main mt-1" />
                                 <div>
                                     <h3 className="text-2xl font-semibold text-gray-700 mb-2">
-                                        Exclusive Offers for Events
+                                        Get Great Deals With Reasonable Rates
                                     </h3>
                                     <p className="text-gray-600">
-                                        We offer exclusive discounts and unbeatable prices on the best events in town.
+                                        We bring you exclusive discounts you won't find elsewhere.
                                     </p>
                                 </div>
                             </div>
@@ -88,26 +75,26 @@ const EventSection = () => {
                     {/* Right - Features */}
                     <div className="lg:w-1/2 rounded-xl">
                         <h3 className="text-3xl font-bold text-main mb-6">
-                            Why Choose EzyTicket for Your Events?
+                            Great Deals And Great Offers
                         </h3>
 
                         <div className="space-y-6">
                             <div className="flex items-start gap-4">
-                                <FaCalendarAlt className="text-2xl text-main mt-1" />
+                                <FaMapMarkerAlt className="text-2xl text-main mt-1" />
                                 <div>
-                                    <h4 className="text-xl font-semibold text-gray-800">Top Events & Shows</h4>
+                                    <h4 className="text-xl font-semibold text-gray-800">Top Destinations</h4>
                                     <p className="text-gray-600">
-                                        Choose from a wide variety of events, from live concerts to theater performances.
+                                        With reasonable rates to top Bus Services and destinations Countrywide.
                                     </p>
                                 </div>
                             </div>
 
                             <div className="flex items-start gap-4">
-                                <FaHeadphonesAlt className="text-2xl text-main mt-1" />
+                                <FaRegSmile className="text-2xl text-main mt-1" />
                                 <div>
-                                    <h4 className="text-xl font-semibold text-gray-800">Seamless Booking Experience</h4>
+                                    <h4 className="text-xl font-semibold text-gray-800">Satisfaction Guaranteed</h4>
                                     <p className="text-gray-600">
-                                        With just a few clicks, secure your tickets and enjoy a seamless experience.
+                                        24/7 customer support and flexible cancellation policies.
                                     </p>
                                 </div>
                             </div>
@@ -117,27 +104,24 @@ const EventSection = () => {
                                 <div>
                                     <h4 className="text-xl font-semibold text-gray-800">Exclusive Discounts</h4>
                                     <p className="text-gray-600">
-                                        Enjoy amazing deals and discounts on your event bookings.
+                                        Special member-only deals and last-minute offers.
                                     </p>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="mt-8">
-                            <Link to={'/events'}>
-                                <button className="ezy-button-primary w-fit py-3 text-lg font-semibold">
-                                    Book Your Event Ticket Now
+                        <div className="">
+                            <Link to={"/travel"}>
+                                <button className="ezy-button-primary mt-8 w-fit py-3 text-lg font-semibold">
+                                    Book Your Journey Now
                                 </button>
                             </Link>
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </section>
-
     );
 };
 
-export default EventSection;
+export default TravelSection;

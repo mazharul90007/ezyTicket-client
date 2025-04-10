@@ -72,7 +72,7 @@ const Navbar = () => {
     { to: "/travel", label: "Travel", icon: <RiCompassDiscoverLine /> },
     { to: "/events", label: "Event", icon: <MdOutlineEventAvailable /> },
     { to: "/entertainment", label: "Entertainment", icon: <MdOutlineMovieCreation /> },
-    { to: "/pricing", label: "Pricing", icon: <MdOutlinePriceChange /> },
+    // { to: "/pricing", label: "Pricing", icon: <MdOutlinePriceChange /> },
     { to: "/about", label: "About", icon: <MdOutlineDescription /> },
     { to: "/contact", label: "Contact", icon: <MdOutlineContactSupport /> },
   ];
