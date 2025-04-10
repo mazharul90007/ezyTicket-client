@@ -8,6 +8,7 @@ import { LuPopcorn } from "react-icons/lu";
 import { FaBus } from "react-icons/fa";
 import { GiMicrophone } from "react-icons/gi";
 import useAuth from "../../Hooks/useAuth";
+import EntertainmentSection from "./HomeComponents/EntertainmentSection";
 
 const Home = () => {
   const [showModal, setShowModal] = useState(true);
@@ -81,7 +82,9 @@ const Home = () => {
               </div>
 
               {/* Entertainment Ticket Card */}
-              <div className={`md:col-span-1 shadow p-8 ${darkMode ? 'bg-dark-surface hover:bg-[#3D3D3D]' : 'bg-white'} rounded-lg cursor-pointer hover:scale-105 transform transition-all duration-300`}>
+              <div 
+              onClick={() => scrollToSection("entertainmentSection")}
+              className={`md:col-span-1 shadow p-8 ${darkMode ? 'bg-dark-surface hover:bg-[#3D3D3D]' : 'bg-white'} rounded-lg cursor-pointer hover:scale-105 transform transition-all duration-300`}>
                 <div className="mb-4 text-7xl text-dark-accent font-bold">
                   <LuPopcorn />
                 </div>
@@ -92,9 +95,11 @@ const Home = () => {
           </div>
         </div>
         
-        {/* Add IDs to your sections */}
+        {/* 3 Sections */}
         <TravelSection/>
         <EventSection/>
+        <EntertainmentSection/>
+
       </div>
 
       {/* Popup Modal */}
