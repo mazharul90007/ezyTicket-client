@@ -315,34 +315,6 @@ const EventDetails = () => {
           darkMode ? "bg-gray-200" : "bg-white"
         } p-6 rounded-lg shadow-lg w-11/12 md:w-3/5`}
       >
-        <div className="mt-2">
-          {comments?.length > 0 ? (
-            comments
-              .filter((comment) => comment.eventId === eventData._id) // Filter comments by eventId
-              .map((comment, index) => (
-                <div
-                  key={index}
-                  className="border-b py-2 flex items-start gap-4"
-                >
-                  {/* User Image */}
-                  <img
-                    src={comment.customerPhoto || noImage} // Display user photo or default image
-                    alt={comment.customerName}
-                    className="w-10 h-10 rounded-full object-cover"
-                  />
-                  <div className="flex flex-col">
-                    <p className="font-semibold">{comment.customerName}</p>
-                    <p>{comment.comment}</p>
-                    <p className="text-sm text-gray-500">{comment.time}</p>{" "}
-                    {/* Show the time */}
-                  </div>
-                </div>
-              ))
-          ) : (
-            <p>No comments yet.</p>
-          )}
-        </div>
-
         <h2 className="text-xl font-bold mb-4">Add Comment</h2>
         <textarea
           value={comment}
@@ -471,8 +443,56 @@ const EventDetails = () => {
               </h2>
               <p className="mt-2 text-md md:text-xl">{eventData?.details}</p>
             </div>
-          </div>
+            {/* Comment section */}
+            <div
+              className={`${
+                darkMode
+                  ? "bg-dark-surface text-dark-primary"
+                  : "bg-white text-black"
+              } mt-4 p-6 md:p-10 rounded-lg shadow`}
+            >
+              <h2 className="mb-5 font-bold text-2xl">Comments</h2>
+              {comments?.length > 0 ? (
+                comments
+                  .filter((comment) => comment.eventId === eventData._id) // Filter comments by eventId
+                  .map((comment, index) => (
+                    <div
+                      key={index}
+                      className="border-b py-2 flex items-start gap-4"
+                    >
+                      {/* User Image */}
+                      <img
+                        src={comment.customerPhoto || noImage} // Display user photo or default image
+                        alt={comment.customerName}
+                        className="w-10 h-10 rounded-full object-cover"
+                      />
+                      <div className="flex flex-col">
+                        <p className="font-semibold text-black">
+                          {comment.customerName}
+                        </p>
+                        <p>{comment.comment}</p>
+                        <p className="text-sm text-gray-500">
+                          {comment.time}
+                        </p>{" "}
+                        {/* Show the time */}
+                      </div>
+                    </div>
+                  ))
+              ) : (
+                <p>No comments yet.</p>
+              )}
+            </div>
 
+            <div className="flex gap-4 mt-10">
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="ezy-button-secondary-sm p-10"
+              >
+                Add Comment
+              </button>
+            </div>
+          </div>
+          {/* Comment section */}
           {/* Right Sidebar */}
           <div className="rounded-lg h-fit lg:col-span-1">
             {/* -----------------Event Details----------------- */}
@@ -732,20 +752,6 @@ const EventDetails = () => {
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Comment Section */}
-        <div className="flex gap-4 mt-10">
-          <button
-            onClick={() => setIsModalOpen(true)}
-
-            
-
-            className="ezy-button-secondary-sm p-10"
-
-          >
-            Comments
-          </button>
         </div>
 
         {isModalOpen && <CommentModal />}

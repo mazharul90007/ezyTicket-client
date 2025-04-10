@@ -57,7 +57,7 @@ const EventCards = () => {
             key={event._id}
             className={`${
               darkMode ? "bg-dark-surface text-white" : "bg-white text-black"
-            } rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300 h-full flex flex-col group`}
+            } rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300 h-full flex flex-col group`}
           >
             <Link to={`/eventdetailspublic/${event._id}`}>
               <div className="overflow-hidden">
