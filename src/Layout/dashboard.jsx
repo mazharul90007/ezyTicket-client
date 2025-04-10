@@ -134,7 +134,7 @@ const Dashboard = () => {
 
                                 <li onClick={closeMenu}><NavLink to="/dashboard/MyBusServices" className={getNavLinkClass}><FaList /> My Bus Services</NavLink></li>
 
-                                <li onClick={closeMenu}><NavLink to="/dashboard/soldProperties" className={getNavLinkClass}><HiCurrencyDollar /> Ticket Sold</NavLink></li>
+                                <li onClick={closeMenu}><NavLink to="/dashboard/soldTickets" className={getNavLinkClass}><HiCurrencyDollar /> Ticket Sold</NavLink></li>
 
                                 <li onClick={closeMenu}><NavLink to="/dashboard/manageReview" className={getNavLinkClass}><FaHouseCircleExclamation /> Manage Review</NavLink></li>
                             </>
