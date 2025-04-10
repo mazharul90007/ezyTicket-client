@@ -37,6 +37,7 @@ import MovieDetails from "../Pages/Dashboard/Entertainment/MovieManager/MovieDet
 import MovieDetailsPage from "../Pages/Entertainment/MovieDetails/MovieDetailsPage";
 import AddBusService from "../Pages/Dashboard/Travel/AddBusService/AddBusService";
 import ManageReviews from "../Pages/Dashboard/Travel/ManageReviews/ManageReviews";
+import MyBusServices from "../Pages/Dashboard/Travel/MyBusServices/MyBusServices";
 
 
 const Route = createBrowserRouter([
@@ -210,6 +211,10 @@ const Route = createBrowserRouter([
       {
         path: 'manageReview',
         element: <ManageReviews> </ManageReviews>
+      },
+      {
+        path: 'MyBusServices',
+        element: <MyBusServices> </MyBusServices>
       }
     ],
   },
