@@ -58,7 +58,7 @@ const MovieNews = () => {
       <h2 className="text-3xl border-l-4 pl-3 text-supporting md:text-4xl font-bold ">
         Latest News
       </h2>
-     <div className="grid grid-cols-4 gap-6 py-4  text-black mx-auto">
+     <div className="flex flex-col md:grid grid-cols-4 gap-6 py-4  text-black mx-auto">
       
       {/* First Column - Largest (Takes 50%) */}
       <div className="col-span-2 bg-white shadow-lg rounded-xl overflow-hidden">

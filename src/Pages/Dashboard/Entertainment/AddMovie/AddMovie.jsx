@@ -1,6 +1,11 @@
 import React, { useState } from "react";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+import useEntertainmentData from "../../../../Hooks/EntertainmentHook/useEntertainmentData";
+
 
 const AddMovie = () => {
+  const axiosSecure = useAxiosSecure();
   const [movieData, setMovieData] = useState({
     name: "",
     description: "",
@@ -15,13 +20,12 @@ const AddMovie = () => {
     cinemaHalls: [],
   });
 
-  const cinemaHallOptions = [
-    "Hall 1",
-    "Hall 2",
-    "Hall 3",
-    "Premium Cineplex",
-    "IMAX Theater",
-  ];
+const {halls}=useEntertainmentData();
+
+
+const hallNames = halls.map(hall => hall.name); 
+console.log(hallNames);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,12 +36,35 @@ const AddMovie = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Movie Data Submitted:", movieData);
-    // You can now send `movieData` to your backend or API
+    axiosSecure.post('/allmovies',movieData)
+
+    .then((res)=>{
+      console.log(res.data)
+      Swal.fire({
+              title: "Movie Added Successfully",
+              text: "Go to cinemas",
+              icon: "success",
+            });
+            setMovieData({
+              name: "",
+              description: "",
+              duration: "",
+              category: "",
+              genre: "",
+              actors: "",
+              releaseDate: "",
+              language: "",
+              director: "",
+              imageLink: "",
+              cinemaHalls: [],
+            })
+    })
   };
 
   return (
-    <div className="relative">
-      <img src="/addcine2.jpg" alt="" className="" />
+    <div className="relative h-[900px] md:h-[1100px] bg-cover bg-center"
+    style={{ backgroundImage: "url('/addcine2.jpg')" }}
+    >
       <div className="absolute inset-0 bg-black/40 bg-opacity-50"></div>
 
       <div className=" absolute top-0  mx-auto p-6 text-white shadow-md rounded-lg ">
@@ -48,6 +75,7 @@ const AddMovie = () => {
           <form onSubmit={handleSubmit} className="space-y-4 w-2/3">
             <input
               name="name"
+              value={movieData.name}
               placeholder="Name"
               onChange={handleChange}
               className="w-full p-3 border rounded-lg text-amber-50"
@@ -55,6 +83,7 @@ const AddMovie = () => {
             />
             <textarea
               name="description"
+              value={movieData.description}
               placeholder="Description"
               onChange={handleChange}
               className="w-full p-3 border rounded-lg"
@@ -62,6 +91,7 @@ const AddMovie = () => {
             />
             <input
               name="duration"
+              value={movieData.duration}
               placeholder="Duration (e.g., 2h 15m)"
               onChange={handleChange}
               className="w-full p-3 border rounded-lg"
@@ -69,6 +99,7 @@ const AddMovie = () => {
             />
             <input
               name="category"
+              value={movieData.category}
               placeholder="Category (e.g., Action, Drama)"
               onChange={handleChange}
               className="w-full p-3 border rounded-lg"
@@ -76,6 +107,7 @@ const AddMovie = () => {
             />
             <input
               name="genre"
+              value={movieData.genre}
               placeholder="Genre (e.g., Thriller, Romance)"
               onChange={handleChange}
               className="w-full p-3 border rounded-lg"
@@ -83,6 +115,7 @@ const AddMovie = () => {
             />
             <input
               name="actors"
+              value={movieData.actors}
               placeholder="Actors (comma separated)"
               onChange={handleChange}
               className="w-full p-3 border rounded-lg"
@@ -91,12 +124,14 @@ const AddMovie = () => {
             <input
               type="date"
               name="releaseDate"
+              value={movieData.releaseDate}
               onChange={handleChange}
               className="w-full p-3 border rounded-lg"
               required
             />
             <input
               name="language"
+              value={movieData.language}
               placeholder="Language (e.g., English, Hindi)"
               onChange={handleChange}
               className="w-full p-3 border rounded-lg"
@@ -104,6 +139,7 @@ const AddMovie = () => {
             />
             <input
               name="director"
+              value={movieData.director}
               placeholder="Director"
               onChange={handleChange}
               className="w-full p-3 border rounded-lg"
@@ -111,6 +147,7 @@ const AddMovie = () => {
             />
             <input
               name="imageLink"
+              value={movieData.imageLink}
               placeholder="Image Link (URL)"
               onChange={handleChange}
               className="w-full p-3 border rounded-lg"
@@ -127,7 +164,7 @@ const AddMovie = () => {
               Select Cinema Halls
             </label>
             <div className="border rounded-lg p-4 space-y-2">
-              {cinemaHallOptions.map((hall, idx) => (
+              {hallNames.map((hall, idx) => (
                 <label key={idx} className="flex items-center space-x-2">
                   <input
                     type="checkbox"

@@ -17,7 +17,6 @@ import AllEvents from "../Pages/Events/AllEvents/AllEvents";
 import MyWishList from "../Pages/MyWishList/MyWishList";
 import Contact from "../Pages/Contact/Contact";
 import AllMovie from "../Pages/Entertainment/AllMovie/AllMovies";
-import MovieDetails from "../Pages/Entertainment/MovieDetails/MovieDetails";
 import Dashboard from "../Layout/dashboard";
 import TravelSelectSet from "../Pages/Travel/TravelTicekBook/TravelSelectSet";
 import AddEvents from "../Pages/Dashboard/Events/AddEvents/AddEvents";
@@ -27,12 +26,16 @@ import MyAddedEvents from "../Pages/Dashboard/Admin/MyAddedEvents/MyAddedEvents"
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import Profile from "../Pages/Dashboard/Profile/Profile";
 import ManageEventReview from "../Pages/Dashboard/Events/ManageEventReviews/ManageEventReview";
-import Checkout from "../Pages/Checkout/Checkout";
+import PaymentSuccess from "../Pages/PaymentSuccess/PaymentSuccess";
+import PaymentFail from "../Pages/PaymentFail/PaymentFail";
 import AddCineplex from "../Pages/Dashboard/Entertainment/AddCineplex/AddCineplex";
 import SoldedCineTicket from "../Pages/Dashboard/Entertainment/SoldedCineTicket/SoldedCineTicket";
 import ManageCineplex from "../Pages/Dashboard/Entertainment/ManageCineplex/ManageCineplex";
 import AddMovie from "../Pages/Dashboard/Entertainment/AddMovie/AddMovie";
 import MovieManager from "../Pages/Dashboard/Entertainment/MovieManager/MovieManager";
+import MovieDetails from "../Pages/Dashboard/Entertainment/MovieManager/MovieDetails/MovieDetails";
+import MovieDetailsPage from "../Pages/Entertainment/MovieDetails/MovieDetailsPage";
+
 
 const Route = createBrowserRouter([
   {
@@ -55,6 +58,14 @@ const Route = createBrowserRouter([
       {
         path: "/register",
         element: <RegisterPage></RegisterPage>,
+      },
+      {
+        path: "/payment/success/:tran_id",
+        element: <PaymentSuccess></PaymentSuccess>,
+      },
+      {
+        path: "/payment/fail/:tran_id",
+        element: <PaymentFail></PaymentFail>,
       },
       // --------------Travel route start----------
       {
@@ -118,7 +129,7 @@ const Route = createBrowserRouter([
       },
       {
         path: `/entertainment/allmovies/:id`,
-        element: <MovieDetails></MovieDetails>,
+        element: <MovieDetailsPage></MovieDetailsPage>,
       },
     ],
   },
@@ -183,6 +194,11 @@ const Route = createBrowserRouter([
       {
         path:'managemovie',
         element:<MovieManager></MovieManager>
+      },
+      {
+        path:'managemovie/moviedetails/:id',
+        element:<MovieDetails></MovieDetails> 
+        
       }
 
     ],

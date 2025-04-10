@@ -24,12 +24,14 @@ import {
 } from "react-icons/io";
 import { GiTicket } from "react-icons/gi";
 import { FaMapMarkerAlt, FaMoneyCheckAlt } from "react-icons/fa";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const EventDetails = () => {
   // Hooks and state
   const { user, darkMode, userInfo } = useAuth();
   const { eventId } = useParams();
   const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
 
   const [timeLeft, setTimeLeft] = useState({
@@ -167,6 +169,8 @@ const EventDetails = () => {
       address: userInfo?.address,
       price: parseFloat((eventData?.price * ticketQuantity * 1.05).toFixed(2)),
       product: eventData?.title,
+      unitPrice: eventData?.price,
+      charge: parseFloat((eventData?.price * ticketQuantity * 0.05).toFixed(2)),
       productCategory: eventData?.category,
       eventId: eventData?._id,
       quantity: ticketQuantity,
@@ -175,6 +179,11 @@ const EventDetails = () => {
       date: new Date().toISOString(),
     };
     console.log(checkoutData);
+
+    const res = await axiosSecure.post("/order", checkoutData);
+    if (res.data) {
+      window.location.replace(res.data.url);
+    }
   };
 
   const handleAddComment = async () => {
@@ -184,12 +193,24 @@ const EventDetails = () => {
     }
 
     try {
+      const localTime = new Date().toLocaleString(); // Get local time as a readable string
+
       await axiosPublic.post("/event-reviews", {
         eventId: eventData._id,
         comment: comment,
-        userEmail: user?.email,
+        customerEmail: user?.email,
+        customerName: user?.displayName,
+        customerPhoto: user?.photoURL,
+        time: localTime,
+        category: "event",
+        status: "pending",
       });
-      Swal.fire("Success", "Your comment has been added!", "success");
+
+      Swal.fire(
+        "Success",
+        "Your comment has been submitted for review.",
+        "success"
+      );
       setComment("");
       setIsModalOpen(false);
     } catch (error) {
@@ -296,12 +317,27 @@ const EventDetails = () => {
       >
         <div className="mt-2">
           {comments?.length > 0 ? (
-            comments.map((comment, index) => (
-              <div key={index} className="border-b py-2">
-                <p className="font-semibold">{comment.userEmail}</p>
-                <p>{comment.comment}</p>
-              </div>
-            ))
+            comments
+              .filter((comment) => comment.eventId === eventData._id) // Filter comments by eventId
+              .map((comment, index) => (
+                <div
+                  key={index}
+                  className="border-b py-2 flex items-start gap-4"
+                >
+                  {/* User Image */}
+                  <img
+                    src={comment.customerPhoto || noImage} // Display user photo or default image
+                    alt={comment.customerName}
+                    className="w-10 h-10 rounded-full object-cover"
+                  />
+                  <div className="flex flex-col">
+                    <p className="font-semibold">{comment.customerName}</p>
+                    <p>{comment.comment}</p>
+                    <p className="text-sm text-gray-500">{comment.time}</p>{" "}
+                    {/* Show the time */}
+                  </div>
+                </div>
+              ))
           ) : (
             <p>No comments yet.</p>
           )}
@@ -414,7 +450,7 @@ const EventDetails = () => {
 
             <button
               onClick={handleSaveEvent}
-              className={`flex flex-row btn ml-20 md:ml-60 lg:ml-90 mt-10 ${
+              className={`flex flex-row btn ml-35 md:ml-60 lg:ml-90 mt-10 ${
                 isSaved
                   ? "bg-green-500 text-white"
                   : "hover:bg-green-400 hover:text-white"
@@ -652,16 +688,7 @@ const EventDetails = () => {
                 </div>
 
                 {/* Checkout Button */}
-                <Link
-                  // to={'/checkout'}
-                  // state={{
-                  //   ticketQuantity,
-                  //   subtotal: (eventData?.price * ticketQuantity).toFixed(2),
-                  //   serviceFee: (eventData?.price * ticketQuantity * 0.05).toFixed(2),
-                  //   total: (eventData?.price * ticketQuantity * 1.05).toFixed(2)
-                  // }}
-                  className="block mt-6"
-                >
+                <Link className="block mt-6">
                   <div className="relative group">
                     {" "}
                     {/* Tooltip container */}
@@ -691,7 +718,7 @@ const EventDetails = () => {
                       !userInfo?.email ||
                       !userInfo?.phone ||
                       !userInfo?.address) && (
-                      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 text-red-500 bg-gray-800 text-sm rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2  bg-gray-800 text-sm rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
                         Please update your full information to checkout
                         <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-b-0 border-t-4 border-gray-800"></div>
                       </div>
@@ -711,7 +738,11 @@ const EventDetails = () => {
         <div className="flex gap-4 mt-10">
           <button
             onClick={() => setIsModalOpen(true)}
-            className="ezy-button-secondary-sm p-10 ml-85 items-center"
+
+            
+
+            className="ezy-button-secondary-sm p-10"
+
           >
             Comments
           </button>
