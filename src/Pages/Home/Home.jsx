@@ -1,15 +1,18 @@
 import { useState, useEffect } from "react";
-// import { useLocation } from "react-router-dom";
 import HomeBanner from "./HomeComponents/HomeBanner";
 import HomeCategory from "./HomeComponents/HomeCategory";
 import EventSection from "./HomeComponents/EventSection";
 import eidPopUp from "../../assets/Home_image/eidPopUp.gif";
-// import { getUserInformation } from "../../API/Utils";
+import TravelSection from "./HomeComponents/TravelSection";
+import { LuPopcorn } from "react-icons/lu";
+import { FaBus } from "react-icons/fa";
+import { GiMicrophone } from "react-icons/gi";
+import useAuth from "../../Hooks/useAuth";
 
 const Home = () => {
-  // const location = useLocation();
   const [showModal, setShowModal] = useState(true);
   const [countdown, setCountdown] = useState(6);
+  const { darkMode } = useAuth();
 
   // Auto-close modal after 6 seconds with countdown
   useEffect(() => {
@@ -29,17 +32,69 @@ const Home = () => {
     setShowModal(false);
   };
 
-  // console.log(location);
-  // const result = getUserInformation();
-  // console.log(result);
+  // Smooth scroll function
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
 
   return (
     <div className="pt-16 min-h-screen relative">
       {/* Blur effect only on Home Page content */}
       <div className={showModal ? "blur-md" : ""}>
         <HomeBanner />
-        <HomeCategory />
-        <EventSection />
+        <div className="py-16">
+          <div className="w-11/12 mx-auto">
+            <p className={`text-center text-xl md:text-2xl font-semibold mb-2 md:mb-1 ${darkMode ? 'text-dark-supporting' : 'text-supporting'}`}>
+              One Platform, Endless Possibilities – The Best Ticketing System Online.
+            </p>
+            <h2 className="text-2xl md:text-4xl text-main font-bold text-center">EzyTicket <span className={` ${darkMode ? 'text-dark-primary' : 'text-gray-800'}`}>Your One-Stop Solution for Hassle-Free Ticketing</span></h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 py-8">
+              {/* Bus Ticket Card */}
+              <div 
+                onClick={() => scrollToSection("travelSection")}
+                className={`md:col-span-1 shadow p-8 ${darkMode ? 'bg-dark-surface hover:bg-[#3D3D3D]' : 'bg-white'} rounded-lg cursor-pointer hover:scale-105 transform transition-all duration-300`}
+              >
+                <div className="mb-4 text-7xl text-dark-accent font-bold">
+                  <FaBus />
+                </div>
+                <h3 className={`text-2xl font-semibold ${darkMode && 'text-dark-primary'}`}><span className={`${darkMode ? 'text-dark-supporting' : 'text-supporting'}`}>Bus </span>Ticket</h3>
+                <p className={`text-lg ${darkMode && 'text-dark-secondary'}`}>Your journey starts here! Book bus tickets effortlessly on EzyTicket. </p>
+              </div>
+
+              {/* Event Ticket Card */}
+              <div 
+                onClick={() => scrollToSection("eventSection")}
+                className={`md:col-span-1 shadow p-8 ${darkMode ? 'bg-dark-surface hover:bg-[#3D3D3D]' : 'bg-white'} rounded-lg cursor-pointer hover:scale-105 transform transition-all duration-300`}
+              >
+                <div className="mb-4 text-7xl text-dark-accent font-bold">
+                  <GiMicrophone />
+                </div>
+                <h3 className={`text-2xl font-semibold ${darkMode && 'text-dark-primary'}`}><span className={`${darkMode ? 'text-dark-supporting' : 'text-supporting'}`}>Events </span>Ticket</h3>
+                <p className={`text-lg ${darkMode && 'text-dark-secondary'}`}>Experience the thrill! Event tickets just a click away on EzyTicket. </p>
+              </div>
+
+              {/* Entertainment Ticket Card */}
+              <div className={`md:col-span-1 shadow p-8 ${darkMode ? 'bg-dark-surface hover:bg-[#3D3D3D]' : 'bg-white'} rounded-lg cursor-pointer hover:scale-105 transform transition-all duration-300`}>
+                <div className="mb-4 text-7xl text-dark-accent font-bold">
+                  <LuPopcorn />
+                </div>
+                <h3 className={`text-2xl font-semibold ${darkMode && 'text-dark-primary'}`}><span className={`${darkMode ? 'text-dark-supporting' : 'text-supporting'}`}>Entertainmet </span>Ticket</h3>
+                <p className={`text-lg ${darkMode && 'text-dark-secondary'}`}>Lights, camera, action! Book entertainment tickets in seconds. </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Add IDs to your sections */}
+        <TravelSection/>
+        <EventSection/>
       </div>
 
       {/* Popup Modal */}
