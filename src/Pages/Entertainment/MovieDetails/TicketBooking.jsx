@@ -37,15 +37,9 @@ const TicketBooking = () => {
 
   useEffect(() => {
     const selectedHall = halls.filter((h) => h.name == formData.cineplex)[0];
-<<<<<<< HEAD
-    // console.log(selectedHall?.price);
-  
-    if(selectedHall){
-=======
     console.log(selectedHall?.price);
 
     if (selectedHall) {
->>>>>>> 1a72fe663581cdb779e9c4f8efdad3a8b4024f44
       setFormData((prevData) => ({
         ...prevData,
         priceperticket: selectedHall.price,
@@ -95,26 +89,6 @@ const TicketBooking = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-<<<<<<< HEAD
-    // console.log(formData);
-    axiosSecure.post('/movie_tickets', formData)
-      .then(() => {
-        Swal.fire({
-          title: "Ticket Booked!",
-          text: ` Booking Confirmed for ${movie.title}!`,
-          icon: "success"
-        });
-
-        setFormData(
-          {     
-            date: "",
-            time: "",
-            seats: [],
-          }
-        )
-
-      })
-=======
     console.log(formData);
     axiosSecure.post("/movie_tickets", formData).then(() => {
       Swal.fire({
@@ -129,7 +103,6 @@ const TicketBooking = () => {
         seats: [],
       });
     });
->>>>>>> 1a72fe663581cdb779e9c4f8efdad3a8b4024f44
   };
 
   return (

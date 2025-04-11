@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-import { MdConstruction } from "react-icons/md";
-=======
 import { MdOutlineEmail, MdEdit } from "react-icons/md";
 import noImage from "../../../../assets/Common_image/noImage.png";
 import { FaHome, FaPhoneAlt, FaTicketAlt, FaUserCircle } from "react-icons/fa";
@@ -8,16 +5,11 @@ import { FaFolderOpen } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import EditButton from "../ProfileComponents/EditButton"
 import useAuth from "../../../../Hooks/useAuth";
->>>>>>> 1a72fe663581cdb779e9c4f8efdad3a8b4024f44
 
 
 const TravelManagerProfile = () => {
     const { userInfo, user, refetchUserInfo } = useAuth();
     return (
-<<<<<<< HEAD
-        <div className="my-16">
-            <div className="text-5xl font-semibold text-center flex items-center w-fit mx-auto">Under Construction... <MdConstruction /></div>
-=======
         <div className="min-h-screen">
             <div className="w-10/12 mx-auto">
                 {/* Profile Card */}
@@ -114,7 +106,6 @@ const TravelManagerProfile = () => {
                     </div>
                 </div>
             </div>
->>>>>>> 1a72fe663581cdb779e9c4f8efdad3a8b4024f44
         </div>
     );
 };

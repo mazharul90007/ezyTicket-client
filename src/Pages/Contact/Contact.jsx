@@ -4,16 +4,9 @@ import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaClock } from 'react-icons/fa';
 const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
 
-<<<<<<< HEAD
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // console.log('Form Data:', formData);
-    };
-=======
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
->>>>>>> 1a72fe663581cdb779e9c4f8efdad3a8b4024f44
 
   const handleSubmit = (e) => {
     e.preventDefault();

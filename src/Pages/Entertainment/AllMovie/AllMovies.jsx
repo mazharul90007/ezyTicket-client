@@ -21,10 +21,6 @@ const AllMovies = () => {
   const { darkMode } = useAuth();
   const { halls,movies } = useEntertainmentData();
 
-<<<<<<< HEAD
-  // console.log(movies);
-=======
->>>>>>> 1a72fe663581cdb779e9c4f8efdad3a8b4024f44
 
   const options = [
     { value: "london", label: "Dhaka" },
