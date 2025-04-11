@@ -41,7 +41,7 @@ const AddCineplex = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Submitting cinema hall:", formData);
+    // console.log("Submitting cinema hall:", formData);
     axiosPublic.post("/cinemahalls", formData).then((res) => {
       console.log(res.data);
       Swal.fire({

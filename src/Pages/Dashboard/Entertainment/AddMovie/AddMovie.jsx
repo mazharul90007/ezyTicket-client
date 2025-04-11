@@ -24,7 +24,7 @@ const {halls}=useEntertainmentData();
 
 
 const hallNames = halls.map(hall => hall.name); 
-console.log(hallNames);
+// console.log(hallNames);
 
 
   const handleChange = (e) => {
@@ -35,7 +35,7 @@ console.log(hallNames);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Movie Data Submitted:", movieData);
+    // console.log("Movie Data Submitted:", movieData);
     axiosSecure.post('/allmovies',movieData)
 
     .then((res)=>{

@@ -1,9 +1,10 @@
+import { MdConstruction } from "react-icons/md";
 
 
 const AdminProfile = () => {
     return (
-        <div>
-            <h2>this is Admin Profile</h2>
+        <div className="my-16">
+            <div className="text-5xl font-semibold text-center flex items-center w-fit mx-auto">Under Construction... <MdConstruction /></div>
         </div>
     );
 };

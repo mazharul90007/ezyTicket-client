@@ -1,7 +1,7 @@
 
 
 const EventCard = ({ event }) => {
-    console.log(event)
+    // console.log(event)
     return (
         <div className="card bg-base-100 w-full shadow-sm">
             <figure>
