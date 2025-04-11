@@ -194,7 +194,7 @@ const AllMovies = () => {
   const { darkMode } = useAuth();
   const { halls,movies } = useEntertainmentData();
 
-  console.log(movies);
+  // console.log(movies);
 
   const options = [
     { value: "london", label: "London" },

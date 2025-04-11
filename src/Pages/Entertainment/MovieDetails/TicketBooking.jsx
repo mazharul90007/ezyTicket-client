@@ -41,7 +41,7 @@ const TicketBooking = () => {
   useEffect(()=>{
 
     const selectedHall = halls.filter((h) => h.name == formData.cineplex)[0];
-    console.log(selectedHall?.price);
+    // console.log(selectedHall?.price);
   
     if(selectedHall){
       setFormData((prevData) => ({
@@ -80,7 +80,7 @@ const TicketBooking = () => {
       paymentMethod: "card",
       date: new Date().toISOString(),
     };
-    console.log(checkoutData);
+    // console.log(checkoutData);
 
     const res = await axiosSecure.post('/order', checkoutData);
     if (res.data) {
@@ -93,7 +93,7 @@ const TicketBooking = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    // console.log(formData);
     axiosSecure.post('/movie_tickets', formData)
       .then(() => {
         Swal.fire({

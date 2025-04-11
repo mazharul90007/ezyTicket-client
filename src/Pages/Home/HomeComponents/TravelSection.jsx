@@ -1,4 +1,4 @@
-import coach from "../../../assets/Home_image/coach3.png";
+import coach from "../../../assets/Home_image/coach.png";
 import { FaPlane, FaTag, FaMapMarkerAlt, FaRegSmile, FaBus } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";

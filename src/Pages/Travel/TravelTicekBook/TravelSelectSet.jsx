@@ -18,7 +18,7 @@ const TravelSelectSet = () => {
         });
     };
 
-    console.log(selectedSeats)
+    // console.log(selectedSeats)
 
 
     const handleTravelInfo = (e) =>{
@@ -30,7 +30,7 @@ const TravelSelectSet = () => {
         const address = form.address.value;
         const totalPrices = selectedSeats.length * seatPrice;
         const passengerData = {name,email,number,selectedSeats,address, totalPrices, seatPrice}
-        console.log(passengerData)
+        // console.log(passengerData)
 
         Swal.fire({
             title: "Ticket Book Successfully",

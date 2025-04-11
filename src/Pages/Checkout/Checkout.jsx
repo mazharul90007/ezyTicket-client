@@ -12,7 +12,7 @@ const Checkout = () => {
     const { register, handleSubmit, getValues, reset, formState: { errors } } = useForm();
 
     const onSubmit = async (data) => {
-        console.log(data);
+        // console.log(data);
         //send the data to Backend
         const eventInfo = {
             title: data.title,

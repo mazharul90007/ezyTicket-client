@@ -22,7 +22,6 @@ import TravelSelectSet from "../Pages/Travel/TravelTicekBook/TravelSelectSet";
 import AddEvents from "../Pages/Dashboard/Events/AddEvents/AddEvents";
 import PrivateRoute from "./PrivateRoute";
 import ManageEvents from "../Pages/Dashboard/Admin/ManageEvents/ManageEvents";
-import MyAddedEvents from "../Pages/Dashboard/Admin/MyAddedEvents/MyAddedEvents";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import Profile from "../Pages/Dashboard/Profile/Profile";
 import ManageEventReview from "../Pages/Dashboard/Events/ManageEventReviews/ManageEventReview";
@@ -35,6 +34,7 @@ import AddMovie from "../Pages/Dashboard/Entertainment/AddMovie/AddMovie";
 import MovieManager from "../Pages/Dashboard/Entertainment/MovieManager/MovieManager";
 import MovieDetails from "../Pages/Dashboard/Entertainment/MovieManager/MovieDetails/MovieDetails";
 import MovieDetailsPage from "../Pages/Entertainment/MovieDetails/MovieDetailsPage";
+import MyAddedEvents from "../Pages/Dashboard/Events/MyAddedEvents/MyAddedEvents";
 
 
 const Route = createBrowserRouter([
