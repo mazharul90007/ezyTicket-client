@@ -50,7 +50,7 @@ const MovieMarquee = () => {
       </h2>
 
       <div className="relative overflow-hidden">
-        <div className="flex space-x-8 animate-marquee">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-2 space-x-8 animate-marquee">
           {marqueeMovies.map((movie) => (
             <div
               key={movie.id}

@@ -73,14 +73,15 @@ const TrendingMovies = () => {
         
           spaceBetween={30}
           freeMode={true}
-          pagination={{
-            clickable: true,
-          }}
+       
           navigation={true}
           modules={[FreeMode,Navigation, Pagination]}
           breakpoints={{
             // when window width is >= 0px
             0: {
+              slidesPerView: 1,
+            },
+            500:{
               slidesPerView: 2,
             },
             // when window width is >= 768px (medium screens)

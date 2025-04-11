@@ -8,201 +8,38 @@ import Select from "react-select";
 import useEntertainmentData from "../../../Hooks/EntertainmentHook/useEntertainmentData";
 import MovieCard from "../Components/MovieCard";
 
-export const Movies = [
-  {
-    id: 21,
-    title: "Venom",
-    poster:
-      "https://imageio.forbes.com/specials-images/imageserve/67508810cdaf3caeed2896b9/0x0.jpg?format=jpg&crop=1150,647,x0,y43,safe&height=900&width=1600&fit=bounds",
-    genre: "Sci-Fi, Action",
-    rating: 4.8,
-  },
-  {
-    id: 22,
-    title: "MUFASA The Lion King",
-    poster:
-      "https://substack-post-media.s3.amazonaws.com/public/images/9184cb58-4f51-452c-8b63-3fd60b1ff306_1313x739.jpeg",
-    genre: "Romance, Drama",
-    rating: 4.5,
-  },
-  {
-    id: 23,
-    title: "Avengers : End Game",
-    poster:
-      "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/DB176BD1488D7E4822256EF1778C124FC17388FC1E7F0F6D89B38AFF5FB001F6/scale?width=1200&aspectRatio=1.78&format=webp",
-    genre: "Thriller, Mystery",
-    rating: 4.7,
-  },
-  {
-    id: 1,
-    title: "Anora",
-    poster: "https://www.impawards.com/2024/posters/anora_ver5.jpg",
-    genre: "Drama",
-    rating: 4.9,
-  },
-  {
-    id: 2,
-    title: "Wicked",
-    poster:
-      "https://ionabmargit.pages.dev/hwmkbvp-wicked-2024-poster-images-wepnwrd/wicked_2024_poster.jpg",
-    genre: "Musical, Fantasy",
-    rating: 4.8,
-  },
-  {
-    id: 3,
-    title: "Den of Thieves 2: Pantera",
-    poster:
-      "https://www.impawards.com/2024/posters/den_of_thieves_two_pantera_ver3.jpg",
-    genre: "Action, Thriller",
-    rating: 4.7,
-  },
-  {
-    id: 4,
-    title: "Dune: Part Two",
-    poster:
-      "https://jeremyctaylor.pages.dev/fscda-dune-part-two-2025-hd-tyhhj/dune_part_two_2025_poster.jpg",
-    genre: "Sci-Fi, Adventure",
-    rating: 4.9,
-  },
-  {
-    id: 5,
-    title: "Inside Out 2",
-    poster:
-      "https://stefaniewjemie.pages.dev/qxplrwl-inside-out-2-2024-cast-images-dmxmuua/inside_out_2_2024_poster.jpg",
-    genre: "Animation, Comedy",
-    rating: 4.6,
-  },
-  {
-    id: 6,
-    title: "Deadpool & Wolverine",
-    poster:
-      "https://www.marvel.com/articles/movies/deadpool-and-wolverine-trailer-posters/deadpool_and_wolverine_poster.jpg",
-    genre: "Action, Comedy",
-    rating: 4.9,
-  },
-  {
-    id: 7,
-    title: "Joker: Folie à Deux",
-    poster: "https://www.impawards.com/2024/posters/joker_folie_a_deux.jpg",
-    genre: "Crime, Thriller",
-    rating: 4.8,
-  },
-  {
-    id: 8,
-    title: "Ghostbusters: Frozen Empire",
-    poster:
-      "https://www.impawards.com/2024/posters/ghostbusters_frozen_empire.jpg",
-    genre: "Comedy, Fantasy",
-    rating: 4.5,
-  },
-  {
-    id: 9,
-    title: "The Fall Guy",
-    poster: "https://www.impawards.com/2024/posters/the_fall_guy.jpg",
-    genre: "Action, Comedy",
-    rating: 4.7,
-  },
-  {
-    id: 10,
-    title: "Kingdom of the Planet of the Apes",
-    poster:
-      "https://www.impawards.com/2024/posters/kingdom_of_the_planet_of_the_apes.jpg",
-    genre: "Sci-Fi, Action",
-    rating: 4.7,
-  },
-  {
-    id: 11,
-    title: "Godzilla x Kong: The New Empire",
-    poster:
-      "https://www.impawards.com/2024/posters/godzilla_x_kong_the_new_empire.jpg",
-    genre: "Action, Sci-Fi",
-    rating: 4.8,
-  },
-  {
-    id: 12,
-    title: "Borderlands",
-    poster: "https://www.impawards.com/2024/posters/borderlands.jpg",
-    genre: "Sci-Fi, Adventure",
-    rating: 4.5,
-  },
-  {
-    id: 13,
-    title: "The Marvels",
-    poster: "https://www.impawards.com/2024/posters/the_marvels.jpg",
-    genre: "Action, Sci-Fi",
-    rating: 4.6,
-  },
-  {
-    id: 14,
-    title: "Saw XI",
-    poster: "https://www.impawards.com/2024/posters/saw_xi.jpg",
-    genre: "Horror, Thriller",
-    rating: 4.4,
-  },
-  {
-    id: 15,
-    title: "The Exorcist: Believer",
-    poster: "https://www.impawards.com/2024/posters/the_exorcist_believer.jpg",
-    genre: "Horror, Mystery",
-    rating: 4.3,
-  },
-  {
-    id: 16,
-    title: "Oppenheimer",
-    poster: "https://www.impawards.com/2024/posters/oppenheimer.jpg",
-    genre: "Drama, History",
-    rating: 4.9,
-  },
-  {
-    id: 17,
-    title: "Mission: Impossible - Dead Reckoning Part Two",
-    poster:
-      "https://www.impawards.com/2024/posters/mission_impossible_dead_reckoning_part_two.jpg",
-    genre: "Action, Thriller",
-    rating: 4.8,
-  },
-  {
-    id: 18,
-    title: "Fast X",
-    poster: "https://www.impawards.com/2024/posters/fast_x.jpg",
-    genre: "Action, Adventure",
-    rating: 4.6,
-  },
-  {
-    id: 19,
-    title: "Aquaman and the Lost Kingdom",
-    poster:
-      "https://www.impawards.com/2024/posters/aquaman_and_the_lost_kingdom.jpg",
-    genre: "Action, Fantasy",
-    rating: 4.5,
-  },
-  {
-    id: 20,
-    title: "Wonka",
-    poster: "https://www.impawards.com/2024/posters/wonka.jpg",
-    genre: "Family, Fantasy",
-    rating: 4.7,
-  },
-];
+
 
 const AllMovies = () => {
   const [isNowActive, setisActive] = useState(true);
   const [isComingActive, setisComingActive] = useState(false);
   const [isAdvancedActive, setisAdvancedActive] = useState(false);
   const [selectedLocations, setSelectedLocations] = useState([]);
+  // const [showMovie, setShowMovie] = useState([]);
+
 
   const { darkMode } = useAuth();
   const { halls,movies } = useEntertainmentData();
 
+<<<<<<< HEAD
   // console.log(movies);
+=======
+>>>>>>> 1a72fe663581cdb779e9c4f8efdad3a8b4024f44
 
   const options = [
-    { value: "london", label: "London" },
-    { value: "new_york", label: "New York" },
-    { value: "paris", label: "Paris" },
-    { value: "tokyo", label: "Tokyo" },
-    { value: "berlin", label: "Berlin" },
+    { value: "london", label: "Dhaka" },
+    { value: "new_york", label: "Jessore" },
+    { value: "paris", label: "Khulna" },
+    { value: "tokyo", label: "Mirpur" },
+    { value: "berlin", label: "Dhanmondi" },
   ];
+  
+
+  const handleHallSelect=(selectedHall)=>{
+
+ const showingHanll = movies.filter((movie) => movie.cinemaHalls.map(p=>p==selectedHall) );
+console.log(showingHanll);
+  }
 
   const handleNowShowing = () => {
     setisActive(true);
@@ -221,6 +58,7 @@ const AllMovies = () => {
     setisComingActive(false);
     setisAdvancedActive(true);
   };
+
 
   return (
     <section
@@ -272,10 +110,10 @@ const AllMovies = () => {
         </div>
       </div>
 
-      <div className="flex justify-between">
+      <div className="flex flex-col-reverse md:justify-between">
        
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-4 md:gap-10 overflow-x-auto no-scrollbar md:overflow-visible">
+        <div className="grid xs:grid-cols-1 sm:grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-4 md:gap-10 overflow-x-auto no-scrollbar md:overflow-visible ">
           {movies.map((movie) => (
           <MovieCard movie={movie}></MovieCard>
           ))}
@@ -296,6 +134,7 @@ const AllMovies = () => {
                 <input
                   type="radio"
                   name="cineplex"
+                  onChange={(e)=>handleHallSelect(e.target.value)}
                   value={cineplex.name}
                   className="accent-green-500"
                   required

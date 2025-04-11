@@ -34,7 +34,14 @@ import AddMovie from "../Pages/Dashboard/Entertainment/AddMovie/AddMovie";
 import MovieManager from "../Pages/Dashboard/Entertainment/MovieManager/MovieManager";
 import MovieDetails from "../Pages/Dashboard/Entertainment/MovieManager/MovieDetails/MovieDetails";
 import MovieDetailsPage from "../Pages/Entertainment/MovieDetails/MovieDetailsPage";
+<<<<<<< HEAD
 import MyAddedEvents from "../Pages/Dashboard/Events/MyAddedEvents/MyAddedEvents";
+=======
+import AddBusService from "../Pages/Dashboard/Travel/AddBusService/AddBusService";
+import ManageReviews from "../Pages/Dashboard/Travel/ManageReviews/ManageReviews";
+import MyBusServices from "../Pages/Dashboard/Travel/MyBusServices/MyBusServices";
+import SoldTickets from "../Pages/Dashboard/Travel/SoldTickets/SoldTickets";
+>>>>>>> 1a72fe663581cdb779e9c4f8efdad3a8b4024f44
 
 
 const Route = createBrowserRouter([
@@ -199,8 +206,24 @@ const Route = createBrowserRouter([
         path:'managemovie/moviedetails/:id',
         element:<MovieDetails></MovieDetails> 
         
+      },
+      //add bus service page, review manage, added by susanto
+      {
+        path: 'add-bus-service',
+        element: <AddBusService> </AddBusService>
+      },
+      {
+        path: 'manageReview',
+        element: <ManageReviews> </ManageReviews>
+      },
+      {
+        path: 'MyBusServices',
+        element: <MyBusServices> </MyBusServices>
+      },
+      {
+        path: 'SoldTickets',
+        element: <SoldTickets> </SoldTickets>
       }
-
     ],
   },
 ]);

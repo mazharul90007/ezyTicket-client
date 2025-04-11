@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Movies } from "../AllMovie/AllMovies";
 
 import { motion } from "framer-motion";
 import { FaBus, FaCheckSquare } from "react-icons/fa";
@@ -11,19 +10,16 @@ import { IoStar } from "react-icons/io5";
 import { MdCast, MdDirectionsBike, MdLocalMovies } from "react-icons/md";
 import TicketBooking from "./TicketBooking";
 import useEntertainmentData from "../../../Hooks/EntertainmentHook/useEntertainmentData";
-
+import Recommended from "./Recommended/Recommended";
 
 const MovieDetailsPage = () => {
   // const [isavailable,seIsAvailablr]=useState('A4');
   const { darkMode } = useAuth();
   const { id } = useParams();
 
-  const {movies}=useEntertainmentData();
-  
+  const { movies } = useEntertainmentData();
+
   const movie = movies.filter((movie) => movie._id == id)[0];
-
-
-
 
   return (
     <div
@@ -43,18 +39,18 @@ const MovieDetailsPage = () => {
           }}
           className="relative bg-cover text-white "
         >
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/80 md:via-black/80  to-black/90" />
+          <div className="absolute inset-0 bg-gradient-to-l from-black/70  md:via-black/90  to-black/95" />
 
-          <div className="relative container  mx-auto py-16  px-6 flex flex-col md:flex-row items-center justify-center gap-10">
+          <div className="relative container  mx-auto py-16  px-6 flex flex-col md:flex-row items-center justify-center ">
             {/* Left Side - Image */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
-              className="w-full md:w-md "
+              className=" md:w-xs"
             >
               <img
-                src={movie?.imageLink }
+                src={movie?.imageLink}
                 alt={movie?.title}
                 className="rounded-lg shadow-lg h-96"
               />
@@ -74,33 +70,36 @@ const MovieDetailsPage = () => {
                 <p>{movie?.duration}</p>
                 <p>Imdb: 7.8/10</p>
                 <div className="flex items-center justify-center md:justify-start gap-4">
-                  <Link to='https://www.youtube.com/watch?v=u9Mv98Gr5pY&ab_channel=SonyPicturesEntertainment'>
-                  <button  className="btn shadow-none bg-transparent text-white hover:shadow-white hover:shadow-md">
-                    Watch Trailer
-                  </button>
+                  <Link to="https://www.youtube.com/watch?v=u9Mv98Gr5pY&ab_channel=SonyPicturesEntertainment">
+                    <button className="btn shadow-none bg-transparent text-white hover:shadow-white hover:shadow-md">
+                      Watch Trailer
+                    </button>
                   </Link>
-                  
-                
+
                   <button
-                  onClick={()=>document.getElementById("booksection")?.scrollIntoView({
-                    behavior:"smooth"
-                  })}
-                  className="btn shadow-none bg-transparent text-white hover:shadow-white hover:shadow-md">
+                    onClick={() =>
+                      document.getElementById("booksection")?.scrollIntoView({
+                        behavior: "smooth",
+                      })
+                    }
+                    className="btn shadow-none bg-transparent text-white hover:shadow-white hover:shadow-md"
+                  >
                     Book now
                   </button>
                 </div>
               </div>
               <div className="flex mt-10">
                 <h1 className="my-auto mr-4">Showing On:</h1>
-                {
-                  movie?.cinemaHalls.map((cinemaHall, index) => (
-
-                    <div className="border-2 border-purple-800 hover:bg-purple-800 transition-all duration-300 rounded-4xl py-2 px-3 mr-3" key={index}>
+                <div className="overflow-x-auto flex flex-col gap-2 md:flex-row">
+                  {movie?.cinemaHalls.map((cinemaHall, index) => (
+                    <div
+                      className="border-2 border-purple-800 hover:bg-purple-800 transition-all duration-300 rounded-lg  md:rounded-4xl py-2 px-3 mr-3"
+                      key={index}
+                    >
                       <p>{cinemaHall}</p>
-
                     </div>
-                  ))
-                }
+                  ))}
+                </div>
               </div>
             </motion.div>
           </div>
@@ -133,6 +132,7 @@ const MovieDetailsPage = () => {
       </div>
 
       <TicketBooking></TicketBooking>
+      <Recommended></Recommended>
     </div>
   );
 };
