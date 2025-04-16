@@ -13,53 +13,88 @@ import useAuth from "../../../Hooks/useAuth";
 
 const EntertainmentSection = () => {
     const { darkMode } = useAuth();
-    const { ref, inView } = useInView({
-        triggerOnce: false,
-        threshold: 0.3,
-    });
 
-    const [animate, setAnimate] = useState(false);
-
-    useEffect(() => {
-        if (inView) {
-            setAnimate(true);
-        } else {
-            setAnimate(false);
+    // Animation variants
+    const container = {
+        hidden: { opacity: 0 },
+        show: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.2,
+                when: "beforeChildren"
+            }
         }
-    }, [inView]);
+    };
+
+    const imageVariants = {
+        hidden: { opacity: 0, scale: 0.95 },
+        show: {
+            opacity: 1,
+            scale: 1,
+            transition: {
+                duration: 0.8,
+                ease: [0.25, 0.1, 0.25, 1]
+            }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 15 },
+        show: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.6,
+                ease: "easeOut"
+            }
+        }
+    };
     return (
-        <section id="entertainmentSection" className="mb-16" ref={ref}>
+        <motion.section
+            id="entertainmentSection"
+            className="mb-16"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "0px 0px -100px 0px" }}
+            variants={container}
+        >
             <div className="w-11/12 mx-auto px-4">
                 {/* Animated Image */}
-                <div className="mb-12 flex justify-center w-full h-[400px] md:h-[500px] lg:h-[600px]">
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.5, y: 20 }}
-                        animate={animate ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.5, y: 20 }}
-                        transition={{ duration: 1, ease: "easeOut" }}
-                        whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                        viewport={{ once: false }}
-                        className="w-full h-full"
-                    >
-                        <img
-                            src={cinema}
-                            alt="Tanoura Dance"
-                            className="object-cover w-full h-full rounded-xl"
-                        />
-                    </motion.div>
-                </div>
-
-
+                <motion.div
+                    className="mb-12 flex justify-center w-full h-[400px] md:h-[500px] lg:h-[600px]"
+                    variants={imageVariants}
+                >
+                    <img
+                        src={cinema}
+                        alt="Tanoura Dance"
+                        className="object-cover w-full h-full rounded-xl"
+                    />
+                </motion.div>
 
                 {/* Text + Features */}
-                <div className="flex flex-col lg:flex-row gap-12">
+                <motion.div
+                    className="flex flex-col lg:flex-row gap-12"
+                    variants={container}
+                >
                     {/* Left - Text Content */}
-                    <div className="lg:w-1/2">
-                        <h2 className={`text-3xl md:text-5xl font-bold ${darkMode ? 'text-dark-primary' : 'text-gray-700'} mb-6`}>
+                    <motion.div
+                        className="lg:w-1/2"
+                        variants={container}
+                    >
+                        <motion.h2
+                            className={`text-3xl md:text-5xl font-bold ${darkMode ? 'text-dark-primary' : 'text-gray-700'} mb-6`}
+                            variants={itemVariants}
+                        >
                             Book Your Seat & <br /> Enjoy The Show
-                        </h2>
+                        </motion.h2>
 
-                        <div className="space-y-6">
-                            <div className="flex items-start gap-4">
+                        <motion.div className="space-y-6"
+                            variants={itemVariants}
+                        >
+                            <motion.div
+                                className="flex items-start gap-4"
+                                variants={itemVariants}
+                            >
                                 <FaFilm className="text-2xl text-main mt-1" />
                                 <div>
                                     <h3 className={`text-xl md:text-2xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-700'} mb-1 md:mb-2`}>
@@ -69,9 +104,12 @@ const EntertainmentSection = () => {
                                         From Hollywood hits to indie gems, we've got all the movies you love in one place.
                                     </p>
                                 </div>
-                            </div>
+                            </motion.div>
 
-                            <div className="flex items-start gap-4">
+                            <motion.div
+                                className="flex items-start gap-4"
+                                variants={itemVariants}
+                            >
                                 <FaTicketAlt className="text-2xl text-main mt-1" />
                                 <div>
                                     <h3 className={`text-xl md:text-2xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-700'} mb-1 md:mb-2`}>
@@ -81,18 +119,30 @@ const EntertainmentSection = () => {
                                         Secure your seats in seconds with our lightning-fast booking system.
                                     </p>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
+                            </motion.div>
+                        </motion.div>
+                    </motion.div>
 
                     {/* Right - Features */}
-                    <div className="lg:w-1/2 rounded-xl">
-                        <h3 className="text-2xl md:text-3xl font-bold text-main mb-4 md:mb-6">
+                    <motion.div
+                        className="lg:w-1/2 rounded-xl"
+                        variants={container}
+                    >
+                        <motion.h3
+                            className="text-2xl md:text-3xl font-bold text-main mb-4 md:mb-6"
+                            variants={itemVariants}
+                        >
                             Why Movie Lovers Choose Us
-                        </h3>
+                        </motion.h3>
 
-                        <div className="space-y-6">
-                            <div className="flex items-start gap-4">
+                        <motion.div
+                            className="space-y-6"
+                            variants={container}
+                        >
+                            <motion.div
+                                className="flex items-start gap-4"
+                                variants={itemVariants}
+                            >
                                 <FaCalendarAlt className="text-2xl text-main mt-1" />
                                 <div>
                                     <h4 className={`text-lg md:text-xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-800'}`}>Showtimes For All Schedules</h4>
@@ -100,9 +150,12 @@ const EntertainmentSection = () => {
                                         Morning matinees, evening shows, or late-night screenings - we've got you covered.
                                     </p>
                                 </div>
-                            </div>
+                            </motion.div>
 
-                            <div className="flex items-start gap-4">
+                            <motion.div
+                                className="flex items-start gap-4"
+                                variants={itemVariants}
+                            >
                                 <FaChair className="text-2xl text-main mt-1" />
                                 <div>
                                     <h4 className={`text-lg md:text-xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-800'}`}>Best Seat Selection</h4>
@@ -110,9 +163,12 @@ const EntertainmentSection = () => {
                                         Choose your perfect spot with our interactive seat maps.
                                     </p>
                                 </div>
-                            </div>
+                            </motion.div>
 
-                            <div className="flex items-start gap-4">
+                            <motion.div
+                                className="flex items-start gap-4"
+                                variants={itemVariants}
+                            >
                                 <LuPopcorn className="text-2xl text-main mt-1" />
                                 <div>
                                     <h4 className={`text-lg md:text-xl font-semibold ${darkMode ? 'text-dark-primary' : 'text-gray-800'}`}>Combo Deals</h4>
@@ -120,21 +176,24 @@ const EntertainmentSection = () => {
                                         Special discounts on ticket+popcorn combos and other snacks.
                                     </p>
                                 </div>
-                            </div>
-                        </div>
+                            </motion.div>
+                        </motion.div>
 
-                        <div className="mt-8">
+                        <motion.div
+                            className="mt-8"
+                            variants={itemVariants}
+                        >
                             <Link to={'/entertainment'}>
                                 <button className="ezy-button-primary w-fit py-3 text-lg font-semibold flex items-center gap-2">
                                     <FaTicketAlt /> Book Movie Tickets Now
                                 </button>
                             </Link>
-                        </div>
-                    </div>
-                </div>
+                        </motion.div>
+                    </motion.div>
+                </motion.div>
 
             </div>
-        </section>
+        </motion.section>
     );
 };
 

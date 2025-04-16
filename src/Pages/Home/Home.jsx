@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 import HomeBanner from "./HomeComponents/HomeBanner";
 import HomeCategory from "./HomeComponents/HomeCategory";
 import EventSection from "./HomeComponents/EventSection";
-import eidPopUp from "../../assets/Home_image/eidPopUp.gif";
+// import eidPopUp from "../../assets/Home_image/eidPopUp.gif";
 import TravelSection from "./HomeComponents/TravelSection";
 import { LuPopcorn } from "react-icons/lu";
 import { FaBus } from "react-icons/fa";
@@ -11,27 +11,27 @@ import useAuth from "../../Hooks/useAuth";
 import EntertainmentSection from "./HomeComponents/EntertainmentSection";
 
 const Home = () => {
-  const [showModal, setShowModal] = useState(true);
-  const [countdown, setCountdown] = useState(6);
+  // const [showModal, setShowModal] = useState(true);
+  // const [countdown, setCountdown] = useState(6);
   const { darkMode } = useAuth();
 
   // Auto-close modal after 6 seconds with countdown
-  useEffect(() => {
-    if (showModal && countdown > 0) {
-      const timer = setInterval(() => {
-        setCountdown((prev) => prev - 1);
-      }, 1000);
+  // useEffect(() => {
+  //   if (showModal && countdown > 0) {
+  //     const timer = setInterval(() => {
+  //       setCountdown((prev) => prev - 1);
+  //     }, 1000);
 
-      return () => clearInterval(timer);
-    } else if (countdown === 0) {
-      setShowModal(false);
-    }
-  }, [showModal, countdown]);
+  //     return () => clearInterval(timer);
+  //   } else if (countdown === 0) {
+  //     setShowModal(false);
+  //   }
+  // }, [showModal, countdown]);
 
   // Close modal when clicking the button
-  const handleClose = () => {
-    setShowModal(false);
-  };
+  // const handleClose = () => {
+  //   setShowModal(false);
+  // };
 
   // Smooth scroll function
   const scrollToSection = (sectionId) => {
@@ -46,8 +46,6 @@ const Home = () => {
 
   return (
     <div className="pt-16 min-h-screen relative">
-      {/* Blur effect only on Home Page content */}
-      <div className={showModal ? "blur-md" : ""}>
         <HomeBanner />
         <div className="py-16">
           <div className="w-11/12 mx-auto">
@@ -100,9 +98,7 @@ const Home = () => {
         <EventSection/>
         <EntertainmentSection/>
 
-      </div>
-
-      {/* Popup Modal */}
+      {/* Popup Modal
       {showModal && (
         <div className="fixed inset-0 bg-black/10 bg-opacity-70 z-50 flex items-center justify-center">
           <div className="rounded-lg mx-4">
@@ -128,7 +124,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };
