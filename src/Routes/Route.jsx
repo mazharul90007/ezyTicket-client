@@ -39,6 +39,7 @@ import AddBusService from "../Pages/Dashboard/Travel/AddBusService/AddBusService
 import ManageReviews from "../Pages/Dashboard/Travel/ManageReviews/ManageReviews";
 import MyBusServices from "../Pages/Dashboard/Travel/MyBusServices/MyBusServices";
 import SoldTickets from "../Pages/Dashboard/Travel/SoldTickets/SoldTickets";
+import Payment from "../components/Payment/Payment";
 
 
 const Route = createBrowserRouter([
@@ -91,6 +92,10 @@ const Route = createBrowserRouter([
       {
         path: "/travel/Bus-Ticket-Cancellation-policy",
         element: <BusTicketCancellation />,
+      },
+      {
+        path: "/strip-payment",
+        element: <Payment/>
       },
       // ------------travel route end-------------
 
