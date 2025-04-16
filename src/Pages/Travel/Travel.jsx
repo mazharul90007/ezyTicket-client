@@ -5,6 +5,7 @@ import AddTravelService from './AddTravelService/AddTravelService'
 import FlashDeals from './FlashDeals/FlashDeals'
 import useAuth from '../../Hooks/useAuth'
 import TravelFAQ from './TravelFAQ/TravelFAQ'
+import WhyChooseUsTravel from './TravelComponents/WhyChooseUsTravel'
 const Travel = () => {
   const {darkMode} = useAuth()
   return (
@@ -29,6 +30,7 @@ const Travel = () => {
       </div>
       <section className='px-4 my-20'>
         <TravelFAQ/>
+        <WhyChooseUsTravel/>
       </section>
 
     </section>
