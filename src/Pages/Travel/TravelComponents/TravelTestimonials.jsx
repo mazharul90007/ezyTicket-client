@@ -51,16 +51,16 @@ const TravelTestimonials=()=> {
     const currentTestimonial = testimonials[activeIndex]; //Get current testimonial
 
     return (
-        <section className={`bg-gradient-to-r my-20 from-supporting-50 to-supporting py-20 px-6 md:px-16 ${darkMode ? "text-white" : "text-black"}`}>
-            <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+        <section className={`bg-gradient-to-r my-20 from-supporting-50 to-supporting py-20 ${darkMode ? "text-white" : "text-black"}`}>
+            <div className="container mx-auto grid md:grid-cols-2 gap-10 items-center px-8">
                 {/* Left Side */}
                 <div className="flex flex-col items-start">
-                    <p className="text-sm uppercase text-main font-semibold mb-2">Testimonials</p>
-                    <h2 className="text-4xl font-bold mb-6 leading-tight">
+                    <p className="text-sm uppercase text-main font-semibold mb-2 ">Testimonials</p>
+                    <h2 className="text-2xl md:text-4xl font-bold mb-6 leading-tight">
                         What Our Clients <span className="text-main">Say About Us</span>
                     </h2>
 
-                    {/* ✅ Dynamically loaded name & role */}
+                    {/*  Dynamically loaded name & role */}
                     <div className="flex items-center gap-4 mt-6">
                         <img
                             src={currentTestimonial.image}
@@ -75,7 +75,7 @@ const TravelTestimonials=()=> {
                 </div>
 
                 {/* Right Side: Swiper Carousel */}
-                <section className="px-6 ">
+                <div className="">
                     <Swiper
                         modules={[Navigation, Pagination, A11y, Autoplay]}
                         spaceBetween={30}
@@ -87,9 +87,9 @@ const TravelTestimonials=()=> {
                         }}
                         loop={true}
                         onSlideChange={(swiper) =>
-                            setActiveIndex(swiper.realIndex) // ✅ Track actual slide
+                            setActiveIndex(swiper.realIndex) //  Track actual slide
                         }
-                        className="max-w-4xl mx-auto"
+                        className="w-[350px] flex justify-center md:w-full  mx-auto"
                     >
                         {testimonials.map((testimonial) => (
                             <SwiperSlide key={testimonial.id}>
@@ -130,7 +130,7 @@ const TravelTestimonials=()=> {
                             </SwiperSlide>
                         ))}
                     </Swiper>
-                </section>
+                </div>
             </div>
         </section>)
 }
