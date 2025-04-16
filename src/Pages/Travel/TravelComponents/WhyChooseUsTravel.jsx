@@ -1,5 +1,6 @@
 import { FaTools, FaSmile, FaBus, FaHandsHelping, FaStar, FaMoneyCheckAlt } from "react-icons/fa";
 import BusImage from "../../../assets/Travel_image/luxury.jpg"
+import useAuth from "../../../Hooks/useAuth";
 const featuresLeft = [
     {
         title: "Expert Team",
@@ -37,11 +38,12 @@ const featuresRight = [
 ];
 
 const WhyChooseUsTravel = () => {
+    const {darkMode} = useAuth()
     return (
-        <div className="container mx-auto px-4 py-12">
+        <div className={`container mx-auto px-4 py-12 ${darkMode ?  "text-white" : "text-[#111111] " }`}>
             <div className="text-center mb-10">
                 <p className="text-sm font-semibold  uppercase">Why Choose Us</p>
-                <h2 className="text-3xl md:text-4xl font-bold ">
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold ">
                     Your Trusted Partner in <span className="text-main italic">Excellence</span>
                 </h2>
             </div>
