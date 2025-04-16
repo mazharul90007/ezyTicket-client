@@ -19,10 +19,10 @@ const TravelSection = () => {
         const checkMobile = () => {
             setIsMobile(window.innerWidth < 768);
         };
-        
+
         checkMobile();
         window.addEventListener('resize', checkMobile);
-        
+
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
 
@@ -39,18 +39,18 @@ const TravelSection = () => {
     };
 
     const imageVariants = {
-        hidden: { 
+        hidden: {
             x: isMobile ? 0 : 300,
             scale: isMobile ? 0.9 : 0.5,
-            opacity: 0 
+            opacity: 0
         },
         visible: {
             x: 0,
             scale: 1,
             opacity: 1,
-            transition: { 
-                duration: 1, 
-                ease: "easeOut" 
+            transition: {
+                duration: 1,
+                ease: "easeOut"
             }
         }
     };
@@ -70,7 +70,7 @@ const TravelSection = () => {
         <section id="travelSection" className="mb-16" ref={ref}>
             <div className="w-11/12 mx-auto px-4">
                 {/* Animated Coach Image */}
-                <motion.div 
+                <motion.div
                     className="mb-12 flex justify-center"
                     initial="hidden"
                     animate={inView ? "visible" : "hidden"}
@@ -85,29 +85,29 @@ const TravelSection = () => {
                 </motion.div>
 
                 {/* Text + Features */}
-                <motion.div 
+                <motion.div
                     className="flex flex-col lg:flex-row gap-8 md:gap-12"
                     initial="hidden"
                     animate={inView ? "visible" : "hidden"}
                     variants={containerVariants}
                 >
                     {/* Left - Text */}
-                    <motion.div 
+                    <motion.div
                         className="lg:w-1/2"
                         variants={containerVariants}
                     >
-                        <motion.h2 
+                        <motion.h2
                             className={`text-3xl md:text-5xl font-bold ${darkMode ? 'text-dark-primary' : 'text-gray-700'} mb-6`}
                             variants={itemVariants}
                         >
                             Make your Journey <br /> Hassle Free
                         </motion.h2>
 
-                        <motion.div 
+                        <motion.div
                             className="space-y-4 md:space-y-6"
                             variants={containerVariants}
                         >
-                            <motion.div 
+                            <motion.div
                                 className="flex items-start gap-3 md:gap-4"
                                 variants={itemVariants}
                             >
@@ -122,7 +122,7 @@ const TravelSection = () => {
                                 </div>
                             </motion.div>
 
-                            <motion.div 
+                            <motion.div
                                 className="flex items-start gap-3 md:gap-4"
                                 variants={itemVariants}
                             >
@@ -140,22 +140,22 @@ const TravelSection = () => {
                     </motion.div>
 
                     {/* Right - Features */}
-                    <motion.div 
+                    <motion.div
                         className="lg:w-1/2 p-4 md:p-6 rounded-xl"
                         variants={containerVariants}
                     >
-                        <motion.h3 
+                        <motion.h3
                             className="text-2xl md:text-3xl font-bold text-main mb-4 md:mb-6"
                             variants={itemVariants}
                         >
                             Great Deals And Offers
                         </motion.h3>
 
-                        <motion.div 
+                        <motion.div
                             className="space-y-4 md:space-y-6"
                             variants={containerVariants}
                         >
-                            <motion.div 
+                            <motion.div
                                 className="flex items-start gap-3 md:gap-4"
                                 variants={itemVariants}
                             >
@@ -170,7 +170,7 @@ const TravelSection = () => {
                                 </div>
                             </motion.div>
 
-                            <motion.div 
+                            <motion.div
                                 className="flex items-start gap-3 md:gap-4"
                                 variants={itemVariants}
                             >
@@ -185,7 +185,7 @@ const TravelSection = () => {
                                 </div>
                             </motion.div>
 
-                            <motion.div 
+                            <motion.div
                                 className="flex items-start gap-3 md:gap-4"
                                 variants={itemVariants}
                             >
@@ -201,7 +201,7 @@ const TravelSection = () => {
                             </motion.div>
                         </motion.div>
 
-                        <motion.div 
+                        <motion.div
                             className="mt-6 md:mt-8"
                             variants={itemVariants}
                         >
