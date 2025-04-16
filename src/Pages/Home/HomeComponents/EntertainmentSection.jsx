@@ -67,7 +67,7 @@ const EntertainmentSection = () => {
                     <img
                         src={cinema}
                         alt="Tanoura Dance"
-                        className="object-cover w-full h-full rounded-xl"
+                        className="object-cover w-full h-full rounded"
                     />
                 </motion.div>
 
