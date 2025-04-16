@@ -64,7 +64,7 @@ const EventSection = () => {
                     <img
                         src={tanoura}
                         alt="Tanoura Dance"
-                        className="object-cover w-full h-full rounded-xl shadow-lg"
+                        className="object-cover w-full h-full rounded shadow-lg"
                     />
                 </motion.div>
 
