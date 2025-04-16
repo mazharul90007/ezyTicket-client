@@ -24,12 +24,12 @@ const TravelSelectSet = () => {
         });
     };
 
-    console.log(selectedSeats)
+    // console.log(selectedSeats)
 
 
     const handleTravelInfo = (e) => {
         e.preventDefault();
-        const form = e.target;
+       const form = e.target;
         const name = form.name.value;
         const email = form.email.value;
         const number = form.number.value;

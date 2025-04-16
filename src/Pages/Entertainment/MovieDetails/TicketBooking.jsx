@@ -79,7 +79,7 @@ const TicketBooking = () => {
       paymentMethod: "card",
       date: new Date().toISOString(),
     };
-    console.log(checkoutData);
+    // console.log(checkoutData);
 
     const res = await axiosSecure.post("/order", checkoutData);
     if (res.data) {

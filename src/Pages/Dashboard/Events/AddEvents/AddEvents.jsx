@@ -17,7 +17,7 @@ const AddEvents = () => {
     const { register, handleSubmit, getValues, reset, formState: { errors } } = useForm();
 
     const onSubmit = async (data) => {
-        console.log(data);
+        // console.log(data);
         //image upload to imgbb
         const imageFile = { image: data.image[0] }
         const res = await axiosPublic.post(image_hosting_api, imageFile, {
