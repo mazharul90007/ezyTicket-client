@@ -6,6 +6,7 @@ import FlashDeals from './FlashDeals/FlashDeals'
 import useAuth from '../../Hooks/useAuth'
 import TravelFAQ from './TravelFAQ/TravelFAQ'
 import WhyChooseUsTravel from './TravelComponents/WhyChooseUsTravel'
+import TravelTestimonials from './TravelComponents/TravelTestimonials'
 const Travel = () => {
   const {darkMode} = useAuth()
   return (
@@ -32,6 +33,8 @@ const Travel = () => {
         <TravelFAQ/>
         <WhyChooseUsTravel/>
       </section>
+
+      <TravelTestimonials/>
 
     </section>
   )
