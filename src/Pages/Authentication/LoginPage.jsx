@@ -8,10 +8,10 @@ import {
 } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { useForm } from "react-hook-form";
-
-import useAuth from "../../Hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth"; // ✅ Import for reset
+import useAuth from "../../Hooks/useAuth";
 import { saveUserInformation } from "../../API/Utils";
 
 function LoginPage() {
@@ -25,6 +25,7 @@ function LoginPage() {
   } = useForm();
 
   const [showPassword, setShowPassword] = useState(false);
+  const [resetEmail, setResetEmail] = useState(""); // ✅ State to hold email for password reset
 
   const onSubmit = async (data) => {
     const { email, password } = data;
@@ -58,6 +59,33 @@ function LoginPage() {
     } catch (err) {
       setLoading(false);
       console.log(err);
+    }
+  };
+
+  // ✅ Handle Forgot Password
+  const handleForgotPassword = async () => {
+    if (!resetEmail) {
+      Swal.fire({
+        icon: "warning",
+        title: "Please enter your email first",
+      });
+      return;
+    }
+    try {
+      const auth = getAuth();
+      await sendPasswordResetEmail(auth, resetEmail);
+      Swal.fire({
+        icon: "success",
+        title: "Password reset email sent",
+        text: "Check your inbox to reset your password.",
+      });
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Failed to send reset email",
+        text: error.message,
+      });
     }
   };
 
@@ -130,6 +158,7 @@ function LoginPage() {
                   type="email"
                   placeholder="Enter email"
                   {...register("email", { required: true })}
+                  onChange={(e) => setResetEmail(e.target.value)} // ✅ Store email for reset
                   className="outline-none text-gray-700 placeholder-gray-600 py-2 w-full bg-transparent"
                 />
               </div>
@@ -164,6 +193,17 @@ function LoginPage() {
                   Password is required
                 </p>
               )}
+
+              {/* ✅ Forgot Password Link */}
+              <p className="text-left text-sm mt-2">
+                <button
+                  type="button"
+                  onClick={handleForgotPassword}
+                  className="text-blue-400 hover:underline"
+                >
+                  Forgot password?
+                </button>
+              </p>
             </div>
 
             {/* Login Button */}
