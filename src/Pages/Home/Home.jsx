@@ -5,6 +5,7 @@ import TravelSection from "./HomeComponents/TravelSection";
 import EntertainmentSection from "./HomeComponents/EntertainmentSection";
 import Testimonials from "./HomeComponents/Testimonials";
 import useAuth from "../../Hooks/useAuth";
+import AboutUs from "./HomeComponents/AboutUs";
 
 const Home = () => {
   const { darkMode } = useAuth();
@@ -31,6 +32,7 @@ const Home = () => {
       <TravelSection />
       <EventSection />
       <EntertainmentSection />
+      <AboutUs></AboutUs>
       <Testimonials />
     </div>
   );

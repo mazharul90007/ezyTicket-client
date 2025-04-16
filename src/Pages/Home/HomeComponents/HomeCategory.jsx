@@ -71,11 +71,11 @@ const HomeCategory = ({ scrollToSection }) => {
     return (
         <div className="py-16">
             <div className="w-11/12 mx-auto">
-                <p className={`text-center text-xl md:text-2xl font-semibold mb-2 md:mb-1 ${textClasses.supporting}`}>
+                <p className={`uppercase text-center text-xl font-semibold mb-2 md:mb-1 text-main`}>
                     One Platform, Endless Possibilities
                 </p>
-                <h2 className="text-2xl md:text-4xl text-main font-bold text-center">
-                    EzyTicket <span className={textClasses.primary}>Your One-Stop Solution for Hassle-Free Ticketing</span>
+                <h2 className="uppercase text-2xl md:text-3xl lg:text-4xl text-main font-bold text-center">
+                    EzyTicket <span className={darkMode ? 'text-dark-primary' : 'text-gray-700'}>Your One-Stop Solution <br /> for Hassle-Free Ticketing</span>
                 </h2>
 
                 <motion.div

@@ -49,7 +49,7 @@ const TravelSection = () => {
             scale: 1,
             opacity: 1,
             transition: {
-                duration: 1,
+                duration: 0.6,
                 ease: "easeOut"
             }
         }
@@ -61,7 +61,7 @@ const TravelSection = () => {
             y: 0,
             opacity: 1,
             transition: {
-                duration: 0.6
+                duration: 0.4
             }
         }
     };
@@ -97,7 +97,7 @@ const TravelSection = () => {
                         variants={containerVariants}
                     >
                         <motion.h2
-                            className={`text-3xl md:text-5xl font-bold ${darkMode ? 'text-dark-primary' : 'text-gray-700'} mb-6`}
+                            className={`uppercase text-3xl md:text-4xl lg:text-5xl font-bold ${darkMode ? 'text-dark-primary' : 'text-gray-700'} mb-6`}
                             variants={itemVariants}
                         >
                             Make your Journey <br /> Hassle Free

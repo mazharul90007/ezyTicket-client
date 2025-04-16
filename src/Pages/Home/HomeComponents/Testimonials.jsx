@@ -7,8 +7,8 @@ const Testimonials = () => {
     const testimonials = [
         {
             id: 1,
-            name: "Alex Johnson",
-            role: "Professional Athlete",
+            name: "Dr. Jahangir Kabir",
+            role: "Physicians and Surgeons",
             rating: 5,
             content: "EzyTicket made my intercity travel so much easier! I booked my Dhaka to Chattogram bus ticket within minutes — no queues, no hassle. Everything was smooth and on time!",
             image: "https://randomuser.me/api/portraits/men/32.jpg",
@@ -62,7 +62,7 @@ const Testimonials = () => {
             <div className="max-w-7xl mx-auto">
                 <div className="text-center mb-12">
                     <p className="uppercase text-xl font-semibold text-center text-main mb-2">Testimonials</p>
-                    <h3 className={`uppercase text-4xl md:text-5xl font-bold text-center mb-4 ${darkMode ? "text-dark-primary" : "text-gray-700"}`}>What Our Customers Say</h3>
+                    <h3 className={`uppercase text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-4 ${darkMode ? "text-dark-primary" : "text-gray-700"}`}>What Our Customers Say</h3>
                 </div>
 
                 <motion.div

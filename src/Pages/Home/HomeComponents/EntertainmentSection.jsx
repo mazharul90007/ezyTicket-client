@@ -32,7 +32,7 @@ const EntertainmentSection = () => {
             opacity: 1,
             scale: 1,
             transition: {
-                duration: 0.8,
+                duration: 0.6,
                 ease: [0.25, 0.1, 0.25, 1]
             }
         }
@@ -44,7 +44,7 @@ const EntertainmentSection = () => {
             opacity: 1,
             y: 0,
             transition: {
-                duration: 0.6,
+                duration: 0.4,
                 ease: "easeOut"
             }
         }
@@ -82,7 +82,7 @@ const EntertainmentSection = () => {
                         variants={container}
                     >
                         <motion.h2
-                            className={`text-3xl md:text-5xl font-bold ${darkMode ? 'text-dark-primary' : 'text-gray-700'} mb-6`}
+                            className={`uppercase text-3xl md:text-4xl lg:text-5xl font-bold ${darkMode ? 'text-dark-primary' : 'text-gray-700'} mb-6`}
                             variants={itemVariants}
                         >
                             Book Your Seat & <br /> Enjoy The Show
