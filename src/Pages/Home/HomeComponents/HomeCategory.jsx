@@ -1,59 +1,110 @@
-import useAuth from "../../../Hooks/useAuth";
+import { motion } from "framer-motion";
 import { LuPopcorn } from "react-icons/lu";
 import { FaBus } from "react-icons/fa";
 import { GiMicrophone } from "react-icons/gi";
-import { Link } from "react-router-dom";
+import useAuth from "../../../Hooks/useAuth";
 
-const HomeCategory = () => {
-    const { darkMode } = useAuth()
+const HomeCategory = ({ scrollToSection }) => {
+    const { darkMode } = useAuth();
+
+    // Animation configurations
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        show: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.2,
+            }
+        }
+    };
+
+    const cardVariants = {
+        hidden: { opacity: 0, y: 20 },
+        show: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                type: "spring", 
+                stiffness: 100,
+                damping: 20,
+                duration: 0.8 
+            }
+        }
+    };
+
+
+    // Card data
+    const cards = [
+        {
+            id: 1,
+            icon: <FaBus />,
+            title: "Bus",
+            description: "Your journey starts here! Book bus tickets effortlessly on EzyTicket.",
+            sectionId: "travelSection"
+        },
+        {
+            id: 2,
+            icon: <GiMicrophone />,
+            title: "Events",
+            description: "Experience the thrill! Event tickets just a click away on EzyTicket.",
+            sectionId: "eventSection"
+        },
+        {
+            id: 3,
+            icon: <LuPopcorn />,
+            title: "Entertainment",
+            description: "Lights, camera, action! Book entertainment tickets in seconds.",
+            sectionId: "entertainmentSection"
+        }
+    ];
+
+    // Dynamic classes
+    const textClasses = {
+        supporting: darkMode ? 'text-dark-supporting' : 'text-supporting',
+        primary: darkMode ? 'text-dark-primary' : 'text-gray-800',
+        secondary: darkMode ? 'text-dark-secondary' : 'text-gray-600'
+    };
+
+    const cardClasses = `md:col-span-1 shadow p-8 ${darkMode ? 'bg-dark-surface hover:bg-[#3D3D3D]' : 'bg-white'
+        } rounded-lg cursor-pointer hover:scale-105 transform transition-all duration-300`;
+
     return (
         <div className="py-16">
             <div className="w-11/12 mx-auto">
-                <p className={`text-center text-xl md:text-2xl font-semibold mb-2 md:mb-1 ${darkMode ? 'text-dark-supporting' : 'text-supporting'}`}>
-                    One Platform, Endless Possibilities – The Best Ticketing System Online.
+                <p className={`text-center text-xl md:text-2xl font-semibold mb-2 md:mb-1 ${textClasses.supporting}`}>
+                    One Platform, Endless Possibilities
                 </p>
-                <h2 className="text-2xl md:text-4xl text-main font-bold text-center">EzyTicket <span className={` ${darkMode ? 'text-dark-primary' : 'text-gray-800'}`}>Your One-Stop Solution for Hassle-Free Ticketing</span></h2>
+                <h2 className="text-2xl md:text-4xl text-main font-bold text-center">
+                    EzyTicket <span className={textClasses.primary}>Your One-Stop Solution for Hassle-Free Ticketing</span>
+                </h2>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 py-8">
-                    {/* Bus */}
-                    <a href="busSection">
-                        <div className={`md:col-span-1 shadow p-8 ${darkMode ? 'bg-dark-surface hover:bg-[#3D3D3D]' : 'bg-white'} rounded-lg cursor-pointer hover:scale-105 transform transition-all duration-300`}>
+                <motion.div
+                    className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 py-8"
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once:true, margin: "0px 0px -100px 0px" }}
+                    variants={containerVariants}
+                >
+                    {cards.map((card) => (
+                        <motion.div
+                            key={card.id}
+                            className={cardClasses}
+                            variants={cardVariants}
+                            onClick={() => scrollToSection(card.sectionId)}
+                        >
                             <div className="mb-4 text-7xl text-dark-accent font-bold">
-                                <FaBus />
+                                {card.icon}
                             </div>
-
-                            <h3 className={`text-2xl font-semibold ${darkMode && 'text-dark-primary'}`}><span className={`${darkMode ? 'text-dark-supporting' : 'text-supporting'}`}>Bus </span>Ticket</h3>
-
-                            <p className={`text-lg ${darkMode && 'text-dark-secondary'}`}>Your journey starts here! Book bus tickets effortlessly on EzyTicket. </p>
-                        </div>
-                    </a>
-
-                    {/* Event */}
-                    <div className={`md:col-span-1 shadow p-8 ${darkMode ? 'bg-dark-surface hover:bg-[#3D3D3D]' : 'bg-white'} rounded-lg cursor-pointer hover:scale-105 transform transition-all duration-300`}>
-                        <div className="mb-4 text-7xl text-dark-accent font-bold">
-                            <GiMicrophone />
-                        </div>
-
-                        <h3 className={`text-2xl font-semibold ${darkMode && 'text-dark-primary'}`}><span className={`${darkMode ? 'text-dark-supporting' : 'text-supporting'}`}>Events </span>Ticket</h3>
-
-                        <p className={`text-lg ${darkMode && 'text-dark-secondary'}`}>Experience the thrill! Event tickets just a click away on EzyTicket. </p>
-                    </div>
-
-                    {/* Entertainment */}
-                    <div className={`md:col-span-1 shadow p-8 ${darkMode ? 'bg-dark-surface hover:bg-[#3D3D3D]' : 'bg-white'} rounded-lg cursor-pointer hover:scale-105 transform transition-all duration-300`}>
-                        <div className="mb-4 text-7xl text-dark-accent font-bold">
-                            <LuPopcorn />
-                        </div>
-
-                        <h3 className={`text-2xl font-semibold ${darkMode && 'text-dark-primary'}`}><span className={`${darkMode ? 'text-dark-supporting' : 'text-supporting'}`}>Entertainmet </span>Ticket</h3>
-
-                        <p className={`text-lg ${darkMode && 'text-dark-secondary'}`}>Lights, camera, action! Book entertainment tickets in seconds. </p>
-                    </div>
-
-                </div>
+                            <h3 className={`text-2xl font-semibold ${textClasses.primary}`}>
+                                <span className={textClasses.supporting}>{card.title} </span>Ticket
+                            </h3>
+                            <p className={`text-lg ${textClasses.secondary}`}>
+                                {card.description}
+                            </p>
+                        </motion.div>
+                    ))}
+                </motion.div>
             </div>
-
-
         </div>
     );
 };
