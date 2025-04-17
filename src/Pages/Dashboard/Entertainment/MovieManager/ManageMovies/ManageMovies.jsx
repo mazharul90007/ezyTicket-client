@@ -1,91 +1,107 @@
-import React, { useState } from "react";
+import React from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { useAuth } from "../../Hooks/useAuth";
+
+const fakeMovies = [
+  {
+    id: 1,
+    title: "Dune: Part Two",
+    category: "Sci-Fi",
+    releaseDate: "2024-03-01",
+    status: "Now Showing",
+    poster:
+      "https://m.media-amazon.com/images/I/71Fq3hdN5wL._AC_UF894,1000_QL80_.jpg",
+  },
+  {
+    id: 2,
+    title: "Joker: Folie à Deux",
+    category: "Drama",
+    releaseDate: "2024-10-04",
+    status: "Coming Soon",
+    poster: "https://m.media-amazon.com/images/I/81F0uT1LQuL.jpg",
+  },
+  {
+    id: 3,
+    title: "Deadpool 3",
+    category: "Action",
+    releaseDate: "2024-07-26",
+    status: "Advanced Booking",
+    poster: "https://m.media-amazon.com/images/I/71wnn+nblbL.jpg",
+  },
+];
 
 const ManageMovies = () => {
-  const [movies, setMovies] = useState([
-    {
-      _id: "1",
-      title: "Avengers: Endgame",
-      genre: "Action, Sci-Fi",
-      releaseDate: "2019-04-26",
-      posterUrl: "https://i.ibb.co/Y7MZt5M/endgame.jpg",
-    },
-    {
-      _id: "2",
-      title: "Inception",
-      genre: "Action, Adventure",
-      releaseDate: "2010-07-16",
-      posterUrl: "https://i.ibb.co/nDtFMq7/inception.jpg",
-    },
-    {
-      _id: "3",
-      title: "Interstellar",
-      genre: "Drama, Sci-Fi",
-      releaseDate: "2014-11-07",
-      posterUrl: "https://i.ibb.co/sWh7X7G/interstellar.jpg",
-    },
-  ]);
-
-  const handleDelete = (id) => {
-    if (confirm("Are you sure you want to delete this movie?")) {
-      setMovies((prev) => prev.filter((movie) => movie._id !== id));
-    }
-  };
+  const { darkMode } = useAuth();
 
   return (
-    <div className="p-4 overflow-x-auto">
-      <h2 className="text-2xl font-bold mb-4">🎬 Manage Movies</h2>
-      <table className="min-w-full bg-white border rounded shadow-md text-sm md:text-base">
-        <thead className="bg-gray-100 text-left">
-          <tr>
-            <th className="p-3 border">Poster</th>
-            <th className="p-3 border">Title</th>
-            <th className="p-3 border">Genre</th>
-            <th className="p-3 border">Release Date</th>
-            <th className="p-3 border text-center">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {movies.map((movie) => (
-            <tr key={movie._id} className="hover:bg-gray-50 transition-all">
-              <td className="p-3 border">
-                <img
-                  src={movie.posterUrl}
-                  alt={movie.title}
-                  className="h-20 w-14 object-cover rounded"
-                />
-              </td>
-              <td className="p-3 border font-medium">{movie.title}</td>
-              <td className="p-3 border text-gray-600">{movie.genre}</td>
-              <td className="p-3 border">{movie.releaseDate}</td>
-              <td className="p-3 border text-center">
-                <div className="flex items-center justify-center space-x-4">
+    <div
+      className={`min-h-screen p-6 ${
+        darkMode ? "bg-black text-white" : "bg-white text-black"
+      }`}
+    >
+      <h2 className="text-3xl font-bold mb-6 text-center">🎬 Manage Movies</h2>
+      <div className="overflow-x-auto">
+        <table className="min-w-full table-auto border-collapse shadow-md rounded-xl overflow-hidden">
+          <thead>
+            <tr className={`${darkMode ? "bg-gray-800" : "bg-gray-200"}`}>
+              <th className="px-4 py-3 text-left">Poster</th>
+              <th className="px-4 py-3 text-left">Title</th>
+              <th className="px-4 py-3 text-left">Category</th>
+              <th className="px-4 py-3 text-left">Release Date</th>
+              <th className="px-4 py-3 text-left">Status</th>
+              <th className="px-4 py-3 text-left">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {fakeMovies.map((movie) => (
+              <tr
+                key={movie.id}
+                className={`border-b ${
+                  darkMode ? "hover:bg-gray-900" : "hover:bg-gray-100"
+                }`}
+              >
+                <td className="px-4 py-3">
+                  <img
+                    src={movie.poster}
+                    alt={movie.title}
+                    className="w-16 h-24 object-cover rounded-md shadow"
+                  />
+                </td>
+                <td className="px-4 py-3 font-medium">{movie.title}</td>
+                <td className="px-4 py-3">{movie.category}</td>
+                <td className="px-4 py-3">{movie.releaseDate}</td>
+                <td className="px-4 py-3">
+                  <span
+                    className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                      movie.status === "Now Showing"
+                        ? "bg-green-200 text-green-800"
+                        : movie.status === "Coming Soon"
+                        ? "bg-yellow-200 text-yellow-800"
+                        : "bg-blue-200 text-blue-800"
+                    }`}
+                  >
+                    {movie.status}
+                  </span>
+                </td>
+                <td className="px-4 py-3 space-x-2">
                   <button
-                    className="text-blue-500 hover:text-blue-700"
+                    className="text-blue-500 hover:text-blue-700 transition"
                     title="Edit"
                   >
                     <FaEdit />
                   </button>
                   <button
-                    className="text-red-500 hover:text-red-700"
+                    className="text-red-500 hover:text-red-700 transition"
                     title="Delete"
-                    onClick={() => handleDelete(movie._id)}
                   >
                     <FaTrash />
                   </button>
-                </div>
-              </td>
-            </tr>
-          ))}
-          {movies.length === 0 && (
-            <tr>
-              <td colSpan="5" className="text-center py-4 text-gray-400">
-                No movies available.
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
