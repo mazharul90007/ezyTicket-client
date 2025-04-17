@@ -41,6 +41,7 @@ import MyBusServices from "../Pages/Dashboard/Travel/MyBusServices/MyBusServices
 import SoldTickets from "../Pages/Dashboard/Travel/SoldTickets/SoldTickets";
 import Payment from "../components/Payment/Payment";
 import ManageMovies from "../Pages/Dashboard/Entertainment/MovieManager/ManageMovies/ManageMovies";
+import TicketManager from "../Pages/Dashboard/Entertainment/TicketManager/TicketManager";
 
 const Route = createBrowserRouter([
   {
@@ -197,6 +198,10 @@ const Route = createBrowserRouter([
       {
         path: "ticketcineplex",
         element: <SoldedCineTicket></SoldedCineTicket>,
+      },
+      {
+        path: "ticketmanager",
+        element: <TicketManager></TicketManager>,
       },
       {
         path: "managemovie",

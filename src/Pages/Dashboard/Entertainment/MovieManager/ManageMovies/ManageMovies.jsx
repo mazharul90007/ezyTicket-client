@@ -1,6 +1,6 @@
 import React from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
-import { useAuth } from "../../Hooks/useAuth";
+import useAuth from "../../../../../Hooks/useAuth";
 
 const fakeMovies = [
   {
