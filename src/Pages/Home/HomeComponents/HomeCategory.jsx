@@ -65,7 +65,7 @@ const HomeCategory = ({ scrollToSection }) => {
         secondary: darkMode ? 'text-dark-secondary' : 'text-gray-600'
     };
 
-    const cardClasses = `md:col-span-1 shadow p-8 ${darkMode ? 'bg-dark-surface hover:bg-[#3D3D3D]' : 'bg-white'
+    const cardClasses = `md:col-span-1 p-8 shadow-md border ${darkMode ? 'bg-dark-surface hover:bg-[#3D3D3D] border-gray-400 shadow-gray-400' : 'bg-white border-gray-200'
         } rounded-lg cursor-pointer hover:scale-105 transform transition-all duration-300`;
 
     return (

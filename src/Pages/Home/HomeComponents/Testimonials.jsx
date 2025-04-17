@@ -79,7 +79,7 @@ const Testimonials = () => {
                             whileHover={{ y: -10 }}
                             className="flex"
                         >
-                            <div className={`px-6 py-16 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex flex-col h-full w-full relative overflow-hidden group ${darkMode ? 'bg-dark-surface': 'bg-white'}`}>
+                            <div className={`px-6 py-16 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex flex-col h-full w-full relative overflow-hidden group border ${darkMode ? 'bg-dark-surface border-gray-400 shadow-gray-400': 'bg-white border-gray-200'}`}>
                                 {/* Decorative accent circle */}
                                 <div
                                     className={`absolute -top-16 -left-16 h-40 w-40 ${testimonial.accentColor} rounded-full opacity-10 transition-all duration-500 ease-in-out z-0 group-hover:scale-[12] group-hover:opacity-10 group-hover:-top-full group-hover:-left-full`}

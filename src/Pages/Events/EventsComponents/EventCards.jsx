@@ -40,14 +40,14 @@ const EventCards = () => {
   const displayedEvents = verifiedEvents.slice(0, 4);
   return (
     <div
-      className={`py-12 ${
+      className={`pt-12 ${
         darkMode ? "bg-dark-background text-dark-primary" : "bg-background"
       }`}
     >
-      <h1 className="text-5xl font-bold text-center text-supporting mt-5 mb-5">
-        Explore Events
+      <h1 className="text-5xl font-bold text-center text-supporting mb-3">
+        Recent Events
       </h1>
-      <p className="text-lg text-center text-gray-500 mb-10">
+      <p className="text-xl font-semibold text-center text-gray-500 mb-10">
         Buy Your Event Tickets Anytime, Anywhere – Hassle-Free & Instant
         Confirmation!
       </p>
@@ -108,14 +108,14 @@ const EventCards = () => {
       </div>
 
       {/* View All Button */}
-      <div className="flex justify-center mt-8">
+      {/* <div className="flex justify-center mt-8">
         <Link
           to="/allevents"
           className="ezy-button-primary py-3 px-6 font-semibold text-xl rounded-lg"
         >
           View All Events
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 };
