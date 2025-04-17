@@ -1,4 +1,5 @@
 import useAuth from "../../Hooks/useAuth";
+import AllEvents from "./AllEvents/AllEvents";
 import EventBanner from "./EventsComponents/EventBanner";
 import EventCards from "./EventsComponents/EventCards";
 import EventInfo from "./EventsComponents/EventInfo";
@@ -12,6 +13,7 @@ const Events = () => {
     >
       <EventBanner></EventBanner>
       <EventCards></EventCards>
+      <AllEvents></AllEvents>
       <EventInfo></EventInfo>
       <EventReview></EventReview>
     </div>

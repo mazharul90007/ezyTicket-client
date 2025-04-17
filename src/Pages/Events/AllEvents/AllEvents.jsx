@@ -54,9 +54,8 @@ const AllEvents = () => {
   const displayedEvents = verifiedEvents.slice(0, 4);
   return (
     <div
-      className={`${
-        darkMode ? "bg-black text-white" : "bg-gray-50 text-black"
-      }`}
+      className={`my-16 ${darkMode ? "bg-black text-white" : "bg-gray-50 text-black"
+        }`}
     >
       <div
         className="relative py-16 px-8 text-white text-center overflow-hidden h-[500px] md:h-[600px] lg:h-[680px] xl:h-[600px] flex justify-center items-center"
@@ -85,11 +84,10 @@ const AllEvents = () => {
               <Link to={`/eventdetailspublic/${event._id}`}>
                 <div
                   key={event._id}
-                  className={`${
-                    darkMode
+                  className={`${darkMode
                       ? "bg-dark-surface text-dark-primary"
                       : "bg-white text-black"
-                  } rounded-md overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300 h-full flex flex-col group`}
+                    } rounded-md overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300 h-full flex flex-col group`}
                 >
                   <div className="overflow-hidden">
                     <img
@@ -142,11 +140,10 @@ const AllEvents = () => {
           <button
             onClick={() => setCurrentPage(currentPage - 1)}
             disabled={currentPage === 1}
-            className={`px-4 py-2 rounded-lg ${
-              currentPage === 1
+            className={`px-4 py-2 rounded-lg ${currentPage === 1
                 ? "bg-gray-400 cursor-not-allowed"
                 : "ezy-button-primary"
-            }`}
+              }`}
           >
             Previous
           </button>
@@ -155,11 +152,10 @@ const AllEvents = () => {
             <button
               key={index}
               onClick={() => setCurrentPage(index + 1)}
-              className={`px-4 py-2 rounded-lg ${
-                currentPage === index + 1
+              className={`px-4 py-2 rounded-lg ${currentPage === index + 1
                   ? "bg-green-700 text-white"
                   : "bg-gray-300 hover:bg-gray-400"
-              }`}
+                }`}
             >
               {index + 1}
             </button>
@@ -168,11 +164,10 @@ const AllEvents = () => {
           <button
             onClick={() => setCurrentPage(currentPage + 1)}
             disabled={currentPage === totalPages}
-            className={`px-4 py-2 rounded-lg ${
-              currentPage === totalPages
+            className={`px-4 py-2 rounded-lg ${currentPage === totalPages
                 ? "bg-gray-400 cursor-not-allowed"
                 : "ezy-button-primary"
-            }`}
+              }`}
           >
             Next
           </button>

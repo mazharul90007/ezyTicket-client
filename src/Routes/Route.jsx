@@ -13,7 +13,6 @@ import Pricing from "../Pages/Pricing/Pricing";
 import BusReservationPage from "../Pages/Travel/TravelServiceSeciton/BusReservationPage";
 import TravelBusTicketPage from "../Pages/Travel/TravelTicekBook/TravelBusTicketPage";
 import BusTicketCancellation from "../components/BusTicketCancellation";
-import AllEvents from "../Pages/Events/AllEvents/AllEvents";
 import MyWishList from "../Pages/MyWishList/MyWishList";
 import Contact from "../Pages/Contact/Contact";
 import AllMovie from "../Pages/Entertainment/AllMovie/AllMovies";
@@ -109,11 +108,6 @@ const Route = createBrowserRouter([
         path: "/eventdetailspublic/:eventId",
         element: <EventDetails></EventDetails>,
       },
-      {
-        path: "/allevents",
-        element: <AllEvents></AllEvents>,
-      },
-
       //-------------event route end---------------
       {
         path: "/entertainment",
