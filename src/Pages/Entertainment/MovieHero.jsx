@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 const slides = [
   {
-    title: "",
+    title: "Star Cineplex",
     image: "/starcineplex.webp",
   },
 
@@ -57,7 +57,7 @@ const MovieHeroSlider = () => {
             key={idx}
             className="!w-[80%] md:!w-[60%] lg:!w-[80%] mx-auto transition-all duration-500 ease-in-out"
           >
-            <div className="relative h-56 md:h-64 lg:h-96 overflow-hidden rounded-xl border-2 border-purple-800 shadow-lg">
+            <div className="relative h-56 md:h-64 lg:h-44 overflow-hidden rounded-xl border-2 border-main shadow-lg">
               <img
                 src={slide.image}
                 alt={`Slide ${idx + 1}`}

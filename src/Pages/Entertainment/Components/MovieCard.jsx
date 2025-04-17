@@ -9,7 +9,7 @@ const MovieCard = ({ movie }) => {
   return (
     <div
       key={movie.id}
-      className={`min-w-[280px]  w-62 relative group flex flex-col justify-between md:min-w-0 ${
+      className={`min-w-[280px]  w-62 relative group flex flex-col scale-90 justify-between md:min-w-0 ${
         darkMode ? "text-white bg-gray-800/20" : "bg-white"
       } rounded-t-xl shadow-lg transition hover:-translate-y-1 duration-300`}
     >
@@ -34,7 +34,7 @@ const MovieCard = ({ movie }) => {
       {/* Book Now Button Always Visible */}
       <div className="p-4">
         <Link to={`/entertainment/allmovies/${movie._id}`}>
-          <button className="mt-2 w-full bg-supporting hover:bg-green-700 transition text-white py-2 px-3 cursor-pointer rounded-full font-semibold">
+          <button className="mt-2 w-full bg-main hover:bg-green-700 focus:outline-none hover:scale-95 transition text-white py-2 px-3 cursor-pointer rounded-full font-semibold">
             Book Now
           </button>
         </Link>
