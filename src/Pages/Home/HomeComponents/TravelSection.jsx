@@ -86,7 +86,7 @@ const TravelSection = () => {
 
                 {/* Text + Features */}
                 <motion.div
-                    className="flex flex-col lg:flex-row gap-8 md:gap-12"
+                    className="flex flex-col lg:flex-row gap-8 md:gap-12 py-6"
                     initial="hidden"
                     animate={inView ? "visible" : "hidden"}
                     variants={containerVariants}

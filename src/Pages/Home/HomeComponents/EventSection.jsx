@@ -70,7 +70,7 @@ const EventSection = () => {
 
                 {/* Text + Features */}
                 <motion.div 
-                    className="flex flex-col lg:flex-row gap-12"
+                    className="flex flex-col lg:flex-row gap-12 py-6"
                     variants={container}
                 >
                     {/* Left - Text */}
