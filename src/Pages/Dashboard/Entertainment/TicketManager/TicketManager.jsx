@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
-import { useTheme } from "../../Hooks/useTheme";
+import useAuth from "../../../../Hooks/useAuth";
 
 const fakeTickets = [
   {
@@ -27,7 +27,7 @@ const fakeTickets = [
 
 const TicketManager = () => {
   const [tickets, setTickets] = useState(fakeTickets);
-  const { darkMode } = useTheme();
+  const { darkMode } = useAuth();
 
   const handleDelete = (id) => {
     const updated = tickets.filter((ticket) => ticket.id !== id);
@@ -37,16 +37,14 @@ const TicketManager = () => {
   return (
     <div
       className={`min-h-screen p-4 md:p-8 transition duration-300 ${
-        darkMode
-          ? "bg-gradient-to-br from-gray-900 to-black text-white"
-          : "bg-gray-100 text-gray-900"
+        darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-900"
       }`}
     >
       <h1 className="text-3xl font-bold mb-6 text-center">Ticket Manager</h1>
       <div className="overflow-x-auto">
         <table className="w-full table-auto shadow-lg rounded-xl overflow-hidden">
           <thead className={`${darkMode ? "bg-gray-800" : "bg-white"}`}>
-            <tr className="text-left">
+            <tr className="text-left text-sm md:text-base">
               <th className="p-3">Movie</th>
               <th className="p-3">Hall</th>
               <th className="p-3">Show Time</th>
@@ -65,7 +63,7 @@ const TicketManager = () => {
                   darkMode
                     ? "bg-gray-700 hover:bg-gray-600"
                     : "bg-white hover:bg-gray-50"
-                }`}
+                } border-b`}
               >
                 <td className="p-3 font-semibold">{ticket.movieName}</td>
                 <td className="p-3">{ticket.hall}</td>
@@ -87,7 +85,7 @@ const TicketManager = () => {
                 <td className="p-3 text-center">
                   <button
                     onClick={() => handleDelete(ticket.id)}
-                    className="text-red-500 hover:text-red-700 transition"
+                    className="text-red-500 hover:text-red-700 transition text-lg"
                   >
                     <FaTrashAlt />
                   </button>

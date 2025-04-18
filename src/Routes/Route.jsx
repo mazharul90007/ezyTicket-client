@@ -191,12 +191,9 @@ const Route = createBrowserRouter([
       },
       {
         path: "ticketcineplex",
-        element: <SoldedCineTicket></SoldedCineTicket>,
-      },
-      {
-        path: "ticketmanager",
         element: <TicketManager></TicketManager>,
       },
+
       {
         path: "managemovie",
         element: <ManageMovies></ManageMovies>,
