@@ -35,8 +35,8 @@ const HomeCategory = ({ scrollToSection }) => {
     };
 
     return (
-        <div className="w-11/12 mx-auto">
-            <section className=" py-12 text-center">
+        <div className="w-11/12 mx-auto mb-8 md:mb-16 lg:mb-20">
+            <section className="text-center">
                 <p className={`tracking-widest uppercase mb-2 ${darkMode ? 'text-dark-secondary' : 'text-gray-500'}`}>EzyTicket</p>
                 <h2 className={`uppercase text-3xl md:text-5xl font-bold mb-12 tracking-wide leading-[1.1] ${darkMode ? 'text-dark-primary' : 'text-gray-700'}`}>
                     Book Tickets Easily with EzyTicket <br /> Anytime, Anywhere
@@ -51,7 +51,7 @@ const HomeCategory = ({ scrollToSection }) => {
                 >
                     {/* Travel */}
                     <motion.div
-                        className="bg-[#677115] p-6 shadow-md px-12 text-white font-light"
+                        className="bg-[#677115] p-6 shadow-md px-12 text-white font-light rounded-md"
                         variants={item}
                     >
                         <div>
@@ -72,7 +72,7 @@ const HomeCategory = ({ scrollToSection }) => {
 
                     {/* Events */}
                     <motion.div
-                        className="bg-[#D0AE72] p-6 shadow-md px-12 text-white font-light"
+                        className="bg-[#D0AE72] p-6 shadow-md px-12 text-white font-light rounded-md"
                         variants={item}
                     >
                         <div>
@@ -93,7 +93,7 @@ const HomeCategory = ({ scrollToSection }) => {
 
                     {/* Movies */}
                     <motion.div
-                        className="bg-[#C68D6E] p-6 shadow-md px-12 text-white font-light"
+                        className="bg-[#C68D6E] p-6 shadow-md px-12 text-white font-light rounded-md"
                         variants={item}
                     >
                         <div>
