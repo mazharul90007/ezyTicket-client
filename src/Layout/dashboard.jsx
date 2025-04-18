@@ -111,8 +111,6 @@ const Dashboard = () => {
                                 <li onClick={closeMenu}><NavLink to="/dashboard/manageEntertainments" className={getNavLinkClass}><BiMoviePlay /> Manage Entertainments</NavLink></li>
 
                                 <li onClick={closeMenu}><NavLink to="/dashboard/manageUsers" className={getNavLinkClass}><FaUsers /> Manage Users</NavLink></li>
-
-                                <li onClick={closeMenu}><NavLink to="/dashboard/advertiseProperty" className={getNavLinkClass}><FaBullhorn /> Advertisement</NavLink></li>
                             </>
                         ) : isEventManager ? (
                             <>
