@@ -44,7 +44,7 @@ const EventCards = () => {
         darkMode ? "bg-dark-background text-dark-primary" : "bg-background"
       }`}
     >
-      <h1 className="text-5xl font-bold text-center text-supporting mb-3">
+      <h1 className="text-5xl font-bold text-center text-main mb-3">
         Recent Events
       </h1>
       <p className="text-xl font-semibold text-center text-gray-500 mb-10">
@@ -76,7 +76,7 @@ const EventCards = () => {
                 <div className="mt-auto pt-4">
                   {/* Price and Remaining Seat */}
                   <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-2 text-supporting font-semibold">
+                    <div className="flex items-center gap-2 text-main font-semibold">
                       <FaBangladeshiTakaSign className="text-xl" />
                       <span className="text-lg">{event.price}</span>
                     </div>

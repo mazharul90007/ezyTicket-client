@@ -9,13 +9,16 @@ const Events = () => {
   const { darkMode } = useAuth();
   return (
     <div
-      className={`${darkMode ? "bg-dark-background text-dark-primary" : "bg-background text-black"} `}
+      className={`${
+        darkMode
+          ? "bg-dark-background text-dark-primary"
+          : "bg-background text-black"
+      } `}
     >
       <EventBanner></EventBanner>
       <EventCards></EventCards>
       <AllEvents></AllEvents>
       <EventInfo></EventInfo>
-      <EventReview></EventReview>
     </div>
   );
 };
