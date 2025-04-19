@@ -16,45 +16,18 @@ import "swiper/css/pagination";
 // import required modules
 import { FreeMode, Pagination, Navigation } from "swiper/modules";
 
-// const trendingMovies = [
-//   {
-//     id: 21,
-//     title: "Venom",
-//     poster:
-//       "https://imageio.forbes.com/specials-images/imageserve/67508810cdaf3caeed2896b9/0x0.jpg?format=jpg&crop=1150,647,x0,y43,safe&height=900&width=1600&fit=bounds",
-//     genre: "Sci-Fi, Action",
-//     rating: 4.8,
-//   },
-//   {
-//     id: 22,
-//     title: "MUFASA The Lion King",
-//     poster:
-//       "https://substack-post-media.s3.amazonaws.com/public/images/9184cb58-4f51-452c-8b63-3fd60b1ff306_1313x739.jpeg",
-//     genre: "Romance, Drama",
-//     rating: 4.5,
-//   },
-//   {
-//     id: 23,
-//     title: "Avengers : End Game",
-//     poster:
-//       "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/DB176BD1488D7E4822256EF1778C124FC17388FC1E7F0F6D89B38AFF5FB001F6/scale?width=1200&aspectRatio=1.78&format=webp",
-//     genre: "Thriller, Mystery",
-//     rating: 4.7,
-//   },
-// ];
-
 const TrendingMovies = () => {
   const { movies } = useEntertainmentData();
 
   return (
-    <section className=" mt-24  mx-4 md:px-10">
+    <section className=" mt-24  mx-4  md:px-10">
       <div className="flex justify-between">
-        <h2 className="text-3xl border-l-4 pl-3 mb-4 text-supporting md:text-4xl font-bold ">
+        <h2 className="text-3xl border-l-4 pl-3 text-main md:text-4xl font-bold ">
           Now Showing
         </h2>
 
         <Link to="allmovies">
-          <button className="btn bg-supporting text-white border-none text-end">
+          <button className="btn ezy-button-primary  ">
             View All <FaArrowAltCircleRight></FaArrowAltCircleRight>{" "}
           </button>
         </Link>
@@ -68,7 +41,28 @@ const TrendingMovies = () => {
         </div>
       </div> */}
 
-      <div>
+<div className="">
+
+<div >
+  
+  <div className="flex gap-4 mt-4">
+    <button className="px-4 py-2 text-white rounded-md border-2 hover">
+      English
+    </button>
+    <button className="px-4 py-2  text-white rounded-md border-2 hover:">
+      Spanish
+    </button>
+    <button className="px-4 py-2  text-white rounded-md border-2 hover:">
+      French
+    </button>
+    <button className="px-4 py-2  text-white rounded-md border-2 hover:">
+      German
+    </button>
+  </div>
+</div>
+
+
+ <div >
         <Swiper
         
           spaceBetween={30}
@@ -98,7 +92,7 @@ const TrendingMovies = () => {
               }
             
           }}
-          className="mySwiper text-white mt-10"
+          className="mySwiper text-white mt-5 "
         >
           {movies.map((movie) => (
             <SwiperSlide><MovieCard movie={movie}></MovieCard></SwiperSlide>
@@ -106,6 +100,9 @@ const TrendingMovies = () => {
           ))}
         </Swiper>
       </div>
+
+</div>
+     
     </section>
   );
 };
