@@ -5,42 +5,50 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Link } from "react-router-dom";
+import useEntertainmentData from "../../Hooks/EntertainmentHook/useEntertainmentData";
+import { CiBookmarkCheck } from "react-icons/ci";
 
-const slides = [
-  {
-    title: "Star Cineplex",
-    image: "/starcineplex.webp",
-  },
+import { motion } from "framer-motion";
+import { IoPlayCircleSharp } from "react-icons/io5";
 
-  {
-    title: "Monihar Cineplex",
-    image: "/monihar.avif",
-  },
+// const slides = [
+//   {
+//     title: "Star Cineplex",
+//     image: "/starcineplex.webp",
+//   },
 
-  {
-    title: "",
-    image: "/cineplex2.jpg",
-  },
-  {
-    title: "UltraAVX",
-    image: "/cineplex3.jpg",
-  },
-  {
-    title: "IMAX",
-    image: "/cineplex4.jpg",
-  },
-];
+//   {
+//     title: "Monihar Cineplex",
+//     image: "/monihar.avif",
+//   },
+
+//   {
+//     title: "",
+//     image: "/cineplex2.jpg",
+//   },
+//   {
+//     title: "UltraAVX",
+//     image: "/cineplex3.jpg",
+//   },
+//   {
+//     title: "IMAX",
+//     image: "/cineplex4.jpg",
+//   },
+// ];
 
 const MovieHeroSlider = () => {
+  const { movies } = useEntertainmentData();
+  console.log(movies);
+  const newMovies = movies.slice(0, 5);
   return (
     <div className="relative text-white">
-   <div className="bg-white/10 backdrop-blur-md text-supporting text-center py-3 px-6 text-base  shadow-md  mb-2  flex flex-col md:flex-row items-center justify-center gap-4">
+      {/* <div className="bg-white/10 backdrop-blur-md text-supporting text-center py-3 px-6 text-base  shadow-md  mb-2  flex flex-col md:flex-row items-center justify-center gap-4">
   <span>🎟️ Enjoy instant booking + exclusive online discounts!</span>
   <span className="hidden md:inline-block">|</span>
   <span>🎬 Book your seat now — Experience Movies Like Never Before!</span>
   <span className="hidden md:inline-block">|</span>
   <span>🎥 We bring all the screens across the country — just for you!</span>
-</div>
+</div> */}
 
       <Swiper
         centeredSlides={true}
@@ -48,39 +56,73 @@ const MovieHeroSlider = () => {
         spaceBetween={30}
         loop={true}
         pagination={{ clickable: true }}
-        autoplay={{ delay: 4000, disableOnInteraction: false }}
+        autoplay={{ delay: 5000, disableOnInteraction: false }}
         modules={[Pagination, Autoplay]}
         className="mySwiper"
       >
-        {slides.map((slide, idx) => (
-          <SwiperSlide
-            key={idx}
-            className="!w-[80%] md:!w-[60%] lg:!w-[80%] mx-auto transition-all duration-500 ease-in-out"
-          >
-            <div className="relative h-56 md:h-64 lg:h-44 overflow-hidden rounded-xl border-2 border-main shadow-lg">
-              <img
-                src={slide.image}
-                alt={`Slide ${idx + 1}`}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute bottom-0 mb-5  left-0 z-20 flex flex-col items-center justify-center text-center px-4 sm:px-8 md:px-12 max-w-4xl mx-auto">
-                <h1 className="text-2xl sm:text-4xl md:text-5xl text-white/50 font-extrabold leading-tight">
-                  {slide.title}
-                  {/* {slide.title.split(" ").slice(0, 3).join(" ")}
-                  <div className="text-green-600">
-                    {slide.title.split(" ").slice(3).join(" ")}
-                  </div> */}
-                </h1>
-                <p className=" text-base sm:text-lg md:text-xl text-gray-300">
-                  {slide?.desc}
-                </p>
-              </div>
-              {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/20 z-10" />
+        {newMovies.map((slide, idx) => (
+          <div className="relative">
+            <SwiperSlide
+              key={idx}
+              className="!w-[80%] md:!w-[60%]  lg:!w-[80%] mx-auto transition-all duration-500 ease-in-out"
+            >
+              <div className="relative h-56 md:h-64 lg:h-96 overflow-hidden  shadow-lg">
+                <img
+                  src={slide.imageLink}
+                  alt={`Slide ${idx + 1}`}
+                  className="w-full h-full object-cover "
+                />
+                <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2  mb-5   z-20 flex flex-col items-center justify-center text-center px-4 sm:px-8 md:px-12 max-w-4xl mx-auto">
+                  <Link to="https://www.youtube.com/watch?v=u9Mv98Gr5pY&ab_channel=SonyPicturesEntertainment">
+                    <button className="cursor-pointer hover:scale-110 transition-all duration-300 ">
+                      <IoPlayCircleSharp className="size-12" />
+                    </button>
+                  </Link>
 
-              {/* Content */}
-            </div>
-          </SwiperSlide>
+                </div>
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/20 z-10" />
+
+                {/* Content */}
+              </div>
+
+              <h1 className="text-2xl text-white-400 z-50 bg-main py-7 text-center md:text-right mb-8">
+                {" "}
+                <button
+                  onClick={() =>
+                    document.getElementById("booksection")?.scrollIntoView({
+                      behavior: "smooth",
+                    })
+                  }
+                  className="btn mr-3 shadow-none font-bold text-main bg-white hover:shadow-white hover:shadow-md"
+                >
+                  <CiBookmarkCheck className="size-5"/>
+                  Book now
+                </button>
+              </h1>
+              <div className=" absolute z-50 top-32 md:ml-10 flex gap-5">
+                <motion.div
+                  initial={{ opacity: 0, x: -50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8 }}
+                  className=" "
+                >
+                  <img
+                    src={slide?.imageLink}
+                    alt={slide?.name}
+                    className=" shadow-lg hidden lg:flex rounded-lg  lg:h-80"
+                  />
+                </motion.div>
+                <div className="flex flex-col justify-center  gap-3">
+                  <h2 className=" gap-5 text-3xl md:text-5xl  font-bold ">
+                    {slide?.name}
+                  </h2>
+                  <p className="">{slide?.genre}</p>
+                  <p className="hidden md:flex">{slide?.duration}</p>
+                </div>
+              </div>
+            </SwiperSlide>
+          </div>
         ))}
       </Swiper>
     </div>

@@ -39,8 +39,8 @@ import ManageReviews from "../Pages/Dashboard/Travel/ManageReviews/ManageReviews
 import MyBusServices from "../Pages/Dashboard/Travel/MyBusServices/MyBusServices";
 import SoldTickets from "../Pages/Dashboard/Travel/SoldTickets/SoldTickets";
 import Payment from "../components/Payment/Payment";
-
-
+import ManageMovies from "../Pages/Dashboard/Entertainment/MovieManager/ManageMovies/ManageMovies";
+import TicketManager from "../Pages/Dashboard/Entertainment/TicketManager/TicketManager";
 
 const Route = createBrowserRouter([
   {
@@ -95,7 +95,7 @@ const Route = createBrowserRouter([
       },
       {
         path: "/strip-payment",
-        element: <Payment/>
+        element: <Payment />,
       },
       // ------------travel route end-------------
 
@@ -176,51 +176,49 @@ const Route = createBrowserRouter([
       },
       // -----------Events route ends------------
 
-
       // -----------Entertaiment route start------------
       {
-        path:'addcineplex',
-        element:<AddCineplex></AddCineplex>
+        path: "addcineplex",
+        element: <AddCineplex></AddCineplex>,
       },
       {
-        path:'addmovie',
-        element:<AddMovie></AddMovie>
+        path: "addmovie",
+        element: <AddMovie></AddMovie>,
+      },
+      {
+        path: "managecineplex",
+        element: <ManageCineplex></ManageCineplex>,
+      },
+      {
+        path: "ticketcineplex",
+        element: <TicketManager></TicketManager>,
+      },
 
+      {
+        path: "managemovie",
+        element: <ManageMovies></ManageMovies>,
       },
       {
-        path:'managecineplex',
-        element:<ManageCineplex></ManageCineplex>
-      },
-      {
-        path:'ticketcineplex',
-        element:<SoldedCineTicket></SoldedCineTicket>
-      },
-      {
-        path:'managemovie',
-        element:<MovieManager></MovieManager>
-      },
-      {
-        path:'managemovie/moviedetails/:id',
-        element:<MovieDetails></MovieDetails> 
-        
+        path: "managemovie/moviedetails/:id",
+        element: <MovieDetails></MovieDetails>,
       },
       //add bus service page, review manage, added by susanto
       {
-        path: 'add-bus-service',
-        element: <AddBusService></AddBusService>
+        path: "add-bus-service",
+        element: <AddBusService></AddBusService>,
       },
       {
-        path: 'manageReview',
-        element: <ManageReviews> </ManageReviews>
+        path: "manageReview",
+        element: <ManageReviews> </ManageReviews>,
       },
       {
-        path: 'MyBusServices',
-        element: <MyBusServices> </MyBusServices>
+        path: "MyBusServices",
+        element: <MyBusServices> </MyBusServices>,
       },
       {
-        path: 'SoldTickets',
-        element: <SoldTickets> </SoldTickets>
-      }
+        path: "SoldTickets",
+        element: <SoldTickets> </SoldTickets>,
+      },
     ],
   },
 ]);
