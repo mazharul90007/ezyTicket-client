@@ -2,14 +2,13 @@
 import { LuPopcorn } from "react-icons/lu";
 import { FaBus } from "react-icons/fa";
 import { GiMicrophone } from "react-icons/gi";
-import useAuth from "../../../Hooks/useAuth";
 import bus from "../../../assets/Home_image/bus.webp"
 import dance from "../../../assets/Home_image/dance.webp"
 import movie from "../../../assets/Home_image/movie.webp"
 import { motion } from "framer-motion";
+import Heading from "../../../components/Heading";
 
 const HomeCategory = ({ scrollToSection }) => {
-    const { darkMode } = useAuth();
 
     const container = {
         hidden: { opacity: 0 },
@@ -37,11 +36,12 @@ const HomeCategory = ({ scrollToSection }) => {
     return (
         <div className="w-11/12 mx-auto mb-8 md:mb-16 lg:mb-20">
             <section className="text-center">
-                <p className={`tracking-widest uppercase mb-2 ${darkMode ? 'text-dark-secondary' : 'text-gray-500'}`}>EzyTicket</p>
-                <h2 className={`uppercase text-3xl md:text-5xl font-bold mb-12 tracking-wide leading-[1.1] ${darkMode ? 'text-dark-primary' : 'text-gray-700'}`}>
-                    Book Tickets Easily with EzyTicket <br /> Anytime, Anywhere
-                </h2>
-
+                <Heading
+                    subtitle={'EzyTicket'}
+                    title={'Book Tickets Easily with EzyTicket'}
+                    extend={'Anytime, Anywhere'}
+                >
+                </Heading>
                 <motion.div
                     className="grid md:grid-cols-3 gap-8"
                     variants={container}

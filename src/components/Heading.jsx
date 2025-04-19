@@ -1,12 +1,16 @@
 import React from 'react'
 import useAuth from '../Hooks/useAuth'
 
-const Heading = ({title, subtitle, color}) => {
-  const {darkMode} = useAuth()
+const Heading = ({ title, subtitle, extend }) => {
+  const { darkMode } = useAuth()
   return (
-    <div className={`${darkMode ?  "text-white" : "text-[#111111]" } text-center container mx-auto`}>
-        <h1 className={`text-2xl font-bold md:text-3xl lg:text-5xl ${color}`}>{title}</h1>
-        <p className='mt-5 md:w-10/12 mx-auto'>{subtitle}</p>
+    <div className='text-center'>
+      <p className={`tracking-widest uppercase mb-2 ${darkMode ? 'text-dark-secondary' : 'text-gray-500'}`}>
+        {subtitle}
+      </p>
+      <h2 className={`uppercase text-3xl md:text-5xl font-bold mb-12 tracking-wide leading-[1.1] ${darkMode ? 'text-dark-primary' : 'text-gray-700'}`}>
+        {title} <br /> {extend}
+      </h2>
     </div>
   )
 }

@@ -55,13 +55,13 @@ const CounterItem = ({ targetNumber, label }) => {
 const StatsCounter = () => {
     const stats = [
         { number: 12, label: "Destinations" },
-        { number: 10, label: "Partner Companies" },
+        { number: 10, label: "Bus Companies" },
         { number: 36, label: "Buses" },
         { number: 250, label: "Happy Customers per day" }
     ];
 
     return (
-        <section className="py-12">
+        <section className="my-6">
             <div className="container mx-auto ">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     {stats.map((stat, index) => (
