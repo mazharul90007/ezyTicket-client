@@ -1,11 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
 
 const movieNewsData = [
   {
     id: 1,
     title: "Dune: Part Two Breaks Box Office Records",
     description:
-      "Denis Villeneuve's sequel smashes opening weekend expectations, setting a new sci-fi benchmark.",
+      "Denis Villeneuve's sequel smashes opening weekend expectations, setting a new sci-fi benchmark.Denis Villeneuve's sequel smashes opening weekend expectations, setting a new sci-fi benchmark.Denis Villeneuve's sequel smashes opening weekend expectations, setting a new sci-fi benchmark.Denis Villeneuve's sequel smashes opening weekend expectations, setting a new sci-fi benchmark.Denis Villeneuve's sequel smashes opening weekend expectations, setting a new sci-fi benchmark.",
     image: "https://miro.medium.com/v2/resize:fit:1400/1*SvqveyU-E2RAHPwHykl5YQ.jpeg",
   },
   {
@@ -53,26 +55,36 @@ const movieNewsData = [
 ];
 
 const MovieNews = () => {
+  const { darkMode } = useAuth()
   return (
-   <div className="px-12  mt-24 mx-auto">
-      <h2 className="text-3xl border-l-4 pl-3 text-supporting md:text-4xl font-bold ">
+   <div className={`px-12   md:mt-24 mx-auto ${darkMode ? " text-white" : " text-black"} `}>
+      <h2 className="text-3xl border-l-4 pl-3 text-main md:text-4xl font-bold ">
         Latest News
       </h2>
-     <div className="flex flex-col md:grid grid-cols-4 gap-6 py-4  text-black mx-auto">
+     <div className="flex flex-col md:grid grid-cols-4  gap-6 py-4   mx-auto">
       
       {/* First Column - Largest (Takes 50%) */}
-      <div className="col-span-2 bg-white shadow-lg rounded-xl overflow-hidden">
+      <div className="col-span-2  shadow-lg rounded-xl overflow-hidden">
         <img
           src={movieNewsData[0].image}
           alt={movieNewsData[0].title}
           className="w-full h-80 object-cover"
         />
         <div className="p-4">
-          <h2 className="text-2xl font-bold hover:text-blue-600 transition duration-200 cursor-pointer">
+          <h2 className="text-2xl font-bold hover:text-main transition duration-200 cursor-pointer">
             {movieNewsData[0].title}
           </h2>
           <p className="mt-2 ">{movieNewsData[0].description}</p>
         </div>
+        <div className="flex justify-center mb-4">
+          <Link to='https://thedirect.com/article/dune-2-box-office-records'>
+          <button className="btn ">
+          Read More
+        </button>
+          </Link>
+    
+        </div>
+      
       </div>
 
       {/* Second Column - Medium (Takes 25%) */}
@@ -80,7 +92,7 @@ const MovieNews = () => {
         {movieNewsData.slice(1, 3).map((news) => (
           <div
             key={news.id}
-            className="bg-white shadow-lg rounded-xl overflow-hidden"
+            className=" shadow-lg rounded-xl overflow-hidden"
           >
             <img
               src={news.image}
@@ -88,7 +100,7 @@ const MovieNews = () => {
               className="w-full h-40 object-cover"
             />
             <div className="p-3">
-              <h2 className="text-lg font-semibold hover:text-blue-600 transition duration-200 cursor-pointer">
+              <h2 className="text-lg font-semibold hover:text-main transition duration-200 cursor-pointer">
                 {news.title}
               </h2>
               <p className=" text-sm">{news.description}</p>
@@ -99,10 +111,10 @@ const MovieNews = () => {
 
       {/* Third Column - Smallest (Takes 25%) */}
       <div className="col-span-1 flex flex-col gap-4">
-        {movieNewsData.slice(3, 7).map((news) => (
+        {movieNewsData.slice(3, 6).map((news) => (
           <div
             key={news.id}
-            className="bg-white shadow-lg rounded-lg p-3 flex items-center  hover:bg-gray-100 transition duration-200 cursor-pointer"
+            className=" shadow-lg rounded-lg p-3 flex items-center  hover:bg-main transition duration-200 cursor-pointer"
           >
             <img
               src={news.image}

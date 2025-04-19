@@ -10,6 +10,9 @@ import { CiBookmarkCheck } from "react-icons/ci";
 
 import { motion } from "framer-motion";
 import { IoPlayCircleSharp } from "react-icons/io5";
+import { MdAccessTimeFilled, MdCategory } from "react-icons/md";
+
+import { TbCategory } from "react-icons/tb";
 
 // const slides = [
 //   {
@@ -88,6 +91,7 @@ const MovieHeroSlider = () => {
 
               <h1 className="text-2xl text-white-400 z-50 bg-main py-7 text-center md:text-right mb-8">
                 {" "}
+                  <Link to={`/entertainment/allmovies/${slide._id}`}>
                 <button
                   onClick={() =>
                     document.getElementById("booksection")?.scrollIntoView({
@@ -99,6 +103,7 @@ const MovieHeroSlider = () => {
                   <CiBookmarkCheck className="size-5"/>
                   Book now
                 </button>
+                </Link>
               </h1>
               <div className=" absolute z-50 top-32 md:ml-10 flex gap-5">
                 <motion.div
@@ -117,8 +122,8 @@ const MovieHeroSlider = () => {
                   <h2 className=" gap-5 text-3xl md:text-5xl  font-bold ">
                     {slide?.name}
                   </h2>
-                  <p className="">{slide?.genre}</p>
-                  <p className="hidden md:flex">{slide?.duration}</p>
+                  <p className="flex"><TbCategory  className="my-auto mr-1"/>{slide?.genre}</p>
+                  <p className="hidden md:flex"><MdAccessTimeFilled  className="my-auto mr-1"/>{slide?.duration}</p>
                 </div>
               </div>
             </SwiperSlide>
