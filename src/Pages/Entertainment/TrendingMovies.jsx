@@ -20,46 +20,21 @@ const TrendingMovies = () => {
   const { movies } = useEntertainmentData();
 
   return (
-    <section className=" mt-24  mx-4  md:px-10">
+    <section className=" mt-24  w-10/12 mx-auto md:px-10">
       <div className="flex justify-between">
         <h2 className="text-3xl border-l-4 pl-3 text-main md:text-4xl font-bold ">
           Now Showing
         </h2>
 
         <Link to="allmovies">
-          <button className="btn ezy-button-primary  ">
+          <button className="btn ezy-button-primary w-36 scale-80 md:scale-100">
             View All <FaArrowAltCircleRight></FaArrowAltCircleRight>{" "}
           </button>
         </Link>
       </div>
       
-      {/* <div className="flex justify-between">
-        <div className="grid grid-cols-1 sm:grid-cols-2  gap-8 md:grid-cols-3 lg:grid-cols-4 md:gap-10 overflow-x-auto no-scrollbar md:overflow-visible">
-          {movies.map((movie) => (
-            <MovieCard movie={movie}></MovieCard>
-          ))}
-        </div>
-      </div> */}
 
 <div className="">
-
-<div >
-  
-  <div className="flex gap-4 mt-4">
-    <button className="px-4 py-2 text-white rounded-md border-2 hover">
-      English
-    </button>
-    <button className="px-4 py-2  text-white rounded-md border-2 hover:">
-      Spanish
-    </button>
-    <button className="px-4 py-2  text-white rounded-md border-2 hover:">
-      French
-    </button>
-    <button className="px-4 py-2  text-white rounded-md border-2 hover:">
-      German
-    </button>
-  </div>
-</div>
 
 
  <div >
@@ -73,14 +48,14 @@ const TrendingMovies = () => {
           breakpoints={{
             // when window width is >= 0px
             0: {
-              slidesPerView: 1,
+              slidesPerView: 3,
             },
             500:{
-              slidesPerView: 2,
+              slidesPerView: 3,
             },
             // when window width is >= 768px (medium screens)
             768: {
-              slidesPerView: 3,
+              slidesPerView: 4,
             },
             // when window width is >= 1024px (large screens)
             1024: {
@@ -92,7 +67,7 @@ const TrendingMovies = () => {
               }
             
           }}
-          className="mySwiper text-white mt-5 "
+          className="mySwiper text-white md:mt-5 "
         >
           {movies.map((movie) => (
             <SwiperSlide><MovieCard movie={movie}></MovieCard></SwiperSlide>
