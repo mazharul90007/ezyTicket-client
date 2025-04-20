@@ -8,7 +8,6 @@ const HomeBanner = () => {
 
     useEffect(() => {
         if (videoRef.current) {
-            // Set slower playback rate (0.7 = 70% of normal speed)
             videoRef.current.playbackRate = 0.7;
             
             // Handle autoplay with fallback
@@ -40,13 +39,13 @@ const HomeBanner = () => {
                     <source src={travelVideo} type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
-                <div className="absolute inset-0 bg-black/40"></div>
+                <div className="absolute inset-0  bg-gradient-to-t from-black/50 via-black/30 to-black/10"></div>
             </div>
 
             {/* Content */}
-            <div className="relative z-10 h-full flex flex-col justify-center items-center text-center px-4">
+            <div className="relative z-10 h-full flex flex-col md:justify-center items-center text-center px-4">
                 <motion.h1 
-                    className='text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4'
+                    className='text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 pt-4 md:pt-0'
                     initial={{ y: -20 }}
                     animate={{ y: 0 }}
                     transition={{ duration: 0.5 }}
@@ -56,7 +55,7 @@ const HomeBanner = () => {
                 </motion.h1>
                 
                 <motion.p 
-                    className='text-lg md:text-xl text-white/90 mb-8 max-w-2xl'
+                    className='text-lg md:text-xl text-white/90 mb-8 max-w-2xl hidden md:block'
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.3, duration: 0.8 }}
