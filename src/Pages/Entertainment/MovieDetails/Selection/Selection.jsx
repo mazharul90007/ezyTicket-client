@@ -5,6 +5,7 @@ import "react-day-picker/dist/style.css";
 export function Selection() {
   const [selected, setSelected] = useState(new Date());
   const [days, setDays] = useState([]);
+  const [calerndar, setCalendar] = useState(false);
 
   useEffect(() => {
     getNextNDays(7);
@@ -42,7 +43,7 @@ export function Selection() {
   }
 
   return (
-    <div className="flex flex-col items-center gap-4 p-6 rounded-2xl shadow-md w-full mx-auto">
+    <div className="flex relative flex-col items-center gap-4 p-6 rounded-2xl shadow-md w-full mx-auto">
       {/* Display the days array if needed */}
       <div>
         {days.length > 0 && (
@@ -58,7 +59,9 @@ export function Selection() {
                 </span>
               ))}
             </div>
-            <button className="px-3   bg-main text-white rounded-full text-sm">
+            <button
+            onClick={() => setCalendar(!calerndar)}
+            className="px-3 cursor-pointer transition-all duration-600 hover:bg-green-700 bg-main text-white rounded-full text-sm">
             Choose Date
             </button>
             
@@ -68,13 +71,13 @@ export function Selection() {
 
     
 
-      <div className="rounded-lg border border-gray-200 p-2 hidden">
+      <div className={`rounded-lg border absolute right-15 z-20 backdrop-blur-3xl  border-gray-200 p-2 ${calerndar?"transition-all duration-500 ":"hidden "} `}>
         <DayPicker
           mode="single"
           selected={selected}
           onSelect={setSelected}
           styles={{
-            caption: { color: "#1f2937", fontWeight: "600" },
+            caption: { color: "#008236", fontWeight: "600" },
             head_cell: { color: "#6b7280" },
             cell: { borderRadius: "8px", padding: "8px" },
             day_selected: {

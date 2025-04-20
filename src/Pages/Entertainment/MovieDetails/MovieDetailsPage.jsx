@@ -148,12 +148,12 @@ const MovieDetailsPage = () => {
       {/* <img src={movie.poster} alt="" /> */}
 
       <div className="mt-80 ">
-        <h1 className="text-4xl font-extrabold text-center border-2 mx-15 rounded-2xl">Select Your Showtimes</h1>
+        <h1 className="text-5xl font-extrabold text-center  mx-15 rounded-2xl"> Your Showtimes</h1>
       </div>
 
       <Selection></Selection>
 
-      <TicketBooking></TicketBooking>
+      {/* <TicketBooking></TicketBooking> */}
       <Recommended></Recommended>
     </div>
   );

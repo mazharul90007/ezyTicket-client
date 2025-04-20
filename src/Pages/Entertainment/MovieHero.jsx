@@ -89,8 +89,12 @@ const MovieHeroSlider = () => {
                 {/* Content */}
               </div>
 
-              <h1 className="text-2xl text-white-400 z-50 bg-main py-7 text-center md:text-right mb-8">
+              <h1 className="text-2xl text-white-400 z-50  bg-main py-7 text-center md:text-right mb-8">
                 {" "}
+                {/* <h1 className="text-center">
+                Now in Cinemas
+                </h1> */}
+             
                   <Link to={`/entertainment/allmovies/${slide._id}`}>
                 <button
                   onClick={() =>
