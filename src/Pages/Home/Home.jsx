@@ -4,11 +4,10 @@ import EventSection from "./HomeComponents/EventSection";
 import TravelSection from "./HomeComponents/TravelSection";
 import EntertainmentSection from "./HomeComponents/EntertainmentSection";
 import Testimonials from "./HomeComponents/Testimonials";
-import useAuth from "../../Hooks/useAuth";
 import AboutUs from "./HomeComponents/AboutUs";
+import EventSectionBanner from "./HomeComponents/EventSectionBanner";
 
 const Home = () => {
-  const { darkMode } = useAuth();
 
   // Smooth scroll function
   const scrollToSection = (sectionId) => {
@@ -30,6 +29,7 @@ const Home = () => {
 
       {/* Other Sections */}
       <TravelSection />
+      <EventSectionBanner></EventSectionBanner>
       <EventSection />
       <EntertainmentSection />
       {/* <AboutUs></AboutUs> */}

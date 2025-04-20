@@ -1,15 +1,14 @@
 import { FaPlane, FaTag, FaMapMarkerAlt, FaRegSmile, FaBus } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import useAuth from "../../../Hooks/useAuth";
 import dhaka from "../../../assets/Home_image/dhaka.webp";
 import merinDrive from "../../../assets/Home_image/marinDrive.webp";
 import sylhet from "../../../assets/Home_image/sylhet.webp";
 import chittagong from "../../../assets/Home_image/chittagong.jpg";
 import { motion } from "framer-motion";
 import StatsCounter from "./StatsCounter";
+import Heading from "../../../components/Heading";
 
 const TravelSection = () => {
-    const { darkMode } = useAuth();
 
     const destinations = [
         { img: dhaka, name: "Dhaka" },
@@ -20,14 +19,11 @@ const TravelSection = () => {
 
     return (
         <div className="w-11/12 mx-auto mb-8 md:mb-16 lg:mb-20">
-            <div>
-                <p className={`tracking-widest uppercase mb-2 ${darkMode ? 'text-dark-secondary' : 'text-gray-500'}`}>
-                    Choose your Destination
-                </p>
-                <h2 className={`uppercase text-3xl md:text-5xl font-bold mb-12 tracking-wide leading-[1.1] ${darkMode ? 'text-dark-primary' : 'text-gray-700'}`}>
-                    Make your journey hassle free
-                </h2>
-            </div>
+            <Heading
+                subtitle={'Choose your Destination'}
+                title={'Make your journey hassle free'}
+            >
+            </Heading>
 
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4 py-8">
                 {destinations.map((destination, index) => (
