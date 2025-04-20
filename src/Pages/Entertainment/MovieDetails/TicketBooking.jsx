@@ -105,6 +105,9 @@ const TicketBooking = () => {
     });
   };
 
+  const myDate = new Date;
+  console.log(myDate,"my date");
+
   return (
     <div id="booksection">
       <div className="pb-6 flex flex-col md:flex-row justify-around">

@@ -19,7 +19,7 @@ const Recommended = () => {
   return (
     <div className="mx-10 py-10">
       <div className="flex justify-between">
-        <h2 className="text-3xl border-l-4 pl-3 mb-4 text-supporting md:text-4xl font-bold ">
+        <h2 className="text-3xl border-l-4 pl-3 mb-4 text-main md:text-4xl font-bold ">
           Recommended
         </h2>
       </div>
