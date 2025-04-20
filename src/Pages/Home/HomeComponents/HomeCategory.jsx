@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 import Heading from "../../../components/Heading";
 import { Link } from "react-router-dom";
 
-const HomeCategory = ({ scrollToSection }) => {
+const HomeCategory = () => {
 
     const container = {
         hidden: { opacity: 0 },

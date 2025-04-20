@@ -58,7 +58,7 @@ const Testimonials = () => {
     };
 
     return (
-        <section className="py-16 px-4 sm:px-6 lg:px-8">
+        <section className="w-11/12 mx-auto mb-8 md:mb-16 lg:mb-20">
             <div className="max-w-7xl mx-auto">
                 <div className="text-center mb-12">
                     <p className="uppercase text-xl font-semibold text-center text-main mb-2">Testimonials</p>
