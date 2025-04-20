@@ -41,6 +41,7 @@ import SoldTickets from "../Pages/Dashboard/Travel/SoldTickets/SoldTickets";
 import Payment from "../components/Payment/Payment";
 import ManageMovies from "../Pages/Dashboard/Entertainment/MovieManager/ManageMovies/ManageMovies";
 import TicketManager from "../Pages/Dashboard/Entertainment/TicketManager/TicketManager";
+import ManageHalls from "../Pages/Dashboard/Entertainment/ManageHalls/ManageHalls";
 
 const Route = createBrowserRouter([
   {
@@ -187,7 +188,7 @@ const Route = createBrowserRouter([
       },
       {
         path: "managecineplex",
-        element: <ManageCineplex></ManageCineplex>,
+        element: <ManageHalls></ManageHalls>,
       },
       {
         path: "ticketcineplex",
