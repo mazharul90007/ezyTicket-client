@@ -1,13 +1,17 @@
 import { useState } from "react";
-
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
-import useEventReview from "../../../../Hooks/useEventReview.JSX";
+import useEventReview from "../../../../Hooks/useEventReview";
+
 
 const ManageEventReview = () => {
-  const [eventReviews, refetch] = useEventReview();
-  const [axiosSecure] = useAxiosSecure();
+  const [eventReviews, refetch, isLoading] = useEventReview();
+  const [axiosSecure] = useAxiosSecure(); 
   const [selectedEvent, setSelectedEvent] = useState(null);
+
+  if (isLoading) {
+    return <div className="text-center py-10">Loading reviews...</div>;
+  }
 
   const handleVerifyClick = (event) => {
     setSelectedEvent(event);
