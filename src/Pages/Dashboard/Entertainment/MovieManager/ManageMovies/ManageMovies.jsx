@@ -4,6 +4,7 @@ import useAuth from "../../../../../Hooks/useAuth";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const ManageMovies = () => {
   const { darkMode } = useAuth(); // Get dark mode from context
@@ -58,10 +59,6 @@ const ManageMovies = () => {
     });
   };
   // Edit movie handler (placeholder for modal or navigation)
-  const handleEdit = (movie) => {
-    console.log("Edit movie:", movie);
-    // Later you can open modal or navigate to edit form
-  };
 
   return (
     <div
@@ -114,17 +111,18 @@ const ManageMovies = () => {
                   <td className="px-4 py-3">{movie.cinemaHalls?.join(", ")}</td>
                   <td className="px-4 py-3 space-x-2">
                     {/* Edit Button */}
-                    <button
-                      className="text-blue-500 hover:text-blue-700 transition"
-                      title="Edit"
-                      onClick={() => handleEdit(movie)}
-                    >
-                      <FaEdit />
-                    </button>
+                    <Link to={`/dashboard/update-movie/${movie._id}`}>
+                      <button
+                        className="text-blue-500 hover:text-blue-700 transition cursor-pointer"
+                        title="Edit"
+                      >
+                        <FaEdit />
+                      </button>
+                    </Link>
 
                     {/* Delete Button */}
                     <button
-                      className="text-red-500 hover:text-red-700 transition"
+                      className="text-red-500 hover:text-red-700 transition cursor-pointer"
                       title="Delete"
                       onClick={() => handleDelete(movie._id)}
                     >

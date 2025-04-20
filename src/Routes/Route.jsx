@@ -42,6 +42,7 @@ import Payment from "../components/Payment/Payment";
 import ManageMovies from "../Pages/Dashboard/Entertainment/MovieManager/ManageMovies/ManageMovies";
 import TicketManager from "../Pages/Dashboard/Entertainment/TicketManager/TicketManager";
 import ManageHalls from "../Pages/Dashboard/Entertainment/ManageHalls/ManageHalls";
+import UpdateMovieData from "../Pages/Dashboard/Entertainment/UpdateMovieData/UpdateMovieData";
 
 const Route = createBrowserRouter([
   {
@@ -202,6 +203,10 @@ const Route = createBrowserRouter([
       {
         path: "managemovie/moviedetails/:id",
         element: <MovieDetails></MovieDetails>,
+      },
+      {
+        path: "update-movie/:id",
+        element: <UpdateMovieData></UpdateMovieData>,
       },
       //add bus service page, review manage, added by susanto
       {
