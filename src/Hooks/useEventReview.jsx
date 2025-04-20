@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "./useAxiosSecure";
 
 const useEventReview = () => {
-  const [axiosSecure] = useAxiosSecure(); // ✅ destructure from array
+  const axiosSecure = useAxiosSecure();
 
   const {
     data: eventReviews = [],

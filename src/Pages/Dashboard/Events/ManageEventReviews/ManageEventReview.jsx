@@ -1,12 +1,11 @@
 import { useState } from "react";
-import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
-import useEventReview from "../../../../Hooks/useEventReview";
-
+import useEventReview from "./../../../../Hooks/useEventReview";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const ManageEventReview = () => {
   const [eventReviews, refetch, isLoading] = useEventReview();
-  const [axiosSecure] = useAxiosSecure(); 
+  const axiosSecure = useAxiosSecure();
   const [selectedEvent, setSelectedEvent] = useState(null);
 
   if (isLoading) {
@@ -14,20 +13,44 @@ const ManageEventReview = () => {
   }
 
   const handleVerifyClick = (event) => {
+    if (!event._id) {
+      Swal.fire("Error", "Invalid review selected.", "error");
+      return;
+    }
     setSelectedEvent(event);
     document.getElementById("verify_modal").showModal();
   };
 
   const handleVerifySubmit = () => {
+    if (!selectedEvent || !selectedEvent._id) {
+      Swal.fire("Error", "No review selected for verification.", "error");
+      return;
+    }
+
     axiosSecure
-      .patch(`/verifyEvent/${selectedEvent._id}`, { status: "verified" })
+      .patch(`/verifyEvent/${selectedEvent._id}`, { status: "verified" }) // Fixed backticks
       .then((res) => {
         if (res.data.modifiedCount > 0) {
-          Swal.fire("Success!", "Review verified successfully!", "success");
-          refetch();
-          setSelectedEvent(null);
-          document.getElementById("verify_modal").close();
+          Swal.fire(
+            "Success!",
+            "Review verified successfully!",
+            "success"
+          ).then(() => {
+            refetch();
+            setSelectedEvent(null);
+            document.getElementById("verify_modal").close();
+          });
+        } else {
+          Swal.fire(
+            "Error",
+            "Failed to verify the review. Try again.",
+            "error"
+          );
         }
+      })
+      .catch((error) => {
+        console.error("Error during status verification:", error);
+        Swal.fire("Error", "Something went wrong. Try again.", "error");
       });
   };
 
@@ -53,58 +76,76 @@ const ManageEventReview = () => {
   };
 
   return (
-    <div className="p-6">
-      <h2 className="text-3xl font-bold mb-6">Manage Event Reviews</h2>
+    <div className="container mx-auto px-4">
+      <h2 className="text-3xl md:text-5xl font-semibold text-center my-8">
+        Manage Event Reviews
+      </h2>
 
-      <div className="overflow-x-auto">
-        <table className="table w-full">
-          <thead className="bg-base-200">
-            <tr>
-              <th>#</th>
-              <th>Event Name</th>
-              <th>Reviewer</th>
-              <th>Email</th>
-              <th>Status</th>
-              <th className="text-right">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {eventReviews.map((event, index) => (
-              <tr key={event._id}>
-                <td>{index + 1}</td>
-                <td>{event.eventName}</td>
-                <td>{event.customerName}</td>
-                <td>{event.customerEmail}</td>
-                <td>{event.status || "pending"}</td>
-                <td className="p-2 flex justify-end gap-2">
-                  {event?.status === "rejected" ? (
-                    <p className="py-1 px-3 bg-red-100 text-red-600 border border-red-300 w-fit rounded">
-                      Rejected
-                    </p>
-                  ) : event?.status === "verified" ? (
-                    <p className="py-1 px-3 bg-green-100 text-green-600 border border-green-300 w-fit rounded">
-                      Verified
-                    </p>
-                  ) : (
-                    <button
-                      className="btn btn-sm btn-outline btn-primary"
-                      onClick={() => handleVerifyClick(event)}
-                    >
-                      Verify
-                    </button>
-                  )}
-                  <button
-                    className="btn btn-sm btn-outline btn-error"
-                    onClick={() => handleDelete(event._id)}
-                    title="Delete"
-                  >
-                    🗑️
-                  </button>
-                </td>
+      <div className="bg-background rounded-lg shadow-md p-4">
+        <div className="overflow-x-auto">
+          <table className="table w-full">
+            <thead className="bg-gray-100">
+              <tr>
+                <th className="text-left py-4 px-4">#</th>
+                <th className="text-left py-4 px-4">Event Name</th>
+                <th className="text-left py-4 px-4">Reviewer</th>
+                <th className="text-left py-4 px-4">Email</th>
+                <th className="text-left py-4 px-4">Status</th>
+                <th className="text-right py-4 px-4">Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {eventReviews.length === 0 ? (
+                <tr>
+                  <td colSpan="6" className="text-center py-8 text-gray-500">
+                    No reviews available
+                  </td>
+                </tr>
+              ) : (
+                eventReviews.map((review, index) => (
+                  <tr key={review._id} className="hover:bg-gray-50">
+                    <td className="p-2">{index + 1}</td>
+                    <td className="p-2">{review.eventName}</td>
+                    <td className="p-2">{review.customerName}</td>
+                    <td className="p-2">{review.customerEmail}</td>
+                    <td className="p-2">
+                      {review.status === "verified" ? (
+                        <p className="py-1 px-3 bg-green-100 text-green-600 border border-green-300 w-fit rounded">
+                          Verified
+                        </p>
+                      ) : review.status === "rejected" ? (
+                        <p className="py-1 px-3 bg-red-100 text-red-600 border border-red-300 w-fit rounded">
+                          Rejected
+                        </p>
+                      ) : (
+                        <p className="py-1 px-3 bg-yellow-100 text-yellow-600 border border-yellow-300 w-fit rounded">
+                          Pending
+                        </p>
+                      )}
+                    </td>
+                    <td className="p-2 flex justify-end gap-2">
+                      {review?.status === "verified" ? null : (
+                        <button
+                          className="btn btn-sm btn-outline btn-primary"
+                          onClick={() => handleVerifyClick(review)}
+                        >
+                          Verify
+                        </button>
+                      )}
+                      <button
+                        className="btn btn-sm btn-outline btn-error"
+                        onClick={() => handleDelete(review._id)}
+                        title="Delete"
+                      >
+                        🗑️
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {/* Verify Modal */}
