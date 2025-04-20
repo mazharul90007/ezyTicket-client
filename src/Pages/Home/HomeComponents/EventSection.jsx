@@ -56,7 +56,7 @@ const EventSection = () => {
                     whileInView="show"
                     viewport={{ once: true, margin: "0px 0px -100px 0px" }}
                     variants={container}
-                    className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-16"
+                    className="grid grid-cols-1 lg:grid-cols-2 gap-2 md:gap-16"
                 >
                     {/* Left Column */}
                     <motion.div variants={item} className="space-y-8">
@@ -106,7 +106,7 @@ const EventSection = () => {
                         </div>
 
                         <div>
-                            <motion.div variants={container} className="grid grid-cols-2 gap-4 h-full">
+                            <motion.div variants={container} className="grid grid-cols-2 gap-2 h-full">
                                 <motion.div
                                     variants={imageItem}
                                     className="relative h-64 md:h-80 rounded-md overflow-hidden"
@@ -144,7 +144,7 @@ const EventSection = () => {
                     <div>
                         {/* Right Column - Image Grid */}
                         <div className="mb-6">
-                            <motion.div variants={container} className="grid grid-cols-2 gap-4 h-full">
+                            <motion.div variants={container} className="grid grid-cols-2 gap-2 h-full">
                                 <motion.div
                                     variants={imageItem}
                                     className="relative h-64 md:h-80 rounded-md overflow-hidden"

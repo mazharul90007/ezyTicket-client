@@ -7,6 +7,7 @@ import dance from "../../../assets/Home_image/dance.webp"
 import movie from "../../../assets/Home_image/movie.webp"
 import { motion } from "framer-motion";
 import Heading from "../../../components/Heading";
+import { Link } from "react-router-dom";
 
 const HomeCategory = ({ scrollToSection }) => {
 
@@ -34,7 +35,7 @@ const HomeCategory = ({ scrollToSection }) => {
     };
 
     return (
-        <div className="w-11/12 mx-auto mb-8 md:mb-16 lg:mb-20">
+        <div className="w-11/12 mx-auto mb-8 md:mb-16 lg:mb-20 pt-56 md:pt-30 lg:pt-30">
             <section className="text-center">
                 <Heading
                     subtitle={'EzyTicket'}
@@ -66,7 +67,9 @@ const HomeCategory = ({ scrollToSection }) => {
                             />
                         </figure>
                         <div className="mt-4">
-                            <button className="uppercase cursor-pointer  ">Learn More</button>
+                            <Link to={'/travel'}>
+                                <button className="uppercase cursor-pointer  ">Learn More</button>
+                            </Link>
                         </div>
                     </motion.div>
 
@@ -87,7 +90,9 @@ const HomeCategory = ({ scrollToSection }) => {
                             />
                         </figure>
                         <div className="mt-4">
-                            <button className="uppercase cursor-pointer">Learn More</button>
+                            <Link to={'/events'}>
+                                <button className="uppercase cursor-pointer">Learn More</button>
+                            </Link>
                         </div>
                     </motion.div>
 
@@ -108,7 +113,9 @@ const HomeCategory = ({ scrollToSection }) => {
                             />
                         </figure>
                         <div className="mt-4">
-                            <button className="uppercase cursor-pointer">Learn More</button>
+                            <Link to={'/entertainment'}>
+                                <button className="uppercase cursor-pointer">Learn More</button>
+                            </Link>
                         </div>
                     </motion.div>
                 </motion.div>
