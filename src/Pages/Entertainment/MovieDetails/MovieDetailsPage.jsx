@@ -11,6 +11,7 @@ import { MdCast, MdDirectionsBike, MdLocalMovies } from "react-icons/md";
 import TicketBooking from "./TicketBooking";
 import useEntertainmentData from "../../../Hooks/EntertainmentHook/useEntertainmentData";
 import Recommended from "./Recommended/Recommended";
+import { Selection } from "./Selection/Selection";
 
 const MovieDetailsPage = () => {
   // const [isavailable,seIsAvailablr]=useState('A4');
@@ -28,7 +29,7 @@ const MovieDetailsPage = () => {
       }`}
     >
       <div className="relative h-56 md:h-64 lg:h-96    ">
-        <img src={movie.imageLink} className="w-full h-full object-cover " />
+        <img src={movie?.imageLink} className="w-full h-full object-cover " />
         <div className={`absolute inset-0 bg-gradient-to-t ${
         darkMode ? " text-white from-neutral-950/95  via-black/80   to-black/50" : " text-black from-white  /95  via-white/80   to-white/50"
       } `}  />
@@ -149,6 +150,8 @@ const MovieDetailsPage = () => {
       <div className="mt-80 ">
         <h1 className="text-4xl font-extrabold text-center border-2 mx-15 rounded-2xl">Select Your Showtimes</h1>
       </div>
+
+      <Selection></Selection>
 
       <TicketBooking></TicketBooking>
       <Recommended></Recommended>
