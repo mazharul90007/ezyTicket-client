@@ -1,13 +1,16 @@
 import React from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import useAuth from "../../../../../Hooks/useAuth";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const ManageMovies = () => {
-  const { darkMode } = useAuth();
+  const { darkMode } = useAuth(); // Get dark mode from context
+  const axiosSecure = useAxiosSecure(); // Secure axios instance
+  const queryClient = useQueryClient(); // React Query for refetching
 
-  const axiosSecure = useAxiosSecure();
+  // Fetch all movies from the backend
   const fetchMovies = async () => {
     try {
       const res = await axiosSecure.get("/allmovies");
@@ -18,6 +21,7 @@ const ManageMovies = () => {
     }
   };
 
+  // Use React Query to manage movies state
   const {
     data: movies = [],
     isLoading,
@@ -27,7 +31,37 @@ const ManageMovies = () => {
     queryKey: ["movies"],
     queryFn: fetchMovies,
   });
-  console.log(movies);
+
+  // Delete movie handler
+  // ✅ SweetAlert Delete Handler
+  const handleDelete = async (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axiosSecure.delete(`/allmovies/${id}`);
+          queryClient.invalidateQueries(["movies"]);
+
+          Swal.fire("Deleted!", "The movie has been removed.", "success");
+        } catch (error) {
+          console.error("Delete failed:", error);
+          Swal.fire("Error", "Failed to delete movie. Try again.", "error");
+        }
+      }
+    });
+  };
+  // Edit movie handler (placeholder for modal or navigation)
+  const handleEdit = (movie) => {
+    console.log("Edit movie:", movie);
+    // Later you can open modal or navigate to edit form
+  };
 
   return (
     <div
@@ -37,6 +71,7 @@ const ManageMovies = () => {
     >
       <h2 className="text-3xl font-bold mb-6 text-center">🎬 Manage Movies</h2>
 
+      {/* Show loading, error or table */}
       {isLoading ? (
         <p className="text-center text-lg font-medium">Loading movies...</p>
       ) : isError ? (
@@ -78,15 +113,20 @@ const ManageMovies = () => {
                   <td className="px-4 py-3">{movie.releaseDate}</td>
                   <td className="px-4 py-3">{movie.cinemaHalls?.join(", ")}</td>
                   <td className="px-4 py-3 space-x-2">
+                    {/* Edit Button */}
                     <button
                       className="text-blue-500 hover:text-blue-700 transition"
                       title="Edit"
+                      onClick={() => handleEdit(movie)}
                     >
                       <FaEdit />
                     </button>
+
+                    {/* Delete Button */}
                     <button
                       className="text-red-500 hover:text-red-700 transition"
                       title="Delete"
+                      onClick={() => handleDelete(movie._id)}
                     >
                       <FaTrash />
                     </button>
