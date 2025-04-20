@@ -22,7 +22,7 @@ const Home = () => {
   };
 
   return (
-    <div className="pt-16 min-h-screen relative">
+    <div className="min-h-screen relative">
       <HomeBanner />
 
       {/* Reusable Home Category Component */}

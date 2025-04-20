@@ -66,7 +66,7 @@ const HomeTravelCard = () => {
                 <div className="p-1 bg-gradient-to-r from-green-700 to-green-400"></div>
 
                 <div className="p-6 md:p-8">
-                    <h3 className="text-2xl font-bold mb-6 text-main">
+                    <h3 className="text-2xl font-bold mb-6 text-main border-b pb-2">
                         Book Your Journey
                     </h3>
 
