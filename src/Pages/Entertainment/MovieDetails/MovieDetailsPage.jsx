@@ -35,9 +35,22 @@ const {data:movieInfo} = useQuery(
     }
   }
 )
-console.log(movieInfo);
-const hour = parseInt(movieInfo.runtime/60);
-const min= parseInt(movieInfo.runtime%60);
+const {data:castInfo} = useQuery(
+  {
+    queryKey: ["castInfo", id],
+    queryFn: async () => {
+      const res = await fetch(
+        `https://api.themoviedb.org/3/movie/${id}/credits?api_key=7c6a26f876561b33041c71bf76c78528`
+      );
+      return res.json();
+    }
+  }
+)
+const hour = parseInt(movieInfo?.runtime/60);
+const min= parseInt(movieInfo?.runtime%60);
+const actors = castInfo?.cast.map((actor) => actor.name).slice(0, 3).join(", ");
+const director = castInfo?.crew.find((crewMember) => crewMember.job === "Director")?.name || "Unknown Director";
+
 
 
 
@@ -49,7 +62,7 @@ const min= parseInt(movieInfo.runtime%60);
       }`}
     >
       <div className="relative h-56 md:h-64 lg:h-96    ">
-        <img src={movie?.imageLink || `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`} className="w-full h-full object-cover " />
+        <img src={movie?.imageLink || `https://image.tmdb.org/t/p/w500${movie?.backdrop_path}`} className="w-full h-full object-cover " />
         <div className={`absolute inset-0 bg-gradient-to-t ${
         darkMode ? " text-white from-neutral-950/95  via-black/80   to-black/50" : " text-black from-white  /95  via-white/80   to-white/50"
       } `}  />
@@ -68,7 +81,7 @@ const min= parseInt(movieInfo.runtime%60);
                     className=" "
                   >
                     <img
-                      src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                      src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
                       alt={movie?.title}
                       className=" shadow-lg h-72"
                     />
@@ -99,22 +112,19 @@ const min= parseInt(movieInfo.runtime%60);
 
                     {/* Benefits List */}
                     <ul className="mt-4   space-y-2">
+                      
                       <li className="flex items-center gap-2">
-                        <MdLocalMovies />
-                        Genre : {movie?.genre}
+                        <MdDirectionsBike></MdDirectionsBike>Director : {director}
+                      </li>
+                     
+                      <li className="flex items-center gap-2">
+                        <MdCast></MdCast> Casts : {actors}
                       </li>
                       <li className="flex items-center gap-2">
-                        <MdDirectionsBike></MdDirectionsBike>Director :{" "}
-                        {movie?.director}
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <IoStar /> Rating : {movie?.vote_average || "8.2/10"}
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <MdCast></MdCast> Casts : {movie?.actors}
+                        <IoStar /> Rating : {movie?.vote_average.toFixed(1) || "--"}/10
                       </li>
                     </ul>
-                    <div className="flex mt-10">
+                    {/* <div className="flex mt-10">
                     <h1 className="my-auto mr-4">Showing On:</h1>
                     <div className="overflow-x-auto flex flex-col gap-2 md:flex-row">
                       {movie?.cinemaHalls?.map((cinemaHall, index) => (
@@ -126,7 +136,7 @@ const min= parseInt(movieInfo.runtime%60);
                         </div>
                       ))}
                     </div>
-                  </div>
+                  </div> */}
                   </div>
                 
                 </div>
