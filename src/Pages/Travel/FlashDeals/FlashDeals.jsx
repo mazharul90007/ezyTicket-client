@@ -62,8 +62,8 @@ const FlashDeals = () => {
     <>
       <div>
         <Heading
-          title={"Flash Deals"}
-          subtitle={"Limited-Time Bus Ticket Discounts - Grab Exclusive Flash Deals for Affordable and Convenient Travel Before They're Gone!"}
+          title={"Catch the Best Deals Before Departure"}
+          subtitle={"Flash Deals"}
         />
       </div>
       {/* <div className="flex flex-col md:flex-row justify-between mt-15 gap-10">
