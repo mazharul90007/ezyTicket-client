@@ -5,6 +5,7 @@ import useTravelContext from "../../../Hooks/TrevalHook/useTravelContext";
 import useAuth from "../../../Hooks/useAuth";
 import { motion } from 'framer-motion';
 import { FaExchangeAlt, FaCalendarAlt, FaSearch } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 
 const SelectPlaceTime = () => {
@@ -36,17 +37,23 @@ const SelectPlaceTime = () => {
             toast.error("Departure and arrival locations cannot be the same");
             return;
         }
-        setSearchData(placeTimeData)
-        axiosSecure.get("/api/stand", {
-            params: placeTimeData,
-        })
-            .then(data => {
-                setFilterBus(data.data)
-                if (location.pathname === "/travel") {
-                    navigate("/travel/bus-ticket-book")
-                }
+
+        try {
+            setSearchData(placeTimeData)
+            axiosSecure.get("/api/stand", {
+                params: placeTimeData,
             })
-            .catch(err => console.log(err))
+                .then(data => {
+                    setFilterBus(data.data)
+                    if (location.pathname === "/travel") {
+                        navigate("/travel/bus-ticket-book")
+                    }
+                })
+                .catch(err => console.log(err))
+        } catch (err) {
+            console.error("Search error:", err);
+            alert('Failed to search. Please try again.');
+        }
     }
 
     const handleSwapLocations = () => {
@@ -64,7 +71,7 @@ const SelectPlaceTime = () => {
             transition={{ duration: 0.5 }}
             className=""
         >
-            <section className={`rounded-xl shadow-xl overflow-hidden ${darkMode ? "bg-gray-800" : "bg-white"}`}>
+            <section className={`rounded-xl shadow-xl overflow-hidden ${darkMode ? "bg-[#1d1d1d]" : "bg-white"}`}>
                 <div className="p-1 bg-gradient-to-r from-green-700 to-green-400"></div>
 
                 <div className="p-6 md:p-8">
@@ -75,14 +82,14 @@ const SelectPlaceTime = () => {
                     <form onSubmit={handleSearchData} className="grid grid-cols-12 gap-4 items-end">
                         {/* From Location */}
                         <div className="col-span-12 md:col-span-3">
-                            <label className={`block mb-2 text-sm font-medium ${darkMode ? "text-gray-300" : "text-gray-700"}`}>
+                            <label className={`block mb-2 text-sm font-medium ${darkMode ? "text-gray-300" : "text-dark-surface"}`}>
                                 From
                             </label>
                             <select
                                 name="fromDistrict"
                                 defaultValue={searchData?.stand1 || ""}
                                 className={`w-full p-3 rounded-lg border ${darkMode ?
-                                    "bg-gray-700 border-gray-600 text-white" :
+                                    "bg-dark-surface border-gray-600 text-white" :
                                     "bg-gray-50 border-gray-300 text-gray-900"}`}
                                 required
                             >
@@ -105,21 +112,21 @@ const SelectPlaceTime = () => {
                                     animate={{ rotate: isSwapped ? 180 : 0 }}
                                     transition={{ duration: 0.3 }}
                                 >
-                                    <FaExchangeAlt className="text-gray-700 dark:text-gray-300" />
+                                    <FaExchangeAlt className="text-dark-surface dark:text-gray-300" />
                                 </motion.div>
                             </button>
                         </div>
 
                         {/* To Location */}
                         <div className="col-span-12 md:col-span-3">
-                            <label className={`block mb-2 text-sm font-medium ${darkMode ? "text-gray-300" : "text-gray-700"}`}>
+                            <label className={`block mb-2 text-sm font-medium ${darkMode ? "text-gray-300" : "text-dark-surface"}`}>
                                 To
                             </label>
                             <select
                                 name="toDistrict"
                                 defaultValue={searchData?.stand2 || ""}
                                 className={`w-full p-3 rounded-lg border ${darkMode ?
-                                    "bg-gray-700 border-gray-600 text-white" :
+                                    "bg-dark-surface border-gray-600 text-white" :
                                     "bg-gray-50 border-gray-300 text-gray-900"}`}
                                 required
                             >
@@ -132,7 +139,7 @@ const SelectPlaceTime = () => {
 
                         {/* Date */}
                         <div className="col-span-12 md:col-span-3">
-                            <label className={`block mb-2 text-sm font-medium ${darkMode ? "text-gray-300" : "text-gray-700"}`}>
+                            <label className={`block mb-2 text-sm font-medium ${darkMode ? "text-gray-300" : "text-dark-surface"}`}>
                                 Date
                             </label>
                             <div className="relative">
@@ -145,7 +152,7 @@ const SelectPlaceTime = () => {
                                     defaultValue={searchData?.date || ""}
                                     min={new Date().toISOString().split("T")[0]}
                                     className={`w-full p-3 pl-10 rounded-lg border ${darkMode ?
-                                        "bg-gray-700 border-gray-600 text-white" :
+                                        "bg-dark-surface border-gray-600 text-white" :
                                         "bg-gray-50 border-gray-300 text-gray-900"}`}
                                     required
                                 />
