@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 import Heading from "../../../components/Heading";
 import { Link } from "react-router-dom";
 
-const HomeCategory = ({ scrollToSection }) => {
+const HomeCategory = () => {
 
     const container = {
         hidden: { opacity: 0 },
@@ -35,7 +35,7 @@ const HomeCategory = ({ scrollToSection }) => {
     };
 
     return (
-        <div className="w-11/12 mx-auto mb-8 md:mb-16 lg:mb-20 pt-56 md:pt-30 lg:pt-30">
+        <div className="w-11/12 mx-auto mb-8 md:mb-16 lg:mb-20 pt-72 md:pt-30 lg:pt-30">
             <section className="text-center">
                 <Heading
                     subtitle={'EzyTicket'}
@@ -44,7 +44,7 @@ const HomeCategory = ({ scrollToSection }) => {
                 >
                 </Heading>
                 <motion.div
-                    className="grid md:grid-cols-3 gap-8"
+                    className="grid grid-cols-1 md:grid-cols-3 gap-2 lg:gap-8"
                     variants={container}
                     initial="hidden"
                     whileInView="show"
@@ -59,7 +59,7 @@ const HomeCategory = ({ scrollToSection }) => {
                             <h3 className="uppercase text-3xl mb-2">Plan Your Travel</h3>
                             <p className="">Book bus tickets quickly and easily.</p>
                         </div>
-                        <figure className="overflow-hidden h-[400px] rounded-t-[150px] my-8">
+                        <figure className="overflow-hidden h-[300px] md:h-[220px] lg:h-[400px] rounded-t-[150px] my-8">
                             <img
                                 src={bus}
                                 alt="Travel"
@@ -82,7 +82,7 @@ const HomeCategory = ({ scrollToSection }) => {
                             <h3 className="uppercase text-3xl mb-2">Explore Events</h3>
                             <p className="">Browse and book tickets for exciting events.</p>
                         </div>
-                        <figure className="overflow-hidden h-[400px] rounded-tl-[150px] rounded-br-[150px] my-8">
+                        <figure className="overflow-hidden h-[300px] md:h-[220px] lg:h-[400px] rounded-tl-[120px] lg:rounded-tl-[150px] rounded-br-[120px] lg:rounded-br-[150px] my-8">
                             <img
                                 src={dance}
                                 alt="Event"
@@ -105,7 +105,7 @@ const HomeCategory = ({ scrollToSection }) => {
                             <h3 className="uppercase text-3xl mb-2">Enjoy Movies</h3>
                             <p className="">Get your movie tickets in a minute.</p>
                         </div>
-                        <figure className="overflow-hidden h-[400px] rounded-[150px] my-8">
+                        <figure className="overflow-hidden h-[300px] md:h-[220px] lg:h-[400px] rounded-[80px] lg:rounded-[150px] my-8">
                             <img
                                 src={movie}
                                 alt="Movies"

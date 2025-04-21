@@ -23,7 +23,7 @@ import PrivateRoute from "./PrivateRoute";
 import ManageEvents from "../Pages/Dashboard/Admin/ManageEvents/ManageEvents";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import Profile from "../Pages/Dashboard/Profile/Profile";
-import ManageEventReview from "../Pages/Dashboard/Events/ManageEventReviews/ManageEventReview";
+
 import PaymentSuccess from "../Pages/PaymentSuccess/PaymentSuccess";
 import PaymentFail from "../Pages/PaymentFail/PaymentFail";
 import AddCineplex from "../Pages/Dashboard/Entertainment/AddCineplex/AddCineplex";
@@ -43,6 +43,8 @@ import ManageMovies from "../Pages/Dashboard/Entertainment/MovieManager/ManageMo
 import TicketManager from "../Pages/Dashboard/Entertainment/TicketManager/TicketManager";
 import ManageHalls from "../Pages/Dashboard/Entertainment/ManageHalls/ManageHalls";
 import UpdateMovieData from "../Pages/Dashboard/Entertainment/UpdateMovieData/UpdateMovieData";
+import ManageEventReview from "../Pages/Dashboard/Events/ManageEventReviews/ManageEventReview";
+
 
 const Route = createBrowserRouter([
   {

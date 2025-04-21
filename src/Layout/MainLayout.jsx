@@ -7,7 +7,7 @@ import useAuth from "../Hooks/useAuth";
 const MainLayout = () => {
     const { darkMode } = useAuth();
     return (
-        <div className="font-roboto flex flex-col min-h-screen">
+        <div className="relative font-roboto flex flex-col min-h-screen">
             <div className="fixed top-0 left-0 right-0 z-50">
                 <Navbar />
             </div>
