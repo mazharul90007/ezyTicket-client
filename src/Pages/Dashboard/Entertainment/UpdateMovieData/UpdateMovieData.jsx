@@ -66,9 +66,9 @@ const UpdateMovieData = () => {
     e.preventDefault();
     try {
       // Send updated data to the backend
-      await axiosSecure.put(`/allmovies/${id}`, formData);
+      await axiosSecure.patch(`/allmovies/${id}`, formData);
       Swal.fire("Updated!", "The movie details have been updated.", "success");
-      navigate("/manage-movies"); // Navigate back after successful update
+      navigate("/dashboard/managemovie"); // Navigate back after successful update
     } catch (error) {
       Swal.fire("Error", "Failed to update movie. Please try again.", "error");
       console.log(error);
