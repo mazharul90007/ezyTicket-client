@@ -12,6 +12,7 @@ import TicketBooking from "./TicketBooking";
 import useEntertainmentData from "../../../Hooks/EntertainmentHook/useEntertainmentData";
 import Recommended from "./Recommended/Recommended";
 import { Selection } from "./Selection/Selection";
+import { useQuery } from "@tanstack/react-query";
 
 const MovieDetailsPage = () => {
   // const [isavailable,seIsAvailablr]=useState('A4');
@@ -19,9 +20,41 @@ const MovieDetailsPage = () => {
   const { id } = useParams();
 
   const { movies } = useEntertainmentData();
+console.log(movies);
+  const movie = movies.filter((movie) => movie.id == id)[0];
+console.log(movie);
 
-  const movie = movies.filter((movie) => movie._id == id)[0];
+const {data:movieInfo} = useQuery(
+  {
+    queryKey: ["movieDetails", id],
+    queryFn: async () => {
+      const res = await fetch(
+        `https://api.themoviedb.org/3/movie/${id}?api_key=7c6a26f876561b33041c71bf76c78528`
+      );
+      return res.json();
+    }
+  }
+)
+const {data:castInfo} = useQuery(
+  {
+    queryKey: ["castInfo", id],
+    queryFn: async () => {
+      const res = await fetch(
+        `https://api.themoviedb.org/3/movie/${id}/credits?api_key=7c6a26f876561b33041c71bf76c78528`
+      );
+      return res.json();
+    }
+  }
+)
+const hour = parseInt(movieInfo?.runtime/60);
+const min= parseInt(movieInfo?.runtime%60);
+const actors = castInfo?.cast.map((actor) => actor.name).slice(0, 3).join(", ");
+const director = castInfo?.crew.find((crewMember) => crewMember.job === "Director")?.name || "Unknown Director";
 
+
+
+
+// https://api.themoviedb.org/3/movie/1197306?api_key=7c6a26f876561b33041c71bf76c78528
   return (
     <div
       className={`pt-16 bg-gradient-to-br ${
@@ -29,7 +62,7 @@ const MovieDetailsPage = () => {
       }`}
     >
       <div className="relative h-56 md:h-64 lg:h-96    ">
-        <img src={movie?.imageLink} className="w-full h-full object-cover " />
+        <img src={movie?.imageLink || `https://image.tmdb.org/t/p/w500${movie?.backdrop_path}`} className="w-full h-full object-cover " />
         <div className={`absolute inset-0 bg-gradient-to-t ${
         darkMode ? " text-white from-neutral-950/95  via-black/80   to-black/50" : " text-black from-white  /95  via-white/80   to-white/50"
       } `}  />
@@ -48,7 +81,7 @@ const MovieDetailsPage = () => {
                     className=" "
                   >
                     <img
-                      src={movie?.imageLink}
+                      src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
                       alt={movie?.title}
                       className=" shadow-lg h-72"
                     />
@@ -69,35 +102,32 @@ const MovieDetailsPage = () => {
                 <div className="w-2/4 mx-5">
                   <div className="mt-12 text-base pl-8 ">
                     <h2 className=" gap-5 text-3xl md:text-5xl  font-bold ">
-                      {movie?.name}
+                      {movie?.title}
                     </h2>
 
                     <p className="mt-4   ">
-                      {movie?.description ||
+                      {movie?.overview ||
                         "The amazing viewer experience got in the theatre. This is the movie of all time. Book now to experience the best of the best."}
                     </p>
 
                     {/* Benefits List */}
                     <ul className="mt-4   space-y-2">
+                      
                       <li className="flex items-center gap-2">
-                        <MdLocalMovies />
-                        Genre : {movie?.genre}
+                        <MdDirectionsBike></MdDirectionsBike>Director : {director}
+                      </li>
+                     
+                      <li className="flex items-center gap-2">
+                        <MdCast></MdCast> Casts : {actors}
                       </li>
                       <li className="flex items-center gap-2">
-                        <MdDirectionsBike></MdDirectionsBike>Director :{" "}
-                        {movie?.director}
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <IoStar /> Rating : {movie?.rating || "8.2/10"}
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <MdCast></MdCast> Casts : {movie?.actors}
+                        <IoStar /> Rating : {movie?.vote_average.toFixed(1) || "--"}/10
                       </li>
                     </ul>
-                    <div className="flex mt-10">
+                    {/* <div className="flex mt-10">
                     <h1 className="my-auto mr-4">Showing On:</h1>
                     <div className="overflow-x-auto flex flex-col gap-2 md:flex-row">
-                      {movie?.cinemaHalls.map((cinemaHall, index) => (
+                      {movie?.cinemaHalls?.map((cinemaHall, index) => (
                         <div
                           className="border-2 border-purple-800 hover:bg-purple-800 transition-all duration-300 rounded-lg  md:rounded-4xl py-2 px-3 mr-3"
                           key={index}
@@ -106,7 +136,7 @@ const MovieDetailsPage = () => {
                         </div>
                       ))}
                     </div>
-                  </div>
+                  </div> */}
                   </div>
                 
                 </div>
@@ -122,13 +152,14 @@ const MovieDetailsPage = () => {
                     <div className="flex flex-col text-base gap-4 ">
                       <div>
                         <p>RUN TIME</p>
-                        <p>{movie?.duration}</p>
+                        <p>{hour}h {min}m</p>
                       </div>
                       <div>
                         <p>RELEASE DATE</p>
-                        <p>{movie?.releaseDate}</p>
+                        <p>{movie?.release_date
+                        }</p>
                       </div>
-                      <div className="">{movie?.genre}</div>
+                      <div className="flex gap-3">{movieInfo?.genres.map(g=> <div className="border-2 px-2 ">{g.name}</div> ) }</div>
 
                       <div className="flex items-center justify-center md:justify-start gap-4">
                         {/* <Link to="https://www.youtube.com/watch?v=u9Mv98Gr5pY&ab_channel=SonyPicturesEntertainment">

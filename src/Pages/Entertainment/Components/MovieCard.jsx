@@ -13,11 +13,11 @@ const MovieCard = ({ movie }) => {
         darkMode ? " " : " text-black"
       } rounded-t-xl transition hover:-translate-y-1 duration-300`}
     >
-      <Link to={`/entertainment/allmovies/${movie._id}`}>
+      <Link to={`/entertainment/allmovies/${ movie.id}`} >
       {/* Background Image with Overlay */}
       <div className="relative h-80 w-56 overflow-hidden rounded-t-xl">
         <img
-          src={movie.imageLink || "/moviedefault.jpg"}
+          src={movie.imageLink || `https://image.tmdb.org/t/p/w500${movie.poster_path}`|| "/moviedefault.jpg"}
           alt={movie.name}
           className="h-full w-full object-cover rounded-lg  shadow-lg transition duration-300 group-hover:brightness-50"
         />
@@ -34,7 +34,7 @@ const MovieCard = ({ movie }) => {
 
       {/* Book Now Button Always Visible */}
       <div className="p-4 bg-transparent">
-      <h3 className="text-xl font-semibold mb-1">{movie.name}</h3>
+      <h3 className="text-xl font-semibold mb-1">{movie.name || movie.title}</h3>
       <p className="text-sm mb-2">{movie.genre}</p>
          
      
