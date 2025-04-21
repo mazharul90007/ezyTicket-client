@@ -4,8 +4,10 @@ import "react-day-picker/dist/style.css";
 
 export function Selection() {
   const [selected, setSelected] = useState(new Date());
-  const [days, setDays] = useState([]);
+  const [days, setDays] = useState(["Today", "Tomorrow"]);
   const [calerndar, setCalendar] = useState(false);
+  const [dayName, setDayName] = useState("Today");
+  console.log(dayName);
 
   useEffect(() => {
     getNextNDays(7);
@@ -22,9 +24,9 @@ export function Selection() {
       "Saturday",
     ];
     const today = new Date();
-    const nextDays = [];
+    const nextDays = ["Today", "Tomorrow"];
 
-    for (let i = 0; i < n; i++) {
+    for (let i = 2; i < n; i++) {
       const nextDate = new Date();
       nextDate.setDate(today.getDate() + i);
 
@@ -48,30 +50,36 @@ export function Selection() {
       <div>
         {days.length > 0 && (
           <div className="mt-4 flex gap-3">
-
             <div className="flex gap-2 flex-wrap ">
               {days.map((day, index) => (
-                <span
+                <div
+                  onClick={() => setDayName(day)}
                   key={index}
-                  className="px-3 py-1 bg-blue-100 text-green-800 hover:bg-green-700 transition-all duration-600 cursor-pointer hover:text-white rounded-full text-sm"
+                  className={`px-3 py-1 text-sm rounded-full cursor-pointer transition-all duration-300 ${
+                    dayName === day
+                      ? "bg-green-700 text-white"
+                      : "bg-blue-100 text-green-800 hover:bg-green-700 hover:text-white"
+                  }`}
                 >
                   {day}
-                </span>
+                </div>
               ))}
             </div>
             <button
-            onClick={() => setCalendar(!calerndar)}
-            className="px-3 cursor-pointer transition-all duration-600 hover:bg-green-700 bg-main text-white rounded-full text-sm">
-            Choose Date
+              onClick={() => setCalendar(!calerndar)}
+              className="px-3 cursor-pointer transition-all duration-600 hover:bg-green-700 bg-main text-white rounded-full text-sm"
+            >
+              Choose Date
             </button>
-            
           </div>
         )}
       </div>
 
-    
-
-      <div className={`rounded-lg border absolute right-15 z-20 backdrop-blur-3xl  border-gray-200 p-2 ${calerndar?"transition-all duration-500 ":"hidden "} `}>
+      <div
+        className={`rounded-lg border absolute right-15 z-20 backdrop-blur-3xl  border-gray-200 p-2 ${
+          calerndar ? "transition-all duration-500 " : "hidden "
+        } `}
+      >
         <DayPicker
           mode="single"
           selected={selected}
@@ -91,7 +99,6 @@ export function Selection() {
           }}
         />
       </div>
-
     </div>
   );
 }

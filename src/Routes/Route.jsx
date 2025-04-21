@@ -23,7 +23,7 @@ import PrivateRoute from "./PrivateRoute";
 import ManageEvents from "../Pages/Dashboard/Admin/ManageEvents/ManageEvents";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import Profile from "../Pages/Dashboard/Profile/Profile";
-import ManageEventReview from "../Pages/Dashboard/Events/ManageEventReviews/ManageEventReview";
+
 import PaymentSuccess from "../Pages/PaymentSuccess/PaymentSuccess";
 import PaymentFail from "../Pages/PaymentFail/PaymentFail";
 import AddCineplex from "../Pages/Dashboard/Entertainment/AddCineplex/AddCineplex";
@@ -41,6 +41,7 @@ import SoldTickets from "../Pages/Dashboard/Travel/SoldTickets/SoldTickets";
 import Payment from "../components/Payment/Payment";
 import ManageMovies from "../Pages/Dashboard/Entertainment/MovieManager/ManageMovies/ManageMovies";
 import TicketManager from "../Pages/Dashboard/Entertainment/TicketManager/TicketManager";
+import ManageEventReview from "../Pages/Dashboard/Events/ManageEventReviews/ManageEventReview";
 import ManageHalls from "../Pages/Dashboard/Entertainment/ManageHalls/ManageHalls";
 import UpdateMovieData from "../Pages/Dashboard/Entertainment/UpdateMovieData/UpdateMovieData";
 

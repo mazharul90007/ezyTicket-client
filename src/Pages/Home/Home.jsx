@@ -6,6 +6,7 @@ import EntertainmentSection from "./HomeComponents/EntertainmentSection";
 import Testimonials from "./HomeComponents/Testimonials";
 import AboutUs from "./HomeComponents/AboutUs";
 import EventSectionBanner from "./HomeComponents/EventSectionBanner";
+import EntertainmentSectionBanner from "./HomeComponents/EntertainmentSectionBanner";
 
 const Home = () => {
 
@@ -21,7 +22,7 @@ const Home = () => {
   };
 
   return (
-    <div className="pt-16 min-h-screen relative">
+    <div className="min-h-screen relative">
       <HomeBanner />
 
       {/* Reusable Home Category Component */}
@@ -29,8 +30,9 @@ const Home = () => {
 
       {/* Other Sections */}
       <TravelSection />
-      <EventSectionBanner></EventSectionBanner>
+      <EventSectionBanner />
       <EventSection />
+      <EntertainmentSectionBanner />
       <EntertainmentSection />
       {/* <AboutUs></AboutUs> */}
       <Testimonials />

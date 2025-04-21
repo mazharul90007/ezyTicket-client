@@ -18,10 +18,10 @@ const EventSectionBanner = () => {
         backgroundRepeat: 'no-repeat',
         backgroundAttachment: 'fixed'
       }}
-      className="relative h-[70vh] md:h-[80vh] w-full flex items-end pb-8 md:pb-16 mb-8 md:mb-16 lg:mb-20" // Changed to items-end for bottom alignment
+      className="relative h-[70vh] md:h-[80vh] w-full flex items-end pb-8 md:pb-16 mb-8 md:mb-16 lg:mb-20"
     >
       {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/50"></div>
+      <div className="absolute inset-0  bg-gradient-to-t from-black/80 via-black/50 to-black/10"></div>
       
       {/* Content Container */}
       <motion.div 
