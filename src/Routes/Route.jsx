@@ -44,6 +44,7 @@ import TicketManager from "../Pages/Dashboard/Entertainment/TicketManager/Ticket
 import ManageHalls from "../Pages/Dashboard/Entertainment/ManageHalls/ManageHalls";
 import UpdateMovieData from "../Pages/Dashboard/Entertainment/UpdateMovieData/UpdateMovieData";
 import ManageEventReview from "../Pages/Dashboard/Events/ManageEventReviews/ManageEventReview";
+import ManageEntertainment from "../Pages/Dashboard/Admin/ManageEntertainments/ManageEntertainment";
 
 
 const Route = createBrowserRouter([
@@ -173,6 +174,10 @@ const Route = createBrowserRouter([
       {
         path: "manageEvents",
         element: <ManageEvents></ManageEvents>,
+      },
+      {
+        path: 'manageEntertainments',
+        element: <ManageEntertainment></ManageEntertainment>
       },
       {
         path: "myAddedEvents",
