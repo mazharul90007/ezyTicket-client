@@ -44,6 +44,7 @@ import TicketManager from "../Pages/Dashboard/Entertainment/TicketManager/Ticket
 import ManageEventReview from "../Pages/Dashboard/Events/ManageEventReviews/ManageEventReview";
 import ManageHalls from "../Pages/Dashboard/Entertainment/ManageHalls/ManageHalls";
 import UpdateMovieData from "../Pages/Dashboard/Entertainment/UpdateMovieData/UpdateMovieData";
+import UpdateHallDetails from "../Pages/Dashboard/Entertainment/UpdateHallDetails/UpdateHallDetails";
 
 const Route = createBrowserRouter([
   {
@@ -209,6 +210,11 @@ const Route = createBrowserRouter([
         path: "update-movie/:id",
         element: <UpdateMovieData></UpdateMovieData>,
       },
+      {
+        path: "updateHallDetails/:id",
+        element: <UpdateHallDetails></UpdateHallDetails>,
+      },
+
       //add bus service page, review manage, added by susanto
       {
         path: "add-bus-service",

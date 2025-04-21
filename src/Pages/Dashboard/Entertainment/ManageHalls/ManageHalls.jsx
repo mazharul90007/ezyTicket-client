@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import useAuth from "../../../../Hooks/useAuth";
+import { Link } from "react-router-dom";
 
 const ManageHalls = () => {
   const { darkMode } = useAuth();
@@ -97,12 +98,14 @@ const ManageHalls = () => {
                   <td className="px-4 py-3">{hall.totalSeats}</td>
                   <td className="px-4 py-3">{hall.email}</td>
                   <td className="px-4 py-3 space-x-2">
-                    <button
-                      className="text-blue-500 hover:text-blue-700 transition"
-                      title="Edit"
-                    >
-                      <FaEdit />
-                    </button>
+                    <Link to={`/dashboard/updateHallDetails/${hall?._id}`}>
+                      <button
+                        className="text-blue-500 hover:text-blue-700 transition"
+                        title="Edit"
+                      >
+                        <FaEdit />
+                      </button>
+                    </Link>
                     <button
                       className="text-red-500 hover:text-red-700 transition"
                       title="Delete"
