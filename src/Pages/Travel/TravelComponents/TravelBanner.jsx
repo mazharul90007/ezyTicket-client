@@ -18,7 +18,7 @@ const TravelBanner = () => {
 
     return (
         <>
-            <div className="relative mb-40 h-[700px] md:h-[700px] lg:h-[500px] xl:h-[500px]">
+            <div className="relative mb-40 h-[730px] md:h-[520px] xl:h-[520px]">
                 <div
                     className="hero md:min-h-[600px] min-h-screen "
                     style={{
@@ -36,8 +36,8 @@ const TravelBanner = () => {
                 {/* cards */}
 
                 <div className="flex justify-center items-center">
-                    <div className=" absolute z-20 top-[520px]  ">
-                        <div className="text-black shadow-2xl">
+                    <div className=" absolute z-20 top-[380px] md:top-[450px]  ">
+                        <div className="text-black shadow-2xl px-5">
                             <SelectPlaceTime />
                         </div>
                     </div>

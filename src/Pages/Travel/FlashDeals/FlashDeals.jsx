@@ -74,7 +74,7 @@ const FlashDeals = () => {
             </div> */}
       <div className="py-10">
         <Swiper
-          slidesPerView={3}
+          // slidesPerView={1}
           spaceBetween={30}
           pagination={{
             clickable: true,
