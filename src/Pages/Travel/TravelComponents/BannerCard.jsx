@@ -5,7 +5,7 @@ const BannerCard = () => {
     const [travelCards] = useCardData()
     const { darkMode } = useAuth()
     return (
-        <section className="pt-20">
+        <section className="pt-14">
             <div className="text-center flex justify-center items-center text-2xl md:text-3xl lg:text-5xl mb-10 flex-col">
                 {/* <p className="text-sm font-semibold  uppercase">Quick & Easy Ticket Booking</p> */}
                 <h1 className={`text-2xl font-bold md:text-3xl lg:text-5xl ${darkMode ? "text-white" : "text-black"}`}>Just 4 Simple Steps to Reserve Your Seat</h1>
@@ -22,7 +22,7 @@ const BannerCard = () => {
                             className={`${darkMode ? "bg-[#1d1d1d] text-white" : "bg-white text-[#111111]"} shadow-2xl rounded p-5 flex flex-col justify-between text-center py-10`}>
                             <div>
                                 <div className="text-center text-4xl mb-5 text-white  flex justify-center items-center ">
-                                    <span className="p-5 bg-supporting rounded-2xl">
+                                    <span className="p-5 bg-main rounded-2xl">
 
                                         {card?.icon}
                                     </span>

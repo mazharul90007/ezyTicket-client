@@ -53,7 +53,7 @@ const WhyChooseUsTravel = () => {
                 <div className="space-y-6">
                     {featuresLeft.map((feature, idx) => (
                         <div key={idx} className="flex items-center gap-4">
-                            <div className="bg-supporting text-white rounded-lg p-4">
+                            <div className="bg-main text-white rounded-lg p-4">
                                 {feature.icon}
                             </div>
                             <div>
@@ -77,7 +77,7 @@ const WhyChooseUsTravel = () => {
                 <div className="space-y-6">
                     {featuresRight.map((feature, idx) => (
                         <div key={idx} className="flex items-center gap-4">
-                            <div className="bg-supporting text-white rounded-lg p-4">
+                            <div className="bg-main text-white rounded-lg p-4">
                                 {feature.icon}
                             </div>
                             <div>
