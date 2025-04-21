@@ -66,14 +66,14 @@ const director = castInfo?.crew.find((crewMember) => crewMember.job === "Directo
         <div className={`absolute inset-0 bg-gradient-to-t ${
         darkMode ? " text-white from-neutral-950/95  via-black/80   to-black/50" : " text-black from-white  /95  via-white/80   to-white/50"
       } `}  />
-        <div className="absolute top-44 ">
+        <div className="absolute -top-10 lg:top-44 ">
           <section>
             <div className="relative bg-cover  ">
               {/* <div className="absolute inset-0 bg-gradient-to-l from-neutral-800  md:neutral-800   to-black/95 "  /> */}
 
               <div className="relative container w-full  mx-auto py-16  px-6 flex flex-col md:flex-row items-center justify-center z-10">
                 {/* Left Side - Image */}
-                <div className="w-1/4 flex justify-end">
+                <div className="w-1/4 flex justify-end ">
                   <motion.div
                     initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -83,7 +83,7 @@ const director = castInfo?.crew.find((crewMember) => crewMember.job === "Directo
                     <img
                       src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
                       alt={movie?.title}
-                      className=" shadow-lg h-72"
+                      className=" shadow-lg md:h-72  md:flex"
                     />
                     <button
                       onClick={() =>
@@ -99,7 +99,7 @@ const director = castInfo?.crew.find((crewMember) => crewMember.job === "Directo
                 </div>
 
                 {/* Middle Side - Content */}
-                <div className="w-2/4 mx-5">
+                <div className="md:w-2/4 mx-5 ">
                   <div className="mt-12 text-base pl-8 ">
                     <h2 className=" gap-5 text-3xl md:text-5xl  font-bold ">
                       {movie?.title}
@@ -178,7 +178,7 @@ const director = castInfo?.crew.find((crewMember) => crewMember.job === "Directo
       </div>
       {/* <img src={movie.poster} alt="" /> */}
 
-      <div className="mt-80 ">
+      <div className="mt-80 pt-80">
         <h1 className="text-5xl font-extrabold text-center  mx-15 rounded-2xl"> Your Showtimes</h1>
       </div>
 
