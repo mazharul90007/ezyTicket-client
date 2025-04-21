@@ -15,13 +15,13 @@ const Travel = () => {
     >
       <TravelBanner />
 
-      <section className='container mx-auto px-4 pt-10 mb-20'>
+      <section className='container mx-auto px-4 pt-10 mb-14'>
         <FlashDeals/>
       </section>
-     
+{/*      
       <div className='px-4 mb-20'>
         <TravelService />
-      </div>
+      </div> */}
       
       <AddTravelService />
 
@@ -33,8 +33,8 @@ const Travel = () => {
         <TravelFAQ/>
         <WhyChooseUsTravel/>
       </section>
-
-      <TravelTestimonials/>
+{/* 
+      <TravelTestimonials/> */}
 
     </section>
   )

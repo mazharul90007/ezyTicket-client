@@ -8,7 +8,7 @@ import Heading from "../../../components/Heading";
 const AddTravelService = () => {
     return (
         <section >
-            <div className="mt-20 mb-14">
+            <div className=" mb-14">
                 <Heading
                 title="Expand Your Bus Service and Boost Bookings with Our Platform"
                 subtitle="You must list your bus service on our platform to reach thousands of passengers, effortlessly manage schedules, and boost revenue. Enjoy secure payments, easy ticket management, and 24/7 customer support to grow your business seamlessly"
