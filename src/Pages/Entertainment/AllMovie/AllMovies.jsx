@@ -108,10 +108,10 @@ console.log(showingHanll);
         </div>
       </div>
 
-      <div className="flex flex-col-reverse md:justify-between">
+      <div className="flex flex-col-reverse md:flex-row-reverse md:justify-between">
        
 
-        <div className="grid xs:grid-cols-1 sm:grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-4 md:gap-10 overflow-x-auto no-scrollbar md:overflow-visible ">
+        <div className="grid grid-cols-2 sm:grid-cols-3  md:grid-cols-3 lg:grid-cols-4 md:gap-10 overflow-x-auto no-scrollbar md:overflow-visible ">
           {movies.map((movie) => (
           <MovieCard movie={movie}></MovieCard>
           ))}
@@ -119,7 +119,7 @@ console.log(showingHanll);
 
 
         
-        <div className="w-64 h-96 overflow-auto">
+        <div className="w-64  overflow-auto">
           <label className="block text-xl ml-1 mt-2 mb-2">
             Select Cineplex
           </label>

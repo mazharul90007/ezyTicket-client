@@ -120,8 +120,8 @@ const MovieHeroSlider = () => {
                   <h2 className=" gap-5 text-3xl md:text-5xl  font-bold ">
                     {slide?.title}
                   </h2>
-                  <p className="flex"><TbCategory  className="my-auto mr-1"/>{slide?.genre}</p>
-                  <p className="hidden md:flex"><MdAccessTimeFilled  className="my-auto mr-1"/>{slide?.duration}</p>
+                  <p className="flex"><TbCategory  className="my-auto mr-1"/>{slide?.overview.split(" ").slice(0,10).join(" ")} ...</p>
+                  <p className="hidden md:flex"><MdAccessTimeFilled  className="my-auto mr-1"/>{slide?.release_date}</p>
                 </div>
               </div>
             </SwiperSlide>

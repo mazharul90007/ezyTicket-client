@@ -15,6 +15,7 @@ import MovieCard from "../../Components/MovieCard";
 
 const Recommended = () => {
   const { movies } = useEntertainmentData();
+  const recMovies = movies.slice(4,10)
 
   return (
     <div className="mx-10 py-10">
@@ -52,7 +53,7 @@ const Recommended = () => {
           }}
           className="mySwiper text-white mt-10"
         >
-          {movies.map((movie) => (
+          {recMovies.map((movie) => (
             <SwiperSlide>
               <MovieCard movie={movie}></MovieCard>
             </SwiperSlide>
