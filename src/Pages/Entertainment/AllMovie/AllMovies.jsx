@@ -10,6 +10,7 @@ import MovieCard from "../Components/MovieCard";
 
 
 
+
 const AllMovies = () => {
   const [isNowActive, setisActive] = useState(true);
   const [isComingActive, setisComingActive] = useState(false);
@@ -21,6 +22,7 @@ const AllMovies = () => {
   const { darkMode } = useAuth();
   const { halls,movies } = useEntertainmentData();
 
+ 
 
   const options = [
     { value: "london", label: "Dhaka" },
