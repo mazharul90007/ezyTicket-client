@@ -108,9 +108,12 @@ const Contact = () => {
         {/* Message Us Section */}
       </div>
      
-      <div className="md:mt-80 mt-96  max-w-6xl mx-auto  items-center   backdrop-blur-lg p-10 rounded-xl ">
-        <div>
-        <p>CONTACT</p>
+      <div className="md:mt-60 mt-96  max-w-6xl mx-auto  items-center   backdrop-blur-lg p-10 rounded-xl ">
+        <div className="mb-10">
+        <p className="flex items-center gap-4 ml-3 text-md font-bold mb-3">
+        <span className="w-16 h-px bg-black font-bold"></span>CONTACT <span className="w-16 h-px bg-black font-bold"></span>
+</p>
+
         <h1 className="text-2xl md:text-4xl font-bold">KEEP IN TOUCH</h1>
         </div>
     
@@ -119,70 +122,66 @@ const Contact = () => {
         
         <form
           onSubmit={handleSubmit}
-          className=" p-8 rounded-lg shadow-md border border-gray-200"
+          className=" rounded-lg "
         >
        
 
-          <div className="flex">
-          <div className="mb-6">
-            <label className="block text-green-900 font-medium text-lg">
+          <div className="flex gap-3">
+          <div className="mb-6 w-full">
+            {/* <label className="block text-green-900 font-medium text-lg">
               Name
-            </label>
+            </label> */}
             <input
               type="text"
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg mt-2 focus:ring-2 focus:ring-green-600 focus:outline-none"
+              className="w-full p-3 border border-gray-300 mt-2 focus:ring-2 focus:ring-green-600 focus:outline-none"
+              placeholder="Name"
               required
             />
           </div>
-          <div className="mb-6">
-            <label className="block text-green-900 font-medium text-lg">
-              Email
-            </label>
+          <div className="mb-6 w-full">
+         
             <input
               type="email"
               name="email"
+              placeholder="Email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg mt-2 focus:ring-2 focus:ring-green-600 focus:outline-none"
+              className="w-full p-3 border  border-gray-300  mt-2 focus:ring-2 focus:ring-green-600 focus:outline-none"
               required
             />
           </div>
           </div>
 
 
-
-          <div className="flex">
-          <div className="mb-6">
-            <label className="block text-green-900 font-medium text-lg">
-              Name
-            </label>
+          <div className="flex gap-3">
+          <div className="mb-6 w-full">
+         
             <input
               type="text"
-              name="name"
+              name="phone"
               value={formData.name}
               onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg mt-2 focus:ring-2 focus:ring-green-600 focus:outline-none"
+              className="w-full p-3 border border-gray-300 mt-2 focus:ring-2 focus:ring-green-600 focus:outline-none"
+              placeholder="Phone"
               required
             />
           </div>
-          <div className="mb-6">
-            <label className="block text-green-900 font-medium text-lg">
-              Email
-            </label>
+          <div className="mb-6 w-full">
+         
             <input
-              type="email"
-              name="email"
+              type="text"
+              name="topic"
+              placeholder="Subject"
               value={formData.email}
               onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg mt-2 focus:ring-2 focus:ring-green-600 focus:outline-none"
+              className="w-full p-3 border  border-gray-300  mt-2 focus:ring-2 focus:ring-green-600 focus:outline-none"
               required
             />
           </div>
           </div>
-
 
 
           <div className="mb-6">
@@ -200,26 +199,17 @@ const Contact = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-green-700 text-white py-3 rounded-lg text-lg font-semibold hover:bg-green-800 transition"
+            className=" bg-main text-white text-xs py-2 px-5 font-semibold hover:bg-green-800 transition"
           >
-            Send Message
+            SUBMIT
           </button>
         </form>
 
 
 
         <div>
-          <h2 className="text-3xl font-bold text-green-800 mb-4">Message Us</h2>
-          <p className="text-gray-700 text-lg">
-            Have questions, feedback, or inquiries? Send us a message and our
-            team will respond promptly!
-          </p>
-          <ul className="list-disc list-inside mt-6 text-gray-600">
-            <li>Support for ticket booking & cancellation</li>
-            <li>Partnership or business queries</li>
-            <li>Report issues or bugs</li>
-            <li>General inquiries</li>
-          </ul>
+          <img src="/map.png" alt="" className="object-cover" />
+          
         </div>
         </div>
       </div>
