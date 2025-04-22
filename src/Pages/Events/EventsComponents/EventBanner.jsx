@@ -1,113 +1,47 @@
-import React from 'react';
+// import React, { useRef } from 'react';
 import { FaTicketAlt } from 'react-icons/fa';
-import banner1 from '../../../assets/Events_image/event-banner1.avif';
-import banner2 from '../../../assets/Events_image/event-banner2.png';
-import banner3 from '../../../assets/Events_image/event-banner3.jpg';
+import eventBanner from '../../../assets/Events_image/show.webp';
+import { motion } from "framer-motion";
+import { FaArrowDownLong } from 'react-icons/fa6';
 
-// Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-import 'swiper/css/effect-fade';
-
-// Import required modules
-import { Autoplay, Pagination, Navigation, EffectFade } from 'swiper/modules';
-
-const EventBanner = () => {
+const EventBanner = ({scrollToSection}) => {
     return (
-        <div>
-            <Swiper
-                spaceBetween={30}
-                centeredSlides={true}
-                effect="fade" // Enable fade effect
-                autoplay={{
-                    delay: 3500,
-                    disableOnInteraction: false,
+        <>
+            <div
+                className="relative bg-cover bg-center h-[60vh] md:h-[70vh] lg:h-[80vh] flex text-white mb-8 md:mb-16 lg:mb-20"
+                style={{
+                    backgroundImage: `url(${eventBanner})`
                 }}
-                pagination={{
-                    clickable: true,
-                }}
-                navigation={true}
-                modules={[Autoplay, Pagination, Navigation, EffectFade]} // Include EffectFade
-                className="mySwiper"
             >
-                <SwiperSlide>
-                    <div
-                        className="relative py-16 px-8 text-white text-center overflow-hidden h-[500px] md:h-[600px] lg:h-[680px] xl:h-[600px] flex justify-center items-center"
-                        style={{
-                            backgroundImage: `url(${banner1})`,
-                            backgroundSize: 'cover',
-                            backgroundPosition: 'center',
+                {/* Dark Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/30 to-transparent"></div>
+
+                <div className="absolute bottom-10 left-10 z-10">
+                    <p className="tracking-wide uppercase mb-2 text-xl">Limited Seats Available</p>
+                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-wide uppercase ">
+                       Make Moments <br /> <span className="text-main">Become Memories</span>
+                    </h1>
+                </div>
+                <div 
+                    className="absolute bottom-10 right-10 flex items-center gap-3 cursor-pointer"
+                    onClick={()=>scrollToSection("eventsCard")}
+                >
+                    <h3 className="uppercase text-xl font-lg">Scroll down</h3>
+                    <motion.div
+                        animate={{
+                            y: [0, 10, 0],
+                        }}
+                        transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: "easeInOut",
                         }}
                     >
-                        <div className="absolute inset-0 bg-black opacity-40"></div>
-                        <div className="relative z-10 border-1 border-white p-2">
-                            <div className="border-1 border-white py-2 md:py-10 px-2 md:px-24 flex flex-col items-center">
-                                <h1 className="text-4xl md:text-6xl font-bold uppercase">
-                                    Feel the energy
-                                </h1>
-                                <div className="border-b-1 w-3/4 border-supporting mx-auto my-2 md:my-4"></div>
-                                <p className="text-lg md:text-2xl mb-8">
-                                    Thrilling Performance
-                                </p>
-                                <button className="ezy-button-primary">
-                                    <FaTicketAlt className="mr-2" /> Discover More
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div
-                        className="relative py-16 px-8 text-white text-center overflow-hidden h-[500px] md:h-[600px] lg:h-[680px] xl:h-[600px] flex justify-center items-center"
-                        style={{
-                            backgroundImage: `url(${banner2})`,
-                            backgroundSize: 'cover',
-                            backgroundPosition: 'center',
-                        }}
-                    >
-                        <div className="absolute inset-0 bg-black opacity-40"></div>
-                        <div className="relative z-10 border-1 border-white p-2">
-                            <div className="border-1 border-white py-2 md:py-10 px-2 md:px-24">
-                                <h1 className="text-4xl md:text-6xl font-bold uppercase">
-                                    Be Part of Something Bigger
-                                </h1>
-                                <div className="border-b-1 w-3/4 border-supporting mx-auto my-2 md:my-4"></div>
-                                <p className="text-lg md:text-2xl mb-8">
-                                    Learn, Grow & Succeed
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div
-                        className="relative py-16 px-8 text-white text-center overflow-hidden h-[500px] md:h-[600px] lg:h-[680px] xl:h-[600px] flex justify-center items-center"
-                        style={{
-                            backgroundImage: `url(${banner3})`,
-                            backgroundSize: 'cover',
-                            backgroundPosition: 'center',
-                        }}
-                    >
-                        <div className="absolute inset-0 bg-black opacity-40"></div>
-                        <div className="relative z-10 border-1 border-white p-2">
-                            <div className="border-1 border-white py-2 md:py-10 px-2 md:px-24">
-                                <h1 className="text-4xl md:text-6xl font-bold uppercase">
-                                    Create Memories Together
-                                </h1>
-                                <div className="border-b-1 w-3/4 border-supporting mx-auto my-2 md:my-4"></div>
-                                <p className="text-lg md:text-2xl mb-8">
-                                    Refresh your mind
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </SwiperSlide>
-            </Swiper>
-        </div>
+                        <FaArrowDownLong className="text-lg font-thin" />
+                    </motion.div>
+                </div>
+            </div>
+        </>
     );
 };
 
