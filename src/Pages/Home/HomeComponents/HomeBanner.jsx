@@ -25,7 +25,7 @@ const HomeBanner = () => {
     }, []);
 
     return (
-        <div className='h-[450px] md:h-[480px] lg:h-[500px] relative shadow-md mb-8 md:mb-16 lg:mb-20'>
+        <div className='h-[70vh] md:h-[50vh] lg:h-[70vh] relative shadow-md mb-8 md:mb-16 lg:mb-20'>
             {/* Video Background with slower playback */}
             <div className="absolute inset-0 z-0">
                 <video 
