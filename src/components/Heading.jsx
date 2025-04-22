@@ -8,7 +8,7 @@ const Heading = ({ title, subtitle, extend }) => {
       <p className={`tracking-widest uppercase mb-2 ${darkMode ? 'text-dark-secondary' : 'text-gray-500'}`}>
         {subtitle}
       </p>
-      <h2 className={`uppercase text-3xl md:text-5xl font-bold mb-12 tracking-wide leading-[1.1] ${darkMode ? 'text-dark-primary' : 'text-gray-700'}`}>
+      <h2 className={`uppercase text-3xl md:text-4xl lg:text-5xl font-bold mb-12 tracking-wide leading-[1.1] ${darkMode ? 'text-dark-primary' : 'text-gray-700'}`}>
         {title} <br /> {extend}
       </h2>
     </div>

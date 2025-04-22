@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import useAuth from "../../Hooks/useAuth";
 import AllEvents from "./AllEvents/AllEvents";
 import EventBanner from "./EventsComponents/EventBanner";
@@ -7,15 +8,26 @@ import EventReview from "./EventsComponents/EventReview";
 
 const Events = () => {
   const { darkMode } = useAuth();
+
+  // Smooth scroll function
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
+
   return (
     <div
-      className={`${
-        darkMode
-          ? "bg-dark-background text-dark-primary"
-          : "bg-background text-black"
-      } `}
+      className={`${darkMode
+        ? "bg-dark-background text-dark-primary"
+        : "bg-background text-black"
+        } `}
     >
-      <EventBanner></EventBanner>
+      <EventBanner scrollToSection={scrollToSection}></EventBanner>
       <EventCards></EventCards>
       <AllEvents></AllEvents>
       <EventInfo></EventInfo>

@@ -64,7 +64,7 @@ const HomeCategory = () => {
   ];
 
   return (
-    <div className="w-11/12 mx-auto mb-8 md:mb-16 lg:mb-20 pt-72 md:pt-30 lg:pt-30">
+    <div className="w-11/12 mx-auto mb-8 md:mb-16 lg:mb-20 pt-72 md:pt-28">
       <section className="text-center">
         <Heading
           subtitle="EzyTicket"
