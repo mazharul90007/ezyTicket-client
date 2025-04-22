@@ -45,7 +45,7 @@ export function Selection() {
   }
 
   return (
-    <div className="flex relative flex-col items-center gap-4 p-6 rounded-2xl shadow-md w-full mx-auto">
+    <div className="flex relative flex-col items-center  gap-4 p-6 rounded-2xl shadow-md w-full mx-auto">
       {/* Display the days array if needed */}
       <div>
         {days.length > 0 && (
