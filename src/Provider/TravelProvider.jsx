@@ -23,7 +23,7 @@ const TravelProvider = ({children}) => {
             icon: "success",
             draggable: true
           });
-          navigate("/travel")
+          navigate("/travel-payment-success")
         }
       })
     }

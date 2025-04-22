@@ -10,6 +10,7 @@ import MovieCard from "../Components/MovieCard";
 
 
 
+
 const AllMovies = () => {
   const [isNowActive, setisActive] = useState(true);
   const [isComingActive, setisComingActive] = useState(false);
@@ -21,6 +22,7 @@ const AllMovies = () => {
   const { darkMode } = useAuth();
   const { halls,movies } = useEntertainmentData();
 
+ 
 
   const options = [
     { value: "london", label: "Dhaka" },
@@ -60,8 +62,8 @@ console.log(showingHanll);
     <section
       className={`py-24 px-4 md:px-10 bg-gradient-to-br ${
         darkMode
-          ? "from-black via-blue-900 to-purple-900 text-white"
-          : "from-green-200 via-green-50 to-green-200 text-black"
+          ? "text-white"
+          : ""
       } `}
     >
       <h2 className="text-3xl underline flex items-center justify-center md:text-4xl font-bold  mb-10 ">
@@ -106,10 +108,10 @@ console.log(showingHanll);
         </div>
       </div>
 
-      <div className="flex flex-col-reverse md:justify-between">
+      <div className="flex flex-col-reverse md:flex-row-reverse md:justify-between">
        
 
-        <div className="grid xs:grid-cols-1 sm:grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-4 md:gap-10 overflow-x-auto no-scrollbar md:overflow-visible ">
+        <div className="grid grid-cols-2 sm:grid-cols-3  md:grid-cols-3 lg:grid-cols-4 md:gap-10 overflow-x-auto no-scrollbar md:overflow-visible ">
           {movies.map((movie) => (
           <MovieCard movie={movie}></MovieCard>
           ))}
@@ -117,7 +119,7 @@ console.log(showingHanll);
 
 
         
-        <div className="w-64 h-96 overflow-auto">
+        <div className="w-64  overflow-auto">
           <label className="block text-xl ml-1 mt-2 mb-2">
             Select Cineplex
           </label>

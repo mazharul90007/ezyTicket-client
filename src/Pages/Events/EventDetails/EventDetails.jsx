@@ -85,7 +85,7 @@ const EventDetails = () => {
     if (eventId) {
       fetchComments();
     }
-  }, [eventId]); // Only rerun when eventId changes
+  }, [eventId, axiosPublic]); // Added axiosPublic to dependencies
 
   // Effects
   useEffect(() => {
@@ -178,7 +178,6 @@ const EventDetails = () => {
       paymentMethod: "card",
       date: new Date().toISOString(),
     };
-    // console.log(checkoutData);
 
     const res = await axiosSecure.post("/order", checkoutData);
     if (res.data) {
@@ -205,8 +204,8 @@ const EventDetails = () => {
         eventName: eventData.title,
         comment: comment,
         customerEmail: user?.email,
-        customerName: customerName, // Use userInfo if user.displayName is not available
-        customerPhoto: customerPhoto, // Use userInfo if user.photoURL is not available
+        customerName: customerName,
+        customerPhoto: customerPhoto,
         time: localTime,
         category: "event",
         status: "pending",
@@ -219,11 +218,15 @@ const EventDetails = () => {
       );
       setComment("");
       setIsModalOpen(false);
+      // Refresh comments after adding new one
+      const res = await axiosPublic.get(`/event-reviews?eventId=${eventId}`);
+      setComments(res.data);
     } catch (error) {
       console.error("Error adding comment:", error);
       Swal.fire("Error", "Something went wrong. Try again!", "error");
     }
   };
+
 
   // Helper components
   const DateDisplay = () => {
@@ -318,27 +321,50 @@ const EventDetails = () => {
     <div className="fixed inset-0 bg-black/60 bg-opacity-75 flex items-center justify-center z-50">
       <div
         className={`${
-          darkMode ? "bg-gray-200" : "bg-white"
-        } p-6 rounded-lg shadow-lg w-11/12 md:w-3/5`}
+          darkMode ? "bg-gray-800 text-white" : "bg-white text-gray-800"
+        } p-6 rounded-lg shadow-lg w-11/12 md:w-2/3 lg:w-1/2 max-w-2xl`}
       >
-        <h2 className="text-xl font-bold mb-4">Add Comment</h2>
-        <textarea
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-          rows="4"
-          className="w-full p-2 border rounded-md mb-4"
-          placeholder="Write your comment here..."
-        />
-
-        <div className="flex justify-between">
-          <button onClick={handleAddComment} className="ezy-button-primary-sm">
-            Add Comment
-          </button>
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-xl font-bold">Add Your Comment</h2>
           <button
             onClick={() => setIsModalOpen(false)}
-            className="bg-gray-400 text-white px-4 py-2 rounded-lg"
+            className="text-gray-500 hover:text-gray-700 focus:outline-none"
           >
-            Close
+            <IoMdCloseCircleOutline className="text-2xl" />
+          </button>
+        </div>
+
+        <div className="mb-4">
+          <label htmlFor="comment" className="block text-sm font-medium mb-2">
+            Your thoughts about this event
+          </label>
+          <h2 className="text-xl font-bold mb-4">Add Comment</h2>
+          <textarea
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+            rows="4"
+            className="w-full p-2 border rounded-md mb-4 text-left" // Added text-left here
+            placeholder="Write your comment here..."
+            autoFocus
+          />
+        </div>
+
+        <div className="flex justify-end gap-3">
+          <button
+            onClick={() => setIsModalOpen(false)}
+            className={`px-4 py-2 rounded-lg font-medium ${
+              darkMode
+                ? "bg-gray-600 hover:bg-gray-500"
+                : "bg-gray-200 hover:bg-gray-300"
+            } transition-colors`}
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleAddComment}
+            className="px-4 py-2 bg-supporting text-white rounded-lg font-medium hover:bg-supporting-dark transition-colors"
+          >
+            Post Comment
           </button>
         </div>
       </div>
@@ -449,6 +475,7 @@ const EventDetails = () => {
               </h2>
               <p className="mt-2 text-md md:text-xl">{eventData?.details}</p>
             </div>
+
             {/* Comment section */}
             <div
               className={`${
@@ -457,48 +484,62 @@ const EventDetails = () => {
                   : "bg-white text-black"
               } mt-4 p-6 md:p-10 rounded-lg shadow`}
             >
-              <h2 className="mb-5 font-bold text-2xl">Comments</h2>
+              <div className="flex justify-between items-center mb-5">
+                <h2 className="font-bold text-2xl">Comments</h2>
+                <button
+                  onClick={() => setIsModalOpen(true)}
+                  className={`px-4 py-2 rounded-lg font-medium ${
+                    darkMode
+                      ? "bg-supporting hover:bg-supporting-dark"
+                      : "bg-supporting text-white hover:bg-supporting-dark"
+                  }`}
+                >
+                  Add Comment
+                </button>
+              </div>
+
               {comments?.length > 0 ? (
-                comments
-                  .filter((comment) => comment.eventId === eventData._id) // Filter comments by eventId
-                  .map((comment, index) => (
-                    <div
-                      key={index}
-                      className="border-b py-2 flex items-start gap-4"
-                    >
-                      {/* User Image */}
-                      <img
-                        src={comment.customerPhoto || noImage} // Display user photo or default image
-                        alt={comment.customerName}
-                        className="w-10 h-10 rounded-full object-cover"
-                      />
-                      <div className="flex flex-col">
-                        <p className="font-semibold text-black">
-                          {comment.customerName || "Anonymous"}
-                        </p>
-                        <p>{comment.comment}</p>
-                        <p className="text-sm text-gray-500">
-                          {comment.time}
-                        </p>{" "}
-                        {/* Show the time */}
+                <div className="space-y-4">
+                  {comments
+                    .filter((comment) => comment.eventId === eventData._id)
+                    .map((comment, index) => (
+                      <div
+                        key={index}
+                        className={`p-4 rounded-lg ${
+                          darkMode ? "bg-gray-800" : "bg-gray-50"
+                        }`}
+                      >
+                        <div className="flex items-start gap-4">
+                          <img
+                            src={comment.customerPhoto || noImage}
+                            alt={comment.customerName}
+                            className="w-12 h-12 rounded-full object-cover"
+                          />
+                          <div className="flex-1">
+                            <div className="flex justify-between items-start">
+                              <p className="font-semibold">
+                                {comment.customerName || "Anonymous"}
+                              </p>
+                              <p className="text-sm text-gray-500">
+                                {new Date(comment.time).toLocaleString()}
+                              </p>
+                            </div>
+                            <p className="mt-1">{comment.comment}</p>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  ))
+                    ))}
+                </div>
               ) : (
-                <p>No comments yet.</p>
+                <div className="text-center py-8">
+                  <p className="text-gray-500">
+                    No comments yet. Be the first to share your thoughts!
+                  </p>
+                </div>
               )}
             </div>
-
-            <div className="flex gap-4 mt-10">
-              <button
-                onClick={() => setIsModalOpen(true)}
-                className="ezy-button-secondary-sm p-10"
-              >
-                Add Comment
-              </button>
-            </div>
           </div>
-          {/* Comment section */}
+
           {/* Right Sidebar */}
           <div className="rounded-lg h-fit lg:col-span-1">
             {/* -----------------Event Details----------------- */}

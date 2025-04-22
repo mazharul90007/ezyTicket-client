@@ -40,9 +40,10 @@ const EventCards = () => {
   const displayedEvents = verifiedEvents.slice(0, 4);
   return (
     <div
-      className={`pt-12 ${
+      className={` ${
         darkMode ? "bg-dark-background text-dark-primary" : "bg-background"
       }`}
+      id="eventsCard"
     >
       <h1 className="text-5xl font-bold text-center text-main mb-3">
         Recent Events
