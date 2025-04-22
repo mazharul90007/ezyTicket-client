@@ -24,17 +24,16 @@ const EntertainmentProvider = ({ children }) => {
     const hallsResponse = await axiosSecure.get('/cinemahalls');
     setHalls(hallsResponse.data);
     
-
+    // Get local movies
+    const localMoviesResponse = await axiosSecure.get('/allmovies');
+    const localMovies = localMoviesResponse.data;
+    
+    // Get external movies
     const externalMoviesResponse = await axios.get("https://api.themoviedb.org/3/movie/popular?api_key=7c6a26f876561b33041c71bf76c78528");
-    const externalMovies = externalMoviesResponse?.data.results;
-
-    // const externalMoviesResponse = await axios.get( `https://api.themoviedb.org/3/movie/${id}?api_key=7c6a26f876561b33041c71bf76c78528`);
-    // const externalMovies = externalMoviesResponse.data.results;
-
-
+    const externalMovies = externalMoviesResponse.data.results;
     
     // Combine both movie sources
-    setMovies(externalMovies);
+    setMovies([...localMovies, ...externalMovies]);
   };
   
   fetchData();

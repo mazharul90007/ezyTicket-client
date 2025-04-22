@@ -1,44 +1,45 @@
-import { Link } from "react-router-dom"
-import useAuth from "../../../Hooks/useAuth"
+import { Link } from "react-router-dom";
+import useAuth from "../../../Hooks/useAuth";
 import { IoWalletOutline } from "react-icons/io5";
+
 const FlashDealCard = ({ deal }) => {
-    const { title, image, discountedPrice,discount, promoCode, originalPrice, icon } = deal
-    const { darkMode } = useAuth()
+    const { title, image, discount, promoCode } = deal;
+    const { darkMode } = useAuth();
 
     return (
-        <div className={` card w-full shadow-2xl ${darkMode ? "bg-[#1d1d1d] text-white" : "bg-white text-[#111111]"} `}>
-            {/* <figure>
-                <img
-                    src={image}
-                    alt={title} />
-            </figure> */}
-            <div className=" rounded grid grid-cols-5 gap-5 h-full">
-                <div 
-                style={{
-                    backgroundImage: `url(${image})`,
-                  }}
-                className="col-span-2 bg-main p-2 py-8 rounded flex flex-col items-center  -ml-4 -mt-4 bg-cover h-full z-10 text-white">
-                    <div>
-                        <p className="text-sm">Up To</p>
-                        <p className="font-bold"><span className="text-yellow-500">{discount} </span>Discount</p>
-                    </div>
-                    <p className="text-white text-5xl mt-2"><IoWalletOutline /></p>
-                </div>
-                <div className="col-span-3 p-8 pl-2 pb-0">
-                    <h2 className="card-title">{title}</h2>
-                    <p>Use A simple code with a discount offer.</p>
+        <div className={`relative w-full max-w-sm mx-auto rounded-3xl overflow-hidden hover:shadow-none transition-all  ${darkMode ? "bg-[#1d1d1d] text-white" : "bg-white text-gray-900"}`}>
+            {/* Image */}
+            <div className="relative">
+                <img src={image} alt={title} className="w-full h-48 object-cover" />
+                <div className="absolute top-3 right-3 bg-gradient-to-br from-supporting to-supporting text-black text-[13px] font-semibold px-4 py-1 rounded-full shadow-sm">
+                     {discount} OFF
                 </div>
             </div>
-            <div className="card-body ">
-                <div className="card-actions justify-between items-center border-t pt-2">
-                    <div>
-                        <span className="font-black">Use Code:</span> <span className="text-supporting">{promoCode}</span>
+
+            {/* Card Content */}
+            <div className="p-6 space-y-4">
+                <div>
+                    <h2 className="text-xl font-bold leading-tight">{title}</h2>
+                    <p className="text-sm text-dark-secondary dark:text-gray-300 mt-1">Celebrate Eid with savings! Enjoy exclusive deals using the code below.</p>
+                </div>
+
+                {/* Code Box + CTA */}
+                <div className={`flex items-center justify-between bg-gradient-to-r  ${ darkMode ?  "from-dark-surface to-dark-surface" : "from-gray-100 to-gray-200"} p-4 rounded-xl shadow-inner`}>
+                    <div className="flex items-center gap-2 font-semibold text-sm">
+                        <IoWalletOutline className="text-2xl text-green-500" />
+                        <span className="opacity-80">Code:</span>
+                        <span className="text-main font-extrabold tracking-wider">{promoCode}</span>
                     </div>
-                    <Link to={"/travel/bus-ticket-book"} className="btn bg-main border-none text-white">Book Now</Link>
+                    <Link
+                        to="/travel/bus-ticket-book"
+                        className="bg-main text-white px-4 py-1.5 rounded-md hover:scale-105 transition-all duration-300 shadow-md"
+                    >
+                        Book Now
+                    </Link>
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default FlashDealCard
+export default FlashDealCard;

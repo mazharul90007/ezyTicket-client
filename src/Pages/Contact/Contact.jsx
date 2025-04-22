@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaClock } from 'react-icons/fa';
+import { IoIosArrowForward } from "react-icons/io";
 
 const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const option =[
+    {way: 'Our Email', icon:<FaEnvelope className="text-white text-3xl" />,description: 'For any inquiries or support ',info1:"Business: ezy@gmail.com",info2:"Support: ticket@gmail.com"},
+    {way: 'Our Phone', icon: <FaPhone className="text-4xl mx-auto text-white mb-3" />,description: 'Call us for immediate assistance.',info1:"Main Office: +123 456 7890",info2:"24/7 Service: +987 654 3210"},
+    {way: 'Location', icon: <FaMapMarkerAlt className="text-4xl mx-auto text-white mb-3" />,description: 'Visit us at our office.',info1:"Wireless, Dhaka, Bangladesh",info2:"ZIP Code: 12345"},
+
+  ]
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -14,14 +21,55 @@ const Contact = () => {
   };
 
   return (
-    <div className="pt-36 text-black bg-gradient-to-br from-[#70fd94f5] via-[#f1fff0] to-[#b0fac2d7] px-6 pb-20">
+    <div className="  relative  pb-20">
       {/* Page Heading */}
-      <div className="max-w-5xl mx-auto text-center mb-16">
-        <h1 className="text-5xl font-bold mb-4">Contact Us</h1>
-        <p className="text-lg max-w-2xl mx-auto">
-          We'd love to hear from you! Whether you have a question, feedback, or just want to say hello — we’re here to help.
-        </p>
+      <div className='relative'>
+      <img src="/contact1.jpg" alt="" className=' w-full object-cover'/>
+      <div className='bg-gradient-to-l from-black/70 to-transparent inset-0 absolute'></div>
       </div>
+      
+      <div className=" absolute top-45 ml-20 text-white text-xl mb-16">
+      
+        <h1 className="text-5xl font-bold mb-4">Contact Us</h1>
+        <p className='flex text-gray-200'>Home <IoIosArrowForward  className='my-auto'/> Contact</p>
+        {/* <p className="text-lg max-w-2xl mx-auto">
+          We'd love to hear from you! Whether you have a question, feedback, or just want to say hello — we’re here to help.
+        </p> */}
+      </div>
+
+
+
+<div className='bg-white/50 backdrop-blur-2xl absolute top-96 ml-28 mx-auto shadow-2xl w-10/12 h-96  mt-20'>
+     {/* connections way */}
+     <div className=' bg-main flex items-center justify-center  relative '>
+     
+      <div className='absolute z-20 -top-9 flex  gap-20'>
+      {
+  option.map((option => (
+    <div className='flex flex-col justify-center items-center gap-5'>
+      <p className='w-20 h-20 bg-main rounded-full flex items-center justify-center mx-auto mb-3'>
+         {option.icon}
+      </p>
+     
+
+      <h1 className='text-2xl font-bold text-gray-900'>{option.way}</h1>
+      {/* <p>{option.description}</p> */}
+      <div className='text-center'>
+      <p className="text-gray-1200 mt-2">{option.info1}</p>
+      <p>{option.info2}</p>
+      </div>
+     
+      <button className='py-2 px-4 border-2 rounded-3xl mt-10 font-bold'>{option.way}</button>
+    </div>
+  )))
+}
+      </div>
+
+     </div>
+     </div>
+
+
+
 
       {/* Contact Info Section */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-6xl mx-auto text-center mb-16">

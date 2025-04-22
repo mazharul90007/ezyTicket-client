@@ -42,7 +42,7 @@ import { TbCategory } from "react-icons/tb";
 const MovieHeroSlider = () => {
   const { movies } = useEntertainmentData();
   console.log(movies);
-  const newMovies = movies.slice(0, 5);
+  const newMovies = movies.slice(5, 10);
   return (
     <div className="relative text-white">
 
@@ -65,7 +65,7 @@ const MovieHeroSlider = () => {
             >
               <div className="relative h-56 md:h-64 lg:h-96 overflow-hidden  shadow-lg">
                 <img
-                  src={`https://image.tmdb.org/t/p/w500${slide?.backdrop_path}`}
+                  src={slide.imageLink || `https://image.tmdb.org/t/p/w500${slide?.backdrop_path}`}
                   alt={`Slide ${idx + 1}`}
                   className="w-full h-full object-cover "
                 />
@@ -89,7 +89,7 @@ const MovieHeroSlider = () => {
                 Now in Cinemas
                 </h1> */}
              
-                  <Link to={`/entertainment/allmovies/${slide.id}`}>
+                  <Link to={`/entertainment/allmovies/${slide._id || slide.id}`}>
                 <button
                   onClick={() =>
                     document.getElementById("booksection")?.scrollIntoView({
@@ -111,17 +111,17 @@ const MovieHeroSlider = () => {
                   className=" "
                 >
                   <img
-                    src={`https://image.tmdb.org/t/p/w500${slide?.poster_path}`}
+                    src={slide.imageLink ||`https://image.tmdb.org/t/p/w500${slide?.poster_path}`}
                     alt={slide?.name}
                     className=" shadow-lg hidden lg:flex rounded-lg  lg:h-80"
                   />
                 </motion.div>
                 <div className="flex flex-col justify-center  gap-3">
                   <h2 className=" gap-5 text-3xl md:text-5xl  font-bold ">
-                    {slide?.title}
+                    {slide?.title || slide?.name}
                   </h2>
-                  <p className="flex"><TbCategory  className="my-auto mr-1"/>{slide?.genre}</p>
-                  <p className="hidden md:flex"><MdAccessTimeFilled  className="my-auto mr-1"/>{slide?.duration}</p>
+                  <p className="flex"><TbCategory  className="my-auto mr-1"/>{slide.genre ||slide?.overview?.split(" ").slice(0,10).join(" ")} </p>
+                  <p className="hidden md:flex"><MdAccessTimeFilled  className="my-auto mr-1"/>{slide?.release_date || slide.duration}</p>
                 </div>
               </div>
             </SwiperSlide>

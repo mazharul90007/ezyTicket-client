@@ -71,7 +71,7 @@ const SelectPlaceTime = () => {
             transition={{ duration: 0.5 }}
             className=""
         >
-            <section className={`rounded-xl shadow-xl overflow-hidden ${darkMode ? "bg-[#1d1d1d]" : "bg-white"}`}>
+            <div className={`rounded-xl shadow-xl overflow-hidden ${darkMode ? "bg-[#1d1d1d]" : "bg-white"}`}>
                 <div className="p-1 bg-gradient-to-r from-green-700 to-green-400"></div>
 
                 <div className="p-6 md:p-8">
@@ -173,7 +173,7 @@ const SelectPlaceTime = () => {
                         </div>
                     </form>
                 </div>
-            </section>
+            </div>
         </motion.section>
 
     )

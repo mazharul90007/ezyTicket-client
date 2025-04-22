@@ -18,6 +18,7 @@ import { FreeMode, Pagination, Navigation } from "swiper/modules";
 
 const TrendingMovies = () => {
   const { movies } = useEntertainmentData();
+  console.log(movies);
 
   return (
     <section className=" mt-24  w-10/12 mx-auto md:px-10">
@@ -32,52 +33,45 @@ const TrendingMovies = () => {
           </button>
         </Link>
       </div>
-      
 
-<div className="">
+      <div className="">
+        <div>
+          <Swiper
+            spaceBetween={30}
+            freeMode={true}
+            navigation={true}
+            modules={[FreeMode, Navigation, Pagination]}
+            breakpoints={{
+              // when window width is >= 0px
+              0: {
+                slidesPerView: 3,
+              },
+              500: {
+                slidesPerView: 3,
+              },
+              // when window width is >= 768px (medium screens)
+              768: {
+                slidesPerView: 4,
+              },
+              // when window width is >= 1024px (large screens)
+              1024: {
+                slidesPerView: 4,
+              },
 
-
- <div >
-        <Swiper
-        
-          spaceBetween={30}
-          freeMode={true}
-       
-          navigation={true}
-          modules={[FreeMode,Navigation, Pagination]}
-          breakpoints={{
-            // when window width is >= 0px
-            0: {
-              slidesPerView: 3,
-            },
-            500:{
-              slidesPerView: 3,
-            },
-            // when window width is >= 768px (medium screens)
-            768: {
-              slidesPerView: 4,
-            },
-            // when window width is >= 1024px (large screens)
-            1024: {
-              slidesPerView: 4,
-            },
-            
-              1280:{
+              1280: {
                 slidesPerView: 5,
-              }
-            
-          }}
-          className="mySwiper text-white md:mt-5 "
-        >
-          {movies.map((movie) => (
-            <SwiperSlide><MovieCard movie={movie}></MovieCard></SwiperSlide>
-            
-          ))}
-        </Swiper>
+              },
+            }}
+            className="mySwiper text-white md:mt-5 "
+          >
+            {movies.map((movie) => (
+              <SwiperSlide>
+                <MovieCard movie={movie}></MovieCard>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
       </div>
-
-</div>
-     
     </section>
   );
 };

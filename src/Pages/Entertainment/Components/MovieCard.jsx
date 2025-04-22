@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 const MovieCard = ({ movie }) => {
   const { darkMode } = useAuth();
 
+
   return (
     <div
       key={movie.id}
@@ -13,7 +14,7 @@ const MovieCard = ({ movie }) => {
         darkMode ? " " : " text-black"
       } rounded-t-xl transition hover:-translate-y-1 duration-300`}
     >
-      <Link to={`/entertainment/allmovies/${ movie.id}`} >
+      <Link to={`/entertainment/allmovies/${ movie.id || movie._id}`} >
       {/* Background Image with Overlay */}
       <div className="relative h-80 w-56 overflow-hidden rounded-t-xl">
         <img
