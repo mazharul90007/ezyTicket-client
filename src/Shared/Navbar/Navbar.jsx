@@ -29,7 +29,11 @@ const Navbar = () => {
 
   useScrollToTop();
 
-  const isTransparent = location.pathname === "/" && !isScrolled;
+  const isTransparent = (location.pathname === "/" 
+    || location.pathname === "/events" 
+    || location.pathname === "/travel"
+  
+  ) && !isScrolled;
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("Theme");
@@ -41,7 +45,11 @@ const Navbar = () => {
       setIsScrolled(window.scrollY > 10);
     };
 
-    if (location.pathname === "/") {
+    if (location.pathname === "/" 
+      || location.pathname === "/events" 
+      || location.pathname === "/travel"
+
+    ) {
       window.addEventListener("scroll", handleScroll);
       handleScroll();
     } else {
