@@ -66,12 +66,6 @@ const FlashDeals = () => {
           subtitle={"Flash Deals"}
         />
       </div>
-      {/* <div className="flex flex-col md:flex-row justify-between mt-15 gap-10">
-                {
-                    flashDeals.map((deal, idx) => <FlashDealCard key={idx} deal={deal}/>)
-                }
-
-            </div> */}
       <div className="py-10">
         <Swiper
           // slidesPerView={1}
@@ -83,7 +77,7 @@ const FlashDeals = () => {
             delay: 3500,
             disableOnInteraction: false,
           }}
-          navigation={true}
+          // navigation={true}
           modules={[Autoplay, Pagination, Navigation]}
           className="mySwiper"
           breakpoints={{
