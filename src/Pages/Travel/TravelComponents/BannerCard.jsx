@@ -8,8 +8,9 @@ const BannerCard = () => {
         <section className="pt-14">
             <div className="text-center flex justify-center items-center text-2xl md:text-3xl lg:text-5xl mb-10 flex-col">
                 {/* <p className="text-sm font-semibold  uppercase">Quick & Easy Ticket Booking</p> */}
-                <h1 className={`text-2xl font-bold md:text-3xl lg:text-5xl ${darkMode ? "text-white" : "text-black"}`}>Just 4 Simple Steps to Reserve Your Seat</h1>
-                <p className="text-[16px] mt-4 max-w-[1000px] px-5">Booking your ticket has never been easier. Just follow these four quick steps to choose your destination, confirm details, and secure your seat in minutes</p>
+                <p className={`text-[16px] ${darkMode ? 'text-dark-secondary' : 'text-gray-500'} mt-4 max-w-[1000px] px-5 mb-2`}>Book in 4 Easy Steps</p>
+                <h1 className={`text-2xl font-bold md:text-3xl lg:text-5xl ${darkMode ? 'text-dark-primary' : 'text-gray-700'}`}>Just 4 Simple Steps to Reserve Your Seat</h1>
+                
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-10 container mx-auto px-5">
                 {

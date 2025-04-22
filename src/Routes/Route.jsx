@@ -44,6 +44,8 @@ import TicketManager from "../Pages/Dashboard/Entertainment/TicketManager/Ticket
 import ManageHalls from "../Pages/Dashboard/Entertainment/ManageHalls/ManageHalls";
 import UpdateMovieData from "../Pages/Dashboard/Entertainment/UpdateMovieData/UpdateMovieData";
 import ManageEventReview from "../Pages/Dashboard/Events/ManageEventReviews/ManageEventReview";
+import ManageEntertainment from "../Pages/Dashboard/Admin/ManageEntertainments/ManageEntertainment";
+import TravelPaymentSuccess from "../Pages/Travel/TravelPaymentReceipt/TravelPaymentSuccess";
 
 
 const Route = createBrowserRouter([
@@ -101,6 +103,10 @@ const Route = createBrowserRouter([
         path: "/strip-payment",
         element: <Payment />,
       },
+      // {
+      //   path: "/travel-payment-success",
+      //   element: <TravelPaymentSuccess />,
+      // },
       // ------------travel route end-------------
 
       //-------------Events route start-----------
@@ -173,6 +179,10 @@ const Route = createBrowserRouter([
       {
         path: "manageEvents",
         element: <ManageEvents></ManageEvents>,
+      },
+      {
+        path: 'manageEntertainments',
+        element: <ManageEntertainment></ManageEntertainment>
       },
       {
         path: "myAddedEvents",

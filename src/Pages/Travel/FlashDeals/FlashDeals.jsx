@@ -62,19 +62,13 @@ const FlashDeals = () => {
     <>
       <div>
         <Heading
-          title={"Flash Deals"}
-          subtitle={"Limited-Time Bus Ticket Discounts - Grab Exclusive Flash Deals for Affordable and Convenient Travel Before They're Gone!"}
+          title={"Catch the Best Deals Before Departure"}
+          subtitle={"Flash Deals"}
         />
       </div>
-      {/* <div className="flex flex-col md:flex-row justify-between mt-15 gap-10">
-                {
-                    flashDeals.map((deal, idx) => <FlashDealCard key={idx} deal={deal}/>)
-                }
-
-            </div> */}
       <div className="py-10">
         <Swiper
-          slidesPerView={3}
+          // slidesPerView={1}
           spaceBetween={30}
           pagination={{
             clickable: true,
@@ -83,7 +77,7 @@ const FlashDeals = () => {
             delay: 3500,
             disableOnInteraction: false,
           }}
-          navigation={true}
+          // navigation={true}
           modules={[Autoplay, Pagination, Navigation]}
           className="mySwiper"
           breakpoints={{
