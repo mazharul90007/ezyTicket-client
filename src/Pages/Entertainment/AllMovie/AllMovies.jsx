@@ -62,8 +62,8 @@ console.log(showingHanll);
     <section
       className={`py-24 px-4 md:px-10 bg-gradient-to-br ${
         darkMode
-          ? "from-black via-blue-900 to-purple-900 text-white"
-          : "from-green-200 via-green-50 to-green-200 text-black"
+          ? "text-white"
+          : ""
       } `}
     >
       <h2 className="text-3xl underline flex items-center justify-center md:text-4xl font-bold  mb-10 ">

@@ -20,41 +20,39 @@ const MovieDetailsPage = () => {
   const { id } = useParams();
 
   const { movies } = useEntertainmentData();
-console.log(movies);
-  const movie = movies.filter((movie) => movie.id == id)[0];
-console.log(movie);
+  console.log(movies.find((m) => m.id == id));
+  const movie = movies.find((movie) => movie.id ==id|| movie._id == id);
+  console.log(movie);
 
-const {data:movieInfo} = useQuery(
-  {
+  const { data: movieInfo } = useQuery({
     queryKey: ["movieDetails", id],
     queryFn: async () => {
       const res = await fetch(
         `https://api.themoviedb.org/3/movie/${id}?api_key=7c6a26f876561b33041c71bf76c78528`
       );
       return res.json();
-    }
-  }
-)
-const {data:castInfo} = useQuery(
-  {
+    },
+  });
+  const { data: castInfo } = useQuery({
     queryKey: ["castInfo", id],
     queryFn: async () => {
       const res = await fetch(
         `https://api.themoviedb.org/3/movie/${id}/credits?api_key=7c6a26f876561b33041c71bf76c78528`
       );
       return res.json();
-    }
-  }
-)
-const hour = parseInt(movieInfo?.runtime/60);
-const min= parseInt(movieInfo?.runtime%60);
-const actors = castInfo?.cast.map((actor) => actor.name).slice(0, 3).join(", ");
-const director = castInfo?.crew.find((crewMember) => crewMember.job === "Director")?.name || "Unknown Director";
+    },
+  });
+  const hour = parseInt(movieInfo?.runtime / 60);
+  const min = parseInt(movieInfo?.runtime % 60);
+  const actors = castInfo?.cast
+    .map((actor) => actor.name)
+    .slice(0, 3)
+    .join(", ");
+  const director =
+    castInfo?.crew.find((crewMember) => crewMember.job === "Director")?.name ||
+    "Unknown Director";
 
-
-
-
-// https://api.themoviedb.org/3/movie/1197306?api_key=7c6a26f876561b33041c71bf76c78528
+  // https://api.themoviedb.org/3/movie/1197306?api_key=7c6a26f876561b33041c71bf76c78528
   return (
     <div
       className={`pt-16 bg-gradient-to-br ${
@@ -62,10 +60,20 @@ const director = castInfo?.crew.find((crewMember) => crewMember.job === "Directo
       }`}
     >
       <div className="relative h-56 md:h-64 lg:h-96    ">
-        <img src={movie?.imageLink || `https://image.tmdb.org/t/p/w500${movie?.backdrop_path}`} className="w-full h-full object-cover " />
-        <div className={`absolute inset-0 bg-gradient-to-t ${
-        darkMode ? " text-white from-neutral-950/95  via-black/80   to-black/50" : " text-black from-white  /95  via-white/80   to-white/50"
-      } `}  />
+        <img
+          src={
+            movie?.imageLink ||
+            `https://image.tmdb.org/t/p/w500${movie?.backdrop_path}`
+          }
+          className="w-full h-full object-cover "
+        />
+        <div
+          className={`absolute inset-0 bg-gradient-to-t ${
+            darkMode
+              ? " text-white from-neutral-950/95  via-black/80   to-black/50"
+              : " text-black from-white  /95  via-white/80   to-white/50"
+          } `}
+        />
         <div className="absolute -top-10 lg:top-44 ">
           <section>
             <div className="relative bg-cover  ">
@@ -81,7 +89,10 @@ const director = castInfo?.crew.find((crewMember) => crewMember.job === "Directo
                     className=" "
                   >
                     <img
-                      src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
+                      src={
+                        movie?.imageLink ||
+                        `https://image.tmdb.org/t/p/w500${movie?.poster_path}`
+                      }
                       alt={movie?.title}
                       className=" shadow-lg md:h-72  md:flex"
                     />
@@ -102,26 +113,28 @@ const director = castInfo?.crew.find((crewMember) => crewMember.job === "Directo
                 <div className="md:w-2/4 mx-5 ">
                   <div className="mt-12 text-base pl-8 ">
                     <h2 className=" gap-5 text-3xl md:text-5xl  font-bold ">
-                      {movie?.title}
+                      {movie?.title || movie?.name}
                     </h2>
 
                     <p className="mt-4   ">
                       {movie?.overview ||
+                        movie?.description ||
                         "The amazing viewer experience got in the theatre. This is the movie of all time. Book now to experience the best of the best."}
                     </p>
 
                     {/* Benefits List */}
                     <ul className="mt-4   space-y-2">
-                      
                       <li className="flex items-center gap-2">
-                        <MdDirectionsBike></MdDirectionsBike>Director : {director}
+                        <MdDirectionsBike></MdDirectionsBike>Director :{" "}
+                        {movie?.director || director}
                       </li>
-                     
+
                       <li className="flex items-center gap-2">
-                        <MdCast></MdCast> Casts : {actors}
+                        <MdCast></MdCast> Casts : {movie?.actors || actors}
                       </li>
                       <li className="flex items-center gap-2">
-                        <IoStar /> Rating : {movie?.vote_average.toFixed(1) || "--"}/10
+                        <IoStar /> Rating :{" "}
+                        {movie?.vote_average?.toFixed(1) || "--"}/10
                       </li>
                     </ul>
                     {/* <div className="flex mt-10">
@@ -138,7 +151,6 @@ const director = castInfo?.crew.find((crewMember) => crewMember.job === "Directo
                     </div>
                   </div> */}
                   </div>
-                
                 </div>
 
                 {/* End COnatent */}
@@ -152,14 +164,22 @@ const director = castInfo?.crew.find((crewMember) => crewMember.job === "Directo
                     <div className="flex flex-col text-base gap-4 ">
                       <div>
                         <p>RUN TIME</p>
-                        <p>{hour}h {min}m</p>
+                        {movie?.duration || (
+                          <p>
+                            {hour}h {min}m
+                          </p>
+                        )}
                       </div>
                       <div>
                         <p>RELEASE DATE</p>
-                        <p>{movie?.release_date
-                        }</p>
+                        <p>{movie?.releaseDate || movie?.release_date}</p>
                       </div>
-                      <div className="flex gap-3">{movieInfo?.genres.map(g=> <div className="border-2 px-2 ">{g.name}</div> ) }</div>
+                      <div className="flex gap-3">
+                        {movie.genre ||
+                          movieInfo?.genres.map((g) => (
+                            <div className="border-2 px-2 ">{g.name}</div>
+                          ))}
+                      </div>
 
                       <div className="flex items-center justify-center md:justify-start gap-4">
                         {/* <Link to="https://www.youtube.com/watch?v=u9Mv98Gr5pY&ab_channel=SonyPicturesEntertainment">
@@ -178,8 +198,11 @@ const director = castInfo?.crew.find((crewMember) => crewMember.job === "Directo
       </div>
       {/* <img src={movie.poster} alt="" /> */}
 
-      <div className="mt-80 pt-80">
-        <h1 className="text-5xl font-extrabold text-center  mx-15 rounded-2xl"> Your Showtimes</h1>
+      <div className="mt-80 pt-80 md:pt-1">
+        <h1 className="text-5xl font-extrabold text-center  mx-15 rounded-2xl">
+          {" "}
+          Your Showtimes
+        </h1>
       </div>
 
       <Selection></Selection>
