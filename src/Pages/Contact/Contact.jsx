@@ -5,9 +5,9 @@ import { IoIosArrowForward } from "react-icons/io";
 const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const option =[
-    {way: 'Email', icon:<FaEnvelope className="text-white text-3xl" />,description: 'For any inquiries or support, '},
-    {way: 'Phone', icon: <FaPhone className="text-4xl mx-auto text-white mb-3" />,description: 'Call us for immediate assistance.'},
-    {way: 'Location', icon: <FaMapMarkerAlt className="text-4xl mx-auto text-white mb-3" />,description: 'Visit us at our office.'},
+    {way: 'Our Email', icon:<FaEnvelope className="text-white text-3xl" />,description: 'For any inquiries or support ',info1:"Business: ezy@gmail.com",info2:"Support: ticket@gmail.com"},
+    {way: 'Our Phone', icon: <FaPhone className="text-4xl mx-auto text-white mb-3" />,description: 'Call us for immediate assistance.',info1:"Main Office: +123 456 7890",info2:"24/7 Service: +987 654 3210"},
+    {way: 'Location', icon: <FaMapMarkerAlt className="text-4xl mx-auto text-white mb-3" />,description: 'Visit us at our office.',info1:"Wireless, Dhaka, Bangladesh",info2:"ZIP Code: 12345"},
 
   ]
 
@@ -39,22 +39,27 @@ const Contact = () => {
 
 
 
-<div className='bg-white absolute top-96 ml-28 mx-auto shadow-2xl w-10/12 h-96  mt-20'>
+<div className='bg-white/50 backdrop-blur-2xl absolute top-96 ml-28 mx-auto shadow-2xl w-10/12 h-96  mt-20'>
      {/* connections way */}
      <div className=' bg-main flex items-center justify-center  relative '>
      
       <div className='absolute z-20 -top-9 flex  gap-20'>
       {
   option.map((option => (
-    <div className='flex flex-col  justify-center items-center gap-5'>
+    <div className='flex flex-col justify-center items-center gap-5'>
       <p className='w-20 h-20 bg-main rounded-full flex items-center justify-center mx-auto mb-3'>
          {option.icon}
       </p>
      
 
-      <h1 className='text-2xl font-bold'>{option.way}</h1>
-      <p>{option.description}</p>
-      <button className='btn'>{option.way}</button>
+      <h1 className='text-2xl font-bold text-gray-900'>{option.way}</h1>
+      {/* <p>{option.description}</p> */}
+      <div className='text-center'>
+      <p className="text-gray-1200 mt-2">{option.info1}</p>
+      <p>{option.info2}</p>
+      </div>
+     
+      <button className='py-2 px-4 border-2 rounded-3xl mt-10 font-bold'>{option.way}</button>
     </div>
   )))
 }
@@ -67,7 +72,7 @@ const Contact = () => {
 
 
       {/* Contact Info Section */}
-      {/* <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-6xl mx-auto text-center mb-16">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-6xl mx-auto text-center mb-16">
         <div className="bg-white p-6 rounded-xl shadow-md">
           <FaMapMarkerAlt className="text-4xl mx-auto text-green-700 mb-3" />
           <h3 className="text-xl font-semibold text-green-800">Our Address</h3>
@@ -93,7 +98,7 @@ const Contact = () => {
           <p className="text-sm">Saturday: 10:00 AM - 4:00 PM</p>
           <p className="text-sm">Sunday: Closed</p>
         </div>
-      </div> */}
+      </div>
 
       {/* Message Us Section */}
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center bg-white/60 backdrop-blur-lg p-10 rounded-xl shadow-md">
