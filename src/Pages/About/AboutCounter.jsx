@@ -40,10 +40,10 @@ const CounterItem = ({ targetNumber, label }) => {
         <motion.div
             ref={ref}
             animate={controls}
-            className={` flex   py-4 rounded-md  ${darkMode ? '' : ''}`}
+            className={` flex   md:py-4 rounded-md  ${darkMode ? '' : ''}`}
         >
-            <div className="text-xl md:text-2xl font-semibold  mb-2 flex items-center gap-2">
-                <p>More than</p> <p className="text-main">{count}+</p> <p>people like us!</p>
+            <div className="text-sm md:text-2xl font-semibold  mb-2 flex items-center gap-2">
+                <p>More than</p> <p className="text-main">{count}+</p> <p>people liked us!</p>
             </div>
             
         </motion.div>
