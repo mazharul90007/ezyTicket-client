@@ -39,11 +39,10 @@ const TopEvents = () => {
             className={`mb-8 md:mb-16 lg:mb-20 ${darkMode ? "bg-dark-background text-dark-primary" : "bg-background"}`}
             id="eventsCard"
         >
-            <div className="pb-8">
-                <Heading title={"Only the Best, Just for You"} subtitle={"EzyTicket Top Events"} />
-            </div>
-
             <div className="mx-auto w-11/12">
+                <div className="">
+                    <Heading title={"Only the Best, Just for You"} subtitle={"EzyTicket Top Events"} />
+                </div>
                 {/* Mobile: Stack cards vertically */}
                 <div className="flex flex-col space-y-4 md:hidden">
                     {events.slice(0, 3).map((event, index) => (
@@ -66,7 +65,34 @@ const TopEvents = () => {
                                     whileHover={{ scale: 1.05 }}
                                     transition={{ duration: 0.3 }}
                                 />
-                                {/* ... rest of mobile card content ... */}
+                                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 flex justify-between items-end">
+                                    <h3 className="text-white font-bold text-lg md:text-xl"
+                                    >
+                                        {event.title}
+                                    </h3>
+                                    {/* Ticket and Date Info - Animated with Framer */}
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{opacity: 1, y: 0,
+                                                transition: {
+                                                    duration: 0.4,
+                                                    ease: "easeOut"
+                                                }
+                                                
+                                            }
+                                        }
+                                        viewport={{ once: true, margin: "0px 0px -100px 0px" }}
+
+                                        className="overflow-hidden text-sm md:text-base text-end"
+                                    >
+                                        <p className="text-white mt-2">
+                                            {event.totalTickets - event.soldTickets} Tickets Left
+                                        </p>
+                                        <p className="text-white">
+                                            {event.eventDate}
+                                        </p>
+                                    </motion.div>
+                                </div>
                             </Link>
                         </motion.div>
                     ))}
