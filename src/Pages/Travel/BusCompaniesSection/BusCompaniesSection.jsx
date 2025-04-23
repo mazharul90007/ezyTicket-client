@@ -6,42 +6,110 @@ import Heading from '../../../components/Heading';
 import useAuth from '../../../Hooks/useAuth';
 
 const BusPartnersSection = () => {
-  const {darkMode} = useAuth()
-  
-  // TODO:  data came from data base
+  const { darkMode } = useAuth()
+
   const partners = [
     {
-      name: 'CityLink Express',
+      name: 'Shohagh Paribahan',
+      logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSC6Br4x4iQdSsuUsR5IuDsAJAFmXNbKTb0Pw&s',
+      since: 2024,
+      routes: 1,
+      features: ['ac'],
+      tags: ['affordable'],
+      rating: 4.2,
+      description: 'Reliable intercity AC service with refund option',
+    },
+    {
+      name: 'Green Line Paribahan',
+      logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSC6Br4x4iQdSsuUsR5IuDsAJAFmXNbKTb0Pw&s',
+      since: 2023,
+      routes: 1,
+      features: ['non-ac'],
+      tags: ['economy'],
+      rating: 3.9,
+      description: 'Non-AC service with multiple seat bookings available',
+    },
+    {
+      name: 'Hanif Enterprise',
       logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSC6Br4x4iQdSsuUsR5IuDsAJAFmXNbKTb0Pw&s',
       since: 2015,
-      routes: 28,
-      features: ['luxury', 'wifi', 'ac'],
-      tags: ['luxury', 'premium'],
-      rating: 4.8,
-      description: 'Premium intercity service with luxury amenities',
-    },
-    {
-      name: 'GreenLine Buses',
-      logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSC6Br4x4iQdSsuUsR5IuDsAJAFmXNbKTb0Pw&s',
-      since: 2010,
-      routes: 42,
-      features: ['eco-friendly', 'wifi', 'charging'],
-      tags: ['eco-friendly'],
+      routes: 1,
+      features: ['ac'],
+      tags: ['comfortable'],
       rating: 4.5,
-      description: 'Eco-conscious travel with modern comforts',
+      description: 'Comfortable AC service to Rajshahi with refund support',
     },
     {
-      name: 'National Express',
+      name: 'Ena Transport',
       logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSC6Br4x4iQdSsuUsR5IuDsAJAFmXNbKTb0Pw&s',
-      since: 2008,
-      routes: 65,
-      features: ['ac', 'charging', 'entertainment'],
-      tags: ['standard'],
-      rating: 4.2,
-      description: 'Nationwide coverage with reliable service',
+      since: 2015,
+      routes: 1,
+      features: ['ac'],
+      tags: ['premium'],
+      rating: 4.6,
+      description: 'Premium long-distance service with refund option',
+    },
+    {
+      name: 'Desh Travels',
+      logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSC6Br4x4iQdSsuUsR5IuDsAJAFmXNbKTb0Pw&s',
+      since: 2018,
+      routes: 1,
+      features: ['ac'],
+      tags: ['holiday'],
+      rating: 4.3,
+      description: 'AC holiday trip with convenient timing but no refund',
+    },
+    {
+      name: 'Shyamoli Paribahan',
+      logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSC6Br4x4iQdSsuUsR5IuDsAJAFmXNbKTb0Pw&s',
+      since: 2025,
+      routes: 1,
+      features: ['non-ac'],
+      tags: ['budget'],
+      rating: 4.0,
+      description: 'Non-AC budget service suitable for family trips',
+    },
+    {
+      name: 'Soukhin Paribahan',
+      logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSC6Br4x4iQdSsuUsR5IuDsAJAFmXNbKTb0Pw&s',
+      since: 2015,
+      routes: 1,
+      features: ['ac'],
+      tags: ['office'],
+      rating: 4.1,
+      description: 'AC bus suited for office travel with refund policy',
+    },
+    {
+      name: 'Royal Coach',
+      logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSC6Br4x4iQdSsuUsR5IuDsAJAFmXNbKTb0Pw&s',
+      since: 2015,
+      routes: 1,
+      features: ['non-ac'],
+      tags: ['early-morning'],
+      rating: 3.8,
+      description: 'Non-AC service for night/early morning journeys',
+    },
+    {
+      name: 'Saint Martin Paribahan',
+      logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSC6Br4x4iQdSsuUsR5IuDsAJAFmXNbKTb0Pw&s',
+      since: 2015,
+      routes: 1,
+      features: ['ac'],
+      tags: ['adventure'],
+      rating: 4.7,
+      description: 'Adventure trips to Teknaf with full refund support',
+    },
+    {
+      name: 'Eagle Paribahan',
+      logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSC6Br4x4iQdSsuUsR5IuDsAJAFmXNbKTb0Pw&s',
+      since: 2015,
+      routes: 1,
+      features: ['non-ac'],
+      tags: ['group'],
+      rating: 4.0,
+      description: 'Non-AC late night service for groups and friends',
     },
   ];
-
 
 
   const featureIcons = {
@@ -49,7 +117,7 @@ const BusPartnersSection = () => {
     charging: <FaPlug className="text-green-400" />,
     ac: <TbAirConditioning className="text-red-400" />,
     'eco-friendly': <FaSnowflake className="text-emerald-400" />,
-    luxury: <FaStar className="text-purple-400" />,
+    luxury: <FaStar className="text-supporting" />,
   };
 
   return (
@@ -58,14 +126,14 @@ const BusPartnersSection = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
           <Heading
-          subtitle={"Strategic Partnerships"}
-          title={"Our Trusted Transport Allies"}
+            subtitle={"Strategic Partnerships"}
+            title={"Our Trusted Transport Allies"}
           ></Heading>
         </motion.div>
 
@@ -73,7 +141,7 @@ const BusPartnersSection = () => {
         {/* Partners Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <AnimatePresence>
-            {partners.map((partner, index) => (
+            {partners?.slice(0,6).map((partner, index) => (
               <motion.div
                 key={partner.name}
                 initial={{ opacity: 0, y: 30, scale: 0.95 }}
@@ -85,17 +153,17 @@ const BusPartnersSection = () => {
                 {/* Glow Effect */}
                 <div className={`absolute inset-0  rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity`} />
 
-                <div className={`relative ${darkMode ? "bg-[#1d1d1d] text-white":"bg-white text-black"}  rounded-2xl p-6 h-full overflow-hidden shadow-xl transition-all`}>
+                <div className={`relative ${darkMode ? "bg-[#1d1d1d] text-white" : "bg-white text-black"}  rounded-2xl p-6 h-full overflow-hidden shadow-xl transition-all`}>
                   {/* Partner Header */}
                   <div className="flex items-start justify-between mb-6">
-                    <img 
-                      src={partner.logo} 
-                      alt={partner.name} 
+                    <img
+                      src={partner.logo}
+                      alt={partner.name}
                       className="w-20 h-20  p-2 object-cover  rounded-xl"
                     />
                     <div className="flex items-center gap-1 px-3 py-1 rounded-full">
                       <FaStar className="text-amber-400 text-sm" />
-                      <span className="text-sm font-semibold text-amber-400">{partner.rating}</span>
+                      <span className="text-xl font-semibold text-amber-400">{partner.rating}</span>
                     </div>
                   </div>
 
@@ -112,7 +180,7 @@ const BusPartnersSection = () => {
                       <span className="text-sm">Since {partner.since}</span>
                     </div>
                     <div className="flex items-center gap-2 ">
-                      <FaRoute className="text-purple-400" />
+                      <FaRoute className="text-supporting" />
                       <span className="text-sm">{partner.routes}+ Routes</span>
                     </div>
                   </div>
@@ -120,10 +188,10 @@ const BusPartnersSection = () => {
                   {/* Features */}
                   <div className="flex flex-wrap gap-2 mb-6">
                     {partner.features.map(feature => (
-                      <motion.div 
+                      <motion.div
                         key={feature}
                         whileHover={{ scale: 1.05 }}
-                        className={`flex items-center gap-2 ${darkMode ? "bg-dark-surface":"bg-gray-100"} px-3 py-2 rounded-lg backdrop-blur-sm`}
+                        className={`flex items-center gap-2 ${darkMode ? "bg-dark-surface" : "bg-gray-100"} px-3 py-2 rounded-lg backdrop-blur-sm`}
                       >
                         {featureIcons[feature]}
                         <span className="text-sm  capitalize">{feature.replace('-', ' ')}</span>
@@ -145,8 +213,8 @@ const BusPartnersSection = () => {
         </div>
 
         {/* Partnership Metrics */}
-        <motion.div 
-          className={`mt-16 ${darkMode ? "bg-[#1d1d1d]":"bg-white"} rounded-2xl p-8 backdrop-blur-lg shadow-xl`}
+        <motion.div
+          className={`mt-16 ${darkMode ? "bg-[#1d1d1d]" : "bg-white"} rounded-2xl p-8 backdrop-blur-lg shadow-xl`}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, amount: 0.2 }}
@@ -163,7 +231,7 @@ const BusPartnersSection = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.1 }}
-                className={`p-4 ${darkMode ? "bg-dark-surface text-white": "bg-gray-100"} transition-colors  rounded-2xl`}
+                className={`p-4 ${darkMode ? "bg-dark-surface text-white" : "bg-gray-100"} transition-colors  rounded-2xl`}
               >
                 <div className="mb-3">{metric.icon}</div>
                 <div className="text-4xl font-bold  mb-1">{metric.value}</div>
@@ -178,3 +246,5 @@ const BusPartnersSection = () => {
 };
 
 export default BusPartnersSection;
+
+
