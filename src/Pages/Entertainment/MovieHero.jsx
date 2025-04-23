@@ -41,7 +41,7 @@ import { TbCategory } from "react-icons/tb";
 
 const MovieHeroSlider = () => {
   const { movies } = useEntertainmentData();
-  console.log(movies);
+  // console.log(movies);
   const newMovies = movies.slice(5, 10);
   return (
     <div className="relative text-white">
