@@ -176,7 +176,7 @@ const EventOffer = () => {
                                                 </motion.ul>
 
                                                 <motion.div
-                                                    className="flex flex-col sm:flex-row gap-3 items-center"
+                                                    className="flex  gap-3 items-center"
                                                     variants={itemVariants}
                                                 >
                                                     <div className="bg-black/40 backdrop-blur-sm py-1 px-2 rounded-md flex items-center gap-2 border border-white/20">
