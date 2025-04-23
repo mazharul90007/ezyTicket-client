@@ -1,162 +1,129 @@
-import { motion } from 'framer-motion';
-import { FiArrowRight, FiClock, FiCalendar, FiStar } from 'react-icons/fi';
-import useTravelContext from '../../../Hooks/TrevalHook/useTravelContext';
-import Heading from '../../../components/Heading';
+import { FaArrowRight, FaBus, } from "react-icons/fa";
+import { motion } from "framer-motion";
+import Heading from "../../../components/Heading";
+import useTravelContext from "../../../Hooks/TrevalHook/useTravelContext";
+import useAuth from "../../../Hooks/useAuth";
 
 const PopularBusRoutes = () => {
-    const {allBusData} = useTravelContext()
-  const demoRoutes= [
-    {
-      _id: "67e12be5f6b8682745586562",
-      busName: "Shohagh Paribahan",
-      from: "Mohakhali Bus Terminal, Dhaka",
-      to: "Kamalapur Bus Stand, Dhaka",
-      date: "01/03/2025",
-      busTimes: "8:30am",
-      type: "AC",
-      ticketPrice: 350,
-      refund: true,
-      bookedSeats: ["A2", "B3", "B4", "A4", "C4", "C3", "J4", "J3", "C1", "D1", "B2", "C2", "E4"]
-    },
-    {
-      _id: "67e12be5f6b8682745586563",
-      busName: "Green Line Paribahan",
-      from: "Gabtoli Bus Terminal, Dhaka",
-      to: "Chittagong Bus Terminal, Chittagong",
-      date: "05/04/2025",
-      busTimes: "10:00am",
-      type: "Non-AC",
-      ticketPrice: 550,
-      refund: false,
-      bookedSeats: ["H2", "G2", "G3", "J2", "J1", "I1", "J3", "D3", "E3", "E4", "D4", "F4", "H3", "I3"]
-    },
-    {
-      _id: "67e12be5f6b8682745586564",
-      busName: "Hanif Enterprise",
-      from: "Sayedabad Bus Terminal, Dhaka",
-      to: "Rajshahi Bus Terminal, Rajshahi",
-      date: "10/05/2025",
-      busTimes: "9:00pm",
-      type: "AC",
-      ticketPrice: 750,
-      refund: true,
-      bookedSeats: ["D2", "E2", "F2"]
-    },
-    // Add more routes as needed
-  ];
 
-  const processedRoutes = allBusData
-    .map(route => ({
-      ...route,
-      // Fix potential typo in bookedSeats property
-      bookedSeats: route.bookedSeats || [],
-      popularity: (route.bookedSeats?.length || 0) * 2 // Weighted popularity
-    }))
-    .sort((a, b) => b.popularity - a.popularity)
-    .slice(0, 6); // Show top 6 routes
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: { 
-      y: 0, 
-      opacity: 1,
-      transition: { type: 'spring', stiffness: 120 }
-    }
+  const {allBusData} = useTravelContext()
+  const {darkMode} = useAuth()
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
   };
 
   return (
-    <section className="pb-16 px-4 ">
-      <div className="container mx-auto">
-        <Heading
-        subtitle="Popular Routes"
-        title="Popular Bus Routes in Bangladesh"
-        />
+    <section 
+    className="pb-14 bg-gradient-to-br  relative overflow-hidden"
+    >
+      {/* Decorative background elements */}
+      <div 
+      className="absolute top-0 left-0 w-full h-full opacity-10"
+      >
+        <div 
+        className="absolute top-20 -left-20 w-96 h-96 bg-main rounded-full blur-3xl"
+        ></div>
+        <div 
+        className="absolute bottom-0 -right-20 w-96 h-96 bg-main rounded-full blur-3xl"
+        ></div>
+      </div>
 
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
+      <div 
+      className="container mx-auto px-4 sm:px-5  relative z-10"
+      >
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center"
         >
-          {processedRoutes.map((route) => (
-            <motion.div
-              key={route._id}
-              variants={itemVariants}
-              whileHover={{ scale: 1.03 }}
-              className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all"
+          <div 
+          className="inline-block relative">
+            <Heading
+            subtitle={"Popular Routs"}
+            title={"Discover Bangladesh's Most Traveled Highways"}
+            />
+          </div>
+        </motion.div>
+
+        <div 
+        className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {allBusData.map((bus, index) => (
+            <motion.div 
+              key={index}
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className={`group relative rounded-2xl ${darkMode ? "bg-[#1d1d1d]": "bg-white"}`}
             >
-              <div className="flex justify-between items-start mb-4">
-                <div>
-                  <h3 className="text-xl font-bold text-gray-800">
-                    {route.busName}
-                  </h3>
-                  <span className={`text-sm ${
-                    route.type === 'AC' ? 'text-blue-600' : 'text-gray-500'
-                  }`}>
-                    {route.type} Service
-                  </span>
-                </div>
-                {route.popularity > 15 && (
-                  <div className="flex items-center bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-sm">
-                    <FiStar className="mr-1" />
-                    Hot Route
+              {/* Animated route line */}
+              <div 
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <div 
+                className="absolute left-12 top-1/2 w-24 h-px bg-gradient-to-r from-main to-supporting  transform -translate-y-1/2"
+                ></div>
+                <div 
+                className="absolute right-12 top-1/2 w-24 h-px bg-gradient-to-r from-main to-supporting transform -translate-y-1/2"></div>
+              </div>
+
+              <div 
+              className={`relative h-full p-8 backdrop-blur-lg rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-white/30 `}
+              >
+                <div 
+                className="flex items-start space-x-4"
+                >
+                  {/* Animated icon container */}
+                  <motion.div 
+                    whileHover={{ rotate: 15 }}
+                    className="relative flex-shrink-0"
+                  >
+                    <div 
+                    className="absolute inset-0 bg-main rounded-xl blur opacity-30"
+                    ></div>
+                    <div 
+                    className="w-14 h-14 rounded-xl bg-main flex items-center justify-center relative"
+                    >
+                      <FaBus className="w-7 h-7 text-white" />
+                    </div>
+                  </motion.div>
+
+                  <div 
+                  className="flex-1">
+                    <h3 
+                    className="text-xl font-bold bg-gradient-to-r from-main to-supporting transform bg-clip-text text-transparent"
+                    >
+                      {bus.from} 
+                      <FaArrowRight 
+                      className={`${darkMode ? "text-white":"text-black" }  inline-flex mx-2`}/> 
+                      {bus.to}
+                    </h3>
+                    <div 
+                    className="mt-3 flex items-center space-x-2">
+                      <span className={`text-sm font-medium text-dark-secondary 
+                        ${darkMode ? "bg-dark-surface":"bg-purple-50" } px-3 py-1 rounded-full`}
+                        >
+                        12 Daily Trips
+                      </span>
+                      <span className={`text-sm font-medium text-dark-secondary 
+                        ${darkMode ? "bg-dark-surface":"bg-purple-50" } px-3 py-1 rounded-full`}
+                        >
+                        AC Available
+                      </span>
+                    </div>
                   </div>
-                )}
-              </div>
-
-              <div className="flex items-center text-gray-600 mb-4">
-                <span className="font-medium truncate">{route.from}</span>
-                <FiArrowRight className="mx-2 flex-shrink-0" />
-                <span className="font-medium truncate">{route.to}</span>
-              </div>
-
-              <div className="flex flex-wrap gap-4 mb-4">
-                <div className="flex items-center text-sm text-gray-500">
-                  <FiClock className="mr-2" />
-                  {route.busTimes}
                 </div>
-                <div className="flex items-center text-sm text-gray-500">
-                  <FiCalendar className="mr-2" />
-                  {route.date}
-                </div>
-              </div>
 
-              <div className="flex justify-between items-center mt-6">
-                <div>
-                  <span className="text-3xl font-bold text-green-600">
-                    ৳{route.ticketPrice}
-                  </span>
-                  <span className="text-gray-500 ml-2">/ seat</span>
-                </div>
-                <span className={`px-3 py-1 rounded-full text-sm ${
-                  route.refund 
-                    ? 'bg-green-100 text-green-800' 
-                    : 'bg-red-100 text-red-800'
-                }`}>
-                  {route.refund ? 'Refundable' : 'Non-refundable'}
-                </span>
+                {/* Hover effect connector */}
+                <div 
+                className="absolute bottom-0 left-1/2 w-0 h-1 bg-gradient-to-r from-main to-supporting transform -translate-x-1/2 group-hover:w-4/5 transition-all duration-500"
+                ></div>
               </div>
-
-              {route.bookedSeats?.length > 0 && (
-                <div className="mt-4 text-sm text-gray-500">
-                  <span className="font-medium">
-                    {route.bookedSeats.length} seats 
-                  </span> booked recently
-                </div>
-              )}
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -9,18 +9,12 @@ import Heading from "../../../components/Heading";
 import DiscountImage from "../../../assets/Events_image/event-banner1.avif";
 import DiscountImage2 from "../../../assets/Events_image/ride.webp";
 import DiscountImage3 from "../../../assets/Events_image/event-banner3.jpg";
-import bata from "../../../assets/ads/bata.gif";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import "swiper/css/effect-creative";
-import {
-  Autoplay,
-  Pagination,
-  Navigation,
-  EffectCreative,
-} from "swiper/modules";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import 'swiper/css/effect-creative';
+import { Autoplay, Pagination, EffectCreative } from 'swiper/modules';
 import { FaUsers } from "react-icons/fa6";
 
 const EventOffer = () => {

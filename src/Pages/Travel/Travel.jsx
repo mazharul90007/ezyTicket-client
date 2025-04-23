@@ -38,7 +38,7 @@ const Travel = () => {
         <WhyChooseUsTravel />
       </section>
       {/*<TravelTestimonials/> */}
-      {/* <PopularBusRoutes/> */}
+      <PopularBusRoutes/>
 
     </section>
   )
