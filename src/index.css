@@ -39,3 +39,9 @@
 .dashboard-badge {
     @apply font-semibold text-sm py-1 px-3 border border-gray-200 w-fit mx-auto my-2 rounded-md bg-orange-200
 }
+
+.clip-diagonal-reverse {
+    clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+  
+  
