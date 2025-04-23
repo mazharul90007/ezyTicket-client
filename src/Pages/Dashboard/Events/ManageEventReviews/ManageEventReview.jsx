@@ -1,10 +1,11 @@
+/* eslint-disable no-undef */
 import { useState } from "react";
 import Swal from "sweetalert2";
 import useEventReview from "./../../../../Hooks/useEventReview";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const ManageEventReview = () => {
-  const [eventReviews, refetch, isLoading] = useEventReview();
+  const [eventReviews, setEventReviews, isLoading] = useEventReview();
   const axiosSecure = useAxiosSecure();
   const [selectedEvent, setSelectedEvent] = useState(null);
 
@@ -20,30 +21,41 @@ const ManageEventReview = () => {
     setSelectedEvent(event);
     document.getElementById("verify_modal").showModal();
   };
-
   const handleVerifySubmit = () => {
     if (!selectedEvent || !selectedEvent._id) {
       Swal.fire("Error", "No review selected for verification.", "error");
       return;
     }
 
+    console.log("Verifying review with ID:", selectedEvent._id); // Log review ID
+
     axiosSecure
-      .patch(`/verifyEvent/${selectedEvent._id}`, { status: "verified" }) // Fixed backticks
+      .patch(`/verifyEvent/${selectedEvent._id}`, { status: "verified" })
       .then((res) => {
+        console.log(res); // Log the response for debugging
+
         if (res.data.modifiedCount > 0) {
           Swal.fire(
             "Success!",
             "Review verified successfully!",
             "success"
           ).then(() => {
-            refetch();
+            const updatedReviews = eventReviews.map((review) => {
+              if (review._id === selectedEvent._id) {
+                return { ...review, status: "verified" };
+              }
+              return review;
+            });
+            setEventReviews(updatedReviews);
             setSelectedEvent(null);
             document.getElementById("verify_modal").close();
           });
         } else {
+          // Handle cases when modifiedCount is 0 and provide better feedback
           Swal.fire(
             "Error",
-            "Failed to verify the review. Try again.",
+            res.data.message ||
+              "Failed to verify the review. It may already be verified or does not exist.",
             "error"
           );
         }
@@ -68,6 +80,7 @@ const ManageEventReview = () => {
         axiosSecure.delete(`/event-reviews/${id}`).then((res) => {
           if (res.data.deletedCount > 0) {
             Swal.fire("Deleted!", "The review has been removed.", "success");
+            // Refetch the data to reflect the deletion
             refetch();
           }
         });

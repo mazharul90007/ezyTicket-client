@@ -7,6 +7,7 @@ import useAuth from '../../Hooks/useAuth'
 import TravelFAQ from './TravelFAQ/TravelFAQ'
 import WhyChooseUsTravel from './TravelComponents/WhyChooseUsTravel'
 import TravelTestimonials from './TravelComponents/TravelTestimonials'
+import BusCompaniesSection from './BusCompaniesSection/BusCompaniesSection'
 const Travel = () => {
   const {darkMode} = useAuth()
   return (
@@ -24,13 +25,15 @@ const Travel = () => {
       </div> */}
       
       <AddTravelService />
+      <BusCompaniesSection></BusCompaniesSection>
 
       {/* set form */}
       <div id="scroll-section ">
         {/* <TravelUltimateCompanion/> */}
       </div>
-      <section className='px-4 my-20'>
+      <section className='px-4 mb-20'>
         <TravelFAQ/>
+        {/* TODO: need added premium section */}
         <WhyChooseUsTravel/>
       </section>
 {/* 

@@ -1,10 +1,52 @@
-import { IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowForward, IoIosTimer } from "react-icons/io";
 import useAuth from "../../Hooks/useAuth";
+import AboutCounter from "./AboutCounter";
+import { MdMoreTime } from "react-icons/md";
+import { CiCreditCard1, CiMedicalClipboard } from "react-icons/ci";
+import { FaRegHandshake } from "react-icons/fa";
+import { TbColorFilter, TbPhoneCall } from "react-icons/tb";
+import { IoCallOutline, IoColorFilterOutline } from "react-icons/io5";
+import { PiHandshakeLight } from "react-icons/pi";
 
 const About = () => {
   const { darkMode } = useAuth();
+
+  const services=[
+    {
+      title: "Real-Time Availability",
+      desc: "Live schedules",
+    icon:<IoIosTimer />
+    },
+    {
+      title: "Secure Payment",
+      desc: "100% Safe",
+      icon:<CiCreditCard1 />
+    },
+    {
+      title: "Dashboard Manager",
+      desc: "Helps Monitoring",
+      icon:<CiMedicalClipboard />
+    },
+    {
+      title: "Easy Ticket Booking",
+      desc: "Simple Process",
+      icon:<IoColorFilterOutline />
+    },
+    {
+      title: "Reliable Partners",
+      desc: "Verified and top-rated.",
+      icon:<PiHandshakeLight />
+    },
+    {
+      title: "24/7 Support",
+      desc: "When needed",
+      icon:<IoCallOutline />
+    },
+  ]
+
+
   return (
-    <div className={` text-black   ${darkMode ? "" : ""}`}>
+    <div className={` text-black   ${darkMode ? "text-white" : ""}`}>
       <div
         className={` relative text-center ${darkMode ? "text-gray-600" : ""}`}
       >
@@ -30,8 +72,8 @@ const About = () => {
 
 
         {/* Header Section */}
-        <div className="relative flex h-[500px] overflow-hidden mt-32">
-          {/* Image Section */}
+        {/* <div className="relative flex h-[500px] overflow-hidden mt-32">
+        
           <div className="w-full">
             <img
               src="/about1.jpg"
@@ -40,15 +82,16 @@ const About = () => {
             />
           </div>
 
-          {/* Text Section with angled clip on the RIGHT */}
+       
           <div className="absolute top-0 right-0 h-full w-1/2 bg-white z-10 clip-diagonal-reverse pl-44 shadow-lg overflow-y-auto">
             <h2 className="text-3xl font-bold mb-4">What We Are</h2>
             <p className="text-gray-700">
             We aim to simplify transportation and event experiences across the nation. Our platform empowers users to find, book, and manage travel and event plans with ease and efficiency — ensuring comfort, transparency, and trust at every step.
             </p>
-            {/* Repeat content as needed */}
+            
           </div>
-        </div>
+        </div> */}
+
       </div>
 
 
@@ -58,10 +101,19 @@ const About = () => {
 
       {/* Our Mission Section */}
       <div className="mt-20 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-        <div>
-          <h2 className="text-3xl font-semibold mb-4 text-green-700">
-            🎯 Our Mission
+   
+        <img
+          src="/about2.jpg"
+          alt="Our Mission"
+          className="rounded-xl shadow-lg"
+        />
+        
+        <div className="flex flex-col gap-2">
+          <p className="text-main font-bold">WHAT WE DO</p>
+          <h2 className="text-5xl font-semibold mb-4 ">
+            We make your booking easier, seamless and enjoyable!
           </h2>
+          <AboutCounter></AboutCounter>
           <p
             className={`text-lg leading-relaxed ${
               darkMode ? "text-gray-600" : ""
@@ -73,12 +125,7 @@ const About = () => {
             transparency, and trust at every step.
           </p>
         </div>
-        <img
-          src="https://media.istockphoto.com/id/1256476283/photo/from-a-vision-to-a-mission-hand-turns-dice-and-changes-the-word-vision-to-mission.jpg?s=612x612&w=0&k=20&c=6R_Cvlj4_eA2hwNpvVVhaN6-2qtXc9ZyosRBBh3DzzE="
-          alt="Our Mission"
-          className="rounded-xl shadow-lg"
-        />
-      </div>
+         </div>
 
       {/* Features Section */}
       <div className="mt-20 max-w-6xl mx-auto">
@@ -87,38 +134,14 @@ const About = () => {
           Key Features
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            {
-              title: "Real-Time Availability",
-              desc: "Live schedules and updates for travel and events.",
-            },
-            {
-              title: "Easy & Secure Booking",
-              desc: "Fast, simple, and safe transactions every time.",
-            },
-            {
-              title: "All-in-One Dashboard",
-              desc: "Manage your bookings, reviews, and services in one place.",
-            },
-            {
-              title: "Smart Filtering",
-              desc: "Find what you need faster with smart search and filters.",
-            },
-            {
-              title: "Reliable Partners",
-              desc: "Only verified and top-rated service providers.",
-            },
-            {
-              title: "Responsive Support",
-              desc: "Help is just a click away — 24/7 support.",
-            },
-          ].map((feature, idx) => (
+          {services.map((feature, idx) => (
             <div
               key={idx}
-              className={`p-6 rounded-lg shadow-md ${
-                darkMode ? "bg-black border text-gray-600" : "bg-white"
+              className={`p-6 flex flex-col justify-center items-center backdrop-blur-2xl shadow-xl ${
+                darkMode ? "" : ""
               }`}
             >
+              <p className="text-4xl ">{feature.icon}</p>
               <h3 className="text-xl font-bold text-green-800 mb-2">
                 {feature.title}
               </h3>
