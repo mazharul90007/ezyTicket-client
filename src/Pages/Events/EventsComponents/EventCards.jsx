@@ -16,9 +16,9 @@ const EventCards = () => {
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["events"],
+    queryKey: ["topEvents"],
     queryFn: async () => {
-      const res = await axiosPublic.get("/events");
+      const res = await axiosPublic.get("/topEvents");
       return res.data.sort(
         (a, b) => new Date(a.dateTime) - new Date(b.dateTime)
       ); // Sorting after fetching
@@ -34,10 +34,7 @@ const EventCards = () => {
 
   if (error)
     return <p className="text-center text-red-500">Error: {error.message}</p>;
-
-  const verifiedEvents = events.filter((event) => event.status === "verified");
-
-  const displayedEvents = verifiedEvents.slice(0, 4);
+  
   return (
     <div
       className={` ${
@@ -53,7 +50,7 @@ const EventCards = () => {
         Confirmation!
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mx-auto w-11/12">
-        {displayedEvents.map((event) => (
+        {events.slice(0, 3).map((event) => (
           <div
             key={event._id}
             className={`${
@@ -107,16 +104,6 @@ const EventCards = () => {
           </div>
         ))}
       </div>
-
-      {/* View All Button */}
-      {/* <div className="flex justify-center mt-8">
-        <Link
-          to="/allevents"
-          className="ezy-button-primary py-3 px-6 font-semibold text-xl rounded-lg"
-        >
-          View All Events
-        </Link>
-      </div> */}
     </div>
   );
 };

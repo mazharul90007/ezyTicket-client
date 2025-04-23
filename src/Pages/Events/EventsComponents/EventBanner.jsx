@@ -16,17 +16,17 @@ const EventBanner = ({scrollToSection}) => {
                 {/* Dark Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/30 to-transparent"></div>
 
-                <div className="absolute bottom-10 left-10 z-10">
-                    <p className="tracking-wide uppercase mb-2 text-xl">Limited Seats Available</p>
-                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-wide uppercase ">
+                <div className="absolute bottom-20 md:bottom-10 left-4 md:left-10 z-10">
+                    <p className="tracking-wide uppercase mb-1 md:mb-2 text-base md:text-xl">Limited Seats Available</p>
+                    <h1 className="text-2xl md:text-4xl lg:text-5xl font-semibold tracking-wide uppercase ">
                        Make Moments <br /> <span className="text-main">Become Memories</span>
                     </h1>
                 </div>
                 <div 
-                    className="absolute bottom-10 right-10 flex items-center gap-3 cursor-pointer"
+                    className="absolute bottom-4 md:bottom-10 right-4 md:right-10 flex items-center gap-3 cursor-pointer"
                     onClick={()=>scrollToSection("eventsCard")}
                 >
-                    <h3 className="uppercase text-xl font-lg">Scroll down</h3>
+                    <h3 className="uppercase text-base md:text-xl font-lg">Scroll down</h3>
                     <motion.div
                         animate={{
                             y: [0, 10, 0],
@@ -37,7 +37,7 @@ const EventBanner = ({scrollToSection}) => {
                             ease: "easeInOut",
                         }}
                     >
-                        <FaArrowDownLong className="text-lg font-thin" />
+                        <FaArrowDownLong className="text-base md:text-lg font-thin" />
                     </motion.div>
                 </div>
             </div>

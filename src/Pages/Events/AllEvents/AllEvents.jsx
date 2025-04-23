@@ -7,12 +7,22 @@ import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { useState } from "react";
 import { FaBangladeshiTakaSign, FaRegClock } from "react-icons/fa6";
 import { GiTicket } from "react-icons/gi";
+import Heading from "../../../components/Heading";
+import EventOffer from "../EventsComponents/EventOffer";
 
 const AllEvents = () => {
   const { darkMode } = useAuth();
   const axiosPublic = useAxiosPublic();
   const [currentPage, setCurrentPage] = useState(1);
   const eventsPerPage = 13; // 3 rows × 4 cols = 12 cards
+
+  const scrollToAllEvents = () => {
+    const element = document.getElementById("allEvents");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
 
   const {
     data: events = [],
@@ -50,39 +60,25 @@ const AllEvents = () => {
 
   return (
     <div
-      className={`my-16 ${
-        darkMode ? "bg-black text-white" : "bg-gray-50 text-black"
-      }`}
+      className={`mb-8 md:mb-16 lg:mb-20 ${darkMode ? "bg-black text-white" : "bg-gray-50 text-black"
+        }`}
     >
-      <div className="relative h-[240px] md:h-[300px] lg:h-[320px] xl:h-[360px] w-full flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 opacity-80 blur-sm"></div>
-
-        <div className="relative z-10 bg-white/30 dark:bg-black/30 backdrop-blur-lg rounded-xl p-6 md:p-10 text-center w-11/12 max-w-4xl mx-auto shadow-lg border border-white/20 dark:border-black/20">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 dark:text-white drop-shadow-md leading-tight">
-            Your Next Adventure Awaits
-          </h1>
-          <p className="mt-4 text-lg md:text-xl lg:text-2xl text-gray-700 dark:text-gray-200 font-medium">
-            Discover unforgettable experiences with{" "}
-            <span className="font-bold text-green-700 dark:text-green-400">
-              EzyTicket
-            </span>{" "}
-            — where every event becomes a memory.
-          </p>
-        </div>
-      </div>
-
+      <EventOffer></EventOffer>
       {/* Events Grid */}
-      <div className="py-10 w-11/12 mx-auto">
+      <div className="w-11/12 mx-auto" id="allEvents">
+        <div className="mb-4 mt-16 w-fit">
+          <h3 className="text-lg md:text-xl font-semibold text-main ">All Events</h3>
+        </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {displayedEvents.map((event) => {
             return (
               <Link to={`/eventdetailspublic/${event._id}`} key={event._id}>
                 <div
-                  className={`${
-                    darkMode
-                      ? "bg-dark-surface text-dark-primary"
-                      : "bg-white text-black"
-                  } rounded-md overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300 h-full flex flex-col group`}
+                  className={`${darkMode
+                    ? "bg-dark-surface text-dark-primary"
+                    : "bg-white text-black"
+                    } rounded-md overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300 h-full flex flex-col group`}
                 >
                   <div className="overflow-hidden">
                     <img
@@ -131,13 +127,17 @@ const AllEvents = () => {
         {/* Pagination */}
         <div className="flex justify-center mt-8 space-x-2">
           <button
-            onClick={() => setCurrentPage(currentPage - 1)}
+            onClick={() => {
+              setCurrentPage(currentPage - 1)
+              setTimeout(() => {
+                scrollToAllEvents();
+              }, 100);;
+            }}
             disabled={currentPage === 1}
-            className={`px-4 py-2 rounded-lg ${
-              currentPage === 1
-                ? "bg-gray-400 cursor-not-allowed"
-                : "ezy-button-primary"
-            }`}
+            className={`px-4 py-2 rounded-lg ${currentPage === 1
+              ? "bg-gray-400 cursor-not-allowed"
+              : "ezy-button-primary"
+              }`}
           >
             Previous
           </button>
@@ -146,24 +146,27 @@ const AllEvents = () => {
             <button
               key={index}
               onClick={() => setCurrentPage(index + 1)}
-              className={`px-4 py-2 rounded-lg ${
-                currentPage === index + 1
-                  ? "bg-green-700 text-white"
-                  : "bg-gray-300 hover:bg-gray-400"
-              }`}
+              className={`px-4 py-2 rounded-lg ${currentPage === index + 1
+                ? "bg-green-700 text-white"
+                : "bg-gray-300 hover:bg-gray-400"
+                }`}
             >
               {index + 1}
             </button>
           ))}
 
           <button
-            onClick={() => setCurrentPage(currentPage + 1)}
+            onClick={() => {
+              setCurrentPage(currentPage + 1);
+              setTimeout(() => {
+                scrollToAllEvents();
+              }, 100);
+            }}
             disabled={currentPage === totalPages}
-            className={`px-4 py-2 rounded-lg ${
-              currentPage === totalPages
-                ? "bg-gray-400 cursor-not-allowed"
-                : "ezy-button-primary"
-            }`}
+            className={`px-4 py-2 rounded-lg ${currentPage === totalPages
+              ? "bg-gray-400 cursor-not-allowed"
+              : "ezy-button-primary"
+              }`}
           >
             Next
           </button>

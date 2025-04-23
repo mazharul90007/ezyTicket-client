@@ -1,10 +1,11 @@
-import { useEffect } from "react";
+
 import useAuth from "../../Hooks/useAuth";
 import AllEvents from "./AllEvents/AllEvents";
 import EventBanner from "./EventsComponents/EventBanner";
 import EventCards from "./EventsComponents/EventCards";
 import EventInfo from "./EventsComponents/EventInfo";
 import EventReview from "./EventsComponents/EventReview";
+import TopEvents from "./EventsComponents/TopEvents";
 
 const Events = () => {
   const { darkMode } = useAuth();
@@ -28,7 +29,8 @@ const Events = () => {
         } `}
     >
       <EventBanner scrollToSection={scrollToSection}></EventBanner>
-      <EventCards></EventCards>
+      {/* <EventCards></EventCards> */}
+      <TopEvents></TopEvents>
       <AllEvents></AllEvents>
       <EventInfo></EventInfo>
     </div>

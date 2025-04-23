@@ -7,6 +7,7 @@ import {
 } from "react-icons/fa";
 import { IoMusicalNoteSharp } from "react-icons/io5";
 import useAuth from "../../../Hooks/useAuth";
+import Heading from "../../../components/Heading";
 
 const EventInfo = () => {
   const { darkMode } = useAuth();
@@ -66,16 +67,13 @@ const EventInfo = () => {
   ];
 
   return (
-    <div className={`px-4 py-8 text-center mb-10`}>
-      <h1 className="text-3xl font-semibold">
-        Experience Events with
-        <span className="text-main"> EzyTicket</span>
-      </h1>
-      <p className="mt-4 text-lg max-w-3xl mx-auto">
-        Organize events with unlimited possibilities.
-      </p>
+    <div className={`w-11/12 mx-auto text-center mb-8 md:mb-16 lg:mb-20`}>
+      <Heading
+      subtitle={"Explore Your Options"}
+      title={"From Concerts to Conferences"}
+      ></Heading>
 
-      <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         {events.map((event, index) => (
           <div
             key={index}
