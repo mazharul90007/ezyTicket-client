@@ -1,6 +1,8 @@
+/* eslint-disable no-undef */
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { motion } from "framer-motion";
 import Swal from "sweetalert2";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
@@ -159,7 +161,11 @@ const EventDetails = () => {
       Swal.fire("Error", "Something went wrong. Try again!", "error");
     }
   };
-
+  useEffect(() => {
+    requestAnimationFrame(() => {
+      document.body.style.transition = "none"; // Remove any transition applied globally
+    });
+  }, []);
   //Handle Checkout
   const handleCheckout = async () => {
     const checkoutData = {
@@ -226,8 +232,6 @@ const EventDetails = () => {
       Swal.fire("Error", "Something went wrong. Try again!", "error");
     }
   };
-
-
   // Helper components
   const DateDisplay = () => {
     const EventDate = eventData?.eventDate?.split("T")[0];
@@ -371,9 +375,14 @@ const EventDetails = () => {
     </div>
   );
 
-  const SuggestedEventCard = ({ event }) => (
+  const SuggestedEventCard = ({ event, index }) => (
     <Link to={`/eventdetailspublic/${event._id}`}>
-      <div
+      <motion.div
+        key={index}
+        initial={{ opacity: 0, y: 70 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 + index * 0.2, ease: "easeInOut" }}
+        whileHover={{ scale: 1.05 }}
         className={`${
           darkMode ? "bg-dark-surface text-dark-primary" : "bg-white text-black"
         } rounded-md overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300 h-full flex flex-col group`}
@@ -406,7 +415,7 @@ const EventDetails = () => {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </Link>
   );
 
@@ -452,16 +461,39 @@ const EventDetails = () => {
               className="w-full h-[400px] md:h-[450px] lg:h-[500px] object-cover rounded-lg shadow-md"
             />
 
-            <button
-              onClick={handleSaveEvent}
-              className={`flex flex-row btn ml-35 md:ml-60 lg:ml-90 mt-10 ${
-                isSaved
-                  ? "bg-green-500 text-white"
-                  : "hover:bg-green-400 hover:text-white"
-              }`}
-            >
-              <FaBookmark /> {isSaved ? "Saved" : "Save"}
-            </button>
+            <div className="flex gap-4 mt-10 flex-col md:flex-row md:ml-65">
+              <button
+                onClick={handleSaveEvent}
+                className={`flex flex-row btn ${
+                  isSaved
+                    ? "bg-green-500 text-white"
+                    : "hover:bg-green-400 hover:text-white"
+                } w-full sm:w-auto`}
+              >
+                <FaBookmark /> {isSaved ? "Saved" : "Save"}
+              </button>
+
+              {/* Add to Google Calendar Button */}
+              <a
+                href={`https://www.google.com/calendar/render?action=TEMPLATE&text=${
+                  eventData?.title
+                }&dates=${eventData?.eventDate}T${eventData?.eventTime.replace(
+                  ":",
+                  ""
+                )}00Z/${eventData?.eventDate}T${eventData?.eventTime.replace(
+                  ":",
+                  ""
+                )}30Z&details=${eventData?.details}&location=${
+                  eventData?.location
+                }`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 px-6 py-2 bg-blue-500 hover:bg-blue-400 text-white rounded-lg font-medium w-full sm:w-auto"
+              >
+                <BsFillCalendar2DateFill className="mr-2" />
+                Add to Calendar
+              </a>
+            </div>
 
             <div
               className={`${
@@ -809,8 +841,12 @@ const EventDetails = () => {
             Related Events
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {suggestionsData?.slice(0, 4).map((event) => (
-              <SuggestedEventCard key={event._id} event={event} />
+            {suggestionsData?.slice(0, 4).map((event, index) => (
+              <SuggestedEventCard
+                key={(event._id, index)}
+                event={event}
+                index={index}
+              />
             ))}
           </div>
         </div>
