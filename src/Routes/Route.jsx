@@ -46,6 +46,7 @@ import UpdateMovieData from "../Pages/Dashboard/Entertainment/UpdateMovieData/Up
 import ManageEventReview from "../Pages/Dashboard/Events/ManageEventReviews/ManageEventReview";
 import ManageEntertainment from "../Pages/Dashboard/Admin/ManageEntertainments/ManageEntertainment";
 import TravelPaymentSuccess from "../Pages/Travel/TravelPaymentReceipt/TravelPaymentSuccess";
+import Page404 from "../Pages/Page404/Page404";
 
 
 const Route = createBrowserRouter([
@@ -239,6 +240,10 @@ const Route = createBrowserRouter([
       },
     ],
   },
+  {
+    path: '*',
+    element: <Page404></Page404>
+  }
 ]);
 
 export default Route;
