@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import { motion } from "framer-motion";
 import Swal from "sweetalert2";
 import useAuth from "../../../Hooks/useAuth";
@@ -49,6 +51,13 @@ const EventDetails = () => {
   const [comments, setComments] = useState();
   const [ticketQuantity, setTicketQuantity] = useState(1);
   const [checkout, setCheckout] = useState(false);
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // Duration of the animation
+      easing: "ease-in-out", // Easing function for the animation
+      once: true, // Ensures the animation occurs only once
+    });
+  }, []);
 
   // Data fetching
   const {
@@ -375,14 +384,9 @@ const EventDetails = () => {
     </div>
   );
 
-  const SuggestedEventCard = ({ event, index }) => (
+  const SuggestedEventCard = ({ event }) => (
     <Link to={`/eventdetailspublic/${event._id}`}>
       <motion.div
-        key={index}
-        initial={{ opacity: 0, y: 70 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 + index * 0.2, ease: "easeInOut" }}
-        whileHover={{ scale: 1.05 }}
         className={`${
           darkMode ? "bg-dark-surface text-dark-primary" : "bg-white text-black"
         } rounded-md overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300 h-full flex flex-col group`}
@@ -488,7 +492,7 @@ const EventDetails = () => {
                 }`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 px-6 py-2 bg-blue-500 hover:bg-blue-400 text-white rounded-lg font-medium w-full sm:w-auto"
+                className="flex items-center justify-center gap-2 px-6 py-2 ezy-button-primary-sm text-white rounded-lg font-medium w-full sm:w-auto"
               >
                 <BsFillCalendar2DateFill className="mr-2" />
                 Add to Calendar
@@ -522,8 +526,8 @@ const EventDetails = () => {
                   onClick={() => setIsModalOpen(true)}
                   className={`px-4 py-2 rounded-lg font-medium ${
                     darkMode
-                      ? "bg-supporting hover:bg-supporting-dark"
-                      : "bg-supporting text-white hover:bg-supporting-dark"
+                      ? "ezy-button-secondary-sm "
+                      : "ezy-button-secondary-sm "
                   }`}
                 >
                   Add Comment
@@ -834,7 +838,7 @@ const EventDetails = () => {
         </div>
 
         {isModalOpen && <CommentModal />}
-
+        {/* Right Sidebar */}
         {/* More Events */}
         <div className="mt-16">
           <h2 className="text-4xl font-bold text-start border-l-4 border-supporting pl-2 rounded mb-6">
@@ -842,11 +846,13 @@ const EventDetails = () => {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {suggestionsData?.slice(0, 4).map((event, index) => (
-              <SuggestedEventCard
-                key={(event._id, index)}
-                event={event}
-                index={index}
-              />
+              <div
+                data-aos="fade-up" // Apply fade-up animation
+                data-aos-delay={`${index * 200}`} // Optional delay for staggering effect
+                key={event._id}
+              >
+                <SuggestedEventCard event={event} />
+              </div>
             ))}
           </div>
         </div>
