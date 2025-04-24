@@ -93,7 +93,7 @@ const Route = createBrowserRouter([
         element: <BusReservationPage />,
       },
       {
-        path: "/travel/bus-set/:id",
+        path: "/travel/bus-set/:tran_id",
         element: <TravelSelectSet />,
       },
       {
@@ -104,10 +104,10 @@ const Route = createBrowserRouter([
         path: "/strip-payment",
         element: <Payment />,
       },
-      // {
-      //   path: "/travel-payment-success",
-      //   element: <TravelPaymentSuccess />,
-      // },
+      {
+        path: "/travel-payment-success/:tran_id",
+        element: <TravelPaymentSuccess />,
+      },
       // ------------travel route end-------------
 
       //-------------Events route start-----------
