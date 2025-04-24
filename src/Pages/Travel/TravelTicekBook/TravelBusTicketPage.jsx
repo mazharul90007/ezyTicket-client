@@ -7,7 +7,7 @@ import SelectPlaceTime from "./SelectPlaceTime"
 const TravelBusTicketPage = () => {
 
   const { allBusData, filterBus, setFilterBus } = useTravelContext()
-  const {darkMode} = useAuth()
+  const { darkMode } = useAuth()
 
   return (
     <div className="my-20">
@@ -20,23 +20,25 @@ const TravelBusTicketPage = () => {
         }}
       >
         <div className="absolute inset-0 "></div>
-        <div className="text-center relative z-10">
+        <div className="text-center relative z-10 px-5">
           <SelectPlaceTime />
         </div>
       </div>
 
       {/* select bus */}
-      <section className="grid grid-cols-12 my-14 container mx-auto">
+      <section className="grid grid-cols-12 my-14 container mx-auto px-5">
+        <div className=" col-span-0 lg:col-span-3 hidden lg:flex">
 
-       <BusFilter/>
+          <BusFilter />
+        </div>
 
-          {/* bus card */}
+        {/* bus card */}
 
-        <div className="col-span-9 px-4 flex flex-col gap-10 ">
+        <div className="col-span-12 lg:col-span-9 flex flex-col gap-10 ">
           {
-            !filterBus ?  allBusData.map((bus,idx)=><BusCard key={idx} bus={bus}/> ) :
-            filterBus.map((bus,idx)=><BusCard key={idx} bus={bus}/> )
-        }
+            !filterBus ? allBusData.map((bus, idx) => <BusCard key={idx} bus={bus} />) :
+              filterBus.map((bus, idx) => <BusCard key={idx} bus={bus} />)
+          }
         </div>
       </section>
 

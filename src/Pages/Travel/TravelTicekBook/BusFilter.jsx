@@ -49,7 +49,7 @@ const BusFilter = () => {
 
   return (
     <div
-      className={`hidden lg:flex flex-col gap-2 col-span-3 ${
+      className={`hidden lg:flex flex-col gap-2  ${
         darkMode ? " text-white" : "text-[#111111]"
       }`}
     >
