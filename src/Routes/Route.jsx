@@ -47,6 +47,7 @@ import UpdateMovieData from "../Pages/Dashboard/Entertainment/UpdateMovieData/Up
 import UpdateHallDetails from "../Pages/Dashboard/Entertainment/UpdateHallDetails/UpdateHallDetails";
 import ManageEntertainment from "../Pages/Dashboard/Admin/ManageEntertainments/ManageEntertainment";
 import TravelPaymentSuccess from "../Pages/Travel/TravelPaymentReceipt/TravelPaymentSuccess";
+import Page404 from "../Pages/Page404/Page404";
 
 
 const Route = createBrowserRouter([
@@ -93,7 +94,7 @@ const Route = createBrowserRouter([
         element: <BusReservationPage />,
       },
       {
-        path: "/travel/bus-set/:id",
+        path: "/travel/bus-set/:tran_id",
         element: <TravelSelectSet />,
       },
       {
@@ -104,10 +105,10 @@ const Route = createBrowserRouter([
         path: "/strip-payment",
         element: <Payment />,
       },
-      // {
-      //   path: "/travel-payment-success",
-      //   element: <TravelPaymentSuccess />,
-      // },
+      {
+        path: "/travel-payment-success/:tran_id",
+        element: <TravelPaymentSuccess />,
+      },
       // ------------travel route end-------------
 
       //-------------Events route start-----------
@@ -245,6 +246,10 @@ const Route = createBrowserRouter([
       },
     ],
   },
+  {
+    path: '*',
+    element: <Page404></Page404>
+  }
 ]);
 
 export default Route;

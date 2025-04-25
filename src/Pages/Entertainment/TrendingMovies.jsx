@@ -18,7 +18,7 @@ import { FreeMode, Pagination, Navigation } from "swiper/modules";
 
 const TrendingMovies = () => {
   const { movies } = useEntertainmentData();
-  console.log(movies);
+  // console.log(movies);
 
   return (
     <section className=" mt-24  w-10/12 mx-auto md:px-10">

@@ -3,9 +3,11 @@ import { data, Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import travelBannerImage from "../../../assets/Travel_image/travel-service/bg-bus.jpg"
 import useTravelContext from "../../../Hooks/TrevalHook/useTravelContext";
+import useCurrentUser from "../../../Hooks/useCurrentUser";
 
 const TravelSelectSet = () => {
     const { user } = useAuth()
+    const [currentUser] = useCurrentUser()
     const [selectedSeats, setSelectedSeats] = useState([]);
     const {busPassengerData,setBusPassengerData} = useTravelContext()
     const location = useLocation()
@@ -46,6 +48,7 @@ const TravelSelectSet = () => {
         navigate("/strip-payment")
     }
 
+    console.log("----------------------",currentUser)
 
     return (
         <>
@@ -79,7 +82,7 @@ const TravelSelectSet = () => {
             <section className="container mx-auto my-20 px-5 ">
                 <div className="mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 ">
                     {/* Seat Selection Grid */}
-                    <div className={`  ${darkMode ?  "bg-[#1d1d1d] text-white" : "text-[#111111] bg-white" } p-6 rounded-lg shadow-2xl col-span-2 shadow-main`}>
+                    <div className={`  ${darkMode ?  "bg-[#1d1d1d] text-white" : "text-[#111111] bg-white" } p-6 rounded-lg shadow-2xl col-span-2 `}>
                         <h2 className="text-lg font-semibold mb-4">Select Your Seat</h2>
                         {/* Legend */}
                         <div className="flex items-center justify-between space-x-4 mb-6">
@@ -123,7 +126,7 @@ const TravelSelectSet = () => {
                     </div>
 
                     {/* Seat Details and Form */}
-                    <div className={`  ${darkMode ?  "bg-[#1d1d1d] text-white" : "text-[#111111] bg-white" } p-6 rounded-lg  col-span-1 shadow-2xl shadow-main`}>
+                    <div className={`  ${darkMode ?  "bg-[#1d1d1d] text-white" : "text-[#111111] bg-white" } p-6 rounded-lg  col-span-1 shadow-2xl `}>
                         <h2 className="text-lg font-semibold mb-4">Selected Your Seat</h2>
                         <div className={`mb-6 ${darkMode &&  ` bg-dark-surface  text-whit ` } rounded-2xl p-8`}>
                             <div className="flex justify-between py-2 font-semibold">
@@ -173,7 +176,7 @@ const TravelSelectSet = () => {
                                 <input
                                     type="text"
                                     name="name"
-                                    defaultValue={user?.displayName}
+                                    defaultValue={currentUser?.name}
                                     className={`w-full border input border-gray-300 rounded-lg px-4 py-2 mt-1 ${darkMode &&  ` bg-dark-surface border-main text-white` }`}
                                     placeholder="Enter your name"
                                     required
@@ -184,6 +187,7 @@ const TravelSelectSet = () => {
                                 <input
                                     type="tel"
                                     name="number"
+                                    defaultValue={currentUser?.phone}
                                     className={`w-full border input border-gray-300 rounded-lg px-4 py-2 mt-1 ${darkMode &&  ` bg-dark-surface border-main text-white` }`}
                                     placeholder="Enter your phone number"
                                     required
@@ -205,6 +209,7 @@ const TravelSelectSet = () => {
                                 <input
                                     type="text"
                                     name="address"
+                                    defaultValue={currentUser?.address}
                                     className={`w-full border input border-gray-300 rounded-lg px-4 py-2 mt-1 ${darkMode &&  ` bg-dark-surface border-main text-white` }`}
                                     placeholder="Enter your address"
                                     required

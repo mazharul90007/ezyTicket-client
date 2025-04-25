@@ -1,72 +1,214 @@
+import { IoIosArrowForward, IoIosTimer } from "react-icons/io";
 import useAuth from "../../Hooks/useAuth";
+import AboutCounter from "./AboutCounter";
+import { MdMoreTime } from "react-icons/md";
+import { CiCreditCard1, CiMedicalClipboard } from "react-icons/ci";
+import { FaFacebookF, FaLinkedinIn, FaRegHandshake } from "react-icons/fa";
+import { TbColorFilter, TbPhoneCall } from "react-icons/tb";
+import { IoCallOutline, IoColorFilterOutline } from "react-icons/io5";
+import { PiHandshakeLight } from "react-icons/pi";
+import { BsTwitterX } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const About = () => {
-  const {darkMode} = useAuth()
+  const { darkMode } = useAuth();
+
+  const services=[
+    {
+      title: "Real-Time Availability",
+      desc: "Live schedules",
+    icon:<IoIosTimer />
+    },
+    {
+      title: "Secure Payment",
+      desc: "100% Safe",
+      icon:<CiCreditCard1 />
+    },
+    {
+      title: "Dashboard Manager",
+      desc: "Helps Monitoring",
+      icon:<CiMedicalClipboard />
+    },
+    {
+      title: "Easy  Booking",
+      desc: "Simple Process",
+      icon:<IoColorFilterOutline />
+    },
+    {
+      title: "Reliable Partners",
+      desc: "Verified and top-rated.",
+      icon:<PiHandshakeLight />
+    },
+    {
+      title: "24/7 Support",
+      desc: "When needed",
+      icon:<IoCallOutline />
+    },
+  ]
+
+  
+  const leaders =[
+    { name: "Rohim Khan", role: "Manager",description:"Rohim Khan is a seasoned manager with over 10 years of experience in the transportation industry. He is known for his strategic thinking and leadership skills.",social:"https://www.linkedin.com/in/rohim-khan" },
+    { name: "Md.Abdullah", role: "Director",description:"Md.Abdullah is the visionary director behind our platform, with a passion for innovation and a commitment to excellence in customer service.",social:"https://www.linkedin.com/in/md-abdullah" },
+    { name: "Mehedi Hossain", role: "Employee",description:"Mehedi Hossain is a dedicated employee who ensures smooth operations and exceptional customer experiences. His attention to detail and problem-solving skills are invaluable.",social:"https://www.linkedin.com/in/mehedi-hossain" },
+  ]
+
   return (
-    <div className={`pt-40 text-black  px-6 py-16 ${darkMode? 'bg-black' : 'bg-gradient-to-br from-[#70fd94f5] via-[#f1fff0] to-[#b0fac2d7]'}`}>
-      <div className={`max-w-6xl mx-auto text-center ${darkMode? 'text-gray-600' : ''}`}>
+    <div className={` text-black   ${darkMode ? "text-white" : ""}`}>
+      <div
+        className={` relative text-center ${darkMode ? "text-gray-600" : ""}`}
+      >
+        <div className="relative ">
+          <img
+            src="/contact2.jpg"
+            alt=""
+            className=" w-full object-cover h-[200px] md:h-[400px]"
+          />
+          <div className="bg-gradient-to-l from-black/50 to-gray-700/90 inset-0 absolute"></div>
+        </div>
+
+        <div className=" absolute top-20 md:top-45 ml-7 md:ml-20 text-white text-md md:text-xl mb-16">
+          <h1 className="text-2xl md:text-5xl font-bold mb-1 md:mb-4">About Us</h1>
+          <p className="flex text-gray-200">
+            Home <IoIosArrowForward className="my-auto" /> About
+          </p>
+          {/* <p className="text-lg max-w-2xl mx-auto">
+                  We'd love to hear from you! Whether you have a question, feedback, or just want to say hello — we’re here to help.
+                </p> */}
+        </div>
+
+
+
         {/* Header Section */}
-        <h1 className="text-5xl font-bold mb-6 text-green-700">About Us</h1>
-        <p className="text-lg max-w-3xl mx-auto leading-relaxed">
-          Welcome to our <strong>all-in-one ticketing platform</strong>, designed to make booking for <strong>Travel, Events, and Entertainment</strong> seamless. Whether you’re planning a trip, attending a concert, or exploring entertainment options, we’ve got you covered with <strong>real-time availability, secure booking, and hassle-free check-ins</strong>.
-        </p>
+        {/* <div className="relative flex h-[500px] overflow-hidden mt-32">
+        
+          <div className="w-full">
+            <img
+              src="/about1.jpg"
+              alt="Side"
+              className="h-full w-full object-cover"
+            />
+          </div>
+
+       
+          <div className="absolute top-0 right-0 h-full w-1/2 bg-white z-10 clip-diagonal-reverse pl-44 shadow-lg overflow-y-auto">
+            <h2 className="text-3xl font-bold mb-4">What We Are</h2>
+            <p className="text-gray-700">
+            We aim to simplify transportation and event experiences across the nation. Our platform empowers users to find, book, and manage travel and event plans with ease and efficiency — ensuring comfort, transparency, and trust at every step.
+            </p>
+            
+          </div>
+        </div> */}
+
       </div>
 
+
+
+
+
+
       {/* Our Mission Section */}
-      <div className="mt-20 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-        <div>
-          <h2 className="text-3xl font-semibold mb-4 text-green-700">🎯 Our Mission</h2>
-          <p className={ `text-lg leading-relaxed ${darkMode? 'text-gray-600' : ''}`}>
-            We aim to simplify transportation and event experiences across the nation. Our platform empowers users to find, book, and manage travel and event plans with ease and efficiency — ensuring comfort, transparency, and trust at every step.
-          </p>
-        </div>
+      <div className="mt-20 w-10/12 md:w-full md:max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+   
         <img
-          src="https://media.istockphoto.com/id/1256476283/photo/from-a-vision-to-a-mission-hand-turns-dice-and-changes-the-word-vision-to-mission.jpg?s=612x612&w=0&k=20&c=6R_Cvlj4_eA2hwNpvVVhaN6-2qtXc9ZyosRBBh3DzzE="
+          src="/about2.jpg"
           alt="Our Mission"
           className="rounded-xl shadow-lg"
         />
-      </div>
+        
+        <div className="flex flex-col gap-2">
+          <p className="text-main text-xs md:text-base font-bold">WHAT WE DO</p>
+          <h2 className="text-xl md:text-5xl font-semibold md:mb-4 ">
+            We make your booking easier, seamless and enjoyable!
+          </h2>
+          <AboutCounter></AboutCounter>
+          <p
+            className={`text-sm md:text-lg leading-relaxed ${
+              darkMode ? "text-gray-600" : ""
+            }`}
+          >
+            We aim to simplify transportation and event experiences across the
+            nation. Our platform empowers users to find, book, and manage travel
+            and event plans with ease and efficiency — ensuring comfort,
+            transparency, and trust at every step.
+          </p>
+        </div>
+         </div>
 
       {/* Features Section */}
-      <div className="mt-20 max-w-6xl mx-auto">
-        <h2 className="text-3xl font-semibold text-center text-green-700 mb-12"> Key Features</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            { title: "Real-Time Availability", desc: "Live schedules and updates for travel and events." },
-            { title: "Easy & Secure Booking", desc: "Fast, simple, and safe transactions every time." },
-            { title: "All-in-One Dashboard", desc: "Manage your bookings, reviews, and services in one place." },
-            { title: "Smart Filtering", desc: "Find what you need faster with smart search and filters." },
-            { title: "Reliable Partners", desc: "Only verified and top-rated service providers." },
-            { title: "Responsive Support", desc: "Help is just a click away — 24/7 support." },
-          ].map((feature, idx) => (
-            <div key={idx} className={`p-6 rounded-lg shadow-md ${darkMode? 'bg-black border text-gray-600' : 'bg-white'}`}>
-              <h3 className="text-xl font-bold text-green-800 mb-2">{feature.title}</h3>
-              <p className="text-gray-600">{feature.desc}</p>
+      <div className="mt-20 w-10/12 max-w-6xl mx-auto">
+        <h2 className="text-xl md:text-3xl font-semibold text-center  mb-12">
+          {" "}
+          Why Choose Us
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+          {services.map((feature, idx) => (
+            <div
+              key={idx}
+              className={`p-2 md:p-12 flex flex-col justify-center items-center backdrop-blur-2xl shadow-2xl shadow-gray-500 ${
+                darkMode ? "" : ""
+              }`}
+            >
+              <p className="text-4xl ">{feature.icon}</p>
+              <h3 className="text-sm md:text-xl text-main font-bold mt-4">
+                {feature.title}
+              </h3>
+              <p className="text-gray-600 text-xs md:text-base">{feature.desc}</p>
             </div>
           ))}
         </div>
       </div>
 
       {/* Team Section */}
-      <div className="mt-24 max-w-6xl mx-auto text-center">
-        <h2 className="text-3xl font-semibold text-green-700 mb-10"> Meet the Team</h2>
+      <div className="my-24 w-11/12 mx-auto text-center ">
+        <h2 className="text-3xl font-semibold  mb-10">
+          {" "}
+          Meet Our Team
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 ">
-          {[{name: 'Rohim Khan', role: 'Manager'}, {name: 'Md.Abdullah', role: 'Director'}, {name: 'Mehedi Hossain', role: 'Employee'}].map((member) => (
-            <div key={member} className={` rounded-lg p-6  ${darkMode? '' : 'bg-white'}`}>
-              <div className={`w-24 h-24 mx-auto mb-4 rounded-full bg-green-200 `} />
-              <h3 className="text-lg font-bold text-green-900">{member.name}</h3>
+          {leaders.map((member) => (
+            <div
+              key={member}
+              className={` rounded-lg p-6 border ${darkMode ? "" : "bg-white"}`}
+            >
+              <div
+                className={`w-36 h-36 mx-auto mb-4 rounded-full bg-green-200 `}
+              />
+              <div className="mb-5">
+              <h3 className="text-lg text-main font-bold ">
+                {member.name}
+              </h3>
               <p className="text-sm text-gray-600">{member.role}</p>
+              </div>
+            
+
+              <p className="px-2 text-center">{member.description}</p>
+
+              <div className="flex gap-5 justify-center items-center mt-7">
+
+                <Link to='https://www.linkedin.com/in/apu-r0y/'>
+                <FaLinkedinIn />
+                </Link>
+                <Link to='https://www.linkedin.com/in/apu-r0y/'>
+                <BsTwitterX />
+                </Link>
+
+                <Link to='https://www.linkedin.com/in/apu-r0y/'>
+                <FaFacebookF />
+                </Link>
+             
+              </div>
             </div>
           ))}
         </div>
       </div>
 
       {/* Call To Action */}
-      <div className="flex justify-center mt-24">
+      {/* <div className="flex justify-center mt-24">
         <button className="px-10 py-4 bg-green-600 text-white text-lg font-semibold rounded-lg shadow-md hover:bg-green-700 transition">
           Explore the Platform
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

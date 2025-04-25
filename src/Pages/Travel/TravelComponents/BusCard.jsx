@@ -1,59 +1,191 @@
-import { FaBus } from "react-icons/fa";
+
 import { Link } from "react-router-dom";
 import useTravelContext from "../../../Hooks/TrevalHook/useTravelContext";
-import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import useAuth from "../../../Hooks/useAuth";
-const BusCard = ({ bus, time}) => {
-  
-    const {searchData} =useTravelContext()
-    const {darkMode} = useAuth()
-    // console.log(bus)
+import { PiBusBold } from "react-icons/pi";
+import { FaLocationDot, FaClock, FaChair, FaBangladeshiTakaSign } from "react-icons/fa6";
+
+
+
+const BusCard = ({ bus, time }) => {
+
+    const { searchData } = useTravelContext()
+    const { darkMode } = useAuth()
+    const currentDate = new Date().toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      })
 
     return (
         <div 
-        className={`flex flex-col justify-between border rounded-2xl  ${darkMode ?  "bg-[#1d1d1d] text-white border-none" : "bg-white text-[#111111]"}`}>
-            <div className="flex flex-col lg:flex-row justify-between gap-10 p-4 md:p-10 pb-0">
-                {/*ToDo company logo */}
-                <div className="flex flex-col md:flex-row gap-5">
-                    <img className="w-full md:w-20 h-[150px] md:h-20 object-cover" src="https://t4.ftcdn.net/jpg/02/69/47/51/360_F_269475198_k41qahrZ1j4RK1sarncMiFHpcmE2qllQ.jpg" alt="Bus Image" />
-                    {/*  */}
-                    <div className="md:max-w-[200px]">
-                        <h1 className="text-xl font-black">{bus?.busName}</h1>
-                        <h1 className="text-xs">{bus?.from}</h1>
-                    </div>
+        className={`w-full mx-auto 
+            ${darkMode ? "bg-[#1d1d1d] text-white":
+                "bg-white"}  rounded-2xl shadow-lg overflow-hidden m-4 `}
+        >
+            {/* Header Section */}
+            <div 
+            className="bg-main text-white p-6 flex justify-between items-center">
+                <div>
+                    <h1 
+                    className="text-2xl font-bold flex items-center gap-2">
+                        <PiBusBold className="text-supporting" />
+                        {bus?.busName || "Unknown Bus"}
+                    </h1>
+                    <p 
+                    className="text-sm text-emerald-200"
+                    >Express Service • {bus?.type || "Non-AC Bus"}
+                    </p>
                 </div>
-                <div className="flex flex-col md:flex-row flex-grow gap-4 justify-between ">
-                    {/* date */}
-                    <div>
-                        <h1 className="text-xl  font-black">{bus?.busTimes}</h1>
-                        <p>{searchData?.date ? searchData.date : new Date().toISOString().split("T")[0]}<br /><span className="text-xs">{bus?.to}</span></p>
-                    </div>
-                    {/* hour */}
-                    <div className="flex flex-col items-center">
-                        <p>4 Hours</p>
-                        <div className="flex items-center">
-                            <div className="bg-supporting text-white p-2 rounded-full">
-                                <FaBus size={20} />
-                            </div>
-                            <div className="h-1 w-32 bg-supporting"></div>
-                            <div className="w-4 h-4 bg-supporting rounded-full"></div>
-                        </div>
-                    </div>
-                    {/* price */}
-                    <div className="text-center flex justify-center items-center">
-                        <h1 className="text-2xl flex">{bus?.ticketPrice} <FaBangladeshiTakaSign className="text-xs"/></h1>
-                    </div>
-                    {/* action button and set */}
-                    <div className="flex flex-col gap-2  items-center">
-                        <Link to={`/travel/bus-set/${bus?._id}`} state={bus} className="btn bg-main px-2 w-full text-white">Buy Ticket</Link>
-                        <p className="text-xs"><span className="font-black">52</span> Sets (Available)</p>
-                    </div>
+                <div className="text-right"
+                >
+                    <p className="text-xs opacity-75">
+                        Booking Ref:
+                        </p>
+                    <p className="font-mono text-emerald-100">
+                        <span className="uppercase">
+                            {bus?.busName.slice(0,3)}</span>
+                            -{bus?._id}
+                    </p>
                 </div>
             </div>
-            {/* information */}
-            <div className="flex flex-col md:flex-row md:items-center text-center gap-4 px-4 md:px-10 py-5 bg-main/40 rounded-b-2xl">
-                <p className="btn border-none ezy-button-secondary">Non-Refundable</p>
-                <Link to="/travel/Bus-Ticket-Cancellation-policy" className=" border-none btn ezy-button-secondary">Cancellation Policy</Link>
+
+            {/* Main Content */}
+            <div className="p-6 space-y-6">
+                {/* Route Details */}
+                <div className="grid md:grid-cols-2 gap-6">
+                    <div className="space-y-4">
+                        {/* From */}
+                        <div className="flex items-start gap-3">
+                            <FaLocationDot className="text-emerald-600 mt-1 shrink-0" />
+                            <div>
+                                <h3 
+                                className="font-bold ">
+                                    {bus?.from || "Unknown Starting Point"}
+                                    </h3>
+                                <p className="text-sm text-dark-primary">
+                                    Platform 1
+                                    </p>
+                            </div>
+                        </div>
+
+                        {/* Duration */}
+                        <div className="flex items-center gap-3 ml-1">
+                            <FaClock className="text-emerald-600 shrink-0" />
+                            <div>
+                                <p className="font-medium ">4 Hours Journey</p>
+                                <div className="w-32 h-1 bg-emerald-100 rounded-full mt-1">
+                                    <div className="w-3/4 h-full bg-emerald-500 rounded-full"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* To */}
+                        <div className="flex items-start gap-3">
+                            <FaLocationDot className="text-emerald-600 mt-1 shrink-0" />
+                            <div>
+                                <h3 className="font-bold ">
+                                    {bus?.to || "Unknown Destination"}
+                                    </h3>
+                                <p className="text-sm text-dark-primary ">
+                                    Platform 2
+                                    </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Trip Info */}
+                    <div className="space-y-6">
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className={` ${darkMode ? "bg-dark-surface text-dark-primary" : "bg-emerald-50 "} p-4 rounded-xl`}>
+                                <p className="text-sm text-emerald-600">
+                                    Departure Time
+                                    </p>
+                                <p className="font-bold text-2xl ">
+                                    {bus?.busTimes || "N/A"}
+                                    </p>
+                            </div>
+                            <div className={` 
+                                ${darkMode ? "bg-dark-surface text-dark-primary" 
+                                : 
+                                "bg-emerald-50"}  
+                                p-4 rounded-xl`}>
+                                <p className="text-sm text-emerald-600">
+                                    Date
+                                    </p>
+                                <p className="font-bold ">
+                                    {searchData?.date || currentDate}
+                                    </p>
+                            </div>
+                        </div>
+
+                        <div 
+                        className={` 
+                        ${darkMode ? "bg-dark-surface text-dark-primary" : 
+                        "bg-emerald-50 "}  p-4 rounded-xl `
+                        }>
+                            <p className="text-sm text-emerald-600">
+                                Total Price
+                                </p>
+                            <p 
+                            className="font-bold text-3xl text-emerald-700 flex items-center gap-1"
+                            >
+                                {bus?.ticketPrice || 0} 
+                                <FaBangladeshiTakaSign className="text-base" />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Seat Availability & Action */}
+                <div 
+                className={`flex flex-col sm:flex-row justify-between items-center 
+                    ${darkMode ? "bg-dark-surface text-dark-primary" :
+                     "bg-emerald-50 "} p-4 rounded-xl gap-4`}
+                     >
+                    <div className="flex items-center gap-3">
+                        <FaChair className="text-emerald-600 text-xl" />
+                        <div>
+                            <p className="font-semibold text-emerald-700">
+                                {52 - bus?.bookedSeats?.length || 52} Seats Available
+                            </p>
+                            <p className="text-sm text-emerald-600">Economy Class</p>
+                        </div>
+                    </div>
+                    <Link
+                        to={`/travel/bus-set/${bus?._id}`}
+                        state={bus}
+                        className="w-full sm:w-auto bg-main hover:bg-emerald-700 text-white px-8 py-3 rounded-xl font-semibold transition-colors duration-200 text-center"
+                    >
+                        Book Now
+                    </Link>
+                </div>
+
+                {/* Policy Section */}
+                <div className="text-center space-y-2">
+                    <p className="text-emerald-600 font-medium">
+                        <span className={` 
+                            ${darkMode ? "bg-dark-surface text-dark-primary" :
+                             "bg-emerald-50 "} px-2 py-1 rounded-md`}
+                             >ⓘ Non-Refundable Ticket</span>
+                    </p>
+                    <p className="text-sm text-gray-600">
+                        Cancellation policy: 50% refund up to 6 hours before departure
+                    </p>
+                </div>
+
+                {/* Footer */}
+                {/* <div 
+                className="border-t border-emerald-100 pt-4">
+                    <div 
+                    className="font-mono text-center text-2xl tracking-widest text-gray-800">
+                        ▰▰▰▰▰ 1234 5678 9012 ▰▰▰▰▰
+                    </div>
+                    <p 
+                    className="text-center text-xs text-gray-500 mt-2">
+                        Show this barcode at boarding time
+                    </p>
+                </div> */}
             </div>
         </div>
     )

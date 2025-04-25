@@ -36,6 +36,8 @@ const Contact = () => {
     },
   ];
 
+
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -50,12 +52,12 @@ const Contact = () => {
       <div className={`relative  ${darkMode ? "text-white" : ""} pb-44 md:pb-1`}>
         {/* Page Heading */}
         <div className="relative ">
-          <img src="/contact1.jpg" alt="" className=" w-full object-cover" />
+          <img src="/contact1.jpg" alt="" className=" w-full object-cover h-[200px] md:h-full" />
           <div className="bg-gradient-to-l from-black/70 to-transparent inset-0 absolute"></div>
         </div>
 
-        <div className=" absolute top-20 md:top-45 ml-20 text-white text-md md:text-xl mb-16">
-          <h1 className="text-3xl md:text-5xl font-bold mb-4">Contact Us</h1>
+        <div className=" absolute top-20 md:top-45 ml-7 md:ml-20 text-white text-md md:text-xl mb-16">
+          <h1 className="text-2xl md:text-5xl font-bold mb-1 md:mb-4">Contact Us</h1>
           <p className="flex text-gray-200">
             Home <IoIosArrowForward className="my-auto" /> Contact
           </p>
