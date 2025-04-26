@@ -1,12 +1,24 @@
+import { useDispatch, useSelector } from "react-redux";
 import travelBannerImage from "../../../assets/Travel_image/travel-service/bg-bus.jpg"
 import useTravelContext from "../../../Hooks/TrevalHook/useTravelContext"
 import useAuth from "../../../Hooks/useAuth";
 import BusCard from "../TravelComponents/BusCard"
 import BusFilter from "./BusFilter";
 import SelectPlaceTime from "./SelectPlaceTime"
+import { useEffect } from "react";
+import { fetchBus } from "../../../features/allBus/allBusSlice";
 const TravelBusTicketPage = () => {
 
-  const { allBusData, filterBus, setFilterBus } = useTravelContext()
+
+  const { allBus } = useSelector(state => state.allBus)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchBus())
+  }, [dispatch])
+
+
+  const { allBusData, filterBus, } = useTravelContext()
   const { darkMode } = useAuth()
 
   return (
@@ -36,7 +48,9 @@ const TravelBusTicketPage = () => {
 
         <div className="col-span-12 lg:col-span-9 flex flex-col gap-10 ">
           {
-            !filterBus ? allBusData.map((bus, idx) => <BusCard key={idx} bus={bus} />) :
+            !filterBus ?
+              allBus.map((bus, idx) => <BusCard key={idx} bus={bus} />)
+              :
               filterBus.map((bus, idx) => <BusCard key={idx} bus={bus} />)
           }
         </div>

@@ -9,20 +9,25 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ToastContainer } from 'react-toastify';
 import TravelProvider from './Provider/TravelProvider.jsx';
 import EntertainmentProvider from './Provider/EntertainmentProvider.jsx';
+import { store } from './app/store.js';
+import { Provider } from 'react-redux';
+
 
 const queryClient = new QueryClient()
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <EntertainmentProvider>
-        <TravelProvider>
-          <RouterProvider router={Route} />
-          <ToastContainer/>
-        </TravelProvider>
-        </EntertainmentProvider>
-      </AuthProvider>
-    </QueryClientProvider>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <EntertainmentProvider>
+            <TravelProvider>
+              <RouterProvider router={Route} />
+              <ToastContainer />
+            </TravelProvider>
+          </EntertainmentProvider>
+        </AuthProvider>
+      </QueryClientProvider>
+    </Provider>
   </StrictMode>,
 )
