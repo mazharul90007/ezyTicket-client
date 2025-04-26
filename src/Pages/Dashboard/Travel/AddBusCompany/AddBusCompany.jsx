@@ -1,8 +1,11 @@
 import React from 'react'
+import BusDetailsForm from './BusDetailsForm';
 
 const AddBusCompany = () => {
   return (
-    <div>AddBusCompany</div>
+    <div>
+        <BusDetailsForm/>
+    </div>
   )
 }
 

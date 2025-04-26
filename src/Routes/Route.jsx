@@ -168,7 +168,7 @@ const Route = createBrowserRouter([
         element: <ManageUsers></ManageUsers>,
       },
       {
-        path: "add-bus-service",
+        path: "add-your-bus-service",
         element: <AddBusCompany/>
       },
       // ------------Events route start----------

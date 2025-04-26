@@ -4,6 +4,7 @@ import busImage from "../../../assets/Travel_image/travel-service/image1.jpg";
 import busImage2 from "../../../assets/Travel_image/travel-service/bg-bus.jpg";
 import { FaBus, FaCheckSquare } from "react-icons/fa";
 import Heading from "../../../components/Heading";
+import { Link } from "react-router-dom";
 
 const AddTravelService = () => {
     return (
@@ -60,7 +61,7 @@ const AddTravelService = () => {
                                 <FaCheckSquare className="text-main text-2xl" /> 24/7 Customer Support
                             </li>
                         </ul>
-
+                        <Link to={"/dashboard/add-your-bus-service"}>
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
@@ -68,6 +69,7 @@ const AddTravelService = () => {
                         >
                             Add Your Bus Service
                         </motion.button>
+                        </Link>
                     </motion.div>
                 </div>
             </div>
