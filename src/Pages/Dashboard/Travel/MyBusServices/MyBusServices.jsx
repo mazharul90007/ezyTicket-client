@@ -11,29 +11,29 @@ import { useQuery } from "@tanstack/react-query";
 const MyBusServices = () => {
   const [selectedBus, setSelectedBus] = useState(null);
   const { user } = useAuth();
-const axiosSecure = useAxiosSecure();
-
-// ✅ Define the fetcher function first
-const fetchUserBuses = async (email) => {
-  const res = await axiosSecure.get(`/api/buses?email=${email}`);
-  return res.data;
-};
-
-// ✅ Now use the fetcher in the query
-const useUserBuses = (email) => {
-  return useQuery({
-    queryKey: ['user-buses', email],
-    queryFn: () => fetchUserBuses(email),
-    enabled: !!email,
-  });
-};
-
-const { data: buses, isLoading } = useUserBuses(user?.email);
-console.log("buses", buses);
-  
+  const axiosSecure = useAxiosSecure();
 
 
-  const handleDelete = () => {
+  const fetchUserBuses = async (email) => {
+    const res = await axiosSecure.get(`/api/buses?email=${email}`);
+    return res.data;
+  };
+
+
+  const useUserBuses = (email) => {
+    return useQuery({
+      queryKey: ['user-buses', email],
+      queryFn: () => fetchUserBuses(email),
+      enabled: !!email,
+    });
+  };
+
+  const { data: buses = [], isLoading } = useUserBuses(user?.email);
+  console.log("buses-----------------------", buses);
+
+
+
+  const handleDelete = async () => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -52,6 +52,8 @@ console.log("buses", buses);
       }
     });
   };
+
+
   const handleUpdate = () => {
     Swal.fire({
       title: "Coming Soon...!",
@@ -65,16 +67,16 @@ console.log("buses", buses);
     document.getElementById("busDetailsModal").showModal();
   };
 
-  
-if (isLoading) return <p>Loading...</p>;
-console.log(buses)
+
+  if (isLoading) return <p>Loading...</p>;
+  console.log(buses)
   return (
     <div className="max-w-6xl mx-auto mt-2  p-6 bg-green-50 rounded-lg shadow-md">
       <h2 className="text-3xl font-bold text-center mb-6">My Added Bus Services</h2>
 
-      {buses.length === 0 ? (
-        
-        <p className="text-center text-gray-500">No bus services added yet. {isLoading? 'Loading...':''}</p>
+      {buses?.length === 0 ? (
+
+        <p className="text-center text-gray-500">No bus services added yet. {isLoading ? 'Loading...' : ''}</p>
       ) : (
         <div className="overflow-x-auto">
           <table className="table w-full">
@@ -93,7 +95,7 @@ console.log(buses)
               </tr>
             </thead>
             <tbody>
-              {buses.map((bus) => (
+              {buses?.map((bus) => (
                 <tr key={bus._id} className="hover:bg-green-100 transition">
                   <td>{bus.busName}</td>
                   <td>{bus.busTimes}</td>
@@ -105,7 +107,7 @@ console.log(buses)
                   <td>{bus.refund ? "Yes" : "No"}</td>
                   <td>{bus.tripName}</td>
                   <td className="flex gap-1">
-                  <button
+                    <button
                       onClick={() => handleOpenModal(bus)}
                       className="btn btn-sm bg-blue-500 hover:bg-blue-600 text-white"
                     >
@@ -131,10 +133,10 @@ console.log(buses)
         </div>
       )}
       {selectedBus && (
-    <BusDetailsModal bus={selectedBus} modalId="busDetailsModal" />
-  )}
+        <BusDetailsModal bus={selectedBus} modalId="busDetailsModal" />
+      )}
     </div>
-    
+
   );
 };
 
