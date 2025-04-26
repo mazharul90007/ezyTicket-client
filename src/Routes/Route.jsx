@@ -47,6 +47,7 @@ import ManageEventReview from "../Pages/Dashboard/Events/ManageEventReviews/Mana
 import ManageEntertainment from "../Pages/Dashboard/Admin/ManageEntertainments/ManageEntertainment";
 import TravelPaymentSuccess from "../Pages/Travel/TravelPaymentReceipt/TravelPaymentSuccess";
 import Page404 from "../Pages/Page404/Page404";
+import AddBusCompany from "../Pages/Dashboard/Travel/AddBusCompany/AddBusCompany";
 
 
 const Route = createBrowserRouter([
@@ -166,7 +167,10 @@ const Route = createBrowserRouter([
         path: "manageUsers",
         element: <ManageUsers></ManageUsers>,
       },
-
+      {
+        path: "add-bus-service",
+        element: <AddBusCompany/>
+      },
       // ------------Events route start----------
 
       {
