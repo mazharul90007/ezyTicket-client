@@ -15,7 +15,7 @@ const MyBusServices = () => {
 
 
   const fetchUserBuses = async (email) => {
-    const res = await axiosSecure.get(`/api/buses?email=${email}`);
+    const res = await axiosSecure.get(`/api/buses`);
     return res.data;
   };
 
