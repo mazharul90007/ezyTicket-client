@@ -14,7 +14,7 @@ const Entertainment = () => {
     <div className={`pt-20 bg-gradient-to-br  `}>
       <MovieHero></MovieHero>
       <AllMovies></AllMovies>
-      <TrendingMovies></TrendingMovies>
+      {/* <TrendingMovies></TrendingMovies> */}
       {/* <FeaturedTrailers></FeaturedTrailers> */}
       <MovieNews></MovieNews>
       <MovieMarquee></MovieMarquee>

@@ -123,7 +123,7 @@ console.log(showingHanll);
       <div className="">
        
 
-        <div className="flex flex-wrap justify-center md:gap-10  w-10/12 mx-auto">
+        <div className="flex flex-wrap justify-center md:gap-10 w-11/12 md:w-10/12 mx-auto">
           {movies.map((movie) => (
           <MovieCard movie={movie}></MovieCard>
           ))}

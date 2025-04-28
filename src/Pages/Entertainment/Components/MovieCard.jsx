@@ -29,17 +29,8 @@ const MovieCard = ({ movie }) => {
         />
         </Link>
     
-        {/* Movie Details on Hover */}
-        <div className="absolute  top-0 flex flex-col justify-end p-4 opacity-0 group-hover:opacity-100 transition duration-300 text-white">
+      
    
-          {/* <div className="flex items-center gap-1 text-yellow-400">
-          <FaImdb className="size-8 e"/> :
-            <FaStar />
-            <span>{movie.rating || "7.8/10"}</span>
-          </div> */}
-        </div>
-
-        {/* Play Button */}
 
         <Link to='https://youtu.be/zTbgNC42Ops?si=UZzzgh_qAGiaSfcC'>
         <div className="absolute  top-0 p-3 text-white bg-green-700 hover:bg-green-400  transition duration-300 ">
