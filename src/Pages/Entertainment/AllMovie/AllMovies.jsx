@@ -74,7 +74,7 @@ console.log(showingHanll);
       <div className="mt-10">
       <h1 className="text-xl md:text-4xl text-center font-semibold">
       
-        <span className="text-main uppercase border-b-2 "> Top Flims</span>
+        <span className="text-main uppercase border-b-2 border-t-2 "> Top Flims</span>
       </h1>
       {/* <p className="md:mt-4 text-sm text-center md:text-lg max-w-3xl mx-auto">
         Organize events with unlimited possibilities.
@@ -123,7 +123,7 @@ console.log(showingHanll);
       <div className="">
        
 
-        <div className="flex flex-wrap justify-center md:gap-10  ">
+        <div className="flex flex-wrap justify-center md:gap-10  w-10/12 mx-auto">
           {movies.map((movie) => (
           <MovieCard movie={movie}></MovieCard>
           ))}
