@@ -79,9 +79,9 @@ const MovieDetailsPage = () => {
             <div className="relative bg-cover  ">
               {/* <div className="absolute inset-0 bg-gradient-to-l from-neutral-800  md:neutral-800   to-black/95 "  /> */}
 
-              <div className="relative container w-full  mx-auto py-16  px-6 flex flex-col md:flex-row items-center justify-center z-10">
+              <div className="relative container w-full  mx-auto py-16  px-6 flex flex-col md:flex-row md:items-center md:justify-center z-10">
                 {/* Left Side - Image */}
-                <div className="w-1/4 flex justify-end ">
+                <div className="md:w-1/4 w-2/5 flex justify-end ">
                   <motion.div
                     initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -102,15 +102,16 @@ const MovieDetailsPage = () => {
                           behavior: "smooth",
                         })
                       }
-                      className="btn shadow-none mt-4 border-none w-full ezy-button-primary  bg-main text-white hover:shadow-md"
+                      className="btn  shadow-none mt-4 border-none w-full  bg-main text-white hover:shadow-md"
                     >
-                      Book now
+
+                     <span className="text-xs md:text-base">Book now</span> 
                     </button>
                   </motion.div>
                 </div>
 
                 {/* Middle Side - Content */}
-                <div className="md:w-2/4 mx-5 ">
+                <div className="md:w-2/4 md:mx-5 ">
                   <div className="mt-12 text-base pl-8 ">
                     <h2 className=" gap-5 text-3xl md:text-5xl  font-bold ">
                       {movie?.title || movie?.name}
@@ -154,7 +155,7 @@ const MovieDetailsPage = () => {
                 </div>
 
                 {/* End COnatent */}
-                <div className="w-1/4">
+                <div className="w-1/4 absolute right-30 top-20 md:static md:inline-block ">
                   <motion.div
                     initial={{ opacity: 0, x: 50 }}
                     animate={{ opacity: 1, x: 0 }}
