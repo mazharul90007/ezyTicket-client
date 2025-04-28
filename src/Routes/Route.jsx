@@ -48,6 +48,7 @@ import ManageEntertainment from "../Pages/Dashboard/Admin/ManageEntertainments/M
 import TravelPaymentSuccess from "../Pages/Travel/TravelPaymentReceipt/TravelPaymentSuccess";
 import Page404 from "../Pages/Page404/Page404";
 import AddBusCompany from "../Pages/Dashboard/Travel/AddBusCompany/AddBusCompany";
+import TicketSold from "../Pages/Dashboard/DashboardComponents/TicketSold";
 
 
 const Route = createBrowserRouter([
@@ -158,7 +159,7 @@ const Route = createBrowserRouter([
     ),
     errorElement: <Error></Error>,
     children: [
-      // ---------Users route start ------------
+      // ---------Users and Common route start ------------
       {
         path: "profile",
         element: <Profile></Profile>,
@@ -170,6 +171,10 @@ const Route = createBrowserRouter([
       {
         path: "add-your-bus-service",
         element: <AddBusCompany/>
+      },
+      {
+        path:"ticketSold",
+        element: <TicketSold></TicketSold>
       },
       // ------------Events route start----------
 
