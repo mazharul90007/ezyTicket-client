@@ -13,7 +13,7 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 const AddEvents = () => {
     const axiosSecure = useAxiosSecure();
     const axiosPublic = useAxiosPublic();
-    const { user } = useAuth();
+    const { user, userInfo } = useAuth();
     const { register, handleSubmit, getValues, reset, formState: { errors } } = useForm();
 
     const onSubmit = async (data) => {
@@ -43,9 +43,10 @@ const AddEvents = () => {
                 soldTickets: parseInt(0),
                 maxTickets: parseInt(data.maxTickets),
                 price: parseFloat(data.price),
-                managerName: user?.displayName,
+                managerName: userInfo?.name,
                 managerEmail: user?.email,
-                managerImage: user?.photoURL,
+                managerImage: userInfo?.photoURL,
+                category: "event",
                 status: "pending"
             }
             const eventRes = await axiosSecure.post('/events', eventInfo);

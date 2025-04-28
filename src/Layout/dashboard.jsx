@@ -120,9 +120,9 @@ const Dashboard = () => {
 
                                 <li onClick={closeMenu}><NavLink to="/dashboard/myAddedEvents" className={getNavLinkClass}><FaList /> My added Post</NavLink></li>
 
-                                <li onClick={closeMenu}><NavLink to="/dashboard/soldEventTickets" className={getNavLinkClass}><HiCurrencyDollar /> Ticket Sold</NavLink></li>
+                                <li onClick={closeMenu}><NavLink to="/dashboard/ticketSold" className={getNavLinkClass}><HiCurrencyDollar /> Ticket Sold</NavLink></li>
 
-                                <li onClick={closeMenu}><NavLink to="/dashboard/manageEventReview" className={getNavLinkClass}><FaHouseCircleExclamation /> Manage Review</NavLink></li>
+                                {/* <li onClick={closeMenu}><NavLink to="/dashboard/manageEventReview" className={getNavLinkClass}><FaHouseCircleExclamation /> Manage Review</NavLink></li> */}
                             </>
                         ) : isTravelManager ? (
                             <>
@@ -134,7 +134,7 @@ const Dashboard = () => {
 
                                 <li onClick={closeMenu}><NavLink to="/dashboard/soldTickets" className={getNavLinkClass}><HiCurrencyDollar /> Ticket Sold</NavLink></li>
 
-                                <li onClick={closeMenu}><NavLink to="/dashboard/manageReview" className={getNavLinkClass}><FaHouseCircleExclamation /> Manage Review</NavLink></li>
+                                {/* <li onClick={closeMenu}><NavLink to="/dashboard/manageReview" className={getNavLinkClass}><FaHouseCircleExclamation /> Manage Review</NavLink></li> */}
                             </>
                         ) : isEntertainmentManager ? (
                             <>
@@ -157,11 +157,11 @@ const Dashboard = () => {
                             <>
                                 <li onClick={closeMenu}><NavLink to="/dashboard/profile" className={getNavLinkClass}><IoPerson /> My Profile</NavLink></li>
 
-                                <li onClick={closeMenu}><NavLink to="/dashboard/wishlist" className={getNavLinkClass}><FaCalendarAlt /> Wishlist</NavLink></li>
+                                {/* <li onClick={closeMenu}><NavLink to="/dashboard/wishlist" className={getNavLinkClass}><FaCalendarAlt /> Wishlist</NavLink></li> */}
 
                                 <li onClick={closeMenu}><NavLink to="/dashboard/propertyBought" className={getNavLinkClass}><FaWallet /> Ticket Bought</NavLink></li>
 
-                                <li onClick={closeMenu}><NavLink to="/dashboard/myReview" className={getNavLinkClass}><FaShoppingCart /> My Review</NavLink></li>
+                                {/* <li onClick={closeMenu}><NavLink to="/dashboard/myReview" className={getNavLinkClass}><FaShoppingCart /> My Review</NavLink></li> */}
                             </>
                         )}
 

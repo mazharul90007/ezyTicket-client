@@ -68,6 +68,7 @@ const EventDetails = () => {
     queryKey: ["event", eventId],
     queryFn: async () => {
       const res = await axiosPublic.get(`/events/${eventId}`);
+      console.log(res.data);
       return res.data;
     },
   });
@@ -189,8 +190,8 @@ const EventDetails = () => {
       productCategory: eventData?.category,
       eventId: eventData?._id,
       quantity: ticketQuantity,
-      status: "pending",
-      paymentMethod: "card",
+      organizerPayment: "pending",
+      organizer: eventData?.organizer,
       date: new Date().toISOString(),
     };
 
