@@ -157,7 +157,7 @@ const Navbar = () => {
                 {userInfo?.name}
               </h4>
               <p className={`text-sm ${darkMode ? "text-dark-primary" : "text-gray-500"}`}>
-                {userInfo.email}
+                {userInfo?.email}
               </p>
             </div>
             <div className={`border-t ${darkMode ? "border-dark-secondary" : "border-gray-200"}`}>
