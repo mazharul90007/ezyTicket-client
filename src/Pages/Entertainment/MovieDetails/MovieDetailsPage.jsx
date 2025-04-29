@@ -155,7 +155,7 @@ const MovieDetailsPage = () => {
                 </div>
 
                 {/* End COnatent */}
-                <div className="w-1/4 absolute right-30 top-20 md:static md:inline-block ">
+                <div className="w-1/4 absolute right-20 top-15 md:static md:inline-block ">
                   <motion.div
                     initial={{ opacity: 0, x: 50 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -175,7 +175,7 @@ const MovieDetailsPage = () => {
                         <p>RELEASE DATE</p>
                         <p>{movie?.releaseDate || movie?.release_date}</p>
                       </div>
-                      <div className="flex gap-3">
+                      <div className="flex flex-col md:flex-row gap-3">
                         {movie?.genre ||
                           movieInfo?.genres.map((g) => (
                             <div className="border-2 px-2 ">{g.name}</div>
@@ -199,7 +199,7 @@ const MovieDetailsPage = () => {
       </div>
       {/* <img src={movie.poster} alt="" /> */}
 
-      <div className="mt-80 pt-80 md:pt-1">
+      <div className="mt-80 pt-30 md:pt-1">
         <h1 className="text-5xl font-extrabold text-center  mx-15 rounded-2xl">
           {" "}
           Your Showtimes
