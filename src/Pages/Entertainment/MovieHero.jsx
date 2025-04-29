@@ -45,8 +45,6 @@ const MovieHeroSlider = () => {
   const newMovies = movies.slice(5, 10);
   return (
     <div className="relative text-white">
-
-
       <Swiper
         centeredSlides={true}
         slidesPerView={"auto"}
@@ -65,7 +63,10 @@ const MovieHeroSlider = () => {
             >
               <div className="relative h-56 md:h-64 lg:h-96 overflow-hidden  shadow-lg">
                 <img
-                  src={slide.imageLink || `https://image.tmdb.org/t/p/w500${slide?.backdrop_path}`}
+                  src={
+                    slide.imageLink ||
+                    `https://image.tmdb.org/t/p/w500${slide?.backdrop_path}`
+                  }
                   alt={`Slide ${idx + 1}`}
                   className="w-full h-full object-cover "
                 />
@@ -75,7 +76,6 @@ const MovieHeroSlider = () => {
                       <IoPlayCircleSharp className="size-12" />
                     </button>
                   </Link>
-
                 </div>
                 {/* Gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/20 z-10" />
@@ -88,19 +88,18 @@ const MovieHeroSlider = () => {
                 {/* <h1 className="text-center">
                 Now in Cinemas
                 </h1> */}
-             
-                  <Link to={`/entertainment/allmovies/${slide._id || slide.id}`}>
-                <button
-                  onClick={() =>
-                    document.getElementById("booksection")?.scrollIntoView({
-                      behavior: "smooth",
-                    })
-                  }
-                  className="btn mr-3 shadow-none font-bold text-main bg-white hover:shadow-white hover:shadow-md"
-                >
-                  <CiBookmarkCheck className="size-5"/>
-                  Book now
-                </button>
+                <Link to={`/entertainment/allmovies/${slide._id || slide.id}`}>
+                  <button
+                    onClick={() =>
+                      document.getElementById("booksection")?.scrollIntoView({
+                        behavior: "smooth",
+                      })
+                    }
+                    className="btn mr-3 shadow-none font-bold text-main bg-white hover:shadow-white hover:shadow-md"
+                  >
+                    <CiBookmarkCheck className="size-5" />
+                    Book now
+                  </button>
                 </Link>
               </h1>
               <div className=" absolute z-50 top-32 md:ml-10 flex gap-5">
@@ -111,7 +110,10 @@ const MovieHeroSlider = () => {
                   className=" "
                 >
                   <img
-                    src={slide.imageLink ||`https://image.tmdb.org/t/p/w500${slide?.poster_path}`}
+                    src={
+                      slide.imageLink ||
+                      `https://image.tmdb.org/t/p/w500${slide?.poster_path}`
+                    }
                     alt={slide?.name}
                     className=" shadow-lg hidden lg:flex rounded-lg  lg:h-80"
                   />
@@ -120,8 +122,15 @@ const MovieHeroSlider = () => {
                   <h2 className=" gap-5 text-3xl md:text-5xl  font-bold ">
                     {slide?.title || slide?.name}
                   </h2>
-                  <p className="flex"><TbCategory  className="my-auto mr-1"/>{slide.genre ||slide?.overview?.split(" ").slice(0,10).join(" ")} </p>
-                  <p className="hidden md:flex"><MdAccessTimeFilled  className="my-auto mr-1"/>{slide?.release_date || slide.duration}</p>
+                  <p className="flex">
+                    <TbCategory className="my-auto mr-1" />
+                    {slide.genre ||
+                      slide?.overview?.split(" ").slice(0, 10).join(" ")}{" "}
+                  </p>
+                  <p className="hidden md:flex">
+                    <MdAccessTimeFilled className="my-auto mr-1" />
+                    {slide?.release_date || slide.duration}
+                  </p>
                 </div>
               </div>
             </SwiperSlide>
