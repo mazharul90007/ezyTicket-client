@@ -32,6 +32,7 @@ const Navbar = () => {
   const isTransparent = (location.pathname === "/" 
     || location.pathname === "/events" 
     || location.pathname === "/travel"
+     || location.pathname === "/entertainment"
   
   ) && !isScrolled;
 
@@ -48,6 +49,7 @@ const Navbar = () => {
     if (location.pathname === "/" 
       || location.pathname === "/events" 
       || location.pathname === "/travel"
+      || location.pathname === "/entertainment"
 
     ) {
       window.addEventListener("scroll", handleScroll);
