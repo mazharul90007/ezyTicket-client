@@ -11,7 +11,7 @@ const Entertainment = () => {
 
 
   return ( 
-    <div className={`pt-20 bg-gradient-to-br  `}>
+    <div className={`  `}>
       <MovieHero></MovieHero>
       <AllMovies></AllMovies>
       {/* <TrendingMovies></TrendingMovies> */}
