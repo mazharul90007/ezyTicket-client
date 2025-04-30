@@ -1,6 +1,7 @@
 
 import AllMovies from "./AllMovie/AllMovies";
 import MovieMarquee from "./Components/MovieMarquee";
+import DiscountOffer from "./Discount/DiscountOffer";
 import FeaturedTrailers from "./FeaturedTrailers";
 import MovieHero from "./MovieHero";
 import MovieNews from "./MovieNews";
@@ -17,6 +18,7 @@ const Entertainment = () => {
       {/* <TrendingMovies></TrendingMovies> */}
       {/* <FeaturedTrailers></FeaturedTrailers> */}
       <MovieNews></MovieNews>
+      <DiscountOffer></DiscountOffer>
       <MovieMarquee></MovieMarquee>
     </div>
   );
