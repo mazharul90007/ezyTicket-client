@@ -11,7 +11,7 @@ import {
 } from "firebase/auth";
 import app from "../Pages/Authentication/Firebase";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
-import { useQuery } from "@tanstack/react-query";
+import { QueryClient, useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const googleProvider = new GoogleAuthProvider();
@@ -20,15 +20,12 @@ const auth = getAuth(app);
 export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
+  const queryClient = useQueryClient();
   const [darkMode, setDarkMode] = useState(false);
   const [user, setUser] = useState(null);
-  const [userInfo, setUserInfo] = useState([]);
-  // console.log(user);
   const [loading, setLoading] = useState(true);
-  const [userInfoLoading, setUserInfoLoading] = useState(true);
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
-
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -51,59 +48,54 @@ const AuthProvider = ({ children }) => {
   };
 
   const updateUserProfile = (name, photo) => {
-    setLoading(true)
+    setLoading(true);
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photo,
     });
   };
 
-  // onAuthStateChange
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      if (currentUser?.email) {
-        setUser(currentUser);
-        await axiosPublic.post('/jwt',
-          { email: currentUser.email },
-          { withCredentials: true }
-        )
-          .then(res => {
-            console.log('login token', res.data);
-            setLoading(false)
-          })
-      } else {
-        setUser(currentUser);
-        await axiosPublic.post('/logout',
-          {},
-          {
-            withCredentials: true,
-          }
-        )
-          .then(res => {
-            console.log('logout', res.data)
-            setLoading(false)
-          })
-      }
-      setLoading(false);
-    });
-    return () => {
-      return unsubscribe();
-    };
-  }, [user?.displayName, user?.photoURL, axiosPublic]);
-
-  //get user info from mongodb
-  const { data: userData, refetch: refetchUserInfo } = useQuery({
-    queryKey: ['savedUser', user?.email],
+  const {
+    data: userInfo = null,
+    isLoading: isUserLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["userInfo", user?.email],
     queryFn: async () => {
-      setUserInfoLoading(true);
       if (!user?.email) return null;
       const res = await axiosSecure.get(`/users/${user.email}`);
-      setUserInfo(res.data[0]);
-      setUserInfoLoading(false);
-      return res.data[0];
+      return res.data?.data || null;
     },
     enabled: !!user?.email,
   });
+
+  // Auth state handler
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      setLoading(true);
+      try {
+        if (currentUser?.email) {
+          setUser(currentUser);
+          await axiosPublic.post(
+            "/auth/jwt",
+            { email: currentUser.email },
+            { withCredentials: true }
+          );
+          await refetch();
+        } else {
+          setUser(null);
+          await axiosPublic.post("/auth/logout", {}, { withCredentials: true });
+        }
+      } catch (error) {
+        console.error("Auth error:", error);
+      } finally {
+        setLoading(false);
+      }
+    });
+    return unsubscribe;
+  }, [axiosPublic, refetch]);
+
+  console.log(userInfo);
 
   const authInfo = {
     user,
@@ -112,15 +104,17 @@ const AuthProvider = ({ children }) => {
     setDarkMode,
     loading,
     setLoading,
-    userInfoLoading,
+    userInfoLoading: isUserLoading,
     createUser,
     signIn,
     signInWithGoogle,
     logOut,
     updateUserProfile,
-    userInfo: userData || userInfo,
-    setUserInfo,
-    refetchUserInfo,
+    userInfo,
+    // setUserInfo,
+    refetchUserInfo: () => {
+      queryClient.invalidateQueries(["userInfo", user?.email]);
+    },
   };
 
   return (
