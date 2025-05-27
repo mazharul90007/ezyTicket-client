@@ -23,7 +23,6 @@ const AllEvents = () => {
     }
   };
 
-
   const {
     data: events = [],
     isLoading,
@@ -32,7 +31,8 @@ const AllEvents = () => {
     queryKey: ["events"],
     queryFn: async () => {
       const res = await axiosPublic.get("/events");
-      return res.data.sort(
+      console.log(res.data.data);
+      return res.data.data.sort(
         (a, b) => new Date(b.dateTime) - new Date(a.dateTime)
       );
     },
@@ -60,14 +60,17 @@ const AllEvents = () => {
 
   return (
     <div
-      className={`mb-8 md:mb-16 lg:mb-20 ${darkMode ? "bg-black text-white" : "bg-gray-50 text-black"
-        }`}
+      className={`mb-8 md:mb-16 lg:mb-20 ${
+        darkMode ? "bg-black text-white" : "bg-gray-50 text-black"
+      }`}
     >
       <EventOffer></EventOffer>
       {/* Events Grid */}
       <div className="w-11/12 mx-auto" id="allEvents">
         <div className="mb-4 mt-16 w-fit">
-          <h3 className="text-lg md:text-xl font-semibold text-main ">All Events</h3>
+          <h3 className="text-lg md:text-xl font-semibold text-main ">
+            All Events
+          </h3>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -75,10 +78,11 @@ const AllEvents = () => {
             return (
               <Link to={`/eventdetailspublic/${event._id}`} key={event._id}>
                 <div
-                  className={`${darkMode
-                    ? "bg-dark-surface text-dark-primary"
-                    : "bg-white text-black"
-                    } rounded-md overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300 h-full flex flex-col group`}
+                  className={`${
+                    darkMode
+                      ? "bg-dark-surface text-dark-primary"
+                      : "bg-white text-black"
+                  } rounded-md overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300 h-full flex flex-col group`}
                 >
                   <div className="overflow-hidden">
                     <img
@@ -128,16 +132,17 @@ const AllEvents = () => {
         <div className="flex justify-center mt-8 space-x-2">
           <button
             onClick={() => {
-              setCurrentPage(currentPage - 1)
+              setCurrentPage(currentPage - 1);
               setTimeout(() => {
                 scrollToAllEvents();
-              }, 100);;
+              }, 100);
             }}
             disabled={currentPage === 1}
-            className={`px-4 py-2 rounded-lg ${currentPage === 1
-              ? "bg-gray-400 cursor-not-allowed"
-              : "ezy-button-primary"
-              }`}
+            className={`px-4 py-2 rounded-lg ${
+              currentPage === 1
+                ? "bg-gray-400 cursor-not-allowed"
+                : "ezy-button-primary"
+            }`}
           >
             Previous
           </button>
@@ -146,10 +151,11 @@ const AllEvents = () => {
             <button
               key={index}
               onClick={() => setCurrentPage(index + 1)}
-              className={`px-4 py-2 rounded-lg ${currentPage === index + 1
-                ? "bg-green-700 text-white"
-                : "bg-gray-300 hover:bg-gray-400"
-                }`}
+              className={`px-4 py-2 rounded-lg ${
+                currentPage === index + 1
+                  ? "bg-green-700 text-white"
+                  : "bg-gray-300 hover:bg-gray-400"
+              }`}
             >
               {index + 1}
             </button>
@@ -163,10 +169,11 @@ const AllEvents = () => {
               }, 100);
             }}
             disabled={currentPage === totalPages}
-            className={`px-4 py-2 rounded-lg ${currentPage === totalPages
-              ? "bg-gray-400 cursor-not-allowed"
-              : "ezy-button-primary"
-              }`}
+            className={`px-4 py-2 rounded-lg ${
+              currentPage === totalPages
+                ? "bg-gray-400 cursor-not-allowed"
+                : "ezy-button-primary"
+            }`}
           >
             Next
           </button>

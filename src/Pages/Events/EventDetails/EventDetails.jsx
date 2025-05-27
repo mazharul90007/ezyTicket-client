@@ -68,8 +68,8 @@ const EventDetails = () => {
     queryKey: ["event", eventId],
     queryFn: async () => {
       const res = await axiosPublic.get(`/events/${eventId}`);
-      console.log(res.data);
-      return res.data;
+      console.log(res.data.data);
+      return res.data.data;
     },
   });
 
@@ -79,7 +79,7 @@ const EventDetails = () => {
       const res = await axiosPublic.get(
         `/events?location=${eventData?.location}`
       );
-      return res.data;
+      return res.data.data;
     },
     enabled: !!eventData?.location,
   });
