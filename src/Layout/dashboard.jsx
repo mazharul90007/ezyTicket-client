@@ -199,7 +199,7 @@ const Dashboard = () => {
                     to="/dashboard/myAddedEvents"
                     className={getNavLinkClass}
                   >
-                    <FaList /> My added Post
+                    <FaList /> All Events
                   </NavLink>
                 </li>
 
