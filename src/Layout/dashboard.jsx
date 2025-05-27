@@ -14,22 +14,14 @@ import { HiCurrencyDollar } from "react-icons/hi";
 import { FaHouseCircleExclamation } from "react-icons/fa6";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { IoMdMail } from "react-icons/io";
-import useAdmin from "../Hooks/useAdmin";
 import useAuth from "../Hooks/useAuth";
 // import noImage from "../assets/Common_image/noImage.png";
-import useEventManager from "../Hooks/useEventManager";
-import useTravelManager from "../Hooks/useTravelManager";
-import useEntertainmentManager from "../Hooks/useEntertainmentManager";
 import { MdEmojiEvents } from "react-icons/md";
 import { BiMoviePlay } from "react-icons/bi";
 import { useState } from "react";
 
 const Dashboard = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isAdmin] = useAdmin();
-  const [isEventManager] = useEventManager();
-  const [isTravelManager] = useTravelManager();
-  const [isEntertainmentManager] = useEntertainmentManager();
   const { user, userInfo } = useAuth();
 
   // Active link style function
