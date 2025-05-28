@@ -42,7 +42,7 @@ const Footer = () => {
           <p className="text-gray-400 mb-6 max-w-sm">
             Transforming your event experience with seamless ticketing solutions
           </p>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4">
             {[FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn].map(
               (Icon, idx) => (
                 <motion.a
@@ -65,9 +65,9 @@ const Footer = () => {
               <Link
                 key={item}
                 to={`/${item.toLowerCase()}`}
-                className="hover:text-main transition-colors flex items-center gap-2 group"
+                className="hover:text-main transition-colors flex items-center group"
               >
-                <span className="w-2 h-2 bg-main rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                <span className="bg-main rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
                 {item}
               </Link>
             ))}
@@ -82,9 +82,9 @@ const Footer = () => {
                 <Link
                   key={item}
                   to={`/${item.toLowerCase().replace(" ", "-")}`}
-                  className="hover:text-main transition-colors flex items-center gap-2 group"
+                  className="hover:text-main transition-colors flex items-center group"
                 >
-                  <span className="w-2 h-2 bg-main rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                  <span className="bg-main rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
                   {item}
                 </Link>
               )
